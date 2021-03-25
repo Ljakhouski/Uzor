@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Uzor.Views.UzorItem">
+  <ContentView.Content>
+        <Frame BackgroundColor="#8F1616">
+            <StackLayout>
+                <Label Text="New Uzor Item" FontSize="30">
+                </Label>
+                <Label Text="data 00.00.00.00 00:00" FontSize="10" BackgroundColor="#E4BFBF"></Label>
+            </StackLayout>
+        </Frame>
+  </ContentView.Content>
+</ContentView>
