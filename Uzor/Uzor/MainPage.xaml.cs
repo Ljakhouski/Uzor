@@ -16,13 +16,9 @@ namespace Uzor
             InitializeComponent();
         }
 
-        private void add_item(object sender, EventArgs e)
+        private async void NewUzor(object sender, EventArgs e)
         {
-            stack.Children.Add(new UzorItem());
-        }
-
-        private void NewUzor(object sender, EventArgs e)
-        {
+            await Navigation.PushModalAsync(new NavigationPage(new UzorCreatingPage()));
             stack.Children.Add(new UzorItem());
         }
     }

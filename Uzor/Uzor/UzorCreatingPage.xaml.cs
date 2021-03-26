@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Uzor.Views
+namespace Uzor
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UzorItem : ContentView
+    public partial class UzorCreatingPage : ContentPage
     {
-        public UzorItem()
+        public UzorCreatingPage()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
-        }
-
-        private async void TapOnItem(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new UzorItemPage()));
         }
     }
 }

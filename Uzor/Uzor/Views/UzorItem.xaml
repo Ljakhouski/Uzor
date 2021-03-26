@@ -6,12 +6,14 @@
         <TapGestureRecognizer Tapped="TapOnItem" /> 
     </ContentView.GestureRecognizers>
     <ContentView.Content>
-        <Frame BackgroundColor="#8F1616" x:Name="ItemFrame">
-            <StackLayout>
-                <Label Text="New Uzor Item" FontSize="30">
-                </Label>
-                <Label Text="data 00.00.00.00 00:00" FontSize="10" BackgroundColor="#E4BFBF"></Label>
-            </StackLayout>
+        <Frame HeightRequest="200" Padding="0" CornerRadius="15" BackgroundColor="#DF2727">
+            <RelativeLayout >
+                <Label Text="ItemName: " FontSize="25"
+                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-20}"
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}"
+                       ></Label>
+            </RelativeLayout>
         </Frame>
+        
   </ContentView.Content>
 </ContentView>
