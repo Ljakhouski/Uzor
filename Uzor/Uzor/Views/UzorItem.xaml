@@ -2,8 +2,11 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Uzor.Views.UzorItem">
-  <ContentView.Content>
-        <Frame BackgroundColor="#8F1616">
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapOnItem" /> 
+    </ContentView.GestureRecognizers>
+    <ContentView.Content>
+        <Frame BackgroundColor="#8F1616" x:Name="ItemFrame">
             <StackLayout>
                 <Label Text="New Uzor Item" FontSize="30">
                 </Label>

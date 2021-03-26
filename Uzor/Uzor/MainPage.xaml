@@ -3,12 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Uzor.MainPage">
 
-    <StackLayout x:Name="list">
-        <Frame BackgroundColor="#CD2B2B"  Padding="24" CornerRadius="0">
-            <Label Text="Make Uzor! --->" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
+    <RelativeLayout BackgroundColor="#FFFFFF">
+        <StackLayout
+            RelativeLayout.XConstraint="0"
+            RelativeLayout.YConstraint="0"
+            
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}" 
+            Spacing="0"
+            >
+            <Frame BackgroundColor="#CD2B2B"   WidthRequest="200" Padding="0">
+                <Label Text="Make Uzor! --->" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontSize="36" HeightRequest="450"/>
+            </Frame>
+            <ScrollView  >
+                <StackLayout x:Name="stack" Padding="30" Spacing="20">
+                </StackLayout>
+            </ScrollView>
+            
+        </StackLayout>
 
-        <ImageButton Source="button1.png" Clicked="add_item" BackgroundColor="White" VerticalOptions="End" HeightRequest="80" WidthRequest="80" ></ImageButton>
-    </StackLayout>
+        <ContentView
+            
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-100}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant= -100}">
+
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NewUzor" />
+            </ContentView.GestureRecognizers>
+
+            <Image Source="button1.png" HeightRequest="80"></Image>
+        </ContentView>
+
+    </RelativeLayout>
 
 </ContentPage>

@@ -16,5 +16,10 @@ namespace Uzor.Views
         {
             InitializeComponent();
         }
+
+        private void TapOnItem(object sender, EventArgs e)
+        {
+            this.ItemFrame.BackgroundColor = Color.LightGreen;
+        }
     }
 }

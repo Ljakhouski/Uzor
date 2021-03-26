@@ -18,7 +18,12 @@ namespace Uzor
 
         private void add_item(object sender, EventArgs e)
         {
-            list.Children.Add(new UzorItem());
+            stack.Children.Add(new UzorItem());
+        }
+
+        private void NewUzor(object sender, EventArgs e)
+        {
+            stack.Children.Add(new UzorItem());
         }
     }
 }
