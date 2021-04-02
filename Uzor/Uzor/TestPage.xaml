@@ -2,19 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
-             xmlns:tt="clr-namespace:TouchTracking"
+             xmlns:tt="clr-namespace:TouchTracking" xmlns:views="clr-namespace:Uzor.Views"
              x:Class="Uzor.TestPage"
-             Title="Finger Paint">
-    <Grid BackgroundColor="Beige">
-        <skia:SKCanvasView
-                x:Name="uzorFieldCanvasView" 
-                PaintSurface="onCanvasViewPaintSurface">
-        </skia:SKCanvasView>
-
-
-        <Grid.Effects>
-            <tt:TouchEffect Capture="True"
-                                TouchAction="OnTouchEffectAction"/>
-        </Grid.Effects>
-    </Grid>
+             Title=".......">
+    <StackLayout>
+        <CheckBox x:Name="chckbx" CheckedChanged="chckbx_CheckedChanged"></CheckBox>
+        <views:UzorPixelFieldView x:Name="uzorView"></views:UzorPixelFieldView>
+    </StackLayout>
 </ContentPage>

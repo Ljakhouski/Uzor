@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" xmlns:tt="clr-namespace:TouchTracking"
+             x:Class="Uzor.Views.UzorPixelFieldView"
+             x:Name="contentView">
+  <ContentView.Content>
+        <StackLayout>
+            <Rectangle BackgroundColor="Cyan"  HeightRequest="50"></Rectangle>
+            
+            <Grid BackgroundColor="DarkCyan" x:Name="gridField">
+                <skia:SKCanvasView
+                    x:Name="uzorFieldCanvasView" 
+                    PaintSurface="onCanvasViewPaintSurface">
+                </skia:SKCanvasView>
+
+
+                <Grid.Effects>
+                <tt:TouchEffect Capture="True"
+                                TouchAction="OnTouchEffectAction"/>
+            </Grid.Effects>
+        </Grid>
+
+            <Label Text="" x:Name="labelinfowah" ></Label>
+            <Label Text="" x:Name="labelPostition" TextColor="DarkGreen"></Label>
+        </StackLayout>
+        
+    </ContentView.Content>
+</ContentView>
