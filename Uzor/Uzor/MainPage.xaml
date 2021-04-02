@@ -13,7 +13,10 @@
             Spacing="0"
             >
             <Frame BackgroundColor="#CD2B2B" Padding="0"  HeightRequest="220" MinimumHeightRequest="220">
-                <Label Text="Make Uzor! --->" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontSize="36" />
+                <StackLayout>
+                    <Label Text="Make Uzor! --->" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontSize="36" />
+                    <Button Text="test now" Clicked="TestNow"></Button>
+                </StackLayout>
             </Frame>
             <ScrollView  >
                 <StackLayout x:Name="stack" Padding="20" Spacing="20">

@@ -21,5 +21,10 @@ namespace Uzor
             await Navigation.PushModalAsync(new NavigationPage(new UzorCreatingPage()));
             stack.Children.Add(new UzorItem());
         }
+
+        private async void TestNow(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new TestPage()));
+        }
     }
 }
