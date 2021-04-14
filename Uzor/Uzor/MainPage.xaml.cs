@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Uzor.Views;
 using Xamarin.Forms;
-
 namespace Uzor
 {
     public partial class MainPage : ContentPage
@@ -14,6 +13,17 @@ namespace Uzor
         public MainPage()
         {
             InitializeComponent();
+
+            //videoView1.Start();
+            try
+            {
+                //Assets.
+                //   videoView1.Source = ImageSource.FromFile("bg.mp4");
+                //mediaElement.Source = "ms-appx:///bg.mp4";
+            }
+            catch (Exception e) {
+                int i = 0;
+            }
         }
 
         private async void NewUzor(object sender, EventArgs e)

@@ -6,7 +6,7 @@
         <TapGestureRecognizer Tapped="TapOnItem" /> 
     </ContentView.GestureRecognizers>
     <ContentView.Content>
-        <Frame HeightRequest="200" Padding="0" CornerRadius="15" BackgroundColor="#DF2727">
+        <Frame HeightRequest="150" Padding="0" CornerRadius="15" BackgroundColor="White" Opacity="0.7">
             <RelativeLayout >
                 <Label Text="ItemName: " FontSize="25"
                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-20}"
