@@ -17,12 +17,12 @@
 
         <StackLayout Spacing="0">
             
-                <Grid HeightRequest="250">
-                    <Frame BackgroundColor="#8F0202" Opacity="0.5" HasShadow="False" behaviors:ShadowEffect.Radius="30"></Frame>
+                <Grid HeightRequest="250" MinimumHeightRequest="250">
+                    <Frame BackgroundColor="#AA1616" Opacity="0.75" HasShadow="False" behaviors:ShadowEffect.Radius="30"></Frame>
                     <StackLayout>
-                        <Label Text="Make Uzor! --->" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Yellow" FontSize="36" />
-                        <Button Text="test now" Clicked="TestNow"></Button>
-                        <Button Text="make uzor" Clicked="NewUzor"></Button>
+                        <Label Text="xxxXXXXXUzorXXXXXxxx" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="100" TextColor="White" Opacity="0.8" FontSize="30" />
+                        <Button Text="test now" TextColor="White" Clicked="TestNow"  BackgroundColor="#820E0E" CornerRadius="30" Margin="25,0" VerticalOptions="End"></Button>
+                        <Button Text="make uzor"  TextColor="White"  Clicked="NewUzor" BackgroundColor="#820E0E" CornerRadius="30" Margin="25,0" VerticalOptions="End"></Button>
                     </StackLayout>
                 </Grid>
             
