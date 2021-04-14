@@ -20,8 +20,8 @@
             </Grid.Effects>
         </Grid>
 
-            <Label Text="" x:Name="labelinfowah" ></Label>
-            <Label Text="" x:Name="labelPostition" TextColor="DarkGreen"></Label>
+            <!--<Label Text="" x:Name="labelinfowah" ></Label>
+            <Label Text="" x:Name="labelPostition" TextColor="DarkGreen"></Label>-->
         </StackLayout>
         
     </ContentView.Content>

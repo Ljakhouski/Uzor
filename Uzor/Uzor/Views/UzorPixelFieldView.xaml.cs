@@ -69,8 +69,8 @@ namespace Uzor.Views
                         {
                             FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = true;
 
-                            labelPostition.Text = args.Location.X + " <- args location X, " + args.Location.Y + " <- Y\n"+
-                                ConvertToPixel(args.Location).X + " <- converttopixel X, "+ (ConvertToPixel(args.Location).Y + " <-Y\n");
+                            //labelPostition.Text = args.Location.X + " <- args location X, " + args.Location.Y + " <- Y\n"+
+                               // ConvertToPixel(args.Location).X + " <- converttopixel X, "+ (ConvertToPixel(args.Location).Y + " <-Y\n");
                         }
                         catch (IndexOutOfRangeException e) { }
                         uzorFieldCanvasView.InvalidateSurface();
@@ -83,8 +83,8 @@ namespace Uzor.Views
                         {
                             FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = true;
 
-                            labelPostition.Text = args.Location.X + " <- args location X, " + args.Location.Y + " <- Y\n" +
-                               ConvertToPixel(args.Location).X + " <- converttopixel X, " + (ConvertToPixel(args.Location).Y + " <-Y\n");
+                            //labelPostition.Text = args.Location.X + " <- args location X, " + args.Location.Y + " <- Y\n" +
+                              // ConvertToPixel(args.Location).X + " <- converttopixel X, " + (ConvertToPixel(args.Location).Y + " <-Y\n");
                         }
                         catch (IndexOutOfRangeException e) { }
                        
@@ -118,8 +118,8 @@ namespace Uzor.Views
                         canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, new SKPaint() { Color = Color.Red.ToSKColor() });
                 }
 
-            this.labelinfowah.Text = gridField.Height + " <- Height, " + gridField.HeightRequest + " <- HeightRequest"+ gridField.Width+ " <- Width \n"
-                +this.uzorFieldCanvasView.Height+" <-uzorFieldXanvasView.Height "+ this.uzorFieldCanvasView.Width + " <-uzorFieldXanvasView.Width ";
+            //this.labelinfowah.Text = gridField.Height + " <- Height, " + gridField.HeightRequest + " <- HeightRequest"+ gridField.Width+ " <- Width \n"
+               // +this.uzorFieldCanvasView.Height+" <-uzorFieldXanvasView.Height "+ this.uzorFieldCanvasView.Width + " <-uzorFieldXanvasView.Width ";
             
         }
 

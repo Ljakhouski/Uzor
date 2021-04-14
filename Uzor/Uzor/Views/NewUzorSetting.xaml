@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Uzor.Views.NewUzorSetting" Margin="10,0" VerticalOptions="Center" HorizontalOptions="Center">
+  <ContentView.Content>
+        <Grid HeightRequest="400" WidthRequest="400">
+            <Frame BackgroundColor="White" CornerRadius="20" Opacity="0.85" HasShadow="True"  Padding="0"></Frame>
+            <Frame BackgroundColor="#D91717" CornerRadius="20" VerticalOptions="Start" HeightRequest="25"></Frame>
+            <Frame BackgroundColor="#D91717"  VerticalOptions="Start" Margin="0,20,0,0" HeightRequest="10"></Frame>
+            <Label Text="New Uzor" HorizontalOptions="Center" TextColor="White" FontSize="25" Margin="0,20,0,0" ></Label>
+            <Grid>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="30,90,0,0">
+                        <Label Text="Name: "  FontSize="20" MinimumWidthRequest="60" Padding="0,13,0,0"></Label>
+                        <Entry Text="new Uzor..." HorizontalOptions="StartAndExpand" FontSize="20" Margin="20,0,20,0" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal"   Margin="30,30,0,0">
+                        <Label Text="Size: " FontSize="20"></Label>
+                        <Label x:Name="sizeSliderLabel" FontSize="20" Text="" Margin="30,0,0,0"></Label>
+                        <Slider ThumbColor="#D90E0E"  MaximumTrackColor="Red" x:Name="sizeSlider"  ValueChanged="sizeSliderChanged" HorizontalOptions="FillAndExpand" Maximum="80" Minimum="10" Margin="0,0,20,0"/>
+
+                    </StackLayout>
+                </StackLayout>
+                <Button Text="OK" TextColor="White" BackgroundColor="#D91717" CornerRadius="50" VerticalOptions="End" Margin="20,0,20,30"></Button>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
