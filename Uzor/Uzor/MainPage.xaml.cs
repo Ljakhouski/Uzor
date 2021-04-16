@@ -28,8 +28,11 @@ namespace Uzor
 
         private async void NewUzor(object sender, EventArgs e)
         {
+            mediaElement.Stop();
             await Navigation.PushModalAsync(new NavigationPage(new UzorCreatingPage()));
             stack.Children.Add(new UzorItem());
+            mediaElement.Play();
+           
         }
 
         private async void TestNow(object sender, EventArgs e)

@@ -5,8 +5,7 @@
              x:Name="contentView">
   <ContentView.Content>
         <StackLayout>
-            <Rectangle BackgroundColor="Cyan"  HeightRequest="50"></Rectangle>
-            
+           
             <Grid BackgroundColor="DarkCyan" x:Name="gridField">
                 <skia:SKCanvasView
                     x:Name="uzorFieldCanvasView" 
@@ -15,10 +14,15 @@
 
 
                 <Grid.Effects>
-                <tt:TouchEffect Capture="True"
+                    <tt:TouchEffect Capture="True"
                                 TouchAction="OnTouchEffectAction"/>
-            </Grid.Effects>
-        </Grid>
+                </Grid.Effects>
+            </Grid>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="[before]" x:Name="beforeButton"        Clicked="beforeButtonClick"      TextColor="White" BackgroundColor="#D51919" Opacity="0.8"></Button>
+                <Button Text="[start]"  x:Name="calculationButton"   Clicked="CalculationButtonClick" TextColor="White" BackgroundColor="#D51919" Opacity="0.8"></Button>
+                <Button Text="[ next ]" x:Name="nextButton"          Clicked="nextButtonClick"        TextColor="White" BackgroundColor="#D51919" Opacity="0.8"></Button>
+            </StackLayout>
 
             <!--<Label Text="" x:Name="labelinfowah" ></Label>
             <Label Text="" x:Name="labelPostition" TextColor="DarkGreen"></Label>-->

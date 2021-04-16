@@ -15,14 +15,31 @@ namespace Uzor.Views
     public partial class UzorPixelFieldView : ContentView
     {
         public bool EditingMode { get; set; } = true;
-        int TickOfGame = 0;
-        bool IsActiveMode = false;
+       
+
+        private UzorData ThisData { get; set; }
 
         private bool[,] FieldCore;
         private bool[,] FieldCoreForEditing;
 
-        int WidthField = 35; int HeightField = 35;
+        int WidthField; int HeightField;
         
+        private void Next()
+        {
+
+        }
+        public UzorPixelFieldView(UzorData data)
+        {
+            InitializeComponent();
+            this.ThisData = data;
+            this.WidthField = data.FieldSize;
+            this.HeightField = data.FieldSize;
+
+            FieldCore = new bool[WidthField+1, HeightField+1];
+            FieldCoreForEditing = new bool[WidthField+1, HeightField+1];
+
+            Device.StartTimer(TimeSpan.FromMilliseconds(0), OnTimerTick);
+        }
         public UzorPixelFieldView()
         {
             
@@ -39,11 +56,13 @@ namespace Uzor.Views
         public void StartCalculation()
         {
             EditingMode = false;
+            calculationButton.Text = "[stop]";
         }
 
         public void StopCaltulation()
         {
             EditingMode = true;
+            calculationButton.Text = "[start]";
         }
         private bool OnTimerTick()
         {
@@ -51,10 +70,15 @@ namespace Uzor.Views
                 return true;
 
             CalculateField();
+            //TODO: write new field in UzorData
+
             uzorFieldCanvasView.InvalidateSurface();
             return true;
         }
-
+        private void WriteFieldInUzorData()
+        {
+           // ThisData.Fields.Add();
+        }
         private void OnTouchEffectAction(object sender, TouchActionEventArgs args)
         {
             if (!EditingMode)
@@ -67,7 +91,7 @@ namespace Uzor.Views
                     {
                         try
                         {
-                            FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = true;
+                            FieldCore[(int)(ConvertToPixel(args.Location).X/ pixelSize), (int)(ConvertToPixel(args.Location).Y/ pixelSize)] = true;
 
                             //labelPostition.Text = args.Location.X + " <- args location X, " + args.Location.Y + " <- Y\n"+
                                // ConvertToPixel(args.Location).X + " <- converttopixel X, "+ (ConvertToPixel(args.Location).Y + " <-Y\n");
@@ -96,9 +120,8 @@ namespace Uzor.Views
 
         private void onCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            float pixelSize = (float)((contentView.Width) / HeightField)*((float)Device.Info.PixelScreenSize.Width/ (float)contentView.Width);
+            float pixelSize = (float)uzorFieldCanvasView.CanvasSize.Width / WidthField;
 
-        
             this.uzorFieldCanvasView.HeightRequest = contentView.Width;
             this.uzorFieldCanvasView.WidthRequest = contentView.Width;
 
@@ -106,9 +129,10 @@ namespace Uzor.Views
             SKCanvas canvas = e.Surface.Canvas;
             canvas.Clear(Color.Yellow.ToSKColor());
 
+          
 
-            for(int w = 1; w < WidthField - 1; w++)
-                for (int h = 1; h < HeightField - 1; h++)
+            for(int w = 0; w < WidthField; w++)
+                for (int h = 0; h < HeightField; h++)
                 {
                     if (FieldCore[w, h] == false)
                     {
@@ -118,9 +142,20 @@ namespace Uzor.Views
                         canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, new SKPaint() { Color = Color.Red.ToSKColor() });
                 }
 
-            //this.labelinfowah.Text = gridField.Height + " <- Height, " + gridField.HeightRequest + " <- HeightRequest"+ gridField.Width+ " <- Width \n"
-               // +this.uzorFieldCanvasView.Height+" <-uzorFieldXanvasView.Height "+ this.uzorFieldCanvasView.Width + " <-uzorFieldXanvasView.Width ";
-            
+            // drawing '+' in center
+            canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0) - 50),
+                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
+                (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0) + 50,
+                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
+                new SKPaint() { Color = Color.FromRgba(10,10,10,100).ToSKColor(), StrokeWidth=10}
+                );
+
+            canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0)), 
+                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0-50), 
+                (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0),
+                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0) + 50, 
+                new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth=10 }
+                );
         }
 
         SKPoint ConvertToPixel(Point pt)
@@ -134,15 +169,18 @@ namespace Uzor.Views
             for (int i = -1; i < 2; i++)
                 for (int y = -1; y < 2; y++)
                 {
-                    if (FieldCore[w + i, h + y] && !(y == 0 && i == 0))
-                        count++;
+                    if (w+i>=0 && w+i<WidthField && h+y>=0 && h+y<HeightField)  // for replace "OutOfRangeException"  
+                        if (FieldCore[w + i, h + y] && 
+                                !(y == 0 && i == 0)  // current pixel
+                                )
+                            count++;
                 }
             return count;
         }
         void CalculateField()
         {
-            for (int w = 1; w < WidthField - 1; w++)
-                for (int h = 1; h < HeightField - 1; h++)
+            for (int w = 0; w < WidthField; w++)
+                for (int h = 0; h < HeightField; h++)
                 {
                     int countCellsAround = CountAround(w, h);
                 
@@ -161,6 +199,26 @@ namespace Uzor.Views
 
             FieldCore = (bool[,])FieldCoreForEditing.Clone();
 
+        }
+
+        private void CalculationButtonClick(object sender, EventArgs e)
+        {
+            if (EditingMode)
+                this.StartCalculation();
+            else
+                this.StopCaltulation();
+        }
+
+        private void beforeButtonClick(object sender, EventArgs e)
+        {
+            this.StopCaltulation();
+        }
+
+        private void nextButtonClick(object sender, EventArgs e)
+        {
+            this.StopCaltulation();
+            CalculateField();
+            uzorFieldCanvasView.InvalidateSurface();
         }
     }
 }
