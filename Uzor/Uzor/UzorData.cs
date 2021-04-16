@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Uzor
@@ -9,8 +10,8 @@ namespace Uzor
     [Serializable]
     public class Layer
     {
-        public SKColor FrontColor { get; set; }// = new SKColor() { };
-        public SKColor BackColor { get; set; }
+        public SKColor FrontColor { get; set; } = new SKColor(255, 0, 0);
+        public SKColor BackColor { get; set; }  = new SKColor(255, 255, 255);
         private List<bool[,]> Field { get; set; } = new List<bool[,]>();
         public bool ColorInverted { get; set; } = false;
         public int Step { get; set; } = -1;

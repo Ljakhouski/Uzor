@@ -128,10 +128,10 @@ namespace Uzor.Views
                 {
                     if (FieldCore[w, h] == false)
                     {
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, new SKPaint() { Color = Color.FromRgb(255, 255, 255).ToSKColor() });
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  new SKPaint() { Color = ThisData.Layers[0].BackColor});
                     }
                     else
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, new SKPaint() { Color = Color.Red.ToSKColor() });
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, new SKPaint() { Color = ThisData.Layers[0].FrontColor });
                 }
 
             // drawing '+' in center
@@ -231,6 +231,15 @@ namespace Uzor.Views
                 deleteButton.Text = "[delete]";
 
             DeleteMode = !DeleteMode;
+        }
+
+        private void invertButtonClick(object sender, EventArgs e)
+        {
+            SKColor c = ThisData.Layers[0].FrontColor;
+
+            ThisData.Layers[0].FrontColor = ThisData.Layers[0].BackColor;
+            ThisData.Layers[0].BackColor = c;
+            uzorFieldCanvasView.InvalidateSurface();
         }
     }
 }

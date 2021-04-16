@@ -8,6 +8,7 @@
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Button Text="[delete]" x:Name="deleteButton"        Clicked="deleteButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                <Button Text="[invert color]" x:Name="invertButton"  Clicked="invertButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
             </StackLayout>
             <Grid BackgroundColor="DarkCyan" x:Name="gridField">
                 <skia:SKCanvasView
