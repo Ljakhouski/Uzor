@@ -22,6 +22,8 @@ namespace Uzor.Views
         private bool[,] FieldCore;
         private bool[,] FieldCoreForEditing;
 
+        private bool DeleteMode = false;
+
         int WidthField; int HeightField;
      
         public UzorPixelFieldView(UzorData data)
@@ -81,7 +83,7 @@ namespace Uzor.Views
                     {
                         try
                         {
-                            FieldCore[(int)(ConvertToPixel(args.Location).X/ pixelSize), (int)(ConvertToPixel(args.Location).Y/ pixelSize)] = true;
+                            FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
 
                             //labelPostition.Text = args.Location.X + " <- args location X, " + args.Location.Y + " <- Y\n"+
                                // ConvertToPixel(args.Location).X + " <- converttopixel X, "+ (ConvertToPixel(args.Location).Y + " <-Y\n");
@@ -95,7 +97,7 @@ namespace Uzor.Views
                     {
                         try
                         {
-                            FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = true;
+                            FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
 
                             //labelPostition.Text = args.Location.X + " <- args location X, " + args.Location.Y + " <- Y\n" +
                               // ConvertToPixel(args.Location).X + " <- converttopixel X, " + (ConvertToPixel(args.Location).Y + " <-Y\n");
@@ -219,6 +221,16 @@ namespace Uzor.Views
             this.StopCaltulation();
             CalculateField();
             uzorFieldCanvasView.InvalidateSurface();
+        }
+
+        private void deleteButtonClick(object sender, EventArgs e)
+        {
+            if (!DeleteMode)
+                deleteButton.Text = "[ draw ]";
+            else
+                deleteButton.Text = "[delete]";
+
+            DeleteMode = !DeleteMode;
         }
     }
 }
