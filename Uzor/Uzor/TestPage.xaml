@@ -7,6 +7,6 @@
              Title=".......">
     <StackLayout>
         <CheckBox x:Name="chckbx" CheckedChanged="chckbx_CheckedChanged"></CheckBox>
-        <views:UzorPixelFieldView x:Name="uzorView"></views:UzorPixelFieldView>
+        <!--<views:UzorPixelFieldView x:Name="uzorView"></views:UzorPixelFieldView>-->
     </StackLayout>
 </ContentPage>

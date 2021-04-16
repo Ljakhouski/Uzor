@@ -5,11 +5,15 @@
              x:Name="contentView">
   <ContentView.Content>
         <StackLayout>
-           
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                
+            </StackLayout>
             <Grid BackgroundColor="DarkCyan" x:Name="gridField">
                 <skia:SKCanvasView
                     x:Name="uzorFieldCanvasView" 
-                    PaintSurface="onCanvasViewPaintSurface">
+                    PaintSurface="onCanvasViewPaintSurface"
+                    >
                 </skia:SKCanvasView>
 
 
@@ -19,9 +23,9 @@
                 </Grid.Effects>
             </Grid>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="[before]" x:Name="beforeButton"        Clicked="beforeButtonClick"      TextColor="White" BackgroundColor="#D51919" Opacity="0.8"></Button>
-                <Button Text="[start]"  x:Name="calculationButton"   Clicked="CalculationButtonClick" TextColor="White" BackgroundColor="#D51919" Opacity="0.8"></Button>
-                <Button Text="[ next ]" x:Name="nextButton"          Clicked="nextButtonClick"        TextColor="White" BackgroundColor="#D51919" Opacity="0.8"></Button>
+                <Button Text="[before]" x:Name="beforeButton"        Clicked="beforeButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                <Button Text="[start]"  x:Name="calculationButton"   Clicked="CalculationButtonClick" TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                <Button Text="[ next ]" x:Name="nextButton"          Clicked="nextButtonClick"        TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
             </StackLayout>
 
             <!--<Label Text="" x:Name="labelinfowah" ></Label>

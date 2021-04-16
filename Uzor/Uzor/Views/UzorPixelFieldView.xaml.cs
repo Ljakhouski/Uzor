@@ -23,11 +23,7 @@ namespace Uzor.Views
         private bool[,] FieldCoreForEditing;
 
         int WidthField; int HeightField;
-        
-        private void Next()
-        {
-
-        }
+     
         public UzorPixelFieldView(UzorData data)
         {
             InitializeComponent();
@@ -38,21 +34,17 @@ namespace Uzor.Views
             FieldCore = new bool[WidthField+1, HeightField+1];
             FieldCoreForEditing = new bool[WidthField+1, HeightField+1];
 
-            Device.StartTimer(TimeSpan.FromMilliseconds(0), OnTimerTick);
+            
+            Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
         }
-        public UzorPixelFieldView()
+      
+        public void SaveUzor()
         {
-            
-            InitializeComponent();
-            double i = this.Content.Width;
-            
+            //firstly saving current state
+            this.ThisData.Layers[0].AddNextState(FieldCore);
 
-            FieldCore = new bool[WidthField, HeightField];
-            FieldCoreForEditing = new bool[WidthField, HeightField];
 
-            Device.StartTimer(TimeSpan.FromMilliseconds(500), OnTimerTick);
         }
-
         public void StartCalculation()
         {
             EditingMode = false;
@@ -63,6 +55,7 @@ namespace Uzor.Views
         {
             EditingMode = true;
             calculationButton.Text = "[start]";
+            uzorFieldCanvasView.InvalidateSurface();
         }
         private bool OnTimerTick()
         {
@@ -75,10 +68,7 @@ namespace Uzor.Views
             uzorFieldCanvasView.InvalidateSurface();
             return true;
         }
-        private void WriteFieldInUzorData()
-        {
-           // ThisData.Fields.Add();
-        }
+      
         private void OnTouchEffectAction(object sender, TouchActionEventArgs args)
         {
             if (!EditingMode)
@@ -123,7 +113,7 @@ namespace Uzor.Views
             float pixelSize = (float)uzorFieldCanvasView.CanvasSize.Width / WidthField;
 
             this.uzorFieldCanvasView.HeightRequest = contentView.Width;
-            this.uzorFieldCanvasView.WidthRequest = contentView.Width;
+           // this.uzorFieldCanvasView.WidthRequest = contentView.Width;
 
 
             SKCanvas canvas = e.Surface.Canvas;
@@ -143,19 +133,23 @@ namespace Uzor.Views
                 }
 
             // drawing '+' in center
-            canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0) - 50),
-                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
-                (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0) + 50,
-                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
-                new SKPaint() { Color = Color.FromRgba(10,10,10,100).ToSKColor(), StrokeWidth=10}
-                );
+            if (EditingMode)
+            {
+                canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0) - 50),
+                                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
+                                (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0) + 50,
+                                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
+                                new SKPaint() { Color = Color.FromRgba(10,10,10,100).ToSKColor(), StrokeWidth=10}
+                                );
 
-            canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0)), 
-                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0-50), 
-                (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0),
-                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0) + 50, 
-                new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth=10 }
-                );
+                canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0)), 
+                                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0-50), 
+                                (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0),
+                                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0) + 50, 
+                                new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth=10 }
+                                );
+            }
+            
         }
 
         SKPoint ConvertToPixel(Point pt)
@@ -179,6 +173,9 @@ namespace Uzor.Views
         }
         void CalculateField()
         {
+            //firstly saving current state
+            this.ThisData.Layers[0].AddNextState(FieldCore);
+
             for (int w = 0; w < WidthField; w++)
                 for (int h = 0; h < HeightField; h++)
                 {
@@ -198,7 +195,7 @@ namespace Uzor.Views
                 }
 
             FieldCore = (bool[,])FieldCoreForEditing.Clone();
-
+            
         }
 
         private void CalculationButtonClick(object sender, EventArgs e)
@@ -212,6 +209,9 @@ namespace Uzor.Views
         private void beforeButtonClick(object sender, EventArgs e)
         {
             this.StopCaltulation();
+            if (ThisData.Layers[0].Step>=0)
+                this.FieldCore = ThisData.Layers[0].GetPreviousState();
+            uzorFieldCanvasView.InvalidateSurface();
         }
 
         private void nextButtonClick(object sender, EventArgs e)

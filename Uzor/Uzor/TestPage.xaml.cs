@@ -22,10 +22,10 @@ namespace Uzor
      
         private void chckbx_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (chckbx.IsChecked)
-                this.uzorView.StartCalculation();
-            else
-                this.uzorView.StopCaltulation();
+            //if (chckbx.IsChecked)
+            //    this.uzorView.StartCalculation();
+            //else
+            //    this.uzorView.StopCaltulation();
         }
     }
 }
