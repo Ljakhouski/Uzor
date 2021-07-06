@@ -19,7 +19,9 @@ namespace Uzor
 
             SaveSetting_ ss = SaveSetting;
             var nus = new NewUzorSetting(ss);
+            nus.Opacity = 0;
             gridCreatingPage.Children.Add(nus);
+            nus.FadeTo(1, 1000);
             
         }
         public delegate void SaveSetting_(UzorData data);

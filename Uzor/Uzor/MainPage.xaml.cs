@@ -33,6 +33,7 @@ namespace Uzor
             stack.Children.Add(new UzorItem());
             mediaElement.Play();
            
+
         }
 
         private async void TestNow(object sender, EventArgs e)

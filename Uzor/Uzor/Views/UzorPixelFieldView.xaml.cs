@@ -15,7 +15,7 @@ namespace Uzor.Views
     public partial class UzorPixelFieldView : ContentView
     {
         public bool EditingMode { get; set; } = true;
-       
+        public bool MirrorMode { get; set; } = true;
 
         private UzorData ThisData { get; set; }
 
@@ -76,40 +76,46 @@ namespace Uzor.Views
             if (!EditingMode)
                 return;
 
-            float pixelSize = (float)((contentView.Width) / HeightField) * ((float)Device.Info.PixelScreenSize.Width / (float)contentView.Width);
+            //float pixelSize = (float)((contentView.Width) / HeightField) * ((float)Device.Info.PixelScreenSize.Width / (float)contentView.Width);
             switch (args.Type)
             {
                 case TouchActionType.Pressed:
-                    {
-                        try
-                        {
-                            FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-
-                            //labelPostition.Text = args.Location.X + " <- args location X, " + args.Location.Y + " <- Y\n"+
-                               // ConvertToPixel(args.Location).X + " <- converttopixel X, "+ (ConvertToPixel(args.Location).Y + " <-Y\n");
-                        }
-                        catch (IndexOutOfRangeException e) { }
-                        uzorFieldCanvasView.InvalidateSurface();
-                    }
-                    break;
-
                 case TouchActionType.Moved: 
                     {
                         try
                         {
-                            FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-
-                            //labelPostition.Text = args.Location.X + " <- args location X, " + args.Location.Y + " <- Y\n" +
-                              // ConvertToPixel(args.Location).X + " <- converttopixel X, " + (ConvertToPixel(args.Location).Y + " <-Y\n");
+                            WritePixel(args);
                         }
                         catch (IndexOutOfRangeException e) { }
                        
-                        uzorFieldCanvasView.InvalidateSurface();
+                        
                     }
                     break;
             }
+            uzorFieldCanvasView.InvalidateSurface();
         }
 
+        private void WritePixel(TouchActionEventArgs args)
+        {
+            float pixelSize = (float)((contentView.Width) / HeightField) * ((float)Device.Info.PixelScreenSize.Width / (float)contentView.Width);
+            try
+            {
+                if (MirrorMode)
+                {
+                    if ((int)(ConvertToPixel(args.Location).X / pixelSize)<= WidthField/2 && (int)(ConvertToPixel(args.Location).Y / pixelSize)<=HeightField/2)
+                    {
+                        FieldCore[WidthField-1-(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+
+                        FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                        FieldCore[WidthField -1- (int)(ConvertToPixel(args.Location).X / pixelSize), HeightField -1- (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                        FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), HeightField -1- (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                    }
+                }
+                else 
+                    FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+            }
+            catch (IndexOutOfRangeException e) { }
+        }
         private void onCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             float pixelSize = (float)uzorFieldCanvasView.CanvasSize.Width / WidthField;
@@ -150,6 +156,20 @@ namespace Uzor.Views
                                 (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0) + 50, 
                                 new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth=10 }
                                 );
+            }
+            if (MirrorMode)
+            {
+                canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0) - 50),
+                                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
+                                (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0) + 50,
+                                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
+                                new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth = 10 }
+                                );
+
+                canvas.DrawRect((float)(uzorFieldCanvasView.CanvasSize.Width / 2.0), 0, (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0),
+                    uzorFieldCanvasView.CanvasSize.Width, new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth = 10 });
+                canvas.DrawRect(0, (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0), (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0),
+                    (float)(uzorFieldCanvasView.CanvasSize.Width/2.0), new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth = 10 });
             }
             
         }
@@ -214,6 +234,7 @@ namespace Uzor.Views
             if (ThisData.Layers[0].Step>=0)
                 this.FieldCore = ThisData.Layers[0].GetPreviousState();
             uzorFieldCanvasView.InvalidateSurface();
+            //uzorFieldCanvasView.FadeTo(0, 250);
         }
 
         private void nextButtonClick(object sender, EventArgs e)
@@ -239,6 +260,16 @@ namespace Uzor.Views
 
             ThisData.Layers[0].FrontColor = ThisData.Layers[0].BackColor;
             ThisData.Layers[0].BackColor = c;
+            uzorFieldCanvasView.InvalidateSurface();
+        }
+
+        private void mirrorButtonClick(object sender, EventArgs e)
+        {
+            if (!MirrorMode)
+                mirrorButton.Text = "[before mode]";
+            else
+                mirrorButton.Text = "[mirror mode]";
+            MirrorMode = !MirrorMode;
             uzorFieldCanvasView.InvalidateSurface();
         }
     }

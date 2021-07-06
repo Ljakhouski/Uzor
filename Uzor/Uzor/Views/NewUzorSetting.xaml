@@ -18,7 +18,7 @@
                     <StackLayout Orientation="Horizontal"   Margin="30,30,0,0">
                         <Label Text="Size: " FontSize="20"></Label>
                         <Label x:Name="sizeSliderLabel" FontSize="20" Text="" Margin="30,0,0,0"></Label>
-                        <Slider x:Name="sizeSlider" ThumbColor="#D90E0E"  MaximumTrackColor="Red"   ValueChanged="sizeSliderChanged" HorizontalOptions="FillAndExpand" Maximum="80" Minimum="10" Margin="0,0,20,0"/>
+                        <Slider x:Name="sizeSlider" ThumbColor="#D90E0E"  MaximumTrackColor="Red"   ValueChanged="sizeSliderChanged" HorizontalOptions="FillAndExpand" Maximum="70" Minimum="23" Margin="0,0,20,0"/>
 
                     </StackLayout>
                 </StackLayout>
