@@ -22,13 +22,12 @@ namespace Uzor
             nus.Opacity = 0;
             gridCreatingPage.Children.Add(nus);
             nus.FadeTo(1, 1000);
-            
         }
         public delegate void SaveSetting_(UzorData data);
         public void SaveSetting(UzorData data)
         {
             gridCreatingPage.Children.Clear();
-            gridCreatingPage.Children.Add(new UzorPixelFieldView(data));
+            gridCreatingPage.Children.Add(new UzorEditElementView(data));
            // gridCreatingPage.Children.Add(new NewUzorSetting(SaveSetting));
         }
     }

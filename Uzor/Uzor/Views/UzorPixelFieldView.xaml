@@ -4,13 +4,7 @@
              x:Class="Uzor.Views.UzorPixelFieldView"
              x:Name="contentView">
   <ContentView.Content>
-        <StackLayout>
-
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="[delete]" x:Name="deleteButton"        Clicked="deleteButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-                <Button Text="[invert color]" x:Name="invertButton"  Clicked="invertButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-                <Button Text="[mirror mode]" x:Name="mirrorButton"   Clicked="mirrorButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-            </StackLayout>
+        
             <Grid BackgroundColor="DarkCyan" x:Name="gridField">
                 <skia:SKCanvasView
                     x:Name="uzorFieldCanvasView" 
@@ -24,15 +18,11 @@
                                 TouchAction="OnTouchEffectAction"/>
                 </Grid.Effects>
             </Grid>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="[before]" x:Name="beforeButton"        Clicked="beforeButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-                <Button Text="[start]"  x:Name="calculationButton"   Clicked="CalculationButtonClick" TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-                <Button Text="[ next ]" x:Name="nextButton"          Clicked="nextButtonClick"        TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-            </StackLayout>
+            
 
             <!--<Label Text="" x:Name="labelinfowah" ></Label>
             <Label Text="" x:Name="labelPostition" TextColor="DarkGreen"></Label>-->
-        </StackLayout>
+    
         
     </ContentView.Content>
 </ContentView>

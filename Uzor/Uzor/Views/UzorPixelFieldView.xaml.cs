@@ -1,4 +1,8 @@
-﻿using SkiaSharp;
+﻿/*
+ 
+ 
+ */
+using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
@@ -8,24 +12,25 @@ using System.Threading.Tasks;
 using TouchTracking;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Uzor.Algorithm;
 
 namespace Uzor.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UzorPixelFieldView : ContentView
     {
+        public int LayerNumber { get; set; } = 0;
         public bool EditingMode { get; set; } = true;
         public bool MirrorMode { get; set; } = true;
+                                 
+        public UzorData ThisData { get; set; }
 
-        private UzorData ThisData { get; set; }
+        //private bool[,] EditableField;
+        //private bool[,] FieldCoreForEditing;
 
-        private bool[,] FieldCore;
-        private bool[,] FieldCoreForEditing;
-
-        private bool DeleteMode = false;
+        public bool DeleteMode = false;
 
         int WidthField; int HeightField;
-     
         public UzorPixelFieldView(UzorData data)
         {
             InitializeComponent();
@@ -33,33 +38,22 @@ namespace Uzor.Views
             this.WidthField = data.FieldSize;
             this.HeightField = data.FieldSize;
 
-            FieldCore = new bool[WidthField+1, HeightField+1];
-            FieldCoreForEditing = new bool[WidthField+1, HeightField+1];
+            //EditableField = new bool[WidthField, HeightField];
+           // FieldCoreForEditing = new bool[WidthField+1, HeightField+1];
 
             
-            Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
+           // Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
         }
       
-        public void SaveUzor()
+        /*public void SaveState()
         {
             //firstly saving current state
-            this.ThisData.Layers[0].AddNextState(FieldCore);
-
-
-        }
-        public void StartCalculation()
-        {
-            EditingMode = false;
-            calculationButton.Text = "[stop]";
-        }
-
-        public void StopCaltulation()
-        {
-            EditingMode = true;
-            calculationButton.Text = "[start]";
-            uzorFieldCanvasView.InvalidateSurface();
-        }
-        private bool OnTimerTick()
+            this.ThisData.Layers[LayerNumber].AddNextState(EditableField);
+            BasicDrawingAlgorithm.Calculate(this.ThisData.Layers[LayerNumber]);
+            EditableField = this.ThisData.Layers[LayerNumber].GetLastState();
+        }*/
+        
+       /* private bool OnTimerTick()
         {
             if (EditingMode)
                 return true;
@@ -69,6 +63,11 @@ namespace Uzor.Views
 
             uzorFieldCanvasView.InvalidateSurface();
             return true;
+        }*/
+
+        public void DrawView()
+        {
+            uzorFieldCanvasView.InvalidateSurface();
         }
       
         private void OnTouchEffectAction(object sender, TouchActionEventArgs args)
@@ -95,31 +94,34 @@ namespace Uzor.Views
             uzorFieldCanvasView.InvalidateSurface();
         }
 
-        private void WritePixel(TouchActionEventArgs args)
+        private void WritePixel(TouchActionEventArgs args) // TODO: debug clone array
         {
             float pixelSize = (float)((contentView.Width) / HeightField) * ((float)Device.Info.PixelScreenSize.Width / (float)contentView.Width);
+            var f = /*(bool[,])*/this.ThisData.Layers[LayerNumber].GetLastState();//.Clone();
             try
             {
                 if (MirrorMode)
                 {
                     if ((int)(ConvertToPixel(args.Location).X / pixelSize)<= WidthField/2 && (int)(ConvertToPixel(args.Location).Y / pixelSize)<=HeightField/2)
                     {
-                        FieldCore[WidthField-1-(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                        f[WidthField-1-(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
 
-                        FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-                        FieldCore[WidthField -1- (int)(ConvertToPixel(args.Location).X / pixelSize), HeightField -1- (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-                        FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), HeightField -1- (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                        f[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                        f[WidthField-1-(int)(ConvertToPixel(args.Location).X / pixelSize), HeightField-1- (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                        f[(int)(ConvertToPixel(args.Location).X / pixelSize), HeightField-1- (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
                     }
                 }
-                else 
-                    FieldCore[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                else
+                    f[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+
+                //this.ThisData.Layers[LayerNumber].EditLastState(f);
             }
             catch (IndexOutOfRangeException e) { }
         }
         private void onCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             float pixelSize = (float)uzorFieldCanvasView.CanvasSize.Width / WidthField;
-
+            var f = this.ThisData.Layers[LayerNumber].GetLastState();
             this.uzorFieldCanvasView.HeightRequest = contentView.Width;
            // this.uzorFieldCanvasView.WidthRequest = contentView.Width;
 
@@ -127,12 +129,11 @@ namespace Uzor.Views
             SKCanvas canvas = e.Surface.Canvas;
             canvas.Clear(Color.Yellow.ToSKColor());
 
-          
 
             for(int w = 0; w < WidthField; w++)
                 for (int h = 0; h < HeightField; h++)
                 {
-                    if (FieldCore[w, h] == false)
+                    if (f[w, h] == false)
                     {
                         canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  new SKPaint() { Color = ThisData.Layers[0].BackColor});
                     }
@@ -157,6 +158,8 @@ namespace Uzor.Views
                                 new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth=10 }
                                 );
             }
+
+            // drawing gray indicator of !drawable field
             if (MirrorMode)
             {
                 canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0) - 50),
@@ -179,98 +182,14 @@ namespace Uzor.Views
             return new SKPoint((float)(uzorFieldCanvasView.CanvasSize.Width * pt.X / uzorFieldCanvasView.Width),
                                (float)(uzorFieldCanvasView.CanvasSize.Height * pt.Y / uzorFieldCanvasView.Height));
         }
-        int CountAround(int w, int h)
+      
+
+       /* public void SaveCurrentState(int layerNumber = 0)
         {
-            int count = 0;
-            for (int i = -1; i < 2; i++)
-                for (int y = -1; y < 2; y++)
-                {
-                    if (w+i>=0 && w+i<WidthField && h+y>=0 && h+y<HeightField)  // for replace "OutOfRangeException"  
-                        if (FieldCore[w + i, h + y] && 
-                                !(y == 0 && i == 0)  // current pixel
-                                )
-                            count++;
-                }
-            return count;
-        }
-        void CalculateField()
-        {
-            //firstly saving current state
-            this.ThisData.Layers[0].AddNextState(FieldCore);
+            this.ThisData.Layers[layerNumber].AddNextState(FieldCore);
+        }*/
+        
 
-            for (int w = 0; w < WidthField; w++)
-                for (int h = 0; h < HeightField; h++)
-                {
-                    int countCellsAround = CountAround(w, h);
-                
-
-                    if (countCellsAround == 2 || countCellsAround == 3)
-                    {
-                        FieldCoreForEditing[w, h] = true;
-                        // return;
-                    }
-                    else
-                    {
-                        FieldCoreForEditing[w, h] = false;
-                    }
-                    
-                }
-
-            FieldCore = (bool[,])FieldCoreForEditing.Clone();
-            
-        }
-
-        private void CalculationButtonClick(object sender, EventArgs e)
-        {
-            if (EditingMode)
-                this.StartCalculation();
-            else
-                this.StopCaltulation();
-        }
-
-        private void beforeButtonClick(object sender, EventArgs e)
-        {
-            this.StopCaltulation();
-            if (ThisData.Layers[0].Step>=0)
-                this.FieldCore = ThisData.Layers[0].GetPreviousState();
-            uzorFieldCanvasView.InvalidateSurface();
-            //uzorFieldCanvasView.FadeTo(0, 250);
-        }
-
-        private void nextButtonClick(object sender, EventArgs e)
-        {
-            this.StopCaltulation();
-            CalculateField();
-            uzorFieldCanvasView.InvalidateSurface();
-        }
-
-        private void deleteButtonClick(object sender, EventArgs e)
-        {
-            if (!DeleteMode)
-                deleteButton.Text = "[ draw ]";
-            else
-                deleteButton.Text = "[delete]";
-
-            DeleteMode = !DeleteMode;
-        }
-
-        private void invertButtonClick(object sender, EventArgs e)
-        {
-            SKColor c = ThisData.Layers[0].FrontColor;
-
-            ThisData.Layers[0].FrontColor = ThisData.Layers[0].BackColor;
-            ThisData.Layers[0].BackColor = c;
-            uzorFieldCanvasView.InvalidateSurface();
-        }
-
-        private void mirrorButtonClick(object sender, EventArgs e)
-        {
-            if (!MirrorMode)
-                mirrorButton.Text = "[before mode]";
-            else
-                mirrorButton.Text = "[mirror mode]";
-            MirrorMode = !MirrorMode;
-            uzorFieldCanvasView.InvalidateSurface();
-        }
+        
     }
 }
