@@ -23,7 +23,9 @@ namespace Uzor.Views
         {
             InitializeComponent();
             this.UzorView = new UzorPixelFieldView(data);
-            this.editingFieldGrid.Children.Add(UzorView);
+            this.editingFieldFrame.Content = UzorView;
+           
+
             Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
         }
       
@@ -45,6 +47,7 @@ namespace Uzor.Views
         {
             this.UzorView.EditingMode = false;
             calculationButton.Text = "[stop]";
+            SetDefaultZoomValue();
         }
 
         public void StopCaltulation()
@@ -52,6 +55,7 @@ namespace Uzor.Views
             this.UzorView.EditingMode = true;
             calculationButton.Text = "[start]";
             this.UzorView.DrawView();
+            //SetZoomValueFromPicker();
         }
 
         private void CalculationButtonClick(object sender, EventArgs e)
@@ -68,9 +72,20 @@ namespace Uzor.Views
             if (UzorView.ThisData.Layers[UzorView.LayerNumber].Step >= 0)
                 this.UzorView.ThisData.Layers[UzorView.LayerNumber].GetAndSetPreviousState(); // only set
             this.UzorView.DrawView();
+            SetDefaultZoomValue();
             //uzorFieldCanvasView.FadeTo(0, 250);
         }
 
+        private void SetZoomValueFromPicker()
+        {
+            this.UzorView.Scale = this.zoomPicker.SelectedIndex + 1;
+            this.UzorView.DrawView();
+        }
+        private void SetDefaultZoomValue()
+        {
+            this.UzorView.Scale = 1;
+            this.zoomPicker.SelectedIndex = 0;
+        }
         private void nextButtonClick(object sender, EventArgs e)
         {
             this.StopCaltulation();
@@ -79,6 +94,8 @@ namespace Uzor.Views
             BasicDrawingAlgorithm.Calculate(this.UzorView.ThisData.Layers[UzorView.LayerNumber]);
 
             this.UzorView.DrawView();
+
+            SetDefaultZoomValue();
         }
 
         private void deleteButtonClick(object sender, EventArgs e)
@@ -108,6 +125,11 @@ namespace Uzor.Views
                 mirrorButton.Text = "[mirror mode]";
             UzorView.MirrorMode = !UzorView.MirrorMode;
             UzorView.DrawView();
+        }
+
+        private void pickerChanged(object sender, EventArgs e)
+        {
+            SetZoomValueFromPicker();
         }
     }
 }

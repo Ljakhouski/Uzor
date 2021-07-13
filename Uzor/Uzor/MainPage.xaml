@@ -25,7 +25,7 @@
                         <Button Text="make uzor"  TextColor="White"  Clicked="NewUzor" BackgroundColor="#820E0E" CornerRadius="30" Margin="25,0" VerticalOptions="End"></Button>
                     </StackLayout>
                 </Grid>
-            
+
             
             
                 <ScrollView >

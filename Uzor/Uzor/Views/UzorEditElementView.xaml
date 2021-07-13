@@ -1,18 +1,44 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:Uzor.Views"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:Uzor.Views" xmlns:sh="http://sharpnado.com"
              x:Class="Uzor.Views.UzorEditElementView">
   <ContentView.Content>
-        <StackLayout>
+        <StackLayout Padding="0">
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Button Text="[delete]" x:Name="deleteButton"        Clicked="deleteButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-                <Button Text="[invert color]" x:Name="invertButton"  Clicked="invertButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-                <Button Text="[mirror mode]" x:Name="mirrorButton"   Clicked="mirrorButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                <Picker x:Name="zoomPicker" SelectedIndexChanged="pickerChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>100%</x:String>
+                            <x:String>125%</x:String>
+                            <x:String>200%</x:String>
+                            <x:String>250%</x:String>
+                            <x:String>400%</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                    <Button Text="[invert color]" x:Name="invertButton"  Clicked="invertButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                </sh:Shadows>
+
+                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                    <Button Text="[mirror mode]" x:Name="mirrorButton"   Clicked="mirrorButtonClick"      TextColor="Black" BackgroundColor="#FFFFFF" Opacity="1" CornerRadius="10"></Button>
+                </sh:Shadows>
+                
             </StackLayout>
 
-            <Grid x:Name="editingFieldGrid"></Grid>
-            <Label x:Name="counter" Text="0"></Label>
+            <sh:Shadows x:Name="MyViewShadows"
+            CornerRadius="10"
+            Shades="{sh:SingleShade Offset='3, 3',
+                                    Opacity=0.35,
+                                    Color=black}">
+                <Frame x:Name="editingFieldFrame" HasShadow="False" Margin="15,15,15,15" CornerRadius="10" Padding="0" ></Frame>
+            </sh:Shadows>
+            
+            
+            <!--<Label x:Name="counter" Text="0"></Label>-->
 
             <!-- <Grid BackgroundColor="DarkCyan" x:Name="gridField">
                 <skia:SKCanvasView
@@ -28,9 +54,19 @@
                 </Grid.Effects>
             </Grid>-->
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="[before]" x:Name="beforeButton"        Clicked="beforeButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-                <Button Text="[start]"  x:Name="calculationButton"   Clicked="CalculationButtonClick" TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-                <Button Text="[ next ]" x:Name="nextButton"          Clicked="nextButtonClick"        TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=Green}">
+                    <Button  x:Name="beforeButton" HeightRequest="90"  WidthRequest="90" ImageSource="leftButton.png"    Clicked="beforeButtonClick"      TextColor="White" BackgroundColor="#FFFFFF" Opacity="1" CornerRadius="10"></Button>
+                </sh:Shadows>
+                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=DarkSeaGreen}">
+                    <Button  ImageSource="startButton.png" x:Name="calculationButton"  HeightRequest="90"  WidthRequest="90"   Clicked="CalculationButtonClick" TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                </sh:Shadows>
+                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                    <Button Text=" > " x:Name="nextButton"  FontSize="Large"    HeightRequest="90"  WidthRequest="90"    Clicked="nextButtonClick"        TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                </sh:Shadows>
+                
+                
+                
+               
             </StackLayout>
 
             <!--<Label Text="" x:Name="labelinfowah" ></Label>

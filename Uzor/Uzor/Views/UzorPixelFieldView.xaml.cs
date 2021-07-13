@@ -29,6 +29,8 @@ namespace Uzor.Views
         //private bool[,] FieldCoreForEditing;
 
         public bool DeleteMode = false;
+        
+        public int Scale { get; set; } = 1;
 
         int WidthField; int HeightField;
         public UzorPixelFieldView(UzorData data)
@@ -83,36 +85,56 @@ namespace Uzor.Views
                     {
                         try
                         {
-                            WritePixel(args);
+                            WritePixel(args) ;
                         }
                         catch (IndexOutOfRangeException e) { }
                        
                         
                     }
                     break;
-            }
+            }  
             uzorFieldCanvasView.InvalidateSurface();
         }
 
         private void WritePixel(TouchActionEventArgs args) // TODO: debug clone array
         {
-            float pixelSize = (float)((contentView.Width) / HeightField) * ((float)Device.Info.PixelScreenSize.Width / (float)contentView.Width);
+           // float pixelSize = (float)((contentView.Width) / HeightField) * ((float)Device.Info.PixelScreenSize.Width / (float)contentView.Width);
+            float pixelSize = (float)(uzorFieldCanvasView.CanvasSize.Width / WidthField);
             var f = /*(bool[,])*/this.ThisData.Layers[LayerNumber].GetLastState();//.Clone();
+
+            //int x = (int)(ConvertToPixel(args.Location).X / pixelSize);
+            //int y = (int)(ConvertToPixel(args.Location).Y / pixelSize);
+
+            int xLocationAfterScaling = (int)((ConvertToPixel(args.Location).X/Scale + (uzorFieldCanvasView.CanvasSize.Width - (uzorFieldCanvasView.CanvasSize.Width / Scale)) / 2));
+            int yLocationAfterScaling = (int)((ConvertToPixel(args.Location).Y/Scale + (uzorFieldCanvasView.CanvasSize.Height - (uzorFieldCanvasView.CanvasSize.Height / Scale)) / 2));
+
+            int x = (int)(xLocationAfterScaling / pixelSize);
+            int y = (int)(yLocationAfterScaling / pixelSize);
             try
             {
                 if (MirrorMode)
                 {
-                    if ((int)(ConvertToPixel(args.Location).X / pixelSize)<= WidthField/2 && (int)(ConvertToPixel(args.Location).Y / pixelSize)<=HeightField/2)
+                    if (x<= WidthField/2 && y<=HeightField/2)
                     {
-                        f[WidthField-1-(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                        f[WidthField-1-x, y] = DeleteMode ? false : true;
+
+                        f[x, y] = DeleteMode ? false : true;
+                        f[WidthField-1-x, HeightField-1- y] = DeleteMode ? false : true;
+                        f[x, HeightField-1- y] = DeleteMode ? false : true;
+                    }
+
+                    // width scale:
+                  /*  if ((int)((ConvertToPixel(args.Location).X*(1-Zoom)+(Zoom*())) / pixelSize) <= WidthField / 2 && (int)(ConvertToPixel(args.Location).Y / pixelSize) <= HeightField / 2)
+                    {
+                        f[WidthField - 1 - (int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
 
                         f[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-                        f[WidthField-1-(int)(ConvertToPixel(args.Location).X / pixelSize), HeightField-1- (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-                        f[(int)(ConvertToPixel(args.Location).X / pixelSize), HeightField-1- (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-                    }
+                        f[WidthField - 1 - (int)(ConvertToPixel(args.Location).X / pixelSize), HeightField - 1 - (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                        f[(int)(ConvertToPixel(args.Location).X / pixelSize), HeightField - 1 - (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                    }*/
                 }
                 else
-                    f[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
+                    f[x, y] = DeleteMode ? false : true;
 
                 //this.ThisData.Layers[LayerNumber].EditLastState(f);
             }
@@ -120,17 +142,20 @@ namespace Uzor.Views
         }
         private void onCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
+
             float pixelSize = (float)uzorFieldCanvasView.CanvasSize.Width / WidthField;
             var f = this.ThisData.Layers[LayerNumber].GetLastState();
-            this.uzorFieldCanvasView.HeightRequest = contentView.Width;
+            //this.uzorFieldCanvasView.HeightRequest = contentView.Width;
            // this.uzorFieldCanvasView.WidthRequest = contentView.Width;
 
 
             SKCanvas canvas = e.Surface.Canvas;
             canvas.Clear(Color.Yellow.ToSKColor());
 
+            // zoom scene:
+            canvas.Scale(this.Scale, this.Scale, uzorFieldCanvasView.CanvasSize.Width / 2, uzorFieldCanvasView.CanvasSize.Height / 2);
 
-            for(int w = 0; w < WidthField; w++)
+            for (int w = 0; w < WidthField; w++)
                 for (int h = 0; h < HeightField; h++)
                 {
                     if (f[w, h] == false)
@@ -141,9 +166,25 @@ namespace Uzor.Views
                         canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, new SKPaint() { Color = ThisData.Layers[0].FrontColor });
                 }
 
+
+
+            ////////// drawing grid:
+            var paint = new SKPaint() { Color = Color.FromRgba(5, 5, 5, 20).ToSKColor(), StrokeWidth = 2 };
+
+            for (int w = 0; w < WidthField; w++)
+                canvas.DrawLine((float)((w+1)*pixelSize), 0, (float)((w + 1) * pixelSize), (float)(uzorFieldCanvasView.CanvasSize.Height), paint);
+            for (int h = 0; h < HeightField; h++)
+                canvas.DrawLine(0, (float)((h + 1) * pixelSize), (float)(uzorFieldCanvasView.CanvasSize.Width), (float)((h + 1) * pixelSize), paint);
+            //////////
+            
+           
+            
+
             // drawing '+' in center
             if (EditingMode)
             {
+                canvas.Restore();
+
                 canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0) - 50),
                                 (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
                                 (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0) + 50,
@@ -182,14 +223,19 @@ namespace Uzor.Views
             return new SKPoint((float)(uzorFieldCanvasView.CanvasSize.Width * pt.X / uzorFieldCanvasView.Width),
                                (float)(uzorFieldCanvasView.CanvasSize.Height * pt.Y / uzorFieldCanvasView.Height));
         }
-      
 
-       /* public void SaveCurrentState(int layerNumber = 0)
+        private void sizeChangedEvent(object sender, EventArgs e)
         {
-            this.ThisData.Layers[layerNumber].AddNextState(FieldCore);
-        }*/
-        
+            this.contentView.HeightRequest = contentView.Width;
+        }
 
-        
+
+        /* public void SaveCurrentState(int layerNumber = 0)
+         {
+             this.ThisData.Layers[layerNumber].AddNextState(FieldCore);
+         }*/
+
+
+
     }
 }
