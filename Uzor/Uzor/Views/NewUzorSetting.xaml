@@ -1,29 +1,37 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sh="http://sharpnado.com"
              x:Class="Uzor.Views.NewUzorSetting" Margin="10,0" VerticalOptions="Center" HorizontalOptions="Center">
   <ContentView.Content>
-        <Grid HeightRequest="400" WidthRequest="400">
-            <Frame BackgroundColor="White" CornerRadius="20" Opacity="0.85" HasShadow="True"  Padding="0"></Frame>
-            <Frame BackgroundColor="#D91717" CornerRadius="20" VerticalOptions="Start" HeightRequest="25"></Frame>
-            <Frame BackgroundColor="#D91717"  VerticalOptions="Start" Margin="0,20,0,0" HeightRequest="10"></Frame>
-            <Label Text="New Uzor" HorizontalOptions="Center" TextColor="White" FontSize="25" Margin="0,20,0,0" ></Label>
-            <Grid>
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="30,90,0,0">
-                        <Label Text="Name: "  FontSize="20" MinimumWidthRequest="60" Padding="0,13,0,0"></Label>
-                        <Entry x:Name="entryName" Text="new Uzor..." HorizontalOptions="StartAndExpand" FontSize="20" Margin="20,0,20,0" />
-                    </StackLayout>
 
-                    <StackLayout Orientation="Horizontal"   Margin="30,30,0,0">
-                        <Label Text="Size: " FontSize="20"></Label>
-                        <Label x:Name="sizeSliderLabel" FontSize="20" Text="" Margin="30,0,0,0"></Label>
-                        <Slider x:Name="sizeSlider" ThumbColor="#D90E0E"  MaximumTrackColor="Red"   ValueChanged="sizeSliderChanged" HorizontalOptions="FillAndExpand" Maximum="70" Minimum="23" Margin="0,0,20,0"/>
+        <sh:Shadows CornerRadius="20" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+              <Grid HeightRequest="350" WidthRequest="350">
+                <Frame BackgroundColor="White" CornerRadius="20" Opacity="0.85" HasShadow="True"  Padding="0"></Frame>
+                <Frame BackgroundColor="#D23838" CornerRadius="20" VerticalOptions="Start" HeightRequest="25"></Frame>
+                <Frame BackgroundColor="#D23838"  VerticalOptions="Start" Margin="0,20,0,0" HeightRequest="10"></Frame>
+                <Label Text="New Uzor" HorizontalOptions="Center" TextColor="White" FontSize="25" Margin="0,20,0,0" ></Label>
+                <Grid>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal" Margin="30,90,0,0">
+                            <Label Text="Name: "  FontSize="20" MinimumWidthRequest="60" Padding="0,13,0,0"></Label>
+                            <Entry x:Name="entryName" Text="new Uzor..." HorizontalOptions="StartAndExpand" FontSize="20" Margin="20,0,20,0" />
+                        </StackLayout>
 
+                        <StackLayout Orientation="Horizontal"   Margin="30,30,0,0">
+                            <Label Text="Size: " FontSize="20"></Label>
+                            <Label x:Name="sizeSliderLabel" FontSize="20" Text="" Margin="30,0,0,0"></Label>
+                            <Slider x:Name="sizeSlider" ThumbColor="#D23838"  MaximumTrackColor="#D23838"   ValueChanged="sizeSliderChanged" HorizontalOptions="FillAndExpand" Maximum="70" Minimum="23" Margin="0,0,20,0"/>
+
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-                <Button Text="OK" Clicked="OK_click" TextColor="White" BackgroundColor="#D91717" CornerRadius="50" VerticalOptions="End" Margin="20,0,20,30"></Button>
+                    <sh:Shadows CornerRadius="30" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=Red}">
+                        <Button Text="OK" Clicked="OK_click" TextColor="White" BackgroundColor="#D23838" CornerRadius="50" VerticalOptions="End" Margin="20,0,20,30"></Button>
+                    </sh:Shadows>
+                </Grid>
             </Grid>
-        </Grid>
+        </sh:Shadows>
+      
+      
+        
     </ContentView.Content>
 </ContentView>

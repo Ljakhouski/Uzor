@@ -46,14 +46,14 @@ namespace Uzor.Views
         public void StartCalculation()
         {
             this.UzorView.EditingMode = false;
-            calculationButton.Text = "[stop]";
+            calculationButton.Source = "stopButton.png";
             SetDefaultZoomValue();
         }
 
         public void StopCaltulation()
         {
             this.UzorView.EditingMode = true;
-            calculationButton.Text = "[start]";
+            calculationButton.Source = "startButton.png";
             this.UzorView.DrawView();
             //SetZoomValueFromPicker();
         }
@@ -78,13 +78,13 @@ namespace Uzor.Views
 
         private void SetZoomValueFromPicker()
         {
-            this.UzorView.Scale = this.zoomPicker.SelectedIndex + 1;
+            this.UzorView.Scale = this.scaleSlider.Value;
             this.UzorView.DrawView();
         }
         private void SetDefaultZoomValue()
         {
             this.UzorView.Scale = 1;
-            this.zoomPicker.SelectedIndex = 0;
+            this.scaleSlider.Value = 1;
         }
         private void nextButtonClick(object sender, EventArgs e)
         {
@@ -101,9 +101,9 @@ namespace Uzor.Views
         private void deleteButtonClick(object sender, EventArgs e)
         {
             if (!UzorView.DeleteMode)
-                deleteButton.Text = "[ draw ]";
+                deleteButton.Source = "drawButton.png";
             else
-                deleteButton.Text = "[delete]";
+                deleteButton.Source = "deleteButton.png";
 
             this.UzorView.DeleteMode = !this.UzorView.DeleteMode;
         }
@@ -120,9 +120,9 @@ namespace Uzor.Views
         private void mirrorButtonClick(object sender, EventArgs e)
         {
             if (!UzorView.MirrorMode)
-                mirrorButton.Text = "[before mode]";
+                mirrorButton.Source = "mirrorOffButton.png";
             else
-                mirrorButton.Text = "[mirror mode]";
+                mirrorButton.Source = "mirrorOnButton.png";
             UzorView.MirrorMode = !UzorView.MirrorMode;
             UzorView.DrawView();
         }
@@ -130,6 +130,30 @@ namespace Uzor.Views
         private void pickerChanged(object sender, EventArgs e)
         {
             SetZoomValueFromPicker();
+        }
+
+        private void scaleChanged(object sender, ValueChangedEventArgs e)
+        {
+            this.UzorView.Scale = e.NewValue;
+            this.UzorView.DrawView();
+        }
+
+        private void zoomButtonClick(object sender, EventArgs e)
+        {
+            
+            if (!sliderPanel.IsVisible)
+            {
+                zoomButton.Source = "zoomOnMenuButton.png";
+                sliderPanel.IsVisible = true;
+                sliderPanelShadow.IsVisible = true;
+                return;
+            }    
+                
+            zoomButton.Source = "zoomOffMenuButton.png";
+            sliderPanel.HeightRequest = 20;
+
+            sliderPanel.IsVisible = false;
+            sliderPanelShadow.IsVisible = false;
         }
     }
 }

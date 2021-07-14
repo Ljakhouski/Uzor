@@ -30,7 +30,7 @@ namespace Uzor.Views
 
         public bool DeleteMode = false;
         
-        public int Scale { get; set; } = 1;
+        public double Scale { get; set; } = 1;
 
         int WidthField; int HeightField;
         public UzorPixelFieldView(UzorData data)
@@ -123,15 +123,6 @@ namespace Uzor.Views
                         f[x, HeightField-1- y] = DeleteMode ? false : true;
                     }
 
-                    // width scale:
-                  /*  if ((int)((ConvertToPixel(args.Location).X*(1-Zoom)+(Zoom*())) / pixelSize) <= WidthField / 2 && (int)(ConvertToPixel(args.Location).Y / pixelSize) <= HeightField / 2)
-                    {
-                        f[WidthField - 1 - (int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-
-                        f[(int)(ConvertToPixel(args.Location).X / pixelSize), (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-                        f[WidthField - 1 - (int)(ConvertToPixel(args.Location).X / pixelSize), HeightField - 1 - (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-                        f[(int)(ConvertToPixel(args.Location).X / pixelSize), HeightField - 1 - (int)(ConvertToPixel(args.Location).Y / pixelSize)] = DeleteMode ? false : true;
-                    }*/
                 }
                 else
                     f[x, y] = DeleteMode ? false : true;
@@ -153,7 +144,7 @@ namespace Uzor.Views
             canvas.Clear(Color.Yellow.ToSKColor());
 
             // zoom scene:
-            canvas.Scale(this.Scale, this.Scale, uzorFieldCanvasView.CanvasSize.Width / 2, uzorFieldCanvasView.CanvasSize.Height / 2);
+            canvas.Scale((float)this.Scale, (float)this.Scale, uzorFieldCanvasView.CanvasSize.Width / 2, uzorFieldCanvasView.CanvasSize.Height / 2);
 
             for (int w = 0; w < WidthField; w++)
                 for (int h = 0; h < HeightField; h++)
@@ -203,12 +194,6 @@ namespace Uzor.Views
             // drawing gray indicator of !drawable field
             if (MirrorMode)
             {
-                canvas.DrawLine((float)((uzorFieldCanvasView.CanvasSize.Width / 2.0) - 50),
-                                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
-                                (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0) + 50,
-                                (float)(uzorFieldCanvasView.CanvasSize.Height / 2.0),
-                                new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth = 10 }
-                                );
 
                 canvas.DrawRect((float)(uzorFieldCanvasView.CanvasSize.Width / 2.0), 0, (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0),
                     uzorFieldCanvasView.CanvasSize.Width, new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth = 10 });

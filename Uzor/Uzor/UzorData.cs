@@ -65,6 +65,6 @@ namespace Uzor
             this.FieldSize = size;
             this.Layers = new List<Field>();
             this.Layers.Add(new Field(size));
-        }
+        } 
     } 
 }

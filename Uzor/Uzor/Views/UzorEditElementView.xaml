@@ -6,29 +6,28 @@
         <StackLayout Padding="0">
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="[delete]" x:Name="deleteButton"        Clicked="deleteButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
-                <Picker x:Name="zoomPicker" SelectedIndexChanged="pickerChanged">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>100%</x:String>
-                            <x:String>125%</x:String>
-                            <x:String>200%</x:String>
-                            <x:String>250%</x:String>
-                            <x:String>400%</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
+                <ImageButton Source="deleteButton.png" x:Name="deleteButton"   HeightRequest="50"      Clicked="deleteButtonClick"      BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
 
                 <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <Button Text="[invert color]" x:Name="invertButton"  Clicked="invertButtonClick"      TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                    <ImageButton HeightRequest="50" x:Name="zoomButton"  Clicked="zoomButtonClick"  Source="zoomOffMenuButton.png"  Opacity="0.8"  BackgroundColor="#E92626"  CornerRadius="10"></ImageButton>
+                </sh:Shadows>
+                
+                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                    <ImageButton HeightRequest="50" x:Name="invertButton"  Clicked="invertButtonClick"  Source="invertButton.png"  Opacity="0.8"  BackgroundColor="#E92626"  CornerRadius="10"></ImageButton>
                 </sh:Shadows>
 
                 <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <Button Text="[mirror mode]" x:Name="mirrorButton"   Clicked="mirrorButtonClick"      TextColor="Black" BackgroundColor="#FFFFFF" Opacity="1" CornerRadius="10"></Button>
+                    <ImageButton x:Name="mirrorButton" HeightRequest="50"   Clicked="mirrorButtonClick"    Source="mirrorOffButton.png" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
                 </sh:Shadows>
                 
             </StackLayout>
-
+            
+                <sh:Shadows IsVisible="false" x:Name="sliderPanelShadow" CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                    <Frame IsVisible="false" x:Name="sliderPanel" CornerRadius="10" BackgroundColor="white" HeightRequest="20"  Margin="20,10,20,0">
+                        <Slider x:Name="scaleSlider" Maximum="5" Minimum="1"  ValueChanged="scaleChanged" ThumbColor="#E92626" MinimumTrackColor="#E92626" MaximumTrackColor="Gray" Value="1"></Slider>
+                    </Frame>
+                </sh:Shadows>
+            
             <sh:Shadows x:Name="MyViewShadows"
             CornerRadius="10"
             Shades="{sh:SingleShade Offset='3, 3',
@@ -54,19 +53,21 @@
                 </Grid.Effects>
             </Grid>-->
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=Green}">
-                    <Button  x:Name="beforeButton" HeightRequest="90"  WidthRequest="90" ImageSource="leftButton.png"    Clicked="beforeButtonClick"      TextColor="White" BackgroundColor="#FFFFFF" Opacity="1" CornerRadius="10"></Button>
+                
+                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}" Margin="0,0,30,0">
+                    <ImageButton  x:Name="beforeButton" HeightRequest="50" VerticalOptions="Center"  Source="leftOrRightWhiteButton.png"    Clicked="beforeButtonClick" WidthRequest="60"  BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
                 </sh:Shadows>
-                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=DarkSeaGreen}">
-                    <Button  ImageSource="startButton.png" x:Name="calculationButton"  HeightRequest="90"  WidthRequest="90"   Clicked="CalculationButtonClick" TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                
+                <sh:Shadows CornerRadius="100" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.40, Color=black}">
+                    <ImageButton  Source="startButton.png" x:Name="calculationButton"  HeightRequest="70"    Clicked="CalculationButtonClick" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="100"></ImageButton>
                 </sh:Shadows>
+
                 <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <Button Text=" > " x:Name="nextButton"  FontSize="Large"    HeightRequest="90"  WidthRequest="90"    Clicked="nextButtonClick"        TextColor="White" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></Button>
+                    <ImageButton x:Name="nextButton" Clicked="nextButtonClick" VerticalOptions="Center" Source="leftOrRightWhiteButton.png" Rotation="180" HeightRequest="50"  WidthRequest="60" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10" Margin="30,0,0,0">
+                    </ImageButton>
                 </sh:Shadows>
-                
-                
-                
-               
+
+
             </StackLayout>
 
             <!--<Label Text="" x:Name="labelinfowah" ></Label>
