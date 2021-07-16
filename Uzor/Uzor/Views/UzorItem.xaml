@@ -8,12 +8,13 @@
     <ContentView.Content>
         <sh:Shadows CornerRadius="15" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
             <Frame HeightRequest="150" Padding="0" CornerRadius="15" BackgroundColor="White" Opacity="0.9">
-                <RelativeLayout >
-                    <View:UzorPixelFieldView
-                        WidthRequest="50"
-                        HeightRequest="50"
-                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.1, Constant=-20}"
-                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
+                <RelativeLayout>
+                    <View:UzorPixelFieldView Opacity="0.7"
+                        x:Name="preview"
+                        WidthRequest="250"
+                        HeightRequest="250"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.1, Constant=-100}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5, Constant=-100}"
                         ></View:UzorPixelFieldView>
                     <Label x:Name="itemName" Text="ItemName: " FontSize="25"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-20}"

@@ -20,10 +20,16 @@ namespace Uzor.Views
     public partial class UzorPixelFieldView : ContentView
     {
         public int LayerNumber { get; set; } = 0;
-        public bool EditingMode { get; set; } = true;
+        public bool EditingMode { get; set; } = false;
         public bool MirrorMode { get; set; } = true;
-                                 
-        public UzorData ThisData { get; set; }
+
+        private UzorData _thisData;
+        public UzorData ThisData { get { return _thisData; } 
+            set {
+                this.WidthField = value.FieldSize;
+                this.HeightField = value.FieldSize;
+                this._thisData = value;
+            } }
 
         //private bool[,] EditableField;
         //private bool[,] FieldCoreForEditing;
@@ -37,8 +43,8 @@ namespace Uzor.Views
         {
             InitializeComponent();
             this.ThisData = data;
-            this.WidthField = data.FieldSize;
-            this.HeightField = data.FieldSize;
+            //this.WidthField = data.FieldSize;
+            //this.HeightField = data.FieldSize;
 
             //EditableField = new bool[WidthField, HeightField];
            // FieldCoreForEditing = new bool[WidthField+1, HeightField+1];
@@ -48,7 +54,7 @@ namespace Uzor.Views
         }
         public UzorPixelFieldView()
         {
-
+            InitializeComponent();
         }
       
         /*public void SaveState()
@@ -166,12 +172,18 @@ namespace Uzor.Views
 
 
             ////////// drawing grid:
-            var paint = new SKPaint() { Color = Color.FromRgba(5, 5, 5, 20).ToSKColor(), StrokeWidth = 2 };
+            if (EditingMode)
+            {
+                var paint = new SKPaint() { Color = Color.FromRgba(5, 5, 5, 20).ToSKColor(), StrokeWidth = 2 };
 
-            for (int w = 0; w < WidthField; w++)
-                canvas.DrawLine((float)((w+1)*pixelSize), 0, (float)((w + 1) * pixelSize), (float)(uzorFieldCanvasView.CanvasSize.Height), paint);
-            for (int h = 0; h < HeightField; h++)
-                canvas.DrawLine(0, (float)((h + 1) * pixelSize), (float)(uzorFieldCanvasView.CanvasSize.Width), (float)((h + 1) * pixelSize), paint);
+                for (int w = 0; w < WidthField; w++)
+                    canvas.DrawLine((float)((w+1)*pixelSize), 0, (float)((w + 1) * pixelSize), (float)(uzorFieldCanvasView.CanvasSize.Height), paint);
+                for (int h = 0; h < HeightField; h++)
+                    canvas.DrawLine(0, (float)((h + 1) * pixelSize), (float)(uzorFieldCanvasView.CanvasSize.Width), (float)((h + 1) * pixelSize), paint);
+            }
+            
+
+            
             //////////
             
            
@@ -198,7 +210,7 @@ namespace Uzor.Views
             }
 
             // drawing gray indicator of !drawable field
-            if (MirrorMode)
+            if (MirrorMode && EditingMode)
             {
 
                 canvas.DrawRect((float)(uzorFieldCanvasView.CanvasSize.Width / 2.0), 0, (float)(uzorFieldCanvasView.CanvasSize.Width / 2.0),

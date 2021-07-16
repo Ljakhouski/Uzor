@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sh="http://sharpnado.com"
              x:Class="Uzor.UzorItemPage">
     <ContentPage.Content>
         <StackLayout>
             <Frame BackgroundColor="#D51A1A" MinimumHeightRequest="180">
-                <Label Text="ItemName: " FontSize="30" TextColor="White"></Label>
+                <Label x:Name="itemNameLabel" Text="ItemName: " FontSize="30" TextColor="White"></Label>
             </Frame>
-            
+
+            <sh:Shadows x:Name="MyViewShadows"
+            CornerRadius="10"
+            Shades="{sh:SingleShade Offset='3, 3',
+                                    Opacity=0.35,
+                                    Color=black}">
+                <Frame x:Name="uzorFieldFrame" HasShadow="False" Margin="15,15,15,15" CornerRadius="10" Padding="0" ></Frame>
+            </sh:Shadows>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

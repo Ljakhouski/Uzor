@@ -14,7 +14,7 @@
                     <StackLayout>
                         <StackLayout Orientation="Horizontal" Margin="30,90,0,0">
                             <Label Text="Name: "  FontSize="20" MinimumWidthRequest="60" Padding="0,13,0,0"></Label>
-                            <Entry x:Name="entryName" Text="new Uzor..." HorizontalOptions="StartAndExpand" FontSize="20" Margin="20,0,20,0" />
+                            <Entry x:Name="entryName" Text="new Uzor" HorizontalOptions="StartAndExpand" FontSize="20" Margin="20,0,20,0" />
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal"   Margin="30,30,0,0">

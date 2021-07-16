@@ -18,23 +18,21 @@ namespace Uzor
             InitializeComponent();
 
             //videoView1.Start();
-            try
-            {
+          
                 //Assets.
                 //   videoView1.Source = ImageSource.FromFile("bg.mp4");
                 //mediaElement.Source = "ms-appx:///bg.mp4";
 
                 MakeUzorItemList();
-            }
-            catch (Exception e) {
-            }
+            
         }
 
         private async void NewUzor(object sender, EventArgs e)
         {
             mediaElement.Stop();
             await Navigation.PushModalAsync(new NavigationPage(new UzorCreatingPage()));
-            stack.Children.Add(new UzorItem());
+            //stack.Children.Add(new UzorItem());
+            MakeUzorItemList();
             mediaElement.Play();
            
 
@@ -49,11 +47,12 @@ namespace Uzor
             foreach(string fileName in fileList)
             {
                 var i = new UzorItem();
-                FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate);
-                i.Data = (UzorData)formatter.Deserialize(fs);
-                i.SetUzorNameLabelText( fileName.Split("/".ToCharArray()).Last());
+                FileStream fs = new FileStream(fileName, FileMode.Open);
+                //i.Data = 
+                //i.SetUzorNameLabelText( fileName.Split("/".ToCharArray()).Last());
 
-                this.stack.Children.Add(i);
+                this.stack.Children.Add(new UzorItem((UzorData)formatter.Deserialize(fs)));
+                fs.Dispose();
             }
         }
         private async void TestNow(object sender, EventArgs e)

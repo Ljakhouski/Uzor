@@ -20,13 +20,14 @@ namespace Uzor.Views
     public partial class UzorEditElementView : ContentView
     {
         public UzorPixelFieldView UzorView { get; set; }
-
+        private bool IsSaved = false; // for rewriting before results
+        private string SavedFilePath;
         public UzorEditElementView(UzorData data)
         {
             InitializeComponent();
             this.UzorView = new UzorPixelFieldView(data);
             this.editingFieldFrame.Content = UzorView;
-           
+            this.UzorView.EditingMode = true;
 
             Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
         }
@@ -157,27 +158,42 @@ namespace Uzor.Views
             sliderPanel.IsVisible = false;
             sliderPanelShadow.IsVisible = false;
         }
-        BinaryFormatter formatter = new BinaryFormatter();
+        
+
         private void saveClick(object sender, EventArgs e)
         {
-            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            BinaryFormatter formatter = new BinaryFormatter();
 
-            // запрашиваем разрешение на перезапись
-            // bool isRewrited = //await DisplayAlert("Подтверждение", "Файл уже существует, перезаписать его?", "Да", "Нет");
-            // if (isRewrited == false) return;
-
-            string lastName = this.UzorView.ThisData.Name = this.UzorView.ThisData.Name;
-            for (int i = 0; i<999; i++)
+            if (IsSaved) // rewrite file
             {
-                if (File.Exists(Path.Combine(folderPath, this.UzorView.ThisData.Name+".ubf")))
-                    this.UzorView.ThisData.Name = lastName + i.ToString();
-                else
-                    break;
+                FileStream fsr = new FileStream(SavedFilePath, FileMode.Truncate);
+                formatter.Serialize(fsr, this.UzorView.ThisData);
+                fsr.Dispose();
+                return;
             }
 
-            FileStream fs = new FileStream(folderPath+"/"+this.UzorView.ThisData.Name + ".ubf", FileMode.OpenOrCreate);
-            formatter.Serialize(fs, this.UzorView.ThisData);
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
+            
+            string fileName = this.UzorView.ThisData.Name + ".ubf";
+
+            if (File.Exists(Path.Combine(folderPath, this.UzorView.ThisData.Name + ".ubf")))
+                for (int i = 0; i<999; i++)
+                    if (File.Exists(Path.Combine(folderPath, this.UzorView.ThisData.Name + i.ToString() + ".ubf")))
+                        continue;
+                    else
+                    {
+                        fileName = this.UzorView.ThisData.Name + i.ToString() + ".ubf";
+                        break;
+                    }
+                
+
+            SavedFilePath = folderPath + "/" + fileName;
+            IsSaved = true;
+
+            FileStream fs = new FileStream(folderPath+"/"+fileName, FileMode.OpenOrCreate);
+            formatter.Serialize(fs, this.UzorView.ThisData);
+            fs.Dispose();
         }
             // перезаписываем файл
            // File.WriteAllText(Path.Combine(folderPath, this.UzorView.ThisData.Name), textEditor.Text);
