@@ -46,6 +46,10 @@ namespace Uzor.Views
             
            // Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
         }
+        public UzorPixelFieldView()
+        {
+
+        }
       
         /*public void SaveState()
         {
@@ -137,8 +141,10 @@ namespace Uzor.Views
             float pixelSize = (float)uzorFieldCanvasView.CanvasSize.Width / WidthField;
             var f = this.ThisData.Layers[LayerNumber].GetLastState();
             //this.uzorFieldCanvasView.HeightRequest = contentView.Width;
-           // this.uzorFieldCanvasView.WidthRequest = contentView.Width;
+            // this.uzorFieldCanvasView.WidthRequest = contentView.Width;
 
+            SKColor backColor = ThisData.Layers[0].BackColor.ToSKColor();
+            SKColor frontColor = ThisData.Layers[0].FrontColor.ToSKColor();
 
             SKCanvas canvas = e.Surface.Canvas;
             canvas.Clear(Color.Yellow.ToSKColor());
@@ -151,10 +157,10 @@ namespace Uzor.Views
                 {
                     if (f[w, h] == false)
                     {
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  new SKPaint() { Color = ThisData.Layers[0].BackColor});
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  new SKPaint() { Color = backColor});
                     }
                     else
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, new SKPaint() { Color = ThisData.Layers[0].FrontColor });
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, new SKPaint() { Color = frontColor });
                 }
 
 

@@ -4,7 +4,11 @@
              x:Class="Uzor.Views.UzorEditElementView">
   <ContentView.Content>
         <StackLayout Padding="0">
+                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                    <Button x:Name="saveButton" WidthRequest="90" Text="save" TextColor="Black" HeightRequest="50"   Clicked="saveClick"    BackgroundColor="#FFFFFF" Opacity="0.8" CornerRadius="10"></Button>
+                </sh:Shadows>
 
+            
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <ImageButton Source="deleteButton.png" x:Name="deleteButton"   HeightRequest="50"      Clicked="deleteButtonClick"      BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
 
@@ -19,6 +23,7 @@
                 <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
                     <ImageButton x:Name="mirrorButton" HeightRequest="50"   Clicked="mirrorButtonClick"    Source="mirrorOffButton.png" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
                 </sh:Shadows>
+
                 
             </StackLayout>
             

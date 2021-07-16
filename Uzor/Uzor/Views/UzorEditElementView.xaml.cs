@@ -5,7 +5,9 @@
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Uzor.Algorithm;
@@ -110,7 +112,7 @@ namespace Uzor.Views
 
         private void invertButtonClick(object sender, EventArgs e)
         {
-            SKColor c = UzorView.ThisData.Layers[0].FrontColor;
+            PixelColor c = UzorView.ThisData.Layers[0].FrontColor;
 
             UzorView.ThisData.Layers[0].FrontColor = UzorView.ThisData.Layers[0].BackColor;
             UzorView.ThisData.Layers[0].BackColor = c;
@@ -155,5 +157,31 @@ namespace Uzor.Views
             sliderPanel.IsVisible = false;
             sliderPanelShadow.IsVisible = false;
         }
+        BinaryFormatter formatter = new BinaryFormatter();
+        private void saveClick(object sender, EventArgs e)
+        {
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+            // запрашиваем разрешение на перезапись
+            // bool isRewrited = //await DisplayAlert("Подтверждение", "Файл уже существует, перезаписать его?", "Да", "Нет");
+            // if (isRewrited == false) return;
+
+            string lastName = this.UzorView.ThisData.Name = this.UzorView.ThisData.Name;
+            for (int i = 0; i<999; i++)
+            {
+                if (File.Exists(Path.Combine(folderPath, this.UzorView.ThisData.Name+".ubf")))
+                    this.UzorView.ThisData.Name = lastName + i.ToString();
+                else
+                    break;
+            }
+
+            FileStream fs = new FileStream(folderPath+"/"+this.UzorView.ThisData.Name + ".ubf", FileMode.OpenOrCreate);
+            formatter.Serialize(fs, this.UzorView.ThisData);
+
+        }
+            // перезаписываем файл
+           // File.WriteAllText(Path.Combine(folderPath, this.UzorView.ThisData.Name), textEditor.Text);
+
+        
     }
 }

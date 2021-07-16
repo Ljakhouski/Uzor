@@ -8,10 +8,40 @@ namespace Uzor
 {
 
     [Serializable]
+    public class PixelColor
+    {
+        public int R { get; set; } = 255;
+        public int G { get; set; } = 255;
+        public int B { get; set; } = 255;
+        public int A { get; set; } = 255;
+
+        public SKColor ToSKColor()
+        {
+            return new SKColor((byte)R, (byte)G, (byte)B, (byte)A);
+        }
+
+        public PixelColor (int r, int g, int b, int a)
+        {
+            this.R = r;
+            this.G = g;
+            this.B = b;
+            this.A = a;
+        }
+
+        public PixelColor(int r, int g, int b)
+        {
+            this.R = r;
+            this.G = g;
+            this.B = b;
+        }
+
+    }
+
+    [Serializable]
     public class Field
     {
-        public SKColor FrontColor { get; set; } = new SKColor(255, 0, 0);
-        public SKColor BackColor { get; set; }  = new SKColor(255, 255, 255);
+        public PixelColor FrontColor { get; set; } = new PixelColor(255, 0, 0);
+        public PixelColor BackColor { get; set; }  = new PixelColor(255, 255, 255);
         private List<bool[,]> Content { get; set; } = new List<bool[,]>(); // List<> of all states of Content
         public bool ColorInverted { get; set; } = false;
         public int Step { get; set; } = -1;

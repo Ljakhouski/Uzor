@@ -1,19 +1,26 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sh="http://sharpnado.com" xmlns:View="clr-namespace:Uzor.Views"
              x:Class="Uzor.Views.UzorItem">
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Tapped="TapOnItem" /> 
     </ContentView.GestureRecognizers>
     <ContentView.Content>
-        <Frame HeightRequest="150" Padding="0" CornerRadius="15" BackgroundColor="White" Opacity="0.7">
-            <RelativeLayout >
-                <Label Text="ItemName: " FontSize="25"
-                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-20}"
-                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}"
-                       ></Label>
-            </RelativeLayout>
-        </Frame>
-        
-  </ContentView.Content>
+        <sh:Shadows CornerRadius="15" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+            <Frame HeightRequest="150" Padding="0" CornerRadius="15" BackgroundColor="White" Opacity="0.9">
+                <RelativeLayout >
+                    <View:UzorPixelFieldView
+                        WidthRequest="50"
+                        HeightRequest="50"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.1, Constant=-20}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
+                        ></View:UzorPixelFieldView>
+                    <Label x:Name="itemName" Text="ItemName: " FontSize="25"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-20}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}"
+                           ></Label>
+                </RelativeLayout>
+            </Frame>
+        </sh:Shadows>
+    </ContentView.Content>
 </ContentView>
