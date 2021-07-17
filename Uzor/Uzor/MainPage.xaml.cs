@@ -51,7 +51,7 @@ namespace Uzor
                 //i.Data = 
                 //i.SetUzorNameLabelText( fileName.Split("/".ToCharArray()).Last());
 
-                this.stack.Children.Add(new UzorItem((UzorData)formatter.Deserialize(fs)));
+                this.stack.Children.Add(new UzorItem((UzorData)formatter.Deserialize(fs), this));
                 fs.Dispose();
             }
         }

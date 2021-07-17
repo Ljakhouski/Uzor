@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,12 +14,13 @@ namespace Uzor.Views
     public partial class UzorItem : ContentView
     {
         public UzorData Data { get; set; }
+        private Page pageForAlert;
         public UzorItem()
         {
             
         }
 
-        public UzorItem(UzorData data)
+        public UzorItem(UzorData data, Page p)
         {
             InitializeComponent();
             this.Data = data;
@@ -27,6 +29,12 @@ namespace Uzor.Views
             upv.ThisData = data;
             upv.DrawView();
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
+            this.itemDate.Text = data.DataOfCreation.Date.ToString();
+            this.mineFrame.BackgroundColor = new Color( upv.ThisData.Layers[0].BackColor.R,
+                                                        upv.ThisData.Layers[0].BackColor.G,
+                                                        upv.ThisData.Layers[0].BackColor.B);
+
+            this.pageForAlert = p;
         }
         public void SetUzorNameLabelText(string name)
         {
@@ -35,6 +43,18 @@ namespace Uzor.Views
         private async void TapOnItem(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new UzorItemPage(Data)));
+        }
+
+        async private void deleteItem(object sender, EventArgs e)
+        {
+            if (await pageForAlert.DisplayAlert("Question?", "Удалить элемент?", "Да", "Нет"))
+            {
+                //var fileList = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+
+                File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+"/"+this.Data.Name+".ubf");
+                
+            }
+        
         }
     }
 }

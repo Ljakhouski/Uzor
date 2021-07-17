@@ -23,6 +23,7 @@ namespace Uzor
 
         protected override void OnResume()
         {
+
         }
     }
 }

@@ -173,7 +173,7 @@ namespace Uzor.Views
                                     new float[] { 0, 1 },
                                     SKShaderTileMode.Clamp);
             }
-            
+                  
 
 
 
