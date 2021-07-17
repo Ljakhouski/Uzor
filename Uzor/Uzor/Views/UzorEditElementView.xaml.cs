@@ -184,6 +184,7 @@ namespace Uzor.Views
                     else
                     {
                         fileName = this.UzorView.ThisData.Name + i.ToString() + ".ubf";
+                        this.UzorView.ThisData.Name = this.UzorView.ThisData.Name + i.ToString();
                         break;
                     }
                 

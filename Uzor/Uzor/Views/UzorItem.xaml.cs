@@ -23,6 +23,7 @@ namespace Uzor.Views
             InitializeComponent();
             this.Data = data;
             UzorPixelFieldView upv = this.preview;
+            upv.GradientPreviewMode = true;
             upv.ThisData = data;
             upv.DrawView();
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();

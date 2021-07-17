@@ -22,6 +22,7 @@ namespace Uzor.Views
         public int LayerNumber { get; set; } = 0;
         public bool EditingMode { get; set; } = false;
         public bool MirrorMode { get; set; } = true;
+        public bool GradientPreviewMode { get; set; } = false;
 
         private UzorData _thisData;
         public UzorData ThisData { get { return _thisData; } 
@@ -152,8 +153,32 @@ namespace Uzor.Views
             SKColor backColor = ThisData.Layers[0].BackColor.ToSKColor();
             SKColor frontColor = ThisData.Layers[0].FrontColor.ToSKColor();
 
-            SKCanvas canvas = e.Surface.Canvas;
-            canvas.Clear(Color.Yellow.ToSKColor());
+            SKPaint backPaint = new SKPaint { Color = backColor };
+            SKPaint frontPaint = new SKPaint { Color = frontColor };
+
+            if (GradientPreviewMode)
+            {
+                frontPaint.Shader = SKShader.CreateLinearGradient(
+                                    new SKPoint(uzorFieldCanvasView.CanvasSize.Width / 4, uzorFieldCanvasView.CanvasSize.Height / 2),
+                                    new SKPoint(uzorFieldCanvasView.CanvasSize.Width, uzorFieldCanvasView.CanvasSize.Height / 2),
+                                    new SKColor[] { frontColor, new SKColor(frontColor.Red, frontColor.Green, frontColor.Blue, 0)  },
+                                    new float[] { 0, 1 },
+                                    SKShaderTileMode.Clamp);
+
+
+                backPaint.Shader = SKShader.CreateLinearGradient(
+                                    new SKPoint(uzorFieldCanvasView.CanvasSize.Width / 4, uzorFieldCanvasView.CanvasSize.Height / 2),
+                                    new SKPoint(uzorFieldCanvasView.CanvasSize.Width, uzorFieldCanvasView.CanvasSize.Height / 2),
+                                    new SKColor[] { backColor, new SKColor(backColor.Red, backColor.Green, backColor.Blue, 0) },
+                                    new float[] { 0, 1 },
+                                    SKShaderTileMode.Clamp);
+            }
+            
+
+
+
+            SKCanvas canvas = e.Surface.Canvas; 
+            canvas.Clear(new SKColor(0,0,0,0));
 
             // zoom scene:
             canvas.Scale((float)this.Scale, (float)this.Scale, uzorFieldCanvasView.CanvasSize.Width / 2, uzorFieldCanvasView.CanvasSize.Height / 2);
@@ -163,10 +188,10 @@ namespace Uzor.Views
                 {
                     if (f[w, h] == false)
                     {
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  new SKPaint() { Color = backColor});
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  /*new SKPaint() { Color = backColor}*/ backPaint);
                     }
                     else
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, new SKPaint() { Color = frontColor });
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, /*new SKPaint() { Color = frontColor }*/ frontPaint);
                 }
 
 

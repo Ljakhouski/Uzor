@@ -5,7 +5,7 @@
              x:Name="contentView">
   <ContentView.Content>
         
-            <Grid BackgroundColor="DarkCyan" x:Name="gridField" SizeChanged="sizeChangedEvent" ColumnSpacing="0">
+            <Grid  x:Name="gridField" SizeChanged="sizeChangedEvent" ColumnSpacing="0">
                 <skia:SKCanvasView
                     x:Name="uzorFieldCanvasView" 
                     PaintSurface="onCanvasViewPaintSurface"
