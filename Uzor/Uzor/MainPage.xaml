@@ -1,41 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit"
-             x:Class="Uzor.MainPage">
+             xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit" xmlns:sh="http://sharpnado.com"
+             x:Class="Uzor.MainPage" BackgroundColor="#E7EBF0"
+              >
 
-    <Grid x:Name="mainGrid">
-        <behaviors:MediaElement x:Name="mediaElement" 
+ 
+    
+    
+    <!--<Grid x:Name="mainGrid">-->
+        <!--<behaviors:MediaElement x:Name="mediaElement" 
                                     Source="ms-appx:///background.mp4"
                 AutoPlay="True" IsLooping="True" ShowsPlaybackControls="false"
                                 Aspect="AspectFill"
                                 HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand"/>
+                                VerticalOptions="FillAndExpand"/>-->
 
 
 
 
-        <StackLayout Spacing="0">
-            
-                <Grid HeightRequest="250" MinimumHeightRequest="250">
-                    <Frame BackgroundColor="#AA1616" Opacity="0.75" HasShadow="False" behaviors:ShadowEffect.Radius="30"></Frame>
-                    <StackLayout>
-                        <Label Text="xxxXXXXXUzorXXXXXxxx" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="100" TextColor="White" Opacity="0.8" FontSize="30" />
-                        <Button Text="test now" TextColor="White" Clicked="TestNow"  BackgroundColor="#820E0E" CornerRadius="30" Margin="25,0" VerticalOptions="End"></Button>
-                        <Button Text="make uzor"  TextColor="White"  Clicked="NewUzor" BackgroundColor="#820E0E" CornerRadius="30" Margin="25,0" VerticalOptions="End"></Button>
-                    </StackLayout>
-                </Grid>
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
-            
-            
-                <ScrollView >
-                    <StackLayout x:Name="stack" Padding="10" Spacing="10">
+            <ScrollView  Margin="0,275,0,0" Padding="0,40,0,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Scale="1">
+                    <StackLayout x:Name="stack">
                     </StackLayout>
                 </ScrollView>
+
+
+
+
+        <sh:Shadows x:Name="shadow" CornerRadius="20" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}"  AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 300">
+            <Frame  AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 300" VerticalOptions="Start" Margin="0,0,0,0" HeightRequest="300"   Opacity="1" HasShadow="False" CornerRadius="30"  >
+
+                <Frame.Background>
+                    <LinearGradientBrush StartPoint="0,0"
+                        EndPoint="1,0">
+                        <GradientStop Color="White"
+                    Offset="0.1"/>
+                        <GradientStop Color="#E2E7EB"
+                    Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Frame.Background>
+                            
+                <StackLayout  Margin="0,0,0,0" VerticalOptions="Center" >
+                        <!--<Label Text="xxxXXXXXUzorXXXXXxxx" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="100" TextColor="White" Opacity="0.8" FontSize="30" />-->
+                        <!--<Button Text="test now" TextColor="White" Clicked="TestNow"  BackgroundColor="#820E0E" CornerRadius="30" Margin="25,0" VerticalOptions="End"></Button>-->
+                        <sh:Shadows CornerRadius="20" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}">
+                            <Button Text="make now" VerticalOptions="Center" TextColor="Black" FontSize="21" HeightRequest="80" Clicked="NewUzor" BackgroundColor="White" CornerRadius="20" Margin="40,0"></Button>
+                        </sh:Shadows>
+                    </StackLayout>  
+                </Frame>
+            </sh:Shadows>
+                    
+               
+
             
-            </StackLayout>
+            
+                
+            
+            </AbsoluteLayout>
 
 
-    </Grid>
+    <!--</Grid>-->
 
 </ContentPage>

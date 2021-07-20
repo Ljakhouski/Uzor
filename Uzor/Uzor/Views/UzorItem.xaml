@@ -9,7 +9,8 @@
     
     <ContentView.Content>
         <sh:Shadows CornerRadius="15" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-            <Frame x:Name="mineFrame" HeightRequest="150" Padding="0" CornerRadius="15" BackgroundColor="White" Opacity="1">
+            <Frame x:Name="mineFrame" HeightRequest="150" Padding="0"  CornerRadius="15"  Opacity="1" Margin="20,5">
+
                 <RelativeLayout >
                     <View:UzorPixelFieldView 
                         GradientPreviewMode="true"
@@ -20,12 +21,34 @@
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.1, Constant=-100}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5, Constant=-100}"
                         ></View:UzorPixelFieldView>
-                    <Label  x:Name="itemName" Text="ItemName: " FontSize="25"
+
+                    <Frame HorizontalOptions="Fill" VerticalOptions="Fill" 
+                           
+                           RelativeLayout.WidthConstraint=
+                                "{ConstraintExpression Type=RelativeToParent,
+                                Property=Width,
+                                Factor=1}"
+                            RelativeLayout.HeightConstraint=
+                                "{ConstraintExpression Type=RelativeToParent,
+                                Property=Height,
+                                Factor=1}">
+                        
+                        
+                        <Frame.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#007D7D02"
+                          Offset="0.1" />
+                                <GradientStop Color="#22294150"
+                          Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Frame.Background>
+                    </Frame>
+                    <Label  x:Name="itemName" Text="ItemName: " FontSize="25" TextColor="Black" Opacity="0.7"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=0}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}"
                            ></Label>
 
-                    <Label  x:Name="itemDate" Text="00.00.00.00" FontSize="15" TextColor="Gray"
+                    <Label  x:Name="itemDate"  FontSize="15" TextColor="Black" Opacity="0.3"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=0}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.2, Constant=20}"
                            ></Label>
@@ -35,7 +58,7 @@
                     <sh:Shadows x:Name="shadow" CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9, Constant=-20}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9, Constant=-40}">
-                        <ImageButton x:Name="deleteButton" Source="deleteFileButton.png"   CornerRadius="10" BackgroundColor="White" Opacity="1" Clicked="deleteItem" WidthRequest="40" HeightRequest="40"
+                        <ImageButton x:Name="deleteButton" Opacity="0.95" Source="deleteFileButton.png"   CornerRadius="10" BackgroundColor="#F8F8F8" Clicked="deleteItem" WidthRequest="40" HeightRequest="40"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9, Constant=-20}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9, Constant=-40}"
                                      ></ImageButton>
