@@ -41,14 +41,23 @@
                     Offset="1.0"/>
                     </LinearGradientBrush>
                 </Frame.Background>
-                            
-                <StackLayout  Margin="0,0,0,0" VerticalOptions="Center" >
+
+                <Grid>
+                    <Image x:Name="backGroundImage" Source="uzorBackGroundGradient.PNG" Scale="2" AnchorX="0.23" AnchorY="0.98" Rotation="10"></Image>
+                    <StackLayout  Margin="0,0,0,0" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Horizontal" HeightRequest="70">
                         <!--<Label Text="xxxXXXXXUzorXXXXXxxx" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="100" TextColor="White" Opacity="0.8" FontSize="30" />-->
                         <!--<Button Text="test now" TextColor="White" Clicked="TestNow"  BackgroundColor="#820E0E" CornerRadius="30" Margin="25,0" VerticalOptions="End"></Button>-->
                         <sh:Shadows CornerRadius="20" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}">
-                            <Button Text="make now" VerticalOptions="Center" TextColor="Black" FontSize="21" HeightRequest="80" Clicked="NewUzor" BackgroundColor="White" CornerRadius="20" Margin="40,0"></Button>
+                            <Button Text="make now" VerticalOptions="Fill" TextColor="Black" FontSize="21" WidthRequest="150" Clicked="NewUzor" BackgroundColor="White" CornerRadius="20" ></Button>
                         </sh:Shadows>
-                    </StackLayout>  
+
+                        <sh:Shadows CornerRadius="20" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}">
+                            <ImageButton Source="whiteSettingButton.png"   Clicked="settingClick" BackgroundColor="#FA2626" CornerRadius="20" >
+                            </ImageButton>
+                        </sh:Shadows>
+                    </StackLayout> 
+                </Grid>
+                 
                 </Frame>
             </sh:Shadows>
                     

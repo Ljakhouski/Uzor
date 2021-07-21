@@ -24,7 +24,18 @@ namespace Uzor
                 //mediaElement.Source = "ms-appx:///bg.mp4";
 
                 MakeUzorItemList();
-            
+            int i = new Random().Next(0, 2);
+            switch(i)
+            {
+                case 1:
+                    this.backGroundImage.Source = "uzor2BackGround.PNG";
+                    break;
+                case 2:
+                    this.backGroundImage.Source = "uzor3BackGround.PNG";
+                    break;
+                default:
+                    break;
+            }
         }
 
         private async void NewUzor(object sender, EventArgs e)
@@ -58,6 +69,11 @@ namespace Uzor
         private async void TestNow(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new TestPage()));
+        }
+
+        private void settingClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

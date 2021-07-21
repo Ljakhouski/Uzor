@@ -20,7 +20,7 @@ namespace Uzor.Views
     public partial class UzorEditElementView : ContentView
     {
         public UzorPixelFieldView UzorView { get; set; }
-        private bool IsSaved = false; // for rewriting before results
+        private bool ReSave = false; // for rewriting before results
         private string SavedFilePath;
         public UzorEditElementView(UzorData data)
         {
@@ -164,7 +164,7 @@ namespace Uzor.Views
         {
             BinaryFormatter formatter = new BinaryFormatter();
 
-            if (IsSaved) // rewrite file
+            if (ReSave) // rewrite file
             {
                 FileStream fsr = new FileStream(SavedFilePath, FileMode.Truncate);
                 formatter.Serialize(fsr, this.UzorView.ThisData);
@@ -190,7 +190,7 @@ namespace Uzor.Views
                 
 
             SavedFilePath = folderPath + "/" + fileName;
-            IsSaved = true;
+            ReSave = true;
 
             FileStream fs = new FileStream(folderPath+"/"+fileName, FileMode.OpenOrCreate);
             formatter.Serialize(fs, this.UzorView.ThisData);

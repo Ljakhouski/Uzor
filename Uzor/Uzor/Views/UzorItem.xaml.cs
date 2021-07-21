@@ -29,7 +29,7 @@ namespace Uzor.Views
             upv.ThisData = data;
             upv.DrawView();
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
-            this.itemDate.Text = data.DataOfCreation.Date.ToString();
+            this.itemDate.Text = data.DataOfCreation.ToString();
             this.mineFrame.BackgroundColor = new Color( upv.ThisData.Layers[0].BackColor.R,
                                                         upv.ThisData.Layers[0].BackColor.G,
                                                         upv.ThisData.Layers[0].BackColor.B);
