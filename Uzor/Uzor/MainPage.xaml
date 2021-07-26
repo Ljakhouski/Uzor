@@ -30,7 +30,7 @@
 
 
         <sh:Shadows x:Name="shadow" CornerRadius="20" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}"  AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 300">
-            <Frame  AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 300" VerticalOptions="Start" Margin="0,0,0,0" HeightRequest="300"   Opacity="1" HasShadow="False" CornerRadius="30"  >
+            <Frame  AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 300" VerticalOptions="Start" Margin="7,7,7,0" HeightRequest="300"   Opacity="1" HasShadow="False" CornerRadius="30"  >
 
                 <Frame.Background>
                     <LinearGradientBrush StartPoint="0,0"

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Uzor.Views;
+using Uzor.Views.DrawingObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,8 +19,8 @@ namespace Uzor
             InitializeComponent();
 
             var upfView = new UzorPixelFieldView(data);
+            upfView.DrawingObjectsList.Add(new DemonstrateUzorDrawingObject() { Data = data, GradientMode = false });
             this.uzorFieldFrame.Content = upfView;
-            upfView.EditingMode = false;
             itemNameLabel.Text = data.Name;
         }
     }

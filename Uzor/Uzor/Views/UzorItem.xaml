@@ -13,7 +13,6 @@
 
                 <RelativeLayout >
                     <View:UzorPixelFieldView 
-                        GradientPreviewMode="true"
                         Opacity="1"
                         x:Name="preview"
                         WidthRequest="250"
