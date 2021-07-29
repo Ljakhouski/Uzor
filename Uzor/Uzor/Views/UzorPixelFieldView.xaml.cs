@@ -44,25 +44,9 @@ namespace Uzor.Views
       
         private void OnTouchEffectAction(object sender, TouchActionEventArgs args)
         {
-
-            //float pixelSize = (float)((contentView.Width) / HeightField) * ((float)Device.Info.PixelScreenSize.Width / (float)contentView.Width);
-            switch (args.Type)
-            {
-                case TouchActionType.Pressed:
-                case TouchActionType.Moved: 
-                    {
-                        try
-                        {
-                           // WritePixel(args) ;
-                            foreach (DrawingObject o in DrawingObjectsList)
-                                o.Touched(args, uzorFieldCanvasView);
-                        }
-                        catch (IndexOutOfRangeException e) { }
-                       
-                        
-                    }
-                    break;
-            }  
+            foreach (DrawingObject o in DrawingObjectsList)
+                o.TouchEffectAction(args, uzorFieldCanvasView);
+            
             uzorFieldCanvasView.InvalidateSurface();
         }
 
@@ -74,7 +58,7 @@ namespace Uzor.Views
 
             // zoom scene:
             //canvas.Scale((float)this.Scale, (float)this.Scale, uzorFieldCanvasView.CanvasSize.Width / 2, uzorFieldCanvasView.CanvasSize.Height / 2);
-            canvas.SetMatrix(matrix); // new
+           // canvas.SetMatrix(matrix); // new
 
             foreach (DrawingObject o in DrawingObjectsList)
                 o.Draw(canvas, uzorFieldCanvasView/*, matrix*/);
@@ -84,7 +68,8 @@ namespace Uzor.Views
         SKMatrix matrix = SKMatrix.MakeIdentity();
         Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
     
-    void OnTouchEffectAction2(object sender, TouchActionEventArgs args)
+        
+   /* void OnTouchEffectAction2(object sender, TouchActionEventArgs args)
         {
             // Convert Xamarin.Forms point to pixels
             Point pt = args.Location;
@@ -96,14 +81,14 @@ namespace Uzor.Views
             {
                 case TouchActionType.Pressed:
                     // Find transformed bitmap rectangle
-                    SKRect rect = new SKRect(0, 0, uzorFieldCanvasView.CanvasSize.Width, uzorFieldCanvasView.CanvasSize.Height); // 'bitmap' replaced
-                    rect = matrix.MapRect(rect);
+                    //SKRect rect = new SKRect(0, 0, uzorFieldCanvasView.CanvasSize.Width, uzorFieldCanvasView.CanvasSize.Height); // 'bitmap' replaced
+                    //rect = matrix.MapRect(rect);
 
                     // Determine if the touch was within that rectangle
-                    if (rect.Contains(point) && !touchDictionary.ContainsKey(args.Id))
-                    {
-                        touchDictionary.Add(args.Id, point);
-                    }
+                    //if (rect.Contains(point) && !touchDictionary.ContainsKey(args.Id))
+                    // {
+                    //    touchDictionary.Add(args.Id, point);
+                    // }
                     try
                     {
                         // WritePixel(args) ;
@@ -131,7 +116,7 @@ namespace Uzor.Views
                         else if (touchDictionary.Count >= 2 && MultiTouchEnabled)
                         {
                             // Copy two dictionary keys into array
-                            /*long[] keys = new long[touchDictionary.Count];
+                            long[] keys = new long[touchDictionary.Count];
                             touchDictionary.Keys.CopyTo(keys, 0);
 
                             // Find index of non-moving (pivot) finger
@@ -139,7 +124,7 @@ namespace Uzor.Views
 
                             // Get the three points involved in the transform
                             SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];
-                            SKPoint prevPoint = touchDictionary[args.Id];
+                            SKPoint prevPoint  = touchDictionary[args.Id];
                             SKPoint newPoint = point;
 
                             // Calculate two vectors
@@ -159,7 +144,7 @@ namespace Uzor.Views
 
                                 SKMatrix.PostConcat(ref matrix, scaleMatrix);
                                 uzorFieldCanvasView.InvalidateSurface();
-                            }*/
+                            }
 
                             // Copy two dictionary keys into array
                             long[] keys = new long[touchDictionary.Count];
@@ -222,7 +207,7 @@ namespace Uzor.Views
                     }
                     break;
             }
-        }
+        }*/
         float Magnitude(SKPoint point)
         {
             return (float)Math.Sqrt(Math.Pow(point.X, 2) + Math.Pow(point.Y, 2));

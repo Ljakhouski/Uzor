@@ -15,7 +15,7 @@
 
                 <Grid.Effects>
                     <tt:TouchEffect Capture="True"
-                                TouchAction="OnTouchEffectAction2"/>
+                                TouchAction="OnTouchEffectAction"/>
                 </Grid.Effects>
             </Grid>
             

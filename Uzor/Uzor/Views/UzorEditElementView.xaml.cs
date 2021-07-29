@@ -95,13 +95,13 @@ namespace Uzor.Views
         private void SetZoomValueFromPicker()
         {
             //this.UzorView.Scale = this.scaleSlider.Value;
-            this.Uzor.Scale = (int)this.scaleSlider.Value;
+            //this.Uzor.Scale = (int)this.scaleSlider.Value;
             this.UzorView.DrawView();
         }
         private void SetDefaultZoomValue()
         {
            // this.UzorView.Scale = 1;
-            this.Uzor.Scale = 1;
+            //this.Uzor.Scale = 1;
             this.scaleSlider.Value = 1;
         }
         private void nextButtonClick(object sender, EventArgs e)

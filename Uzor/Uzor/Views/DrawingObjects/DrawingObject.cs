@@ -15,15 +15,6 @@ namespace Uzor.Views.DrawingObjects
 
         }
 
-        // for all event-type:
-        public virtual void Pressed() { }
-        public virtual void Moved() { }
-        public virtual void Released() { }
-
-        // actual event (if pressed on view):
-        public virtual void Touched(TouchActionEventArgs args, SKCanvasView view)
-        {
-
-        }
+        public virtual void TouchEffectAction(TouchActionEventArgs args, SKCanvasView view) { }
     }
 }
