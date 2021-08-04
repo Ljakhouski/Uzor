@@ -8,7 +8,7 @@
             <Grid  x:Name="gridField" SizeChanged="sizeChangedEvent" ColumnSpacing="0">
                 <skia:SKCanvasView
                     x:Name="uzorFieldCanvasView" 
-                    PaintSurface="onCanvasViewPaintSurface"
+                    PaintSurface="onCanvasViewPaintSurface" IgnorePixelScaling="True"
                     >
                 </skia:SKCanvasView>
 

@@ -3,7 +3,9 @@ using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TouchTracking;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Uzor.Views.DrawingObjects
@@ -17,15 +19,18 @@ namespace Uzor.Views.DrawingObjects
         public bool DeleteMode { get; set; } = false;
         public bool ScaleChangeMode { get; set; } = true;
 
-        SKPoint centerPointtt;
+        SKPoint centerPointtt, new_p, old_p, newPointMultitouth, oldPointMultitouth, pivotPointMultitouth, oldCenter;
+        
 
         Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
         SKMatrix matrix = SKMatrix.CreateIdentity();
+
         public override void Draw(SKCanvas canvas, SKCanvasView view/*, SKMatrix matrix*/)
         {
+                
             //canvas.Save();
             //canvas.Restore();
-            canvas.SetMatrix(matrix); // new
+            canvas.SetMatrix(matrix);
             float pixelSize = (float)view.CanvasSize.Width /  Data.FieldSize;
             var f = this.Data.Layers[LayerNumber].GetLastState();
 
@@ -58,26 +63,51 @@ namespace Uzor.Views.DrawingObjects
             }
 
             //center of touch:
-            var m = this.matrix;
+            /*var m = this.matrix;
             canvas.SetMatrix(SKMatrix.CreateIdentity());
             var paint2 = new SKPaint() { Color = Color.FromRgba(55, 5, 55, 100).ToSKColor(), StrokeWidth = 10 };
-            canvas.DrawCircle(centerPointtt.X, centerPointtt.Y, 20, paint2);
-            canvas.SetMatrix(m);
+
+            canvas.DrawCircle(centerPointtt.X, centerPointtt.Y, 40, paint2);
+
+            canvas.DrawCircle(new_p.X, new_p.Y, 20, new SKPaint() { Color = Color.Red.ToSKColor(), StrokeWidth = 10 });
+            canvas.DrawCircle(old_p.X, old_p.Y, 20, new SKPaint() { Color = Color.Green.ToSKColor(), StrokeWidth = 10 });
+            canvas.DrawCircle(newPointMultitouth.X, newPointMultitouth.Y, 60, new SKPaint() { Color = Color.Gold.ToSKColor(), StrokeWidth = 10 });
+            canvas.DrawCircle(oldPointMultitouth.X, oldPointMultitouth.Y, 50, new SKPaint() { Color = Color.Blue.ToSKColor(), StrokeWidth = 10 });
+            canvas.DrawCircle(pivotPointMultitouth.X, pivotPointMultitouth.Y, 40, new SKPaint() { Color = Color.Goldenrod.ToSKColor(), StrokeWidth = 30 });
+            canvas.DrawCircle(oldCenter.X, oldCenter.Y, 30, new SKPaint() { Color = Color.Aqua.ToSKColor(), StrokeWidth = 30 });
+
+            canvas.SetMatrix(m);*/
 
             //canvas.Save();
+            //canvas.Restore();
+            //canvas.DrawCircle(oldCenter.X, oldCenter.Y, 30, new SKPaint() { Color = Color.Aqua.ToSKColor(), StrokeWidth = 30 });
         }
 
-        public void SetPixelsValue(TouchActionEventArgs args, SKCanvasView view)
+        public void SetDefaultScale()
+        {
+            this.matrix = SKMatrix.Identity;
+        }
+        private void SetPixelsValue(TouchActionEventArgs args, SKCanvasView view)
         {
             // float pixelSize = (float)((contentView.Width) / HeightField) * ((float)Device.Info.PixelScreenSize.Width / (float)contentView.Width);
             float pixelSize = (float)(view.CanvasSize.Width / Data.FieldSize);
             var f = /*(bool[,])*/this.Data.Layers[LayerNumber].GetLastState();//.Clone();
 
-            //int x = (int)(ConvertToPixel(args.Location).X / pixelSize);
-            //int y = (int)(ConvertToPixel(args.Location).Y / pixelSize);
 
-            int xLocationAfterScaling = (int)((ConvertToPixel(args.Location, view).X / /*Scale*/1 + (view.CanvasSize.Width - (view.CanvasSize.Width / /*Scale*/1)) / 2));
-           int yLocationAfterScaling = (int)((ConvertToPixel(args.Location, view).Y / /*Scale*/1 + (view.CanvasSize.Height - (view.CanvasSize.Height / /*Scale*/1)) / 2));
+            // for simple scaling (in center):
+
+            // int xLocationAfterScaling = (int)((ConvertToPixel(args.Location, view).X / /*Scale*/1 + (view.CanvasSize.Width - (view.CanvasSize.Width / /*Scale*/1)) / 2));
+            // int yLocationAfterScaling = (int)((ConvertToPixel(args.Location, view).Y / /*Scale*/1 + (view.CanvasSize.Height - (view.CanvasSize.Height / /*Scale*/1)) / 2));
+
+            // scale with transfer (not working):
+
+            //int xLocationAfterScaling = (int)(ConvertToPixel(args.Location, view).X / matrix.ScaleX - matrix.TransX);
+            //int yLocationAfterScaling = (int)(ConvertToPixel(args.Location, view).Y / matrix.ScaleY - matrix.TransY);
+
+            int xLocationAfterScaling = (int)((int)(ConvertToPixel(args.Location, view).X - matrix.TransX) / matrix.ScaleX);
+            int yLocationAfterScaling = (int)((int)(ConvertToPixel(args.Location, view).Y - matrix.TransY) / matrix.ScaleY);
+
+            //oldCenter.X = xLocationAfterScaling; oldCenter.Y = yLocationAfterScaling;
 
             int x = (int)(xLocationAfterScaling / pixelSize);
             int y = (int)(yLocationAfterScaling / pixelSize);
@@ -102,7 +132,27 @@ namespace Uzor.Views.DrawingObjects
             }
             catch (IndexOutOfRangeException e) { }
         }
-        
+
+        private bool OneFingerPushMode = false;
+        private bool PostReleasedMode = false; // required after "release" or "canceled" types of event to moving without drawing on the field
+        private async void OneFingerTouchTimer(TouchActionEventArgs args, SKCanvasView view)
+        {
+            await Task.Delay(50);
+            if (touchDictionary.Count == 1)
+                SetPixelsValue(args, view);
+            
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                view.InvalidateSurface();
+            });
+        }
+
+        private async void PostReleaseModeOn()
+        {
+            PostReleasedMode = true;
+            await Task.Delay(50);
+            PostReleasedMode = false;
+        }
         public override void TouchEffectAction(TouchActionEventArgs args, SKCanvasView view)
         {
             Point pt = args.Location;
@@ -116,15 +166,38 @@ namespace Uzor.Views.DrawingObjects
                 case TouchActionType.Pressed:
                     if (!touchDictionary.ContainsKey(args.Id))
                         touchDictionary.Add(args.Id, point);
-                    // start timer
+                    //SetPixelsValue(args, view);
+
+                    if (touchDictionary.Count == 1)
+                        OneFingerPushMode = true;
+                    else 
+                        OneFingerPushMode = false;
+
+                    OneFingerTouchTimer(args, view);
                     break;
                 case TouchActionType.Moved:
                     if (touchDictionary.ContainsKey(args.Id))
                     {
                         if (touchDictionary.Count == 1)
                         {
-                            SetPixelsValue(args, view);
-                            
+                            if (!PostReleasedMode)
+                                SetPixelsValue(args, view);
+                            OneFingerPushMode = false;
+                            /*long[] keys = new long[touchDictionary.Count];
+                            touchDictionary.Keys.CopyTo(keys, 0);
+
+                            // Find index of non-moving (pivot) finger
+                            int pivotIndex = (keys[0] == args.Id) ? 1 : 0;
+
+                            // Get the three points involved in the transform
+                           // SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];
+                            SKPoint prevPoint = touchDictionary[args.Id];
+                            SKPoint newPoint = point;
+
+                            SKPoint delta = newPoint - prevPoint;   new_p = newPoint; old_p = prevPoint;
+
+                            SKMatrix.PostConcat(ref matrix, SKMatrix.MakeTranslation(delta.X, delta.Y));
+                            touchDictionary[args.Id] = point;*/
                         }
                         else if (touchDictionary.Count >= 2 && ScaleChangeMode)
                         {
@@ -132,172 +205,76 @@ namespace Uzor.Views.DrawingObjects
                             long[] keys = new long[touchDictionary.Count];
                             touchDictionary.Keys.CopyTo(keys, 0);
 
-                            // Find index of non-moving (pivot) finger
                             int pivotIndex = (keys[0] == args.Id) ? 1 : 0;
 
-                            // Get the three points involved in the transform
-                            SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];
+                            SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];  
                             SKPoint prevPoint = touchDictionary[args.Id];
-                            SKPoint newPoint = point;
+                            SKPoint newPoint = point;  pivotPointMultitouth = pivotPoint; newPointMultitouth = newPoint; oldPointMultitouth = prevPoint;
 
                             double distance = Math.Sqrt(Math.Pow(Math.Abs(pivotPoint.X - newPoint.X), 2) + Math.Pow(Math.Abs(pivotPoint.Y - newPoint.Y), 2));
                             double oldDistance = Math.Sqrt(Math.Pow(Math.Abs(pivotPoint.X - prevPoint.X), 2)+ Math.Pow(Math.Abs(pivotPoint.Y - prevPoint.Y), 2));
 
                             double differentDistance = distance / oldDistance;
 
-                            // make center-point:
-                            //SKPoint centerPoint = new SKPoint() { X = pivotPoint.X + Math.Abs(newPoint.X - pivotPoint.X) / 2,
-                                                      //            Y = pivotPoint.Y + Math.Abs(newPoint.Y - pivotPoint.Y) / 2};
                             SKPoint centerPoint = new SKPoint()
                             {
                                 X = (newPoint.X + pivotPoint.X) / 2,
                                 Y = (newPoint.Y + pivotPoint.Y) / 2
                             };
 
-                            this.centerPointtt = centerPoint;
+                            
                             SKPoint oldCenterPoint = new SKPoint()
                             {
                                 X = (prevPoint.X + pivotPoint.X) / 2,
                                 Y = (prevPoint.Y + pivotPoint.Y) / 2
-                            };  
-
-                            SKMatrix translationMatrix = SKMatrix.CreateTranslation((centerPoint.X - oldCenterPoint.X)/matrix.ScaleX, (centerPoint.Y - oldCenterPoint.Y) / matrix.ScaleX);
-                            //SKMatrix scaleMatrix = SKMatrix.CreateScaleTranslation((float)differentDistance, (float)differentDistance, centerPoint.X - oldCenterPoint.X, centerPoint.Y - oldCenterPoint.Y);
-                            SKMatrix scaleMatrix = SKMatrix.CreateScale((float)differentDistance,(float)differentDistance, centerPoint.X / matrix.ScaleX, centerPoint.Y / matrix.ScaleX);
-                            
-
-                            matrix = SKMatrix.Concat(matrix, scaleMatrix);
-                            matrix = SKMatrix.Concat(matrix, translationMatrix);
+                            };this.centerPointtt = centerPoint; oldCenter = oldCenterPoint;
 
 
-                           // SKMatrix.Concat(ref matrix,
- // SKMatrix.CreateTranslation(centerPoint.X - oldCenterPoint.X, centerPoint.Y - oldCenterPoint.Y),
- // SKMatrix.MakeScale((float)differentDistance, (float)differentDistance, centerPoint.X, centerPoint.Y));
-                            //SKMatrix.Concat(ref matrix, SKMatrix.MakeTranslation(centerPoint.X - oldCenterPoint.X, centerPoint.Y - oldCenterPoint.Y),
-                            //SKMatrix.CreateScale((float)differentDistance, (float)differentDistance, centerPoint.X, centerPoint.Y));
+                            SKMatrix translationMatrix = SKMatrix.CreateTranslation((centerPoint.X - oldCenterPoint.X)/*/matrix.ScaleX*/, (centerPoint.Y - oldCenterPoint.Y) /*/ matrix.ScaleX*/);
+                            SKMatrix scaleMatrix = SKMatrix.Identity;
 
+                            if ( !(matrix.ScaleX>8 && differentDistance>1))
+                                scaleMatrix = SKMatrix.CreateScale((float)differentDistance, (float)differentDistance, centerPoint.X, centerPoint.Y/* pivotPoint.X, pivotPoint.Y*/);
 
-                            // SKMatrix.Concat(ref matrix, SKMatrix.CreateTranslation(centerPoint.X - oldCenterPoint.X, centerPoint.Y - oldCenterPoint.Y),
-                            //             SKMatrix.CreateScale((float)differentDistance, (float)differentDistance, centerPoint.X, centerPoint.Y));
-                            //SKMatrix scaleMatrix =
-                            //   SKMatrix.MakeScale((float)differentDistance, (float)differentDistance, centerPoint.X, centerPoint.Y); // edited pivotPoint.X [2]
+                            SKMatrix.PostConcat(ref matrix, scaleMatrix);   // NEW "PostContact() DOES NOT WORKING CORRECTLY!!!" 
+                            SKMatrix.PostConcat(ref matrix, translationMatrix);
 
-                            //           SKMatrix.PostConcat(ref matrix, scaleMatrix);
+                          
                             touchDictionary[args.Id] = point;
                         }
                     }
                         break;
                 case TouchActionType.Released:
                 case TouchActionType.Cancelled:
+
                     if (touchDictionary.ContainsKey(args.Id))
                         touchDictionary.Remove(args.Id);
-                    
+
+                    // for one finger quick tap:
+                    if (OneFingerPushMode)  
+                        SetPixelsValue(args, view);
+                    OneFingerPushMode = false;
+
+
+                    if (touchDictionary.Count == 0)
+                        PostReleasedMode = false;
+
+                    if (touchDictionary.Count == 1)
+                        PostReleaseModeOn();
+
+                    if (matrix.ScaleX < 1)
+                        SetDefaultScale();
+
                     break;
             }
         }
-        SKPoint ConvertToPixel(Point pt, SKCanvasView view)
+        private SKPoint ConvertToPixel(Point pt, SKCanvasView view)
         {
             return new SKPoint((float)(view.CanvasSize.Width * pt.X / view.Width),
                                (float)(view.CanvasSize.Height * pt.Y / view.Height));
         }
 
-        /*
-        public override void TouchEffectAction(TouchActionEventArgs args, SKCanvasView view)
-        {
-            Point pt = args.Location;
-            SKPoint point =
-                new SKPoint((float)(view.CanvasSize.Width * pt.X / view.Width),
-                            (float)(view.CanvasSize.Height * pt.Y / view.Height));
-            switch (args.Type)
-            {
-                case TouchActionType.Pressed:
-                    if (!touchDictionary.ContainsKey(args.Id))
-                        touchDictionary.Add(args.Id, point);
-                    // start timer
-                    break;
-                case TouchActionType.Moved:
-                    if (touchDictionary.ContainsKey(args.Id))
-                    {
-                        if (touchDictionary.Count == 1)
-                        {
-                            SetPixelsValue(args, view);
+        
 
-                        }
-                        else if (touchDictionary.Count >= 2 && ScaleChangeMode)
-                        {
-                            long[] keys = new long[touchDictionary.Count];
-                            touchDictionary.Keys.CopyTo(keys, 0);
-
-                            // Find index of non-moving (pivot) finger
-                            int pivotIndex = (keys[0] == args.Id) ? 1 : 0;
-
-                            // Get the three points involved in the transform
-                            SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];
-                            SKPoint prevPoint = touchDictionary[args.Id];
-                            SKPoint newPoint = point;
-
-                            SKMatrix touchMatrix = SKMatrix.MakeIdentity(); 
-                            SKPoint oldVector = prevPoint - pivotPoint;
-                            SKPoint newVector = newPoint - pivotPoint;
-
-                            if (true)
-                            {
-                                // Find angles from pivot point to touch points
-                                float oldAngle = (float)Math.Atan2(oldVector.Y, oldVector.X);
-                                float newAngle = (float)Math.Atan2(newVector.Y, newVector.X);
-
-                                // Calculate rotation matrix
-                                float angle = newAngle - oldAngle;
-                                touchMatrix = SKMatrix.CreateRotation(angle, pivotPoint.X, pivotPoint.Y);
-
-                                // Effectively rotate the old vector
-                                float magnitudeRatio = Magnitude(oldVector) / Magnitude(newVector);
-                                //oldVector.X = magnitudeRatio * newVector.X;
-                                //oldVector.Y = magnitudeRatio * newVector.Y;
-                            }
-
-                            float scaleX2 = 1;
-                            float scaleY2 = 1;
-
-                            if (false)
-                            {
-                                scaleX2 = newVector.X / oldVector.X;
-                                scaleY2 = newVector.Y / oldVector.Y;
-
-                            }
-                            else if (true)
-                            {
-                                scaleX2 = scaleY2 = Magnitude(newVector) / Magnitude(oldVector);
-                            }
-
-                            if (!float.IsNaN(scaleX2) && !float.IsInfinity(scaleX2) &&
-                                !float.IsNaN(scaleY2) && !float.IsInfinity(scaleY2))
-                            {
-                                SKMatrix.PostConcat(ref matrix,
-                                    SKMatrix.CreateScaleTranslation(scaleX2, scaleY2, pivotPoint.X, pivotPoint.Y));
-                                //SKMatrix.PostConcat(ref matrix,
-                                //    touchMatrix);
-                            }
-
-                            //this.matrix = touchMatrix;
-                            touchDictionary[args.Id] = point;
-                        }
-                    }
-                    break;
-                case TouchActionType.Released:
-                case TouchActionType.Cancelled:
-                    if (touchDictionary.ContainsKey(args.Id))
-                        touchDictionary.Remove(args.Id);
-
-                    break;
-
-            }
-
-        }
-
-        float Magnitude(SKPoint point)
-        {
-            return (float)Math.Sqrt(Math.Pow(point.X, 2) + Math.Pow(point.Y, 2));
-        }*/
     }
 }

@@ -208,6 +208,8 @@ namespace Uzor.Views
                     break;
             }
         }*/
+
+
         float Magnitude(SKPoint point)
         {
             return (float)Math.Sqrt(Math.Pow(point.X, 2) + Math.Pow(point.Y, 2));
