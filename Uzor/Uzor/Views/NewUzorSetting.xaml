@@ -5,7 +5,7 @@
   <ContentView.Content>
 
         <sh:Shadows CornerRadius="20" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-              <Grid HeightRequest="350" WidthRequest="350">
+            <Grid HeightRequest="350" WidthRequest="350">
                 <Frame BackgroundColor="White" CornerRadius="20" Opacity="0.85" HasShadow="True"  Padding="0"></Frame>
                 <Frame BackgroundColor="#D23838" CornerRadius="20" VerticalOptions="Start" HeightRequest="25"></Frame>
                 <Frame BackgroundColor="#D23838"  VerticalOptions="Start" Margin="0,20,0,0" HeightRequest="10"></Frame>

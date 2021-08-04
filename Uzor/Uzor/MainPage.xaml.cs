@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Uzor.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 namespace Uzor
 {
@@ -41,11 +42,11 @@ namespace Uzor
         private async void NewUzor(object sender, EventArgs e)
         {
             //mediaElement.Stop();
-            await Navigation.PushModalAsync(new NavigationPage(new UzorCreatingPage()));
+            await Navigation.PushModalAsync(new NavigationPage(new UzorCreatingPage()), true);
             //stack.Children.Add(new UzorItem());
-            MakeUzorItemList();
+//      edited:      MakeUzorItemList();
             //mediaElement.Play();
-           
+            
 
         }
 
