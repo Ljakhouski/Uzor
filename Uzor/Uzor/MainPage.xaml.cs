@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Uzor.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+//[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Uzor
 {
     public partial class MainPage : ContentPage

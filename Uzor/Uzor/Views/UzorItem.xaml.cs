@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Uzor.Views.DrawingObjects;
+using Uzor.Views.EditorObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,12 +26,12 @@ namespace Uzor.Views
             this.Data = data;
             UzorPixelFieldView upv = this.preview;
 
-            DemonstrateUzorDrawingObject udb = new DemonstrateUzorDrawingObject();
+            DemonstrateUzorEditorObject udb = new DemonstrateUzorEditorObject();
             udb.Data = data;
             udb.GradientMode = true;
 
             upv.ThisData = data;
-            upv.DrawingObjectsList.Add(udb);
+            upv.EditorObjectssList.Add(udb);
             upv.DrawView();
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
             this.itemDate.Text = data.DataOfCreation.ToString();

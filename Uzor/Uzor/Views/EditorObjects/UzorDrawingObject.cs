@@ -6,17 +6,16 @@ using System.Text;
 using TouchTracking;
 using Xamarin.Forms;
 
-
-namespace Uzor.Views.DrawingObjects
+namespace Uzor.Views.EditorObjects
 {
-    class DemonstrateUzorDrawingObject : DrawingObject
+    class UzorDrawingObject : EditorObject
     {
         public UzorData Data { get; set; }
         public int LayerNumber { get; set; } = 0;
         public bool GradientMode { get; set; } = false;
 
-        private Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
-        private SKMatrix matrix = SKMatrix.CreateIdentity();
+        protected Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
+        protected SKMatrix matrix = SKMatrix.CreateIdentity();
 
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {
@@ -50,10 +49,23 @@ namespace Uzor.Views.DrawingObjects
                         new float[] { 0, 1 },
                         SKShaderTileMode.Clamp);
             }
-            
 
-            for (int w = 0; w < Data.FieldSize; w++)
-                for (int h = 0; h < Data.FieldSize; h++)
+            int xLeftTopLocationAfterScaling = (int)((int)(GetLeftTopPoint(view).X - matrix.TransX) / matrix.ScaleX);
+            int yLeftTopLocationAfterScaling = (int)((int)(GetLeftTopPoint(view).Y - matrix.TransY) / matrix.ScaleY);
+
+            int xRightDownLocationAfterScaling = (int)((int)(GetRightDownPoint(view).X - matrix.TransX) / matrix.ScaleX);
+            int yRightDownLocationAfterScaling = (int)((int)(GetRightDownPoint(view).Y - matrix.TransY) / matrix.ScaleY);
+
+            //oldCenter.X = xLocationAfterScaling; oldCenter.Y = yLocationAfterScaling;
+
+            int xLeftTop = (int)(xLeftTopLocationAfterScaling / pixelSize);
+            int yLeftTop = (int)(yLeftTopLocationAfterScaling / pixelSize);
+
+            int xRightDown = (int)(xRightDownLocationAfterScaling / pixelSize);
+            int yRightDown = (int)(yRightDownLocationAfterScaling / pixelSize);
+
+            for (int w = (xLeftTop-1) < 0? 0 : xLeftTop-1; w < /*Data.FieldSize*/     (xRightDown+1 > Data.FieldSize ? Data.FieldSize : xRightDown+1); w++)
+                for (int h = (yLeftTop-1) < 0? 0 : yLeftTop-1; h < /*Data.FieldSize*/ (yRightDown+1 > Data.FieldSize ? Data.FieldSize : yRightDown+1); h++)
                 {
                     if (f[w, h] == false)
                     {
@@ -93,7 +105,7 @@ namespace Uzor.Views.DrawingObjects
                             int pivotIndex = (keys[0] == args.Id) ? 1 : 0;
 
                             // Get the three points involved in the transform
-                           // SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];
+                            // SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];
                             SKPoint prevPoint = touchDictionary[args.Id];
                             SKPoint newPoint = point;
 
@@ -112,7 +124,7 @@ namespace Uzor.Views.DrawingObjects
 
                             SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];
                             SKPoint prevPoint = touchDictionary[args.Id];
-                            SKPoint newPoint = point; 
+                            SKPoint newPoint = point;
 
                             double distance = Math.Sqrt(Math.Pow(Math.Abs(pivotPoint.X - newPoint.X), 2) + Math.Pow(Math.Abs(pivotPoint.Y - newPoint.Y), 2));
                             double oldDistance = Math.Sqrt(Math.Pow(Math.Abs(pivotPoint.X - prevPoint.X), 2) + Math.Pow(Math.Abs(pivotPoint.Y - prevPoint.Y), 2));
@@ -130,7 +142,7 @@ namespace Uzor.Views.DrawingObjects
                             {
                                 X = (prevPoint.X + pivotPoint.X) / 2,
                                 Y = (prevPoint.Y + pivotPoint.Y) / 2
-                            }; 
+                            };
 
 
                             SKMatrix translationMatrix = SKMatrix.CreateTranslation((centerPoint.X - oldCenterPoint.X)/*/matrix.ScaleX*/, (centerPoint.Y - oldCenterPoint.Y) /*/ matrix.ScaleX*/);
@@ -157,6 +169,21 @@ namespace Uzor.Views.DrawingObjects
                         matrix = SKMatrix.Identity;
                     break;
             }
+        }
+        protected SKPoint ConvertToPixel(Point pt, SKCanvasView view)
+        {
+            return new SKPoint((float)(view.CanvasSize.Width * pt.X / view.Width),
+                               (float)(view.CanvasSize.Height * pt.Y / view.Height));
+        }
+        private SKPoint GetLeftTopPoint(SKCanvasView view)
+        {
+            return new SKPoint((float)(view.CanvasSize.Width * 0 / view.Width),
+                               (float)(view.CanvasSize.Height * 0 / view.Height));
+        }
+        private SKPoint GetRightDownPoint(SKCanvasView view)
+        {
+            return new SKPoint((float)(view.CanvasSize.Width * view.Width / view.Width),
+                               (float)(view.CanvasSize.Height * view.Height / view.Height));
         }
     }
 }

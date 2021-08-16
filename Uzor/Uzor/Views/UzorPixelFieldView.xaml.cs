@@ -13,7 +13,7 @@ using TouchTracking;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Uzor.Algorithm;
-using Uzor.Views.DrawingObjects;
+using Uzor.Views.EditorObjects;
 
 namespace Uzor.Views
 {
@@ -23,7 +23,7 @@ namespace Uzor.Views
 
         public UzorData ThisData { get; set; }
 
-        public List<DrawingObject> DrawingObjectsList {get;set;} = new List<DrawingObject>();
+        public List<EditorObject> EditorObjectssList {get;set;} = new List<EditorObject>();
         public bool MultiTouchEnabled { get; set; } = true;
         public bool RotationMultiTouchEnabled { get; set; } = false;
         
@@ -44,7 +44,7 @@ namespace Uzor.Views
       
         private void OnTouchEffectAction(object sender, TouchActionEventArgs args)
         {
-            foreach (DrawingObject o in DrawingObjectsList)
+            foreach (EditorObject o in EditorObjectssList)
                 o.TouchEffectAction(args, uzorFieldCanvasView);
             
             uzorFieldCanvasView.InvalidateSurface();
@@ -60,7 +60,7 @@ namespace Uzor.Views
             //canvas.Scale((float)this.Scale, (float)this.Scale, uzorFieldCanvasView.CanvasSize.Width / 2, uzorFieldCanvasView.CanvasSize.Height / 2);
            // canvas.SetMatrix(matrix); // new
 
-            foreach (DrawingObject o in DrawingObjectsList)
+            foreach (EditorObject o in EditorObjectssList)
                 o.Draw(canvas, uzorFieldCanvasView/*, matrix*/);
             
         }
@@ -92,7 +92,7 @@ namespace Uzor.Views
                     try
                     {
                         // WritePixel(args) ;
-                        foreach (DrawingObject o in DrawingObjectsList)
+                        foreach (EditorObjects o in EditorObjectssList)
                             o.Touched(args, uzorFieldCanvasView);
                     }
                     catch (IndexOutOfRangeException e) { }
@@ -107,7 +107,7 @@ namespace Uzor.Views
                             try
                             {
                                 // WritePixel(args) ;
-                                foreach (DrawingObject o in DrawingObjectsList)
+                                foreach (EditorObjects o in EditorObjectssList)
                                     o.Touched(args, uzorFieldCanvasView);
                             }
                             catch (IndexOutOfRangeException e) { }

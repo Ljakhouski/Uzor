@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Uzor.Views.DrawingObjects
+namespace Uzor.Views.EditorObjects
 {
-    class CenterMarker : DrawingObject
+    class CenterMarker : EditorObject
     {
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {

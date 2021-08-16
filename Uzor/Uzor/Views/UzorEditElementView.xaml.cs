@@ -11,7 +11,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Uzor.Algorithm;
-using Uzor.Views.DrawingObjects;
+using Uzor.Views.EditorObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,10 +22,10 @@ namespace Uzor.Views
     {
         public UzorPixelFieldView UzorView { get; set; }
 
-        private UzorDrawingObject Uzor {get;set;}
-        private DarkField MirrorIndicator { get; set; } = new DarkField();
-        private CenterMarker CenterIndicator { get; set; } = new CenterMarker();
-
+        private UzorEditorObject uzor {get;set;}
+        private DarkField mirrorIndicator { get; set; } = new DarkField();
+        private CenterMarker centerIndicator { get; set; } = new CenterMarker();
+        private CropIndicator cropIndicator { get; set; }
 
         private bool ReSave = false; // for rewriting before results
         private string SavedFilePath;
@@ -35,24 +35,25 @@ namespace Uzor.Views
             this.UzorView = new UzorPixelFieldView(data);
             this.editingFieldFrame.Content = UzorView;
 
-            this.Uzor = new UzorDrawingObject() { MirrorMode = true, Data = data};
-
-            this.UzorView.DrawingObjectsList.Add(Uzor);
-            this.UzorView.DrawingObjectsList.Add(CenterIndicator);
-            this.UzorView.DrawingObjectsList.Add(MirrorIndicator);
-
+            this.uzor = new UzorEditorObject() { MirrorMode = true, Data = data};
+            this.cropIndicator = new CropIndicator() { Data = data };
+            this.cropSlider.Maximum = data.FieldSize/2;
+            this.UzorView.EditorObjectssList.Add(uzor);
+            this.UzorView.EditorObjectssList.Add(centerIndicator);
+            this.UzorView.EditorObjectssList.Add(mirrorIndicator);
+            this.UzorView.EditorObjectssList.Add(cropIndicator);
 
             Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
         }
       
         private bool OnTimerTick()
         {
-            if (this.Uzor.EditingMode)
+            if (this.uzor.EditingMode)
                 return true;
 
             // CALCULTION:
 
-            BasicDrawingAlgorithm.Calculate(this.UzorView.ThisData.Layers[this.Uzor.LayerNumber]);
+            BasicDrawingAlgorithm.Calculate(this.UzorView.ThisData.Layers[this.uzor.LayerNumber]);
             
             //counter.Text = (Int32.Parse(counter.Text) + 1).ToString();
 
@@ -61,14 +62,14 @@ namespace Uzor.Views
         }
         public void StartCalculation()
         {
-            this.Uzor.EditingMode = false;
+            this.uzor.EditingMode = false;
             calculationButton.Source = "stopButton.png";
             SetDefaultZoomValue();
         }
 
         public void StopCaltulation()
         {
-            this.Uzor.EditingMode = true;
+            this.uzor.EditingMode = true;
             calculationButton.Source = "startButton.png";
             this.UzorView.DrawView();
             //SetZoomValueFromPicker();
@@ -76,7 +77,7 @@ namespace Uzor.Views
 
         private void CalculationButtonClick(object sender, EventArgs e)
         {
-            if (this.Uzor.EditingMode)
+            if (this.uzor.EditingMode)
                 this.StartCalculation();
             else
                 this.StopCaltulation();
@@ -85,8 +86,8 @@ namespace Uzor.Views
         private void beforeButtonClick(object sender, EventArgs e)
         {
             this.StopCaltulation();
-            if (UzorView.ThisData.Layers[Uzor.LayerNumber].Step >= 0)
-                this.UzorView.ThisData.Layers[Uzor.LayerNumber].GetAndSetPreviousState(); // only set
+            if (UzorView.ThisData.Layers[uzor.LayerNumber].Step >= 0)
+                this.UzorView.ThisData.Layers[uzor.LayerNumber].GetAndSetPreviousState(); // only set
             this.UzorView.DrawView();
             SetDefaultZoomValue();
             //uzorFieldCanvasView.FadeTo(0, 250);
@@ -102,14 +103,14 @@ namespace Uzor.Views
         {
            // this.UzorView.Scale = 1;
             //this.Uzor.Scale = 1;
-            this.scaleSlider.Value = 1;
+            this.cropSlider.Value = 1;
         }
         private void nextButtonClick(object sender, EventArgs e)
         {
             this.StopCaltulation();
             // CALCULTION:
             
-            BasicDrawingAlgorithm.Calculate(this.UzorView.ThisData.Layers[Uzor.LayerNumber]);
+            BasicDrawingAlgorithm.Calculate(this.UzorView.ThisData.Layers[uzor.LayerNumber]);
 
             this.UzorView.DrawView();
 
@@ -118,12 +119,12 @@ namespace Uzor.Views
 
         private void deleteButtonClick(object sender, EventArgs e)
         {
-            if (!Uzor.DeleteMode)
+            if (!uzor.DeleteMode)
                 deleteButton.Source = "drawButton.png";
             else
                 deleteButton.Source = "deleteButton.png";
 
-            this.Uzor.DeleteMode = !this.Uzor.DeleteMode;
+            this.uzor.DeleteMode = !this.uzor.DeleteMode;
         }
 
         private void invertButtonClick(object sender, EventArgs e)
@@ -137,13 +138,13 @@ namespace Uzor.Views
 
         private void mirrorButtonClick(object sender, EventArgs e)
         {
-            if (!Uzor.MirrorMode)
+            if (!uzor.MirrorMode)
                 mirrorButton.Source = "mirrorOffButton.png";
             else
                 mirrorButton.Source = "mirrorOnButton.png";
 
-            this.Uzor.MirrorMode = !Uzor.MirrorMode;
-            this.MirrorIndicator.IsVisible = this.Uzor.MirrorMode;
+            this.uzor.MirrorMode = !uzor.MirrorMode;
+            this.mirrorIndicator.IsVisible = this.uzor.MirrorMode;
             UzorView.DrawView();
         }
 
@@ -152,9 +153,13 @@ namespace Uzor.Views
             SetZoomValueFromPicker();
         }
 
-        private void scaleChanged(object sender, ValueChangedEventArgs e)
+        private void cropChanged(object sender, ValueChangedEventArgs e)
         {
-            this.UzorView.Scale = e.NewValue;
+            if (this.cropIndicator == null)
+                return;
+
+            this.cropIndicator.Crop = (int)e.NewValue;
+            //this.UzorView.Scale = e.NewValue;
             this.UzorView.DrawView();
         }
 

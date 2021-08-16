@@ -8,12 +8,13 @@ using TouchTracking;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Uzor.Views.DrawingObjects
+namespace Uzor.Views.EditorObjects
 {
-    class UzorDrawingObject : DrawingObject
+    class UzorEditorObject : UzorDrawingObject
     {
-        public UzorData Data { get; set; }
-        public int LayerNumber { get; set; }
+        //public UzorData Data { get; set; }
+       // public [] ... // TODO: этот объект должен хранить только информацих-
+        //public int LayerNumber { get; set; }
         public bool EditingMode { get; set; } = true;
         public bool MirrorMode { get; set; } = true;
         public bool DeleteMode { get; set; } = false;
@@ -22,15 +23,16 @@ namespace Uzor.Views.DrawingObjects
         SKPoint centerPointtt, new_p, old_p, newPointMultitouth, oldPointMultitouth, pivotPointMultitouth, oldCenter;
         
 
-        Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
-        SKMatrix matrix = SKMatrix.CreateIdentity();
+        //Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
+        //SKMatrix matrix = SKMatrix.CreateIdentity();
 
         public override void Draw(SKCanvas canvas, SKCanvasView view/*, SKMatrix matrix*/)
         {
-                
+            base.Draw(canvas, view); 
+            float pixelSize = (float)view.CanvasSize.Width / Data.FieldSize;
             //canvas.Save();
             //canvas.Restore();
-            canvas.SetMatrix(matrix);
+            /*canvas.SetMatrix(matrix);
             float pixelSize = (float)view.CanvasSize.Width /  Data.FieldSize;
             var f = this.Data.Layers[LayerNumber].GetLastState();
 
@@ -45,11 +47,11 @@ namespace Uzor.Views.DrawingObjects
                 {
                     if (f[w, h] == false)
                     {
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  /*new SKPaint() { Color = backColor}*/ backPaint);
-                    }
-                    else
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, /*new SKPaint() { Color = frontColor }*/ frontPaint);
-                }
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  /*new SKPaint() { Color = backColor}*/// backPaint);
+                                                                                                                                                 //  }
+                                                                                                                                                 //    else
+                                                                                                                                                 //          canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, /*new SKPaint() { Color = frontColor }*/// frontPaint);
+                                                                                                                                                 //   }
 
             // draw grid:
             if (EditingMode)
@@ -62,27 +64,9 @@ namespace Uzor.Views.DrawingObjects
                     canvas.DrawLine(0, (float)((h + 1) * pixelSize), (float)(view.CanvasSize.Width), (float)((h + 1) * pixelSize), paint);
             }
 
-            //center of touch:
-            /*var m = this.matrix;
-            canvas.SetMatrix(SKMatrix.CreateIdentity());
-            var paint2 = new SKPaint() { Color = Color.FromRgba(55, 5, 55, 100).ToSKColor(), StrokeWidth = 10 };
-
-            canvas.DrawCircle(centerPointtt.X, centerPointtt.Y, 40, paint2);
-
-            canvas.DrawCircle(new_p.X, new_p.Y, 20, new SKPaint() { Color = Color.Red.ToSKColor(), StrokeWidth = 10 });
-            canvas.DrawCircle(old_p.X, old_p.Y, 20, new SKPaint() { Color = Color.Green.ToSKColor(), StrokeWidth = 10 });
-            canvas.DrawCircle(newPointMultitouth.X, newPointMultitouth.Y, 60, new SKPaint() { Color = Color.Gold.ToSKColor(), StrokeWidth = 10 });
-            canvas.DrawCircle(oldPointMultitouth.X, oldPointMultitouth.Y, 50, new SKPaint() { Color = Color.Blue.ToSKColor(), StrokeWidth = 10 });
-            canvas.DrawCircle(pivotPointMultitouth.X, pivotPointMultitouth.Y, 40, new SKPaint() { Color = Color.Goldenrod.ToSKColor(), StrokeWidth = 30 });
-            canvas.DrawCircle(oldCenter.X, oldCenter.Y, 30, new SKPaint() { Color = Color.Aqua.ToSKColor(), StrokeWidth = 30 });
-
-            canvas.SetMatrix(m);*/
-
-            //canvas.Save();
-            //canvas.Restore();
-            //canvas.DrawCircle(oldCenter.X, oldCenter.Y, 30, new SKPaint() { Color = Color.Aqua.ToSKColor(), StrokeWidth = 30 });
         }
 
+        
         public void SetDefaultScale()
         {
             this.matrix = SKMatrix.Identity;
@@ -268,11 +252,7 @@ namespace Uzor.Views.DrawingObjects
                     break;
             }
         }
-        private SKPoint ConvertToPixel(Point pt, SKCanvasView view)
-        {
-            return new SKPoint((float)(view.CanvasSize.Width * pt.X / view.Width),
-                               (float)(view.CanvasSize.Height * pt.Y / view.Height));
-        }
+       
 
         
 

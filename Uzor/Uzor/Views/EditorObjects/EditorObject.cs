@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using TouchTracking;
 
-namespace Uzor.Views.DrawingObjects
+namespace Uzor.Views.EditorObjects
 {
-    public class DrawingObject
+    public class EditorObject
     {
         public bool IsVisible { get; set; } = true;
         public virtual void Draw(SKCanvas canvas, SKCanvasView view /*, SKMatrix matrix*/)

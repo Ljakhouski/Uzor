@@ -29,7 +29,7 @@
             
                 <sh:Shadows IsVisible="false" x:Name="sliderPanelShadow" CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
                     <Frame IsVisible="false" x:Name="sliderPanel" CornerRadius="10" BackgroundColor="white" HeightRequest="20"  Margin="20,10,20,0">
-                        <Slider x:Name="scaleSlider" Maximum="5" Minimum="1"  ValueChanged="scaleChanged" ThumbColor="#E92626" MinimumTrackColor="#E92626" MaximumTrackColor="Gray" Value="1"></Slider>
+                        <Slider x:Name="cropSlider" Maximum="60" Minimum="5"  ValueChanged="cropChanged" ThumbColor="#E92626" MinimumTrackColor="#E92626" MaximumTrackColor="Gray" Value="7"></Slider>
                     </Frame>
                 </sh:Shadows>
             
