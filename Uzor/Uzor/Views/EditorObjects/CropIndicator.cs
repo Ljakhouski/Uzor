@@ -26,7 +26,7 @@ namespace Uzor.Views.EditorObjects
             }
 
         }
-        private bool[,] cropFieldModel;
+        private bool[,] cropFieldMask;
 
         public CropIndicator()
         {
@@ -35,20 +35,54 @@ namespace Uzor.Views.EditorObjects
         private void CalculateCropField()
         {
 
-            cropFieldModel = new bool[Data.FieldSize, Data.FieldSize];
+            cropFieldMask = new bool[Data.FieldSize, Data.FieldSize];
 
-            for (int i = Data.FieldSize / 2 - Crop; i < Data.FieldSize - Data.FieldSize / 2 - Crop; i++)
+            /*int lineSize = 0;
+            for (int i = Data.FieldSize / 2 - Crop - 1; i <= Data.FieldSize / 2 + Crop; i++)
             {
-                int radius = Math.Abs(Data.FieldSize / 2 - i);
-                for (int y = Data.FieldSize / 2 - radius; y < Data.FieldSize / 2 + radius; y++)
-                    cropFieldModel[i, y] = true;
+                for (int y = Data.FieldSize / 2 - lineSize / 2 ; y <= Data.FieldSize / 2 + lineSize / 2 - 1; y++)
+                        cropFieldModel[i,  y] = true;
+
+                if (i <= Data.FieldSize / 2 - 1 /* for odd*/ /*)
+                    
+                    lineSize += 2; // top and down of each line of crop-rhomb
+                
+                else
+                    lineSize -= 2; // top and down of each line of crop-rhomb
             }
+        */
+
+            int lineSize = 0;
+
+            for (int x = (int)Math.Truncate(Data.FieldSize / 2.0 - crop - 0.1); x <= (int)Math.Truncate(Data.FieldSize / 2.0 + crop + 0.1); x++)
+            {
+                for (int y = (int)Math.Truncate(Data.FieldSize / 2.0 - lineSize/2.0 - 0.1); y <= (int)Math.Truncate(Data.FieldSize / 2.0 + lineSize/2.0 + 0.1); y++)
+                    cropFieldMask[x, y] = true;
+
+                if (Data.FieldSize%2!=0)
+                {
+                    if (x <= Math.Truncate(Data.FieldSize / 2.0) - 1)
+                        lineSize += 2;
+                    else
+                        lineSize -= 2;
+                }
+                else
+                {
+
+                    if (x < Math.Truncate(Data.FieldSize / 2.0) - 1)
+                        lineSize += 2;
+                    else if (x > Math.Truncate(Data.FieldSize / 2.0 - 1))
+                        lineSize -= 2;
+                }
+                
+            }
+
         }
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {
             if (!IsVisible)
                 return;
-            return; // TODO: fix this
+           // return; // TODO: fix this
             float pixelSize = (float)view.CanvasSize.Width / Data.FieldSize;
 
 
@@ -56,7 +90,7 @@ namespace Uzor.Views.EditorObjects
 
             for (int w = 0; w < Data.FieldSize; w++)
                 for (int h = 0; h < Data.FieldSize; h++)
-                    if (cropFieldModel[w, h] == false)
+                    if (cropFieldMask[w, h] == false)
                         canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, paint);
 
         }
