@@ -14,10 +14,12 @@ namespace Uzor.Views
     public partial class NewUzorSetting : ContentView
     {
         SaveSetting_ saveSettingDelegateFunc;
+        private bool IsSquareUzorMode = true;
         public NewUzorSetting(SaveSetting_ ss)
         {
             saveSettingDelegateFunc = ss;
             InitializeComponent();
+            SquareUzorModeFrame.ScaleTo(1.1, 100);
         }
       
         private void sizeSliderChanged(object sender, ValueChangedEventArgs e)
@@ -27,7 +29,28 @@ namespace Uzor.Views
 
         private void OK_click(object sender, EventArgs e)
         {
-            saveSettingDelegateFunc(new UzorData(entryName.Text, DateTime.Now, (int)sizeSlider.Value));
+            if (this.IsSquareUzorMode)
+                saveSettingDelegateFunc(new UzorData(entryName.Text, DateTime.Now, (int)sizeSlider.Value));
+        }
+
+        private async void SquareUzorModeTapped(object sender, EventArgs e)
+        {
+            SquareUzorModeEllipse.IsVisible = true;
+            LongUzorModeEllipse.IsVisible = false;
+            this.IsSquareUzorMode = true;
+
+            SquareUzorModeFrame.ScaleTo(1.1, 100);
+            LongUzorModeFrame.ScaleTo(1, 100);
+        }
+
+        private async void LongUzorModeTapped(object sender, EventArgs e)
+        {
+            SquareUzorModeEllipse.IsVisible = false;
+            LongUzorModeEllipse.IsVisible = true;
+            this.IsSquareUzorMode = false;
+            
+            SquareUzorModeFrame.ScaleTo(1, 100); //draw a single element of the pattern
+            LongUzorModeFrame.ScaleTo(1.1, 100); // a full-fledged pattern of simpler elements
         }
     }
 }

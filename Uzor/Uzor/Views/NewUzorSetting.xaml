@@ -5,18 +5,44 @@
   <ContentView.Content>
 
         <sh:Shadows CornerRadius="20" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-            <Grid HeightRequest="350" WidthRequest="350">
+            <Grid HeightRequest="550" WidthRequest="350">
                 <Frame BackgroundColor="White" CornerRadius="20" Opacity="0.85" HasShadow="True"  Padding="0"></Frame>
                 <Frame BackgroundColor="#D23838" CornerRadius="20" VerticalOptions="Start" HeightRequest="25"></Frame>
                 <Frame BackgroundColor="#D23838"  VerticalOptions="Start" Margin="0,20,0,0" HeightRequest="10"></Frame>
                 <Label Text="New Uzor" HorizontalOptions="Center" TextColor="White" FontSize="25" Margin="0,20,0,0" ></Label>
                 <Grid>
-                    <StackLayout>
+                    <StackLayout Margin="10">
                         <StackLayout Orientation="Horizontal" Margin="30,90,0,0">
                             <Label Text="Name: "  FontSize="20" MinimumWidthRequest="60" Padding="0,13,0,0"></Label>
                             <Entry x:Name="entryName" Text="new Uzor" HorizontalOptions="StartAndExpand" FontSize="20" Margin="20,0,20,0" />
                         </StackLayout>
 
+                        <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center" Margin="0,20,0,0">
+                            <Frame x:Name="SquareUzorModeFrame"  BackgroundColor="White" CornerRadius="15" HasShadow="True" WidthRequest="70" HeightRequest="70">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="SquareUzorModeTapped"/>
+                                </Frame.GestureRecognizers>
+                                <AbsoluteLayout>
+                                    <Ellipse x:Name="SquareUzorModeEllipse" Fill="Gray" WidthRequest="20" HeightRequest="20" IsVisible="true" AbsoluteLayout.LayoutBounds="-5, -5, 15, 15"></Ellipse>
+                                    <Image Source="SquareUzorMode.png" AnchorX="-20" AbsoluteLayout.LayoutBounds="-20, -20, 120, 120"></Image>
+                                </AbsoluteLayout>
+                            </Frame>
+
+                            <Frame x:Name="LongUzorModeFrame" BackgroundColor="White" CornerRadius="15" HasShadow="True" WidthRequest="70" HeightRequest="70">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="LongUzorModeTapped"/>
+                                </Frame.GestureRecognizers>
+                                <AbsoluteLayout>
+                                    <Ellipse x:Name="LongUzorModeEllipse" Fill="Gray" WidthRequest="20" HeightRequest="20" IsVisible="false" AbsoluteLayout.LayoutBounds="-5, -5, 15, 15"></Ellipse>
+                                    <Image Source="LongUzorMode.png" AnchorX="-20"  AbsoluteLayout.LayoutBounds="-33, -20, 120, 120"></Image>
+                                </AbsoluteLayout>
+                            </Frame>
+
+                            
+                        </StackLayout>
+                        
+                        <Label Text="Description: " FontSize="17" Margin="20,10,0,10"></Label>
+                        
                         <StackLayout Orientation="Horizontal"   Margin="30,30,0,0">
                             <Label Text="Size: " FontSize="20"></Label>
                             <Label x:Name="sizeSliderLabel" FontSize="20" Text="" Margin="30,0,0,0"></Label>

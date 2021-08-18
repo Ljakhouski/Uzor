@@ -11,9 +11,10 @@ using Uzor.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-//[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace Uzor
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
         public MainPage()
