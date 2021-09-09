@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace Uzor
+namespace Uzor.Data
 {
 
     [Serializable]
@@ -45,6 +45,7 @@ namespace Uzor
         private List<bool[,]> Content { get; set; } = new List<bool[,]>(); // List<> of all states of Content
         public bool ColorInverted { get; set; } = false;
         public int Step { get; set; } = -1;
+        public bool[,] CropMask { get; set; } 
         public bool[,] GetAndSetPreviousState ()
         {
             var lastState = (bool[,])Content[Content.Count - 1].Clone();
@@ -52,6 +53,7 @@ namespace Uzor
             Step--;
             return lastState;
         }
+        
         public void EditLastState(bool[,] c)
         {
             this.Content[Content.Count - 1] = c;
@@ -62,12 +64,13 @@ namespace Uzor
             Step++;
         }
         public bool[,] GetLastState()
-        {
+        { 
             return Content[Content.Count - 1];
         }
         public Field(int size)
         {
-            this.Content.Add(new bool[size,size]);
+            this.Content.Add(new bool[size, size]);
+            this.CropMask = new bool[size, size];
         }
     }
 
@@ -85,8 +88,8 @@ namespace Uzor
         public string Name { get; set; }
         public int FieldSize { get; set; }
         public DateTime DataOfCreation { get; }
+        public bool[,] CropMask { get; set; }
 
-       
 
         public UzorData(string name, DateTime time, int size)
         {
@@ -95,6 +98,16 @@ namespace Uzor
             this.FieldSize = size;
             this.Layers = new List<Field>();
             this.Layers.Add(new Field(size));
+            this.CropMask = new bool[size, size];
         } 
+
+        public bool CropMaskIsEmpty()
+        {
+            for (int i = 0; i <= this.CropMask.GetUpperBound(0); i++)
+                for (int j = 0; j <= this.CropMask.GetUpperBound(1); j++)
+                    if (this.CropMask[i, j])
+                        return false;
+            return true;
+        }
     } 
 }

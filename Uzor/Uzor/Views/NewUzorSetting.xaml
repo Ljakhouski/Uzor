@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sh="http://sharpnado.com"
-             x:Class="Uzor.Views.NewUzorSetting" Margin="10,0" VerticalOptions="Center" HorizontalOptions="Center">
+             x:Class="Uzor.Views.NewUzorSetting" Margin="10,0" VerticalOptions="Center" HorizontalOptions="Center"
+             xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
 
         <sh:Shadows CornerRadius="20" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-            <Grid HeightRequest="550" WidthRequest="350">
+            <Grid HeightRequest="550" WidthRequest="350" Margin="0,0,0,15">
                 <Frame BackgroundColor="White" CornerRadius="20" Opacity="0.85" HasShadow="True"  Padding="0"></Frame>
                 <Frame BackgroundColor="#D23838" CornerRadius="20" VerticalOptions="Start" HeightRequest="25"></Frame>
                 <Frame BackgroundColor="#D23838"  VerticalOptions="Start" Margin="0,20,0,0" HeightRequest="10"></Frame>
-                <Label Text="New Uzor" HorizontalOptions="Center" TextColor="White" FontSize="25" Margin="0,20,0,0" ></Label>
+                <Label Text="{x:Static resources:AppResource.NewUzor}" HorizontalOptions="Center" TextColor="White" FontSize="25" Margin="0,20,0,0" ></Label>
                 <Grid>
                     <StackLayout Margin="10">
                         <StackLayout Orientation="Horizontal" Margin="30,90,0,0">

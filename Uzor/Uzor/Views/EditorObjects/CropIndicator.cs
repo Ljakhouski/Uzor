@@ -3,11 +3,13 @@ using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Uzor.Algorithms;
+using Uzor.Data;
 using Xamarin.Forms;
 
 namespace Uzor.Views.EditorObjects
 {
-    class CropIndicator : EditorObject
+    public class CropIndicator : EditorObject
     {
         public UzorData Data { get; set; }
         
@@ -21,63 +23,21 @@ namespace Uzor.Views.EditorObjects
             set
             {
                 crop = value;
-                CalculateCropField();
+                cropFieldMask = RhombAlgorithm.GetRhombMask(crop, Data.FieldSize);
+                this.Data.CropMask = cropFieldMask;
                 this.IsVisible = true;
             }
 
         }
         private bool[,] cropFieldMask;
 
-        public CropIndicator()
+        public CropIndicator(UzorData data)
         {
+            this.Data = data;
+            this.crop = data.FieldSize/2 - 3;
             this.IsVisible = false;
         }
-        private void CalculateCropField()
-        {
-
-            cropFieldMask = new bool[Data.FieldSize, Data.FieldSize];
-
-            /*int lineSize = 0;
-            for (int i = Data.FieldSize / 2 - Crop - 1; i <= Data.FieldSize / 2 + Crop; i++)
-            {
-                for (int y = Data.FieldSize / 2 - lineSize / 2 ; y <= Data.FieldSize / 2 + lineSize / 2 - 1; y++)
-                        cropFieldModel[i,  y] = true;
-
-                if (i <= Data.FieldSize / 2 - 1 /* for odd*/ /*)
-                    
-                    lineSize += 2; // top and down of each line of crop-rhomb
-                
-                else
-                    lineSize -= 2; // top and down of each line of crop-rhomb
-            }
-        */
-
-            int lineSize = 0;
-
-            for (int x = (int)Math.Truncate(Data.FieldSize / 2.0 - crop - 0.1); x <= (int)Math.Truncate(Data.FieldSize / 2.0 + crop + 0.1); x++)
-            {
-                for (int y = (int)Math.Truncate(Data.FieldSize / 2.0 - lineSize/2.0 - 0.1); y <= (int)Math.Truncate(Data.FieldSize / 2.0 + lineSize/2.0 + 0.1); y++)
-                    cropFieldMask[x, y] = true;
-
-                if (Data.FieldSize%2!=0)
-                {
-                    if (x <= Math.Truncate(Data.FieldSize / 2.0) - 1)
-                        lineSize += 2;
-                    else
-                        lineSize -= 2;
-                }
-                else
-                {
-
-                    if (x < Math.Truncate(Data.FieldSize / 2.0) - 1)
-                        lineSize += 2;
-                    else if (x > Math.Truncate(Data.FieldSize / 2.0 - 1))
-                        lineSize -= 2;
-                }
-                
-            }
-
-        }
+        
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {
             if (!IsVisible)

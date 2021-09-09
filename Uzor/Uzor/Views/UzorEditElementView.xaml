@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:Uzor.Views" xmlns:sh="http://sharpnado.com"
-             x:Class="Uzor.Views.UzorEditElementView">
+             x:Class="Uzor.Views.UzorEditElementView" VerticalOptions="Center">
   <ContentView.Content>
-        <StackLayout Padding="0">
-                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <Button x:Name="saveButton" WidthRequest="90" Text="save" TextColor="Black" HeightRequest="50"   Clicked="saveClick"    BackgroundColor="#FFFFFF" Opacity="0.8" CornerRadius="10"></Button>
-                </sh:Shadows>
+        <StackLayout>
+            
+                   
+              
 
+            
             
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <ImageButton Source="deleteButton.png" x:Name="deleteButton"   HeightRequest="50"      Clicked="deleteButtonClick"      BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
 
                 <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <ImageButton HeightRequest="50" x:Name="zoomButton"  Clicked="zoomButtonClick"  Source="zoomOffMenuButton.png"  Opacity="0.8"  BackgroundColor="#E92626"  CornerRadius="10"></ImageButton>
+                    <ImageButton HeightRequest="50" WidthRequest="30" x:Name="cropButton" x:FieldModifier="public" Clicked="cropButtonClick"  Source="cropOffMenuButton.png"  Opacity="0.8"  BackgroundColor="#E92626"  CornerRadius="10"></ImageButton>
                 </sh:Shadows>
                 
                 <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
@@ -26,10 +27,10 @@
 
                 
             </StackLayout>
-            
-                <sh:Shadows IsVisible="false" x:Name="sliderPanelShadow" CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <Frame IsVisible="false" x:Name="sliderPanel" CornerRadius="10" BackgroundColor="white" HeightRequest="20"  Margin="20,10,20,0">
-                        <Slider x:Name="cropSlider" Maximum="60" Minimum="5"  ValueChanged="cropChanged" ThumbColor="#E92626" MinimumTrackColor="#E92626" MaximumTrackColor="Gray" Value="7"></Slider>
+
+                <sh:Shadows IsVisible="false" x:Name="sliderPanelShadow" x:FieldModifier="public" CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                    <Frame IsVisible="false" x:Name="sliderPanel" x:FieldModifier="public" CornerRadius="10" BackgroundColor="white" HeightRequest="20"  Margin="20,10,20,0">
+                        <Slider x:Name="cropSlider" x:FieldModifier="public" Maximum="60" Minimum="3"  ValueChanged="cropChanged" ThumbColor="#E92626" MinimumTrackColor="#E92626" MaximumTrackColor="Gray" Value="7"></Slider>
                     </Frame>
                 </sh:Shadows>
             
@@ -57,7 +58,7 @@
                                 TouchAction="OnTouchEffectAction"/>
                 </Grid.Effects>
             </Grid>-->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0,0,15">
                 
                 <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}" Margin="0,0,30,0">
                     <ImageButton  x:Name="beforeButton" HeightRequest="50" VerticalOptions="Center"  Source="leftOrRightWhiteButton.png"    Clicked="beforeButtonClick" WidthRequest="60"  BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>

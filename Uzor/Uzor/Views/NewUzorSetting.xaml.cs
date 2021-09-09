@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Uzor;
+using Uzor.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static Uzor.UzorCreatingPage;
@@ -14,7 +15,7 @@ namespace Uzor.Views
     public partial class NewUzorSetting : ContentView
     {
         SaveSetting_ saveSettingDelegateFunc;
-        private bool IsSquareUzorMode = true;
+        public bool IsSquareUzorMode = true;
         public NewUzorSetting(SaveSetting_ ss)
         {
             saveSettingDelegateFunc = ss;
@@ -29,8 +30,7 @@ namespace Uzor.Views
 
         private void OK_click(object sender, EventArgs e)
         {
-            if (this.IsSquareUzorMode)
-                saveSettingDelegateFunc(new UzorData(entryName.Text, DateTime.Now, (int)sizeSlider.Value));
+            saveSettingDelegateFunc(new UzorData(entryName.Text, DateTime.Now, (int)sizeSlider.Value));
         }
 
         private async void SquareUzorModeTapped(object sender, EventArgs e)

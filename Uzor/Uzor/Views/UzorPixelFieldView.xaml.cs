@@ -14,6 +14,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Uzor.Algorithm;
 using Uzor.Views.EditorObjects;
+using Uzor.Data;
 
 namespace Uzor.Views
 {
@@ -31,16 +32,23 @@ namespace Uzor.Views
         {
             InitializeComponent();
             this.ThisData = data;
+            becomeSquare();
         }
         public UzorPixelFieldView()
         {
             InitializeComponent();
+            becomeSquare();
         }
       
+        private void becomeSquare()
+        {
+            this.uzorFieldCanvasView.HeightRequest = this.uzorFieldCanvasView.Width;
+        }
         public void DrawView()
         {
             uzorFieldCanvasView.InvalidateSurface();
         }
+
       
         private void OnTouchEffectAction(object sender, TouchActionEventArgs args)
         {
@@ -216,7 +224,7 @@ namespace Uzor.Views
         }
         private void sizeChangedEvent(object sender, EventArgs e)
         {
-            this.uzorFieldCanvasView.HeightRequest = this.uzorFieldCanvasView.Width;
+            becomeSquare();
         }
     }
 }

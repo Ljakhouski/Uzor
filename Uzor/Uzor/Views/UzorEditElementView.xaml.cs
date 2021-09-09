@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Uzor.Algorithm;
+using Uzor.Data;
 using Uzor.Views.EditorObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,9 +26,9 @@ namespace Uzor.Views
         private UzorEditorObject uzor {get;set;}
         private DarkField mirrorIndicator { get; set; } = new DarkField();
         private CenterMarker centerIndicator { get; set; } = new CenterMarker();
-        private CropIndicator cropIndicator { get; set; }
+        public CropIndicator cropIndicator { get; set; }
 
-        private bool ReSave = false; // for rewriting before results
+        public bool ReSave = false; // for rewriting before results
         private string SavedFilePath;
         public UzorEditElementView(UzorData data)
         {
@@ -36,7 +37,7 @@ namespace Uzor.Views
             this.editingFieldFrame.Content = UzorView;
 
             this.uzor = new UzorEditorObject() { MirrorMode = true, Data = data};
-            this.cropIndicator = new CropIndicator() { Data = data };
+            this.cropIndicator = new CropIndicator(data);
             this.cropSlider.Maximum = data.FieldSize/2;
             this.UzorView.EditorObjectssList.Add(uzor);
             this.UzorView.EditorObjectssList.Add(centerIndicator);
@@ -64,7 +65,7 @@ namespace Uzor.Views
         {
             this.uzor.EditingMode = false;
             calculationButton.Source = "stopButton.png";
-            SetDefaultZoomValue();
+            this.uzor.SetDefaultScale();
         }
 
         public void StopCaltulation()
@@ -72,7 +73,6 @@ namespace Uzor.Views
             this.uzor.EditingMode = true;
             calculationButton.Source = "startButton.png";
             this.UzorView.DrawView();
-            //SetZoomValueFromPicker();
         }
 
         private void CalculationButtonClick(object sender, EventArgs e)
@@ -81,6 +81,8 @@ namespace Uzor.Views
                 this.StartCalculation();
             else
                 this.StopCaltulation();
+
+            this.uzor.SetDefaultScale();
         }
 
         private void beforeButtonClick(object sender, EventArgs e)
@@ -89,21 +91,15 @@ namespace Uzor.Views
             if (UzorView.ThisData.Layers[uzor.LayerNumber].Step >= 0)
                 this.UzorView.ThisData.Layers[uzor.LayerNumber].GetAndSetPreviousState(); // only set
             this.UzorView.DrawView();
-            SetDefaultZoomValue();
-            //uzorFieldCanvasView.FadeTo(0, 250);
+
+            this.uzor.SetDefaultScale();
         }
 
-        private void SetZoomValueFromPicker()
+        private void SetCropValueFromPicker()
         {
             //this.UzorView.Scale = this.scaleSlider.Value;
             //this.Uzor.Scale = (int)this.scaleSlider.Value;
             this.UzorView.DrawView();
-        }
-        private void SetDefaultZoomValue()
-        {
-           // this.UzorView.Scale = 1;
-            //this.Uzor.Scale = 1;
-            this.cropSlider.Value = 1;
         }
         private void nextButtonClick(object sender, EventArgs e)
         {
@@ -113,8 +109,7 @@ namespace Uzor.Views
             BasicDrawingAlgorithm.Calculate(this.UzorView.ThisData.Layers[uzor.LayerNumber]);
 
             this.UzorView.DrawView();
-
-            SetDefaultZoomValue();
+            this.uzor.SetDefaultScale();
         }
 
         private void deleteButtonClick(object sender, EventArgs e)
@@ -150,7 +145,7 @@ namespace Uzor.Views
 
         private void pickerChanged(object sender, EventArgs e)
         {
-            SetZoomValueFromPicker();
+            SetCropValueFromPicker();
         }
 
         private void cropChanged(object sender, ValueChangedEventArgs e)
@@ -163,18 +158,18 @@ namespace Uzor.Views
             this.UzorView.DrawView();
         }
 
-        private void zoomButtonClick(object sender, EventArgs e)
+        private void cropButtonClick(object sender, EventArgs e)
         {
             
             if (!sliderPanel.IsVisible)
             {
-                zoomButton.Source = "zoomOnMenuButton.png";
+                cropButton.Source = "cropOnMenuButton.png";
                 sliderPanel.IsVisible = true;
                 sliderPanelShadow.IsVisible = true;
                 return;
             }    
                 
-            zoomButton.Source = "zoomOffMenuButton.png";
+            cropButton.Source = "cropOffMenuButton.png";
             sliderPanel.HeightRequest = 20;
 
             sliderPanel.IsVisible = false;
@@ -182,7 +177,7 @@ namespace Uzor.Views
         }
         
 
-        private void saveClick(object sender, EventArgs e)
+        public void SaveButton_Click(object sender, EventArgs e)
         {
             BinaryFormatter formatter = new BinaryFormatter();
 
@@ -218,7 +213,7 @@ namespace Uzor.Views
             formatter.Serialize(fs, this.UzorView.ThisData);
             fs.Dispose();
         }
-            // перезаписываем файл
+            // rewriting file
            // File.WriteAllText(Path.Combine(folderPath, this.UzorView.ThisData.Name), textEditor.Text);
 
         

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Uzor.Data;
 using Uzor.Views.EditorObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

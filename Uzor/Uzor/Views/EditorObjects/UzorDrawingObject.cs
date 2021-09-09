@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TouchTracking;
+using Uzor.Data;
 using Xamarin.Forms;
 
 namespace Uzor.Views.EditorObjects

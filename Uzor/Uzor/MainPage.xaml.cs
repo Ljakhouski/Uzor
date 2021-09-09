@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using Uzor.Data;
 using Uzor.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
