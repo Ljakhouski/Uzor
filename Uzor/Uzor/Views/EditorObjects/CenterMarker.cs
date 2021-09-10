@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Uzor.Views.EditorObjects
 {
-    class CenterMarker : EditorObject
+    public class CenterMarker : EditorObject
     {
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {

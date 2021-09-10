@@ -100,7 +100,7 @@ namespace Uzor.Data
             this.Layers.Add(new Field(size));
             this.CropMask = new bool[size, size];
         } 
-
+        
         public bool CropMaskIsEmpty()
         {
             for (int i = 0; i <= this.CropMask.GetUpperBound(0); i++)
@@ -108,6 +108,18 @@ namespace Uzor.Data
                     if (this.CropMask[i, j])
                         return false;
             return true;
+        }
+
+        public int GetMaskSize()
+        {
+            int arrayCenterIndex = this.CropMask.GetUpperBound(1) / 2;
+            int maskSize = 0;
+
+            for (int i = 0; i <= this.CropMask.GetUpperBound(0); i++)
+                if (this.CropMask[i, arrayCenterIndex])
+                    maskSize++;
+
+            return maskSize;
         }
     } 
 }

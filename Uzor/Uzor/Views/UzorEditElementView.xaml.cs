@@ -23,9 +23,10 @@ namespace Uzor.Views
     {
         public UzorPixelFieldView UzorView { get; set; }
 
+        public UzorData ThisData { get; set; }
         private UzorEditorObject uzor {get;set;}
-        private DarkField mirrorIndicator { get; set; } = new DarkField();
-        private CenterMarker centerIndicator { get; set; } = new CenterMarker();
+        public DarkField mirrorIndicator { get; set; } = new DarkField();
+        public CenterMarker centerIndicator { get; set; } = new CenterMarker();
         public CropIndicator cropIndicator { get; set; }
 
         public bool ReSave = false; // for rewriting before results
@@ -33,12 +34,19 @@ namespace Uzor.Views
         public UzorEditElementView(UzorData data)
         {
             InitializeComponent();
-            this.UzorView = new UzorPixelFieldView(data);
+            this.ThisData = data;
+
+            this.UzorView = new UzorPixelFieldView();
             this.editingFieldFrame.Content = UzorView;
 
             this.uzor = new UzorEditorObject() { MirrorMode = true, Data = data};
             this.cropIndicator = new CropIndicator(data);
-            this.cropSlider.Maximum = data.FieldSize/2;
+
+            if (data.FieldSize / 2 <= this.cropSlider.Minimum)
+                this.cropSlider.Maximum = this.cropSlider.Minimum + 1;
+            else
+                this.cropSlider.Maximum = data.FieldSize/2;
+
             this.UzorView.EditorObjectssList.Add(uzor);
             this.UzorView.EditorObjectssList.Add(centerIndicator);
             this.UzorView.EditorObjectssList.Add(mirrorIndicator);
@@ -54,7 +62,7 @@ namespace Uzor.Views
 
             // CALCULTION:
 
-            BasicDrawingAlgorithm.Calculate(this.UzorView.ThisData.Layers[this.uzor.LayerNumber]);
+            BasicDrawingAlgorithm.Calculate(this.ThisData.Layers[this.uzor.LayerNumber]);
             
             //counter.Text = (Int32.Parse(counter.Text) + 1).ToString();
 
@@ -88,8 +96,8 @@ namespace Uzor.Views
         private void beforeButtonClick(object sender, EventArgs e)
         {
             this.StopCaltulation();
-            if (UzorView.ThisData.Layers[uzor.LayerNumber].Step >= 0)
-                this.UzorView.ThisData.Layers[uzor.LayerNumber].GetAndSetPreviousState(); // only set
+            if (this.ThisData.Layers[uzor.LayerNumber].Step >= 0)
+                this.ThisData.Layers[uzor.LayerNumber].GetAndSetPreviousState(); // only set
             this.UzorView.DrawView();
 
             this.uzor.SetDefaultScale();
@@ -106,7 +114,7 @@ namespace Uzor.Views
             this.StopCaltulation();
             // CALCULTION:
             
-            BasicDrawingAlgorithm.Calculate(this.UzorView.ThisData.Layers[uzor.LayerNumber]);
+            BasicDrawingAlgorithm.Calculate(this.ThisData.Layers[uzor.LayerNumber]);
 
             this.UzorView.DrawView();
             this.uzor.SetDefaultScale();
@@ -124,10 +132,10 @@ namespace Uzor.Views
 
         private void invertButtonClick(object sender, EventArgs e)
         {
-            PixelColor c = UzorView.ThisData.Layers[0].FrontColor;
+            PixelColor c = ThisData.Layers[0].FrontColor;
 
-            UzorView.ThisData.Layers[0].FrontColor = UzorView.ThisData.Layers[0].BackColor;
-            UzorView.ThisData.Layers[0].BackColor = c;
+            ThisData.Layers[0].FrontColor = ThisData.Layers[0].BackColor;
+            ThisData.Layers[0].BackColor = c;
             UzorView.DrawView();
         }
 
@@ -152,6 +160,9 @@ namespace Uzor.Views
         {
             if (this.cropIndicator == null)
                 return;
+
+            if (this.mirrorIndicator.IsVisible) // to not to recalculate View
+                this.mirrorButtonClick(null, null);
 
             this.cropIndicator.Crop = (int)e.NewValue;
             //this.UzorView.Scale = e.NewValue;
@@ -184,7 +195,7 @@ namespace Uzor.Views
             if (ReSave) // rewrite file
             {
                 FileStream fsr = new FileStream(SavedFilePath, FileMode.Truncate);
-                formatter.Serialize(fsr, this.UzorView.ThisData);
+                formatter.Serialize(fsr, this.ThisData);
                 fsr.Dispose();
                 return;
             }
@@ -192,16 +203,16 @@ namespace Uzor.Views
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
             
-            string fileName = this.UzorView.ThisData.Name + ".ubf";
+            string fileName = this.ThisData.Name + ".ubf";
 
-            if (File.Exists(Path.Combine(folderPath, this.UzorView.ThisData.Name + ".ubf")))
+            if (File.Exists(Path.Combine(folderPath, this.ThisData.Name + ".ubf")))
                 for (int i = 0; i<999; i++)
-                    if (File.Exists(Path.Combine(folderPath, this.UzorView.ThisData.Name + i.ToString() + ".ubf")))
+                    if (File.Exists(Path.Combine(folderPath, this.ThisData.Name + i.ToString() + ".ubf")))
                         continue;
                     else
                     {
-                        fileName = this.UzorView.ThisData.Name + i.ToString() + ".ubf";
-                        this.UzorView.ThisData.Name = this.UzorView.ThisData.Name + i.ToString();
+                        fileName = this.ThisData.Name + i.ToString() + ".ubf";
+                        this.ThisData.Name = this.ThisData.Name + i.ToString();
                         break;
                     }
                 
@@ -210,7 +221,7 @@ namespace Uzor.Views
             ReSave = true;
 
             FileStream fs = new FileStream(folderPath+"/"+fileName, FileMode.OpenOrCreate);
-            formatter.Serialize(fs, this.UzorView.ThisData);
+            formatter.Serialize(fs, this.ThisData);
             fs.Dispose();
         }
             // rewriting file

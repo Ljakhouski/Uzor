@@ -22,18 +22,18 @@ namespace Uzor.Views
     public partial class UzorPixelFieldView : ContentView
     {
 
-        public UzorData ThisData { get; set; }
+        //public UzorData ThisData { get; set; }
 
         public List<EditorObject> EditorObjectssList {get;set;} = new List<EditorObject>();
         public bool MultiTouchEnabled { get; set; } = true;
         public bool RotationMultiTouchEnabled { get; set; } = false;
         
-        public UzorPixelFieldView(UzorData data)
+        /*public UzorPixelFieldView(UzorData data)
         {
             InitializeComponent();
-            this.ThisData = data;
+            //this.ThisData = data;
             becomeSquare();
-        }
+        }*/
         public UzorPixelFieldView()
         {
             InitializeComponent();

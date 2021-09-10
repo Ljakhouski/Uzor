@@ -31,14 +31,14 @@ namespace Uzor.Views
             udb.Data = data;
             udb.GradientMode = true;
 
-            upv.ThisData = data;
+            //upv.ThisData = data;
             upv.EditorObjectssList.Add(udb);
             upv.DrawView();
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
             this.itemDate.Text = data.DataOfCreation.ToString();
-            this.mineFrame.BackgroundColor = new Color( upv.ThisData.Layers[0].BackColor.R,
-                                                        upv.ThisData.Layers[0].BackColor.G,
-                                                        upv.ThisData.Layers[0].BackColor.B);
+            this.mineFrame.BackgroundColor = new Color( data.Layers[0].BackColor.R,
+                                                        data.Layers[0].BackColor.G,
+                                                        data.Layers[0].BackColor.B);
 
             this.pageForAlert = p;
         }

@@ -21,7 +21,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
                 
-                <Rectangle BackgroundColor="#C3CBD4" Grid.Row="0"></Rectangle>
+               
         </Grid>
 
         

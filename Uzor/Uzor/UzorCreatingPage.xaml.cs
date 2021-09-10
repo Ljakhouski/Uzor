@@ -66,6 +66,9 @@ namespace Uzor
                 stepsPanel.NextButton.Clicked += NextButton_Clicked;
                 stepsPanel.BeforeButton.Clicked += BeforeButton_Clicked;
                 creatingPageGrid.Children.Add(stepsPanel, 0, 0);
+
+                this.stepsPanel.StepLabel.Text = this.stepNumber + "/" + this.maxStepValue;
+
             }
             // gridCreatingPage.Children.Add(new NewUzorSetting(SaveSetting));
 
@@ -87,11 +90,11 @@ namespace Uzor
                     return;
             else
             {
-
                 this.creatingPageGrid.Children.Remove(uzorEditElementViewList[stepNumber - 1]);
                 stepNumber--;
                 this.creatingPageGrid.Children.Add(uzorEditElementViewList[stepNumber - 1], 0, 1);
 
+                this.stepsPanel.StepLabel.Text = this.stepNumber + "/" + this.maxStepValue;
             }
 
             
@@ -103,6 +106,8 @@ namespace Uzor
             {
                 if (this.longUzorData.UzorElements[stepNumber-1].CropMaskIsEmpty())
                 {
+                    uzorEditElementViewList[stepNumber - 1].mirrorIndicator.IsVisible = false;
+
                     uzorEditElementViewList[stepNumber-1].sliderPanel.IsVisible = true;
                     uzorEditElementViewList[stepNumber-1].sliderPanelShadow.IsVisible = true;
                     uzorEditElementViewList[stepNumber - 1].cropIndicator.Crop = (int)uzorEditElementViewList[stepNumber - 1].cropSlider.Value;
@@ -115,7 +120,7 @@ namespace Uzor
                 {
                     var current = this.longUzorData.UzorElements[stepNumber - 1];
 
-                    var nextUzorData = new UzorData(current.Name, current.DataOfCreation, uzorEditElementViewList[stepNumber-1].cropIndicator.Crop);
+                    var nextUzorData = new UzorData(current.Name, current.DataOfCreation, current.GetMaskSize());
                     this.longUzorData.UzorElements[stepNumber-1 + 1] = nextUzorData;
 
                     uzorEditElementViewList.Add(new UzorEditElementView(nextUzorData));
@@ -124,7 +129,9 @@ namespace Uzor
                 this.creatingPageGrid.Children.Remove(uzorEditElementViewList[stepNumber - 1]);
                 stepNumber++;
                 this.creatingPageGrid.Children.Add(uzorEditElementViewList[stepNumber - 1], 0, 1);
-                
+
+                this.stepsPanel.StepLabel.Text = this.stepNumber + "/" + this.maxStepValue;
+
 
                 if (stepNumber==maxStepValue)
                 {

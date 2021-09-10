@@ -19,7 +19,7 @@ namespace Uzor
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
 
-            var upfView = new UzorPixelFieldView(data);
+            var upfView = new UzorPixelFieldView();
             upfView.EditorObjectssList.Add(new DemonstrateUzorEditorObject() { Data = data, GradientMode = false });
             this.uzorFieldFrame.Content = upfView;
             itemNameLabel.Text = data.Name;
