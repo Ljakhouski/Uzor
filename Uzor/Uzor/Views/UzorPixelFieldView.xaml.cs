@@ -27,7 +27,10 @@ namespace Uzor.Views
         public List<EditorObject> EditorObjectssList {get;set;} = new List<EditorObject>();
         public bool MultiTouchEnabled { get; set; } = true;
         public bool RotationMultiTouchEnabled { get; set; } = false;
-        
+
+
+        private SKMatrix matrix = SKMatrix.MakeIdentity();
+        private Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
         /*public UzorPixelFieldView(UzorData data)
         {
             InitializeComponent();
@@ -73,8 +76,7 @@ namespace Uzor.Views
             
         }
 
-        SKMatrix matrix = SKMatrix.MakeIdentity();
-        Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
+        
     
         
    /* void OnTouchEffectAction2(object sender, TouchActionEventArgs args)

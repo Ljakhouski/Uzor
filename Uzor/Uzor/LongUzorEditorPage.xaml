@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:Uzor.Views"
+             x:Class="Uzor.LongUzorEditorPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="70">
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+
+                <views:LongUzorView x:Name="longUzorView" Grid.Row="0"></views:LongUzorView>
+
+                <Grid x:Name="toolsPanelGrid" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton BackgroundColor="Red" Grid.Column="0" Clicked="ABC_Parameters_Clicked"></ImageButton>
+                    <ImageButton BackgroundColor="Green" Grid.Column="1" Clicked="layersMenu_Clicked"></ImageButton>
+                    <ImageButton BackgroundColor="Blue" Grid.Column="2" Clicked="saveMenu_Clicked"></ImageButton>
+                </Grid>
+            </Grid>
+
+            <AbsoluteLayout x:Name="menuLayout" IsVisible="false" Margin="0,0,0,50">
+                <Rectangle BackgroundColor="Black" Opacity="0" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0, 1.0, 1.0"></Rectangle>
+                
+            </AbsoluteLayout>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

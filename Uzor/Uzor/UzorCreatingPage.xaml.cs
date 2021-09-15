@@ -25,18 +25,29 @@ namespace Uzor
             creatingPageGrid.Children.Add(newUzorSettingView, 0, 1);
             newUzorSettingView.FadeTo(1);
         }
+
+        public UzorCreatingPage(UzorData data) // for editing a previously created Uzor
+        {
+            var v = new UzorEditElementView(data);
+            uzorEditElementViewList.Add(v);
+            creatingPageGrid.Children.Add(v, 0, 1);
+
+            this.saveTopPanel = new UzorEditorSaveTopPanel();
+            saveTopPanel.SaveButton.Clicked += SaveChanges_Clicked;
+            saveTopPanel.BackButton.IsVisible = false;
+            creatingPageGrid.Children.Add(saveTopPanel, 0, 0);
+            v.cropButton.IsVisible = true;
+        }
         public delegate void SaveSetting_(UzorData data);
         private NewUzorSetting newUzorSettingView;
         private UzorEditorSaveTopPanel saveTopPanel;
         private UzorEditorStepsTopPanel stepsPanel;
 
         private int stepNumber = 1;
-        private int maxStepValue = 2;
+        private int maxStepValue = 2; // only for long-uzor-constructor-mode 
 
-        private UzorData currentUzorData;
         private LongUzorData longUzorData; // only for long-uzor-constructor-mode 
 
-        private List<UzorData> uzorDataList = new List<UzorData>();
         private List<UzorEditElementView> uzorEditElementViewList = new List<UzorEditElementView>();
         public void SaveSetting(UzorData data)
         {
@@ -100,7 +111,7 @@ namespace Uzor
             
         }
 
-        private void NextButton_Clicked(object sender, EventArgs e)
+        private async void NextButton_Clicked(object sender, EventArgs e)
         {
             if (stepNumber<maxStepValue)
             {
@@ -140,7 +151,8 @@ namespace Uzor
             }
             else
             {
-
+                LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData);
+                await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
             }
         }
 
@@ -164,8 +176,12 @@ namespace Uzor
         
         }
 
-        
 
-     
+        private async void SaveChanges_Clicked(object sender, EventArgs e) // if this editor is open for editing a previously created Uzor
+        {
+            await Navigation.PopModalAsync();
+        }
+
+
     }
 }

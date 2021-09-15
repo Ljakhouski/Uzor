@@ -14,18 +14,26 @@ namespace Uzor.Views.EditorObjects
         public UzorData Data { get; set; }
         public int LayerNumber { get; set; } = 0;
         public bool GradientMode { get; set; } = false;
-
+        public bool ConsuderMask { get; set; } = false;
         protected Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
         protected SKMatrix matrix = SKMatrix.CreateIdentity();
 
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {
-            canvas.SetMatrix(matrix);
+            canvas.SetMatrix(matrix); // default this view can transform matrix
 
             //canvas.Clear(Color.DarkGray.ToSKColor());
-
             float pixelSize = (float)view.CanvasSize.Width / Data.FieldSize;
+            this.DrawUzor(pixelSize, canvas, view);
+
+        }
+
+        public void DrawUzor(float pixelSize, SKCanvas canvas, SKCanvasView view)
+        {
+            
             var f = this.Data.Layers[LayerNumber].GetLastState();
+            var mask = this.Data.CropMask;
+            bool isEmptyMask = this.Data.CropMaskIsEmpty();
 
             SKColor backColor = this.Data.Layers[0].BackColor.ToSKColor();
             SKColor frontColor = this.Data.Layers[0].FrontColor.ToSKColor();
@@ -65,17 +73,17 @@ namespace Uzor.Views.EditorObjects
             int xRightDown = (int)(xRightDownLocationAfterScaling / pixelSize);
             int yRightDown = (int)(yRightDownLocationAfterScaling / pixelSize);
 
-            for (int w = (xLeftTop-1) < 0? 0 : xLeftTop-1; w < /*Data.FieldSize*/     (xRightDown+1 > Data.FieldSize ? Data.FieldSize : xRightDown+1); w++)
-                for (int h = (yLeftTop-1) < 0? 0 : yLeftTop-1; h < /*Data.FieldSize*/ (yRightDown+1 > Data.FieldSize ? Data.FieldSize : yRightDown+1); h++)
+            for (int w = (xLeftTop - 1) < 0 ? 0 : xLeftTop - 1; w < /*Data.FieldSize*/     (xRightDown + 1 > Data.FieldSize ? Data.FieldSize : xRightDown + 1); w++)
+                for (int h = (yLeftTop - 1) < 0 ? 0 : yLeftTop - 1; h < /*Data.FieldSize*/ (yRightDown + 1 > Data.FieldSize ? Data.FieldSize : yRightDown + 1); h++)
                 {
-                    if (f[w, h] == false)
-                    {
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  /*new SKPaint() { Color = backColor}*/ backPaint);
-                    }
-                    else
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, /*new SKPaint() { Color = frontColor }*/ frontPaint);
+                    if (isEmptyMask || (mask[w,h] && !isEmptyMask))
+                        if (f[w, h] == false)
+                        {
+                            canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  /*new SKPaint() { Color = backColor}*/ backPaint);
+                        }
+                        else
+                            canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, /*new SKPaint() { Color = frontColor }*/ frontPaint);
                 }
-
         }
 
         public override void TouchEffectAction(TouchActionEventArgs args, SKCanvasView view)
