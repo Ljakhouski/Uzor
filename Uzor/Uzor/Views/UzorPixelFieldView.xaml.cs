@@ -40,12 +40,13 @@ namespace Uzor.Views
         public UzorPixelFieldView()
         {
             InitializeComponent();
-            becomeSquare();
+            BecomeSquare();
         }
       
-        private void becomeSquare()
+        public void BecomeSquare()
         {
             this.uzorFieldCanvasView.HeightRequest = this.uzorFieldCanvasView.Width;
+            this.uzorFieldCanvasView.MinimumHeightRequest = this.uzorFieldCanvasView.Width;
         }
         public void DrawView()
         {
@@ -73,152 +74,13 @@ namespace Uzor.Views
 
             foreach (EditorObject o in EditorObjectssList)
                 o.Draw(canvas, uzorFieldCanvasView/*, matrix*/);
-            
+
+           // BecomeSquare();
         }
 
         
     
         
-   /* void OnTouchEffectAction2(object sender, TouchActionEventArgs args)
-        {
-            // Convert Xamarin.Forms point to pixels
-            Point pt = args.Location;
-            SKPoint point =
-                new SKPoint((float)(uzorFieldCanvasView.CanvasSize.Width * pt.X / uzorFieldCanvasView.Width),
-                            (float)(uzorFieldCanvasView.CanvasSize.Height * pt.Y / uzorFieldCanvasView.Height));
-
-            switch (args.Type)
-            {
-                case TouchActionType.Pressed:
-                    // Find transformed bitmap rectangle
-                    //SKRect rect = new SKRect(0, 0, uzorFieldCanvasView.CanvasSize.Width, uzorFieldCanvasView.CanvasSize.Height); // 'bitmap' replaced
-                    //rect = matrix.MapRect(rect);
-
-                    // Determine if the touch was within that rectangle
-                    //if (rect.Contains(point) && !touchDictionary.ContainsKey(args.Id))
-                    // {
-                    //    touchDictionary.Add(args.Id, point);
-                    // }
-                    try
-                    {
-                        // WritePixel(args) ;
-                        foreach (EditorObjects o in EditorObjectssList)
-                            o.Touched(args, uzorFieldCanvasView);
-                    }
-                    catch (IndexOutOfRangeException e) { }
-                    uzorFieldCanvasView.InvalidateSurface();
-                    break;
-                case TouchActionType.Moved:
-                    if (touchDictionary.ContainsKey(args.Id))
-                    {
-                        // Single-finger drag
-                        if (touchDictionary.Count == 1)
-                        {
-                            try
-                            {
-                                // WritePixel(args) ;
-                                foreach (EditorObjects o in EditorObjectssList)
-                                    o.Touched(args, uzorFieldCanvasView);
-                            }
-                            catch (IndexOutOfRangeException e) { }
-                        }
-                        // Double-finger scale and drag
-                        else if (touchDictionary.Count >= 2 && MultiTouchEnabled)
-                        {
-                            // Copy two dictionary keys into array
-                            long[] keys = new long[touchDictionary.Count];
-                            touchDictionary.Keys.CopyTo(keys, 0);
-
-                            // Find index of non-moving (pivot) finger
-                            int pivotIndex = (keys[0] == args.Id) ? 1 : 0;
-
-                            // Get the three points involved in the transform
-                            SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];
-                            SKPoint prevPoint  = touchDictionary[args.Id];
-                            SKPoint newPoint = point;
-
-                            // Calculate two vectors
-                            SKPoint oldVector = prevPoint - pivotPoint;
-                            SKPoint newVector = newPoint - pivotPoint;
-
-                            // Scaling factors are ratios of those
-                            float scaleX = newVector.X / oldVector.X;
-                            float scaleY = newVector.Y / oldVector.Y;
-
-                            if (!float.IsNaN(scaleX) && !float.IsInfinity(scaleX) &&
-                                !float.IsNaN(scaleY) && !float.IsInfinity(scaleY))
-                            {
-                                // If something bad hasn't happened, calculate a scale and translation matrix
-                                SKMatrix scaleMatrix =
-                                    SKMatrix.MakeScale(scaleX, scaleX, pivotPoint.X, pivotPoint.Y); // edited pivotPoint.X [2]
-
-                                SKMatrix.PostConcat(ref matrix, scaleMatrix);
-                                uzorFieldCanvasView.InvalidateSurface();
-                            }
-
-                            // Copy two dictionary keys into array
-                            long[] keys = new long[touchDictionary.Count];
-                            touchDictionary.Keys.CopyTo(keys, 0);
-
-                            // Find index non-moving (pivot) finger
-                            int pivotIndex = (keys[0] == args.Id) ? 1 : 0;
-
-                            // Get the three points in the transform
-                            SKPoint pivotPoint = touchDictionary[keys[pivotIndex]];
-                            SKPoint prevPoint = touchDictionary[args.Id];
-                            SKPoint newPoint = point;
-
-                            // Calculate two vectors
-                            SKPoint oldVector = prevPoint - pivotPoint;
-                            SKPoint newVector = newPoint - pivotPoint;
-
-                            // Find angles from pivot point to touch points
-                            float oldAngle = (float)Math.Atan2(oldVector.Y, oldVector.X);
-                            float newAngle = (float)Math.Atan2(newVector.Y, newVector.X);
-
-                            // Calculate rotation matrix
-
-                            float angle = 0;
-                            if (RotationMultiTouchEnabled)
-                                angle = newAngle - oldAngle;
-                                
-                            SKMatrix touchMatrix = SKMatrix.MakeRotation(angle, pivotPoint.X, pivotPoint.Y);
-
-                            // Effectively rotate the old vector
-                            float magnitudeRatio = Magnitude(oldVector) / Magnitude(newVector);
-                            oldVector.X = magnitudeRatio * newVector.X;
-                            oldVector.Y = magnitudeRatio * newVector.Y;
-
-                            // Isotropic scaling!
-                            float scale = Magnitude(newVector) / Magnitude(oldVector);
-
-                            if (!float.IsNaN(scale) && !float.IsInfinity(scale))
-                            {
-                                SKMatrix.PostConcat(ref touchMatrix,
-                                    SKMatrix.MakeScale(scale, scale, pivotPoint.X, pivotPoint.Y));
-
-                                SKMatrix.PostConcat(ref matrix, touchMatrix);
-                                this.uzorFieldCanvasView.InvalidateSurface();
-                            }
-                        }
-
-                        // Store the new point in the dictionary
-                        touchDictionary[args.Id] = point;
-                    }
-                    uzorFieldCanvasView.InvalidateSurface();
-
-                    break;
-
-                case TouchActionType.Released:
-                case TouchActionType.Cancelled:
-                    if (touchDictionary.ContainsKey(args.Id))
-                    {
-                        touchDictionary.Remove(args.Id);
-                    }
-                    break;
-            }
-        }*/
-
 
         float Magnitude(SKPoint point)
         {
@@ -226,7 +88,7 @@ namespace Uzor.Views
         }
         private void sizeChangedEvent(object sender, EventArgs e)
         {
-            becomeSquare();
+            BecomeSquare();
         }
     }
 }

@@ -123,6 +123,9 @@
   <data name="DeleteWarning" xml:space="preserve">
     <value>Are you sure you want to delete the item?</value>
   </data>
+  <data name="DistancesValue" xml:space="preserve">
+    <value>Distances value:</value>
+  </data>
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>

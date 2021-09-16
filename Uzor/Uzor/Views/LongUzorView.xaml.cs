@@ -140,5 +140,10 @@ namespace Uzor.Views
 
             // TODO: draw zoom-indicator in top angle with specifical parent-view 
         }
+
+        public void Draw()
+        {
+            this.canvasView.InvalidateSurface();
+        }
     }
 }

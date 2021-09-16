@@ -123,6 +123,9 @@
   <data name="DeleteWarning" xml:space="preserve">
     <value>Вы точно хотите удалить элемент?</value>
   </data>
+  <data name="DistancesValue" xml:space="preserve">
+    <value>Расстояния:</value>
+  </data>
   <data name="Exit" xml:space="preserve">
     <value>Выход</value>
   </data>

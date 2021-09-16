@@ -135,6 +135,8 @@ namespace Uzor
                     this.longUzorData.UzorElements[stepNumber-1 + 1] = nextUzorData;
 
                     uzorEditElementViewList.Add(new UzorEditElementView(nextUzorData));
+
+                    uzorEditElementViewList[uzorEditElementViewList.Count - 1].UzorView.BecomeSquare();
                 }
                 
                 this.creatingPageGrid.Children.Remove(uzorEditElementViewList[stepNumber - 1]);
@@ -148,6 +150,8 @@ namespace Uzor
                 {
                     // TODO: replace icon
                 }
+
+                uzorEditElementViewList[stepNumber - 1].UzorView.BecomeSquare();
             }
             else
             {
