@@ -13,6 +13,12 @@
 
                 <views:LongUzorView x:Name="longUzorView" Grid.Row="0"></views:LongUzorView>
 
+
+                <AbsoluteLayout x:Name="menuLayout" IsVisible="false" Margin="0,0,0,0" Grid.Row="0" >
+                         <Rectangle x:Name="backrect" BackgroundColor="Black" Opacity="0.4" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0, 1.0, 1.0"> </Rectangle>
+                
+                    </AbsoluteLayout>
+                
                 <Grid x:Name="toolsPanelGrid" Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -26,10 +32,9 @@
                 </Grid>
             </Grid>
 
-            <AbsoluteLayout x:Name="menuLayout" IsVisible="false" Margin="0,0,0,60">
-                <Rectangle BackgroundColor="Black" Opacity="0" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0, 1.0, 1.0"></Rectangle>
-                
-            </AbsoluteLayout>
+            
+
+
         </Grid>
         
     </ContentPage.Content>

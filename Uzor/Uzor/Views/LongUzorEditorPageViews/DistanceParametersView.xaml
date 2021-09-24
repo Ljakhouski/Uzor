@@ -4,12 +4,12 @@
              x:Class="Uzor.Views.LongUzorEditorPageViews.DistanceParametersView"
              xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
-        <Frame CornerRadius="15" Margin="15,0,15,15" BackgroundColor="#CC212121">
+        <Frame CornerRadius="15" Margin="15,0,15,15" BackgroundColor="#B2FFFFFF">
             <StackLayout Spacing="23">
-                <Label Text="{x:Static resources:AppResource.DistancesValue}" HorizontalOptions="Center" FontSize="Default" TextColor="White"/>
-                <Slider x:Name="A"  Maximum="300" Minimum="50" ValueChanged="slider_Changed" ThumbColor="White"/>
-                <Slider x:Name="B" ValueChanged="slider_Changed" ThumbColor="White"/>
-                <Slider x:Name="C" ValueChanged="slider_Changed" ThumbColor="White"/>
+                <Label Text="{x:Static resources:AppResource.DistancesValue}" HorizontalOptions="Center" FontSize="Default" TextColor="#262626"/>
+                <Slider x:Name="A"  Maximum="300" Minimum="50" ValueChanged="slider_Changed" ThumbColor="#000000"/>
+                <Slider x:Name="B" ValueChanged="slider_Changed" ThumbColor="#000000"/>
+                <Slider x:Name="C" ValueChanged="slider_Changed" ThumbColor="#000000"/>
             </StackLayout>
         </Frame>
   </ContentView.Content>

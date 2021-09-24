@@ -75,7 +75,7 @@ namespace Uzor.Views
             foreach (EditorObject o in EditorObjectssList)
                 o.Draw(canvas, uzorFieldCanvasView/*, matrix*/);
 
-           // BecomeSquare();
+           BecomeSquare();
         }
 
         
