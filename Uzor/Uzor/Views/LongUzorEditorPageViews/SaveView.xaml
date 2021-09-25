@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Uzor.Views.LongUzorEditorPageViews.SaveView">
   <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+        <Frame CornerRadius="15" Margin="0,0,0,0" BackgroundColor="White">
+            <StackLayout Spacing="23">
+                <Label Text="SAVE_TEST_LABEL"/>
+                <Label Text="SAVE_TEST_LABEL"/>
+                <Label Text="SAVE_TEST_LABEL"/>
+                <Label Text="SAVE_TEST_LABEL"/>
+                <Label Text="SAVE_TEST_LABEL"/>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
 </ContentView>

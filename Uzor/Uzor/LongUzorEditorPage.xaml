@@ -14,8 +14,8 @@
                 <views:LongUzorView x:Name="longUzorView" Grid.Row="0"></views:LongUzorView>
 
 
-                <AbsoluteLayout x:Name="menuLayout" IsVisible="false" Margin="0,0,0,0" Grid.Row="0" >
-                         <Rectangle x:Name="backrect" BackgroundColor="Black" Opacity="0.4" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0, 1.0, 1.0"> </Rectangle>
+                <AbsoluteLayout x:Name="dropDownMenuLayout"  Margin="0,0,0,0" Grid.Row="0" >
+                         <Rectangle x:Name="blackBackground" IsVisible="false" BackgroundColor="Black" Opacity="0" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0, 1.0, 1.0"> </Rectangle>
                 
                     </AbsoluteLayout>
                 

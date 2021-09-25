@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Uzor.Views.LongUzorEditorPageViews.LayersParapetersView">
   <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+        <Frame CornerRadius="15" Margin="0,0,0,0" BackgroundColor="White">
+            <StackLayout Spacing="23">
+                <Label Text="TEST_LABEL"/>
+                <Label Text="TEST_LABEL"/>
+                <Label Text="TEST_LABEL"/>
+                <Label Text="TEST_LABEL"/>
+                <Label Text="TEST_LABEL"/>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
 </ContentView>

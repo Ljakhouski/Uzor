@@ -13,50 +13,112 @@ namespace Uzor
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LongUzorEditorPage : ContentPage
     {
-        private DistanceParametersView distanceView; 
+        private DistanceParametersView distanceParametersView;
+        private LayersParapetersView layoutParametersView;
+        private SaveView saveView;
         public LongUzorEditorPage(LongUzorData data)
         {
             
             InitializeComponent();
             this.longUzorView.Data = data;
-            this.distanceView = new DistanceParametersView(longUzorView);
-            AbsoluteLayout.SetLayoutFlags(distanceView, AbsoluteLayoutFlags.All);
-            AbsoluteLayout.SetLayoutBounds(distanceView, new Rectangle(1,1, 1, 0.3));
-           // this.distanceView.
+            initializeDropMenus();
+
+            
+            // this.distanceView.
         }
 
+        private void initializeDropMenus()
+        {
+            this.distanceParametersView = new DistanceParametersView(longUzorView);
+            AbsoluteLayout.SetLayoutFlags(distanceParametersView, AbsoluteLayoutFlags.All);
+            AbsoluteLayout.SetLayoutBounds(distanceParametersView, new Rectangle(1,1, 1, 0.3));
+
+            this.layoutParametersView = new LayersParapetersView();
+            AbsoluteLayout.SetLayoutFlags(layoutParametersView, AbsoluteLayoutFlags.All);
+            AbsoluteLayout.SetLayoutBounds(layoutParametersView, new Rectangle(1, 1, 1, 0.5));
+
+            this.saveView = new SaveView();
+            AbsoluteLayout.SetLayoutFlags(saveView, AbsoluteLayoutFlags.All);
+            AbsoluteLayout.SetLayoutBounds(saveView, new Rectangle(1, 1, 1, 0.5));
+        }
+        private async void hideDownAllDropMenu()
+        {
+            blackBackground.FadeTo(0, 250);
+
+            if (dropDownMenuLayout.Children.Contains(distanceParametersView))
+            {
+                await distanceParametersView.TranslateTo(0, 1000, 250, Easing.SinInOut);
+                dropDownMenuLayout.Children.Remove(distanceParametersView);
+            }
+            else if (dropDownMenuLayout.Children.Contains(layoutParametersView))
+            {
+               
+                await layoutParametersView.TranslateTo(0, 1000, 250, Easing.SinInOut);
+                dropDownMenuLayout.Children.Remove(layoutParametersView);
+
+            }
+            else if (dropDownMenuLayout.Children.Contains(saveView))
+            {
+                await saveView.TranslateTo(0, 1000, 250, Easing.SinInOut);
+                dropDownMenuLayout.Children.Remove(saveView);
+            }
+                
+
+            //dropDownMenuLayout.Children.Clear();
+            //dropDownMenuLayout.Children.Add(blackBackground);
+
+        }
         private async void ABC_Parameters_Clicked(object sender, EventArgs e)
         {
-            if (!menuLayout.Children.Contains(distanceView))
+
+
+            if (!dropDownMenuLayout.Children.Contains(distanceParametersView))
             {
-                distanceView.TranslationY = 300;
-                menuLayout.IsVisible = true;
-                backrect.FadeTo(0.3, 250);
-                
-                menuLayout.Children.Add(distanceView);
-                await distanceView.TranslateTo(0, 0, 250, Easing.SinInOut);
+                hideDownAllDropMenu();
+
+                distanceParametersView.TranslationY = 300;
+                distanceParametersView.IsVisible = true;
+
+                //blackBackground.FadeTo(0.3, 250);  
+                blackBackground.Opacity = 0; // !!!
+
+                dropDownMenuLayout.Children.Add(distanceParametersView);
+                await distanceParametersView.TranslateTo(0, 0, 250, Easing.SinInOut);
             }
             else
-            {
-                backrect.FadeTo(0, 250);
-                await distanceView.TranslateTo(0, 1000, 250, Easing.SinInOut);
-                menuLayout.IsVisible = false;
-
-                menuLayout.Children.Remove(distanceView);
-            }
+                hideDownAllDropMenu();
         }
 
         private async void layersMenu_Clicked(object sender, EventArgs e)
         {
-            //distanceView.TranslateTo(0, distanceView.TranslationY+10);
+            if (!dropDownMenuLayout.Children.Contains(layoutParametersView))
+            {
+                hideDownAllDropMenu();
 
-            await Task.WhenAll(
-            distanceView.TranslateTo(0, 0, 2000, Easing.SinInOut));
+                layoutParametersView.TranslationY = 700;
+                blackBackground.FadeTo(0.3, 250);
+
+                dropDownMenuLayout.Children.Add(layoutParametersView);
+                await layoutParametersView.TranslateTo(0, 0, 250, Easing.SinInOut);
+            }
+            else
+                hideDownAllDropMenu();
         }
 
-        private void saveMenu_Clicked(object sender, EventArgs e)
+        private async void saveMenu_Clicked(object sender, EventArgs e)
         {
+            if (!dropDownMenuLayout.Children.Contains(saveView))
+            {
+                hideDownAllDropMenu();
 
+                saveView.TranslationY = 700;
+                blackBackground.FadeTo(0.3, 250);
+
+                dropDownMenuLayout.Children.Add(saveView);
+                await saveView.TranslateTo(0, 0, 250, Easing.SinInOut);
+            }
+            else
+                hideDownAllDropMenu();
         }
     }
 }
