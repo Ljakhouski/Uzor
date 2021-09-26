@@ -150,30 +150,38 @@ namespace Uzor
                 {
                     // TODO: replace icon
                 }
+                    
 
-                uzorEditElementViewList[stepNumber - 1].UzorView.BecomeSquare();
+                        /*************** CRUTCHES ***************/
+
+                uzorEditElementViewList[stepNumber - 1].UzorView.MinimumHeightRequest = 0;
+                uzorEditElementViewList[stepNumber - 1].BatchBegin();
+
+                        /***  UzorView does not change its size ***/
+
             }
             else
             {
                 LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData);
                 await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
             }
-        }
+}
+
+
 
         // for square-mode
         private async void BackButton_Clicked(object sender, EventArgs e)
         {
-            /*if (this.stepNumber == 1)
-                
-            else
-            {
-                this.stepNumber--;
-                stepsPanel.StepLabel.Text = stepNumber.ToString()+'/'+"2";
-            }*/
+    /*if (this.stepNumber == 1)
+
+    else
+    {
+        this.stepNumber--;
+        stepsPanel.StepLabel.Text = stepNumber.ToString()+'/'+"2";
+    }*/
 
             if (uzorEditElementViewList[0].ReSave || await DisplayAlert("", AppResource.ExitQuestion, AppResource.Yes, AppResource.No))
             {
-
                 await Navigation.PopModalAsync();
             }
                 

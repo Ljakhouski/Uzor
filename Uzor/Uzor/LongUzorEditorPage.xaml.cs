@@ -22,9 +22,6 @@ namespace Uzor
             InitializeComponent();
             this.longUzorView.Data = data;
             initializeDropMenus();
-
-            
-            // this.distanceView.
         }
 
         private void initializeDropMenus()
@@ -44,6 +41,9 @@ namespace Uzor
         private async void hideDownAllDropMenu()
         {
             blackBackground.FadeTo(0, 250);
+            blackBackground.IsVisible = false;
+            blackBackground.InputTransparent = true;
+            blackBackground.IsEnabled = false;
 
             if (dropDownMenuLayout.Children.Contains(distanceParametersView))
             {
@@ -80,7 +80,7 @@ namespace Uzor
                 distanceParametersView.IsVisible = true;
 
                 //blackBackground.FadeTo(0.3, 250);  
-                blackBackground.Opacity = 0; // !!!
+                //blackBackground.Opacity = 0; // !!!
 
                 dropDownMenuLayout.Children.Add(distanceParametersView);
                 await distanceParametersView.TranslateTo(0, 0, 250, Easing.SinInOut);
@@ -96,6 +96,10 @@ namespace Uzor
                 hideDownAllDropMenu();
 
                 layoutParametersView.TranslationY = 700;
+
+                blackBackground.IsVisible = true;
+                blackBackground.InputTransparent = false;
+                blackBackground.IsEnabled = true;
                 blackBackground.FadeTo(0.3, 250);
 
                 dropDownMenuLayout.Children.Add(layoutParametersView);
@@ -112,6 +116,10 @@ namespace Uzor
                 hideDownAllDropMenu();
 
                 saveView.TranslationY = 700;
+
+                blackBackground.IsVisible = true;
+                blackBackground.InputTransparent = false;
+                blackBackground.IsEnabled = true;
                 blackBackground.FadeTo(0.3, 250);
 
                 dropDownMenuLayout.Children.Add(saveView);
@@ -119,6 +127,11 @@ namespace Uzor
             }
             else
                 hideDownAllDropMenu();
+        }
+
+        private void blackBackgroundTapped(object sender, EventArgs e)
+        {
+            hideDownAllDropMenu();
         }
     }
 }

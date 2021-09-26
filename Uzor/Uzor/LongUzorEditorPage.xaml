@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:Uzor.Views"
-             x:Class="Uzor.LongUzorEditorPage">
+             x:Class="Uzor.LongUzorEditorPage"
+             xmlns:tt="clr-namespace:TouchTracking"
+             NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
         <Grid>
             <Grid>
@@ -14,21 +16,29 @@
                 <views:LongUzorView x:Name="longUzorView" Grid.Row="0"></views:LongUzorView>
 
 
-                <AbsoluteLayout x:Name="dropDownMenuLayout"  Margin="0,0,0,0" Grid.Row="0" >
-                         <Rectangle x:Name="blackBackground" IsVisible="false" BackgroundColor="Black" Opacity="0" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0, 1.0, 1.0"> </Rectangle>
+                <!--<AbsoluteLayout x:Name="dropDownMenuLayout"  Margin="0,0,0,0" Grid.Row="0" >
+                         <Rectangle  x:Name="blackBackground" IsVisible="false" BackgroundColor="Black" Opacity="0" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0, 1.0, 1.0"> </Rectangle>
                 
-                    </AbsoluteLayout>
-                
-                <Grid x:Name="toolsPanelGrid" Grid.Row="1">
+                    </AbsoluteLayout>-->
+
+                <BoxView Grid.Row="0" x:Name="blackBackground" IsVisible="false" BackgroundColor="Black" Opacity="0" AbsoluteLayout.LayoutFlags="SizeProportional" >
+                    <BoxView.Effects>
+                        <tt:TouchEffect Capture="True" TouchAction="blackBackgroundTapped"/>
+                    </BoxView.Effects>
+                </BoxView>
+
+                <Grid x:Name="dropDownMenuLayout" VerticalOptions="End"></Grid>
+
+                <Grid x:Name="toolsPanelGrid" Grid.Row="1" BackgroundColor="#EBEBEB">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <ImageButton BackgroundColor="Red" Grid.Column="0" Clicked="ABC_Parameters_Clicked"></ImageButton>
-                    <ImageButton BackgroundColor="Green" Grid.Column="1" Clicked="layersMenu_Clicked"></ImageButton>
-                    <ImageButton BackgroundColor="Blue" Grid.Column="2" Clicked="saveMenu_Clicked"></ImageButton>
+                    <ImageButton HeightRequest="38" Source="ABC_parameters.png" BackgroundColor="#EBEBEB" Grid.Column="0" Clicked="ABC_Parameters_Clicked"></ImageButton>
+                    <ImageButton HeightRequest="38" Source="layersIcon.png" BackgroundColor="#EBEBEB" Grid.Column="1" Clicked="layersMenu_Clicked"></ImageButton>
+                    <ImageButton HeightRequest="38" Source="saveIcon.png" BackgroundColor="#EBEBEB" Grid.Column="2" Clicked="saveMenu_Clicked"></ImageButton>
                 </Grid>
             </Grid>
 

@@ -10,6 +10,7 @@
                     x:Name="uzorFieldCanvasView" 
                     PaintSurface="onCanvasViewPaintSurface" IgnorePixelScaling="False"
                     SizeChanged="sizeChangedEvent"
+                    
                     >
                 </skia:SKCanvasView>
 

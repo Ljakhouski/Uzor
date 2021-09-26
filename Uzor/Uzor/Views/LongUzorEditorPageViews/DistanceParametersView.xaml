@@ -2,9 +2,10 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Uzor.Views.LongUzorEditorPageViews.DistanceParametersView"
-             xmlns:resources="clr-namespace:Uzor.Localization">
+             xmlns:resources="clr-namespace:Uzor.Localization"
+             HeightRequest="200">
   <ContentView.Content>
-        <Frame CornerRadius="15" Margin="15,0,15,15" BackgroundColor="#B2FFFFFF">
+        <Frame CornerRadius="15" Margin="15,0,15,15" BackgroundColor="#B2FFFFFF" HasShadow="False" >
             <StackLayout Spacing="23">
                 <Label Text="{x:Static resources:AppResource.DistancesValue}" HorizontalOptions="Center" FontSize="Default" TextColor="#262626"/>
                 <Slider x:Name="A"  Maximum="300" Minimum="50" ValueChanged="slider_Changed" ThumbColor="#000000"/>
