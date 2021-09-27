@@ -9,6 +9,12 @@ using Xamarin.Forms;
 
 namespace Uzor.Views.EditorObjects
 {
+    public enum Direction
+    {
+        None,
+        ToRight,
+        ToLeft
+    }
     class UzorDrawingObject : EditorObject
     {
         public UzorData Data { get; set; }
@@ -28,7 +34,7 @@ namespace Uzor.Views.EditorObjects
 
         }
 
-        public void DrawUzor(float pixelSize, SKCanvas canvas, SKCanvasView view)
+        public void DrawUzor(float pixelSize, SKCanvas canvas, SKCanvasView view, Direction direction = Direction.None)
         {
             
             var f = this.Data.Layers[LayerNumber].GetLastState();
@@ -59,6 +65,8 @@ namespace Uzor.Views.EditorObjects
                         SKShaderTileMode.Clamp);
             }
 
+                             /********* visible-optimization *********/
+
             int xLeftTopLocationAfterScaling = (int)((int)(GetLeftTopPoint(view).X - matrix.TransX) / matrix.ScaleX);
             int yLeftTopLocationAfterScaling = (int)((int)(GetLeftTopPoint(view).Y - matrix.TransY) / matrix.ScaleY);
 
@@ -73,18 +81,36 @@ namespace Uzor.Views.EditorObjects
             int xRightDown = (int)(xRightDownLocationAfterScaling / pixelSize);
             int yRightDown = (int)(yRightDownLocationAfterScaling / pixelSize);
 
-            for (int w = (xLeftTop - 1) < 0 ? 0 : xLeftTop - 1; w < /*Data.FieldSize*/     (xRightDown + 1 > Data.FieldSize ? Data.FieldSize : xRightDown + 1); w++)
-                for (int h = (yLeftTop - 1) < 0 ? 0 : yLeftTop - 1; h < /*Data.FieldSize*/ (yRightDown + 1 > Data.FieldSize ? Data.FieldSize : yRightDown + 1); h++)
+            
+            for (int w = (xLeftTop - 1) < 0 ? 0 : xLeftTop - 1; 
+                w </*Data.FieldSize*/(xRightDown + 1 > Data.FieldSize ? Data.FieldSize : xRightDown + 1);
+                w++)
+
+                for (int h = (yLeftTop - 1) < 0 ? 0 : yLeftTop - 1; 
+                    h </*Data.FieldSize*/(yRightDown + 1 > Data.FieldSize ? Data.FieldSize : yRightDown + 1); 
+                    h++)
                 {
-                    if (isEmptyMask || (mask[w,h] && !isEmptyMask))
+                            /***** check for masks *****/
+
+                    if ((isEmptyMask || (mask[w,h] && !isEmptyMask))
+                        && 
+                        (direction == Direction.None || 
+                        (direction == Direction.ToLeft && w<=Data.FieldSize/2) ||
+                        (direction == Direction.ToRight && w >= Data.FieldSize/2)
+                        ))
+
                         if (f[w, h] == false)
-                        {
-                            canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  /*new SKPaint() { Color = backColor}*/ backPaint);
-                        }
+                            canvas.DrawRect((float)w * pixelSize, 
+                                            (float)h * pixelSize, pixelSize, pixelSize, 
+                                             backPaint);
                         else
-                            canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, /*new SKPaint() { Color = frontColor }*/ frontPaint);
+                            canvas.DrawRect((float)w * pixelSize, 
+                                            (float)h * pixelSize, pixelSize, pixelSize,
+                                             frontPaint);
                 }
         }
+
+      
 
         public override void TouchEffectAction(TouchActionEventArgs args, SKCanvasView view)
         {

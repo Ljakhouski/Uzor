@@ -11,17 +11,40 @@ namespace Uzor.Views.EditorObjects
 {
     public class LongUzorDrawingObject : EditorObject
     {
-
-        public LongUzorData Data { get; set; }
+        private LongUzorData data_;
+        public LongUzorData Data { get { return data_; }
+            set {
+                data_ = value;
+                uzorPainter.Data = data_.UzorElements[0];
+                sideUzorPainter.Data = data_.UzorElements[0];
+                calculateSizes();
+            } }
+        private int pixelSize = 10;
         public LongUzorDrawingObject(LongUzorData data)
         {
             this.Data = data;
-
+            uzorPainter.Data = data.UzorElements[0];
+            calculateSizes();
         }
+        
         public LongUzorDrawingObject()
         {
-
+            //uzorPainter.Data = this.Data.UzorElements[0];
+            //calculateSizes();
         }
+
+        private void calculateSizes()
+        {
+            minimalSizeStep = pixelSize / 2;
+            minimal_A_parameter = minimalSizeStep * 20;
+        }
+
+        private int minimalSizeStep;
+        private int minimal_A_parameter;
+   
+        private UzorDrawingObject uzorPainter = new UzorDrawingObject();
+        private UzorDrawingObject sideUzorPainter = new UzorDrawingObject();
+   
 
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {
@@ -29,40 +52,64 @@ namespace Uzor.Views.EditorObjects
             if (Data == null)
                 return;
 
-            UzorDrawingObject uzor = new UzorDrawingObject();
-            uzor.Data = this.Data.UzorElements[0];
-            uzor.ConsuderMask = true;
-
+            
             bool b = false;
             for (int i = -7; i < 7; i++)
             {
-                SKMatrix matrix = SKMatrix.Identity;
-                matrix.TransX = 300;
-                SKMatrix previousMatrix = canvas.TotalMatrix;
-
-                float u = previousMatrix.TransX;
-
-                matrix.TransY = i * Data.A * 3;
-                //matrix.PostConcat(canvas.TotalMatrix);
-                SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
-
-                canvas.SetMatrix(matrix);
-
-                
-                uzor.DrawUzor(10, canvas, view);
-
-
-                
-
-                canvas.SetMatrix(previousMatrix);
-
-                b = !b;
-                uzor.Data = this.Data.UzorElements[b? 0 : 1];
-               
-
+                drawCentralUzor(i, canvas, view);
+                drawSideUzor(i, canvas, view);
             }
+
+            
         }
 
+        private void drawCentralUzor(int i, SKCanvas canvas, SKCanvasView view)
+        {
+            SKMatrix matrix = SKMatrix.Identity;
+            matrix.TransX = 300;
+            SKMatrix previousMatrix = canvas.TotalMatrix;
+
+            matrix.TransY = minimal_A_parameter + i * Data.A * minimalSizeStep; // diapasone of Data.A: [0;100]
+                                                                                //matrix.PostConcat(canvas.TotalMatrix);
+            SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
+
+            canvas.SetMatrix(matrix);
+            uzorPainter.DrawUzor(this.pixelSize, canvas, view);
+
+            canvas.SetMatrix(previousMatrix);
+
+            uzorPainter.Data = this.Data.UzorElements[i%2==0 ? 0 : 1];
+        }
+
+        private void drawSideUzor(int i, SKCanvas canvas, SKCanvasView view)
+        {
+            SKMatrix matrix = SKMatrix.Identity;
+            matrix.TransX = 300 - pixelSize *this.Data.UzorElements[0].FieldSize/2 - this.Data.B;
+
+            SKMatrix previousMatrix = canvas.TotalMatrix;
+
+            matrix.TransY = minimal_A_parameter + i * Data.A * minimalSizeStep + pixelSize * this.Data.UzorElements[0].FieldSize / 2; 
+
+            SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
+
+            canvas.SetMatrix(matrix);
+            sideUzorPainter.DrawUzor(this.pixelSize, canvas, view, Direction.ToRight);
+
+            canvas.SetMatrix(previousMatrix);
+
+            // 2:
+            SKMatrix previousMatrix2 = canvas.TotalMatrix;
+            matrix = SKMatrix.Identity;
+            matrix.TransX = 300 + pixelSize * this.Data.UzorElements[0].FieldSize / 2 + this.Data.B;
+            matrix.TransY = minimal_A_parameter + i * Data.A * minimalSizeStep + pixelSize * this.Data.UzorElements[0].FieldSize / 2; 
+
+            SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
+
+            canvas.SetMatrix(matrix);
+            sideUzorPainter.DrawUzor(this.pixelSize, canvas, view, Direction.ToLeft);
+
+            canvas.SetMatrix(previousMatrix2);
+        }
         public override void TouchEffectAction(TouchActionEventArgs args, SKCanvasView view)
         {
            //base.TouchEffectAction(args, view);
