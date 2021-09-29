@@ -35,12 +35,13 @@ namespace Uzor.Views.EditorObjects
 
         private void calculateSizes()
         {
-            minimalSizeStep = pixelSize / 2;
-            minimal_A_parameter = minimalSizeStep * 20;
+            minimalStepSize = pixelSize / 2;
+            //minimal_A_parameter = minimalStepSize * 20;
         }
 
-        private int minimalSizeStep;
-        private int minimal_A_parameter;
+        private int minimalStepSize;
+        //private int minimal_A_parameter;
+        private int sceneCenterX;
    
         private UzorDrawingObject uzorPainter = new UzorDrawingObject();
         private UzorDrawingObject sideUzorPainter = new UzorDrawingObject();
@@ -52,7 +53,8 @@ namespace Uzor.Views.EditorObjects
             if (Data == null)
                 return;
 
-            
+            this.sceneCenterX = (int)view.CanvasSize.Width / 2;
+
             bool b = false;
             for (int i = -7; i < 7; i++)
             {
@@ -66,16 +68,19 @@ namespace Uzor.Views.EditorObjects
         private void drawCentralUzor(int i, SKCanvas canvas, SKCanvasView view)
         {
             SKMatrix matrix = SKMatrix.Identity;
-            matrix.TransX = 300;
             SKMatrix previousMatrix = canvas.TotalMatrix;
 
-            matrix.TransY = minimal_A_parameter + i * Data.A * minimalSizeStep; // diapasone of Data.A: [0;100]
-                                                                                //matrix.PostConcat(canvas.TotalMatrix);
+            /* move Uzor to the x-center of screen */
+            int uzorCenterX = this.pixelSize * uzorPainter.Data.FieldSize / 2;
+            matrix.TransX = this.sceneCenterX - uzorCenterX;
+
+            int uzorCenterY = uzorCenterX; // Uzor is square object
+            matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY; // diapasone of Data.A: [0;100]
+                                                                                
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
             canvas.SetMatrix(matrix);
-            uzorPainter.DrawUzor(this.pixelSize, canvas, view);
-
+            uzorPainter.DrawUzor(this.pixelSize, canvas, view); // uzor constantly drawing in [0;0] point
             canvas.SetMatrix(previousMatrix);
 
             uzorPainter.Data = this.Data.UzorElements[i%2==0 ? 0 : 1];
@@ -83,12 +88,17 @@ namespace Uzor.Views.EditorObjects
 
         private void drawSideUzor(int i, SKCanvas canvas, SKCanvasView view)
         {
+            // left side:
             SKMatrix matrix = SKMatrix.Identity;
-            matrix.TransX = 300 - pixelSize *this.Data.UzorElements[0].FieldSize/2 - this.Data.B;
-
             SKMatrix previousMatrix = canvas.TotalMatrix;
+            int uzorCenterX = this.pixelSize * this.sideUzorPainter.Data.FieldSize / 2;
+            int uzorLeftShift = this.pixelSize * this.Data.UzorElements[0].FieldSize / 2; // must be equal to one of the central Uzor-size;
+            matrix.TransX = this.sceneCenterX - this.Data.B * this.minimalStepSize - uzorCenterX - uzorLeftShift;
 
-            matrix.TransY = minimal_A_parameter + i * Data.A * minimalSizeStep + pixelSize * this.Data.UzorElements[0].FieldSize / 2; 
+            int uzorCenterY = uzorCenterX; // Uzor is square object
+
+            int phaseShift = Data.A * minimalStepSize / 2;
+            matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY + phaseShift; 
 
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
@@ -97,11 +107,12 @@ namespace Uzor.Views.EditorObjects
 
             canvas.SetMatrix(previousMatrix);
 
-            // 2:
+            // right side:
             SKMatrix previousMatrix2 = canvas.TotalMatrix;
             matrix = SKMatrix.Identity;
-            matrix.TransX = 300 + pixelSize * this.Data.UzorElements[0].FieldSize / 2 + this.Data.B;
-            matrix.TransY = minimal_A_parameter + i * Data.A * minimalSizeStep + pixelSize * this.Data.UzorElements[0].FieldSize / 2; 
+            int uzorRightShift = this.pixelSize * (this.Data.UzorElements[0].FieldSize / 2 - this.sideUzorPainter.Data.FieldSize / 2);
+            matrix.TransX = this.sceneCenterX + this.Data.B * this.minimalStepSize + uzorRightShift;
+            matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY + phaseShift; 
 
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
@@ -114,5 +125,7 @@ namespace Uzor.Views.EditorObjects
         {
            //base.TouchEffectAction(args, view);
         }
+
+        //TODO: touch event for selecting uzor-items (long-tap)
     }
 }

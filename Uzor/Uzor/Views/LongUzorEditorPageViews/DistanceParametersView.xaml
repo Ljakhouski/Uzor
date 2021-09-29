@@ -9,7 +9,7 @@
             <StackLayout Spacing="23">
                 <Label Text="{x:Static resources:AppResource.DistancesValue}" HorizontalOptions="Center" FontSize="Default" TextColor="#262626"/>
                 <Slider x:Name="A"  Maximum="100" Minimum="0" ValueChanged="slider_Changed" ThumbColor="#000000"/>
-                <Slider x:Name="B" Maximum="100" Minimum="0" ValueChanged="slider_Changed" ThumbColor="#000000"/>
+                <Slider x:Name="B" Maximum="100" Minimum="-50" Value="0" ValueChanged="slider_Changed" ThumbColor="#000000"/>
                 <Slider x:Name="C" ValueChanged="slider_Changed" ThumbColor="#000000"/>
             </StackLayout>
         </Frame>
