@@ -12,9 +12,16 @@ namespace Uzor.Views.LongUzorEditorPageViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SaveView : ContentView
     {
-        public SaveView()
+        private LongUzorEditorPage editorPage;
+        public SaveView(LongUzorEditorPage longUzorEditorPage)
         {
+            this.editorPage = longUzorEditorPage;
             InitializeComponent();
+        }
+
+        private void Save_Clicked(object sender, EventArgs e)
+        {
+            editorPage.SaveProject();
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Uzor.Data;
+using Uzor.Localization;
 using Uzor.Views.LongUzorEditorPageViews;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,12 +19,57 @@ namespace Uzor
         private DistanceParametersView distanceParametersView;
         private LayersParapetersView layoutParametersView;
         private SaveView saveView;
+        private string SavedFilePath;
+        public bool ReSave { get; set; }
         public LongUzorEditorPage(LongUzorData data)
         {
             
             InitializeComponent();
             this.longUzorView.Data = data;
             initializeDropMenus();
+        }
+
+        public LongUzorData GetData()
+        {
+            return this.longUzorView.Data;
+        }
+
+        internal void SaveProject()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+
+
+            if (ReSave) // rewrite file
+            {
+                FileStream fsr = new FileStream(SavedFilePath, FileMode.Truncate);
+                formatter.Serialize(fsr, this.GetData());
+                fsr.Dispose();
+                return;
+            }
+
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+
+            string fileName = this.GetData().Name + ".lubf";
+
+            if (File.Exists(Path.Combine(folderPath, this.GetData().Name + ".lubf")))
+                for (int i = 0; i < 999; i++)
+                    if (File.Exists(Path.Combine(folderPath, this.GetData().Name + i.ToString() + ".lubf")))
+                        continue;
+                    else
+                    {
+                        fileName = this.GetData().Name + i.ToString() + ".lubf";
+                        this.GetData().Name = this.GetData().Name + i.ToString();
+                        break;
+                    }
+
+
+            SavedFilePath = folderPath + "/" + fileName;
+            ReSave = true;
+
+            FileStream fs = new FileStream(folderPath + "/" + fileName, FileMode.OpenOrCreate);
+            formatter.Serialize(fs, this.GetData());
+            fs.Dispose();
         }
 
         private void initializeDropMenus()
@@ -34,7 +82,7 @@ namespace Uzor
             AbsoluteLayout.SetLayoutFlags(layoutParametersView, AbsoluteLayoutFlags.All);
             AbsoluteLayout.SetLayoutBounds(layoutParametersView, new Rectangle(1, 1, 1, 0.5));
 
-            this.saveView = new SaveView();
+            this.saveView = new SaveView(this);
             AbsoluteLayout.SetLayoutFlags(saveView, AbsoluteLayoutFlags.All);
             AbsoluteLayout.SetLayoutBounds(saveView, new Rectangle(1, 1, 1, 0.5));
         }
@@ -132,6 +180,21 @@ namespace Uzor
         private void blackBackgroundTapped(object sender, EventArgs e)
         {
             hideDownAllDropMenu();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            this.Exit();
+            return true;
+        }
+
+        public async void Exit()
+        {
+            if (await DisplayAlert("", AppResource.ExitQuestion, AppResource.Yes, AppResource.No))
+            {
+                Navigation.PopModalAsync();
+                Navigation.PopModalAsync();
+            }
         }
     }
 }

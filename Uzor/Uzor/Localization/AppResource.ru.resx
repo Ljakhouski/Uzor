@@ -153,6 +153,12 @@
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
   </data>
+  <data name="SavedLabel" xml:space="preserve">
+    <value>Сохранено</value>
+  </data>
+  <data name="SavingProject" xml:space="preserve">
+    <value>Сохранение проекта:</value>
+  </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
   </data>

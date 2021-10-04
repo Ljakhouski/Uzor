@@ -66,8 +66,8 @@ namespace Uzor
                 FileStream fs = new FileStream(fileName, FileMode.Open);
                 //i.Data = 
                 //i.SetUzorNameLabelText( fileName.Split("/".ToCharArray()).Last());
-
-                this.stack.Children.Add(new UzorItem((UzorData)formatter.Deserialize(fs), this));
+                if (fileName[fileName.Length - 4] != 'l')
+                    this.stack.Children.Add(new UzorItem((UzorData)formatter.Deserialize(fs), this));
                 fs.Dispose();
             }
         }

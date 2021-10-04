@@ -186,8 +186,7 @@ namespace Uzor.Views
             sliderPanel.IsVisible = false;
             sliderPanelShadow.IsVisible = false;
         }
-        
-
+       
         public void SaveButton_Click(object sender, EventArgs e)
         {
             BinaryFormatter formatter = new BinaryFormatter();

@@ -169,6 +169,24 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saved.
+        /// </summary>
+        public static string SavedLabel {
+            get {
+                return ResourceManager.GetString("SavedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving project:.
+        /// </summary>
+        public static string SavingProject {
+            get {
+                return ResourceManager.GetString("SavingProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         public static string Yes {

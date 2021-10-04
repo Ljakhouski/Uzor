@@ -13,7 +13,7 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <ImageButton Source="deleteButton.png" x:Name="deleteButton"   HeightRequest="50"      Clicked="deleteButtonClick"      BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
 
-                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                <sh:Shadows CornerRadius="10" x:Name="cropButtonShadow" x:FieldModifier="public" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
                     <ImageButton HeightRequest="50" WidthRequest="30" x:Name="cropButton" x:FieldModifier="public" Clicked="cropButtonClick"  Source="cropOffMenuButton.png"  Opacity="0.8"  BackgroundColor="#E92626"  CornerRadius="10"></ImageButton>
                 </sh:Shadows>
                 

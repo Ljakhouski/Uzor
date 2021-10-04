@@ -13,6 +13,10 @@ namespace Uzor.Data
             { 
                 return UzorElements[0].Name; 
             } 
+            set
+            {
+                this.UzorElements[0].Name = value;
+            }
         }
         public DateTime TimeOfCreation 
         { 

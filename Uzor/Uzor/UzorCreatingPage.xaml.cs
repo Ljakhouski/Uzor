@@ -66,6 +66,8 @@ namespace Uzor
                 saveTopPanel.BackButton.Clicked += BackButton_Clicked;
                 creatingPageGrid.Children.Add(saveTopPanel, 0, 0);
                 v.cropButton.IsVisible = false;
+                v.cropButtonShadow.IsVisible = false;
+                isSquareMode = true;
                 //v.cropSlider.IsVisible = false;
                 
             }
@@ -166,8 +168,19 @@ namespace Uzor
                 await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
             }
 }
+        //crutches
+        private bool isSquareMode;
+        protected override bool OnBackButtonPressed()
+        {
+            if (isSquareMode)
+                BackButton_Clicked(null, null);
+            else
+                BackButton_Clicked(null, null);
+            // if (await DisplayAlert("", AppResource.ExitQuestion, AppResource.Yes, AppResource.No))
+            //    Navigation.PopModalAsync();
 
-
+            return true;
+        }
 
         // for square-mode
         private async void BackButton_Clicked(object sender, EventArgs e)

@@ -153,6 +153,12 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="SavedLabel" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="SavingProject" xml:space="preserve">
+    <value>Saving project:</value>
+  </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>

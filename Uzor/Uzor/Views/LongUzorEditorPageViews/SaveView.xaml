@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Uzor.Views.LongUzorEditorPageViews.SaveView">
+             x:Class="Uzor.Views.LongUzorEditorPageViews.SaveView"
+             xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
         <Frame CornerRadius="15" Margin="0,0,0,0" BackgroundColor="White" HasShadow="False">
             <StackLayout Spacing="23">
-                <Label Text="SAVE_TEST_LABEL"/>
-                <Label Text="SAVE_TEST_LABEL"/>
-                <Label Text="SAVE_TEST_LABEL"/>
+                <Label Text="{x:Static resources:AppResource.SavingProject}" HorizontalOptions="Start"/>
+                <Button Text="{x:Static resources:AppResource.Save}" Clicked="Save_Clicked" CornerRadius="20" HorizontalOptions="Center"/>
+                <Label Text="{x:Static resources:AppResource.SavedLabel}" IsVisible="false" HorizontalOptions="Center" FontSize="Small"/>
                 <Label Text="SAVE_TEST_LABEL"/>
                 <Label Text="SAVE_TEST_LABEL"/>
             </StackLayout>
