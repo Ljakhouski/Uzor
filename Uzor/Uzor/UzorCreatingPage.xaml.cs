@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Uzor.Algorithms;
 using Uzor.Data;
 using Uzor.Localization;
 using Uzor.Views;
@@ -164,6 +165,7 @@ namespace Uzor
             }
             else
             {
+                longUzorData.SidePattern = SideUzorGenerator.GetNewSideUzor(longUzorData.UzorElements[0].FieldSize);
                 LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData);
                 await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
             }

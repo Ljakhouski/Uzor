@@ -16,7 +16,7 @@ namespace Uzor.Views.EditorObjects
             set {
                 data_ = value;
                 uzorPainter.Data = data_.UzorElements[0];
-                sideUzorPainter.Data = data_.UzorElements[0];
+                sideUzorPainter.Data = data_.SidePattern;
                 calculateSizes();
             } }
         private int pixelSize = 10;

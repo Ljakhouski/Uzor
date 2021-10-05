@@ -45,7 +45,7 @@ namespace Uzor.Data
         private List<bool[,]> Content { get; set; } = new List<bool[,]>(); // List<> of all states of Content
         public bool ColorInverted { get; set; } = false;
         public int Step { get; set; } = -1;
-        public bool[,] CropMask { get; set; } 
+        public bool[,] FieldCropMask { get; set; } 
         public bool[,] GetAndSetPreviousState ()
         {
             var lastState = (bool[,])Content[Content.Count - 1].Clone();
@@ -70,7 +70,7 @@ namespace Uzor.Data
         public Field(int size)
         {
             this.Content.Add(new bool[size, size]);
-            this.CropMask = new bool[size, size];
+            this.FieldCropMask = new bool[size, size];
         }
     }
 
