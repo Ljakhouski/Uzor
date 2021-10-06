@@ -12,7 +12,7 @@
             </skia:SKCanvasView>
 
             <Grid.Effects>
-                <tt:TouchEffect Capture="True"
+                <tt:TouchEffect x:Name="gridTouchEffect" Capture="True"
                                 TouchAction="OnTouchEffectAction"/>
             </Grid.Effects>
         </Grid>

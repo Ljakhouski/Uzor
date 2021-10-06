@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Uzor.Data;
+using Uzor.Localization;
 using Uzor.Views.EditorObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,13 +16,9 @@ namespace Uzor.Views
     public partial class UzorItem : ContentView
     {
         public UzorData Data { get; set; }
-        private Page pageForAlert;
-        public UzorItem()
-        {
-            
-        }
-
-        public UzorItem(UzorData data, Page p)
+        private MainPage pageForAlert;
+     
+        public UzorItem(UzorData data, MainPage p)
         {
             InitializeComponent();
             this.Data = data;
@@ -53,12 +50,12 @@ namespace Uzor.Views
 
         async private void deleteItem(object sender, EventArgs e)
         {
-            if (await pageForAlert.DisplayAlert("Question?", "Удалить элемент?", "Да", "Нет"))
+            if (await pageForAlert.DisplayAlert("", AppResource.DeleteQuestion, AppResource.Yes, AppResource.No))
             {
                 //var fileList = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
                 File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+"/"+this.Data.Name+".ubf");
-                
+                pageForAlert.itemStack.Children.Remove(this);
             }
         
         }

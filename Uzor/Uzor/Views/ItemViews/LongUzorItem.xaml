@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sh="http://sharpnado.com" xmlns:View="clr-namespace:Uzor.Views"
+             x:Class="Uzor.Views.LongUzorItem">
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapOnItem" />
+    </ContentView.GestureRecognizers>
+
+
+    <ContentView.Content>
+        <sh:Shadows CornerRadius="15" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+            <Frame x:Name="mineFrame" HeightRequest="150" Padding="0"  CornerRadius="15"  Opacity="1" Margin="20,5">
+
+                <RelativeLayout >
+                    <!--<View:LongUzorView 
+                        Opacity="1"
+                        x:Name="preview"
+                        Rotation="90"
+                        
+                        ></View:LongUzorView>-->
+
+                    <Frame BackgroundColor="Green"
+                           RelativeLayout.XConstraint= "{ConstraintExpression Type=RelativeToParent, 
+                Property=Width, Factor=0.5, Constant=-50}" 
+           RelativeLayout.YConstraint= "{ConstraintExpression Type=RelativeToParent,
+                Property=Height, Factor=0.5, Constant=-50}">
+
+                        <View:LongUzorView 
+                            Opacity="0.3"
+                            x:Name="preview"
+                            Rotation="90"
+                        
+                        ></View:LongUzorView>
+                    </Frame>
+
+                    <Frame HorizontalOptions="Fill" VerticalOptions="Fill" 
+                           
+                           RelativeLayout.WidthConstraint=
+                                "{ConstraintExpression Type=RelativeToParent,
+                                Property=Width,
+                                Factor=1}"
+                            RelativeLayout.HeightConstraint=
+                                "{ConstraintExpression Type=RelativeToParent,
+                                Property=Height,
+                                Factor=1}">
+
+
+                        <Frame.Background>
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Color="#007D7D02"
+                          Offset="0.1" />
+                                <GradientStop Color="#22294150"
+                          Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Frame.Background>
+                    </Frame>
+                    <Label  x:Name="itemName" Text="ItemName: " FontSize="25" TextColor="Black" Opacity="0.7"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=0}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}"
+                           ></Label>
+
+                    <Label  x:Name="itemDate"  FontSize="15" TextColor="Black" Opacity="0.3"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=0}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.2, Constant=20}"
+                           ></Label>
+
+
+
+                    <sh:Shadows x:Name="shadow" CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9, Constant=-20}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9, Constant=-40}">
+                        <ImageButton x:Name="deleteButton" Opacity="0.95" Source="deleteFileButton.png"   CornerRadius="10" BackgroundColor="#F8F8F8" Clicked="deleteItem" WidthRequest="40" HeightRequest="40"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9, Constant=-20}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9, Constant=-40}"
+                                     ></ImageButton>
+                    </sh:Shadows>
+
+                </RelativeLayout>
+            </Frame>
+        </sh:Shadows>
+    </ContentView.Content>
+</ContentView>

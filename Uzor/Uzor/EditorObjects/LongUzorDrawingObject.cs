@@ -24,6 +24,7 @@ namespace Uzor.Views.EditorObjects
         {
             this.Data = data;
             uzorPainter.Data = data.UzorElements[0];
+            sideUzorPainter.Data = data.SidePattern;
             calculateSizes();
         }
         

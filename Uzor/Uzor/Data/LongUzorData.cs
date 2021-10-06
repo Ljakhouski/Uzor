@@ -18,7 +18,7 @@ namespace Uzor.Data
                 this.UzorElements[0].Name = value;
             }
         }
-        public DateTime TimeOfCreation 
+        public DateTime DataOfCreation 
         { 
             get
             {

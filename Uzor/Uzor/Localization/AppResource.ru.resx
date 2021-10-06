@@ -120,7 +120,7 @@
   <data name="BeforeStep" xml:space="preserve">
     <value>Предыдущий</value>
   </data>
-  <data name="DeleteWarning" xml:space="preserve">
+  <data name="DeleteQuestion" xml:space="preserve">
     <value>Вы точно хотите удалить элемент?</value>
   </data>
   <data name="DistancesValue" xml:space="preserve">

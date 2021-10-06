@@ -26,12 +26,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResource.resx</DependentUpon>
     </Compile>
-    <Compile Update="Views\UzorEditorStepsTopPanel.xaml.cs">
+    <Compile Update="Views\EditorTopPanels\UzorEditorStepsTopPanel.xaml.cs">
       <DependentUpon>UzorEditorStepsTopPanel.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="ItemPages\LongUzorItemPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Localization\AppResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResource.Designer.cs</LastGenOutput>
@@ -48,7 +51,7 @@
     <EmbeddedResource Update="UzorCreatingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UzorItemPage.xaml">
+    <EmbeddedResource Update="ItemPages\UzorItemPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LongUzorEditorPageViews\DistanceParametersView.xaml">
@@ -58,6 +61,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LongUzorEditorPageViews\SaveView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ItemViews\LongUzorItem.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LongUzorView.xaml">
@@ -75,13 +81,13 @@
     <EmbeddedResource Update="Views\UzorEditElementView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\UzorEditorSaveTopPanel.xaml">
+    <EmbeddedResource Update="Views\EditorTopPanels\UzorEditorSaveTopPanel.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\UzorEditorStepsTopPanel.xaml">
+    <EmbeddedResource Update="Views\EditorTopPanels\UzorEditorStepsTopPanel.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\UzorItem.xaml">
+    <EmbeddedResource Update="Views\ItemViews\UzorItem.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\UzorPixelFieldView.xaml">

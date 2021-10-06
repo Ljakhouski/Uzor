@@ -61,6 +61,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string _111 {
+            get {
+                return ResourceManager.GetString("111", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Before Uzor.
         /// </summary>
         public static string BeforeStep {
@@ -72,9 +81,9 @@ namespace Uzor.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the item?.
         /// </summary>
-        public static string DeleteWarning {
+        public static string DeleteQuestion {
             get {
-                return ResourceManager.GetString("DeleteWarning", resourceCulture);
+                return ResourceManager.GetString("DeleteQuestion", resourceCulture);
             }
         }
         

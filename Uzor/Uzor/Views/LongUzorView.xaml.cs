@@ -21,6 +21,20 @@ namespace Uzor.Views
         private SKMatrix matrix = SKMatrix.MakeIdentity();
         private Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
 
+        private bool demonstrateMode_ = false;
+        //TODO: need to add ...mode for interactive elements (to turn off all events except zoom-moving)
+        public bool DemonstrateMode { get { return demonstrateMode_; } set
+            {
+                demonstrateMode_ = value;
+                this.InputTransparent = !value;
+            }
+        } 
+
+        private void GridTouchEffect_TouchAction(object sender, TouchActionEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
         public LongUzorData Data 
         { 
             get { return LongUzorGraphic.Data; }
