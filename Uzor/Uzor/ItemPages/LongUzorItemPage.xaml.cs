@@ -18,5 +18,10 @@ namespace Uzor.ItemPages
             this.itemNameLabel.Text = data.Name;
             this.longUzorView.Data = data;
         }
+
+        private async void editButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new LongUzorEditorPage(longUzorView.Data));
+        }
     }
 }

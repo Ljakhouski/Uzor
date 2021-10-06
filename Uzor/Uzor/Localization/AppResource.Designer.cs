@@ -61,15 +61,6 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string _111 {
-            get {
-                return ResourceManager.GetString("111", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Before Uzor.
         /// </summary>
         public static string BeforeStep {
@@ -192,6 +183,15 @@ namespace Uzor.Localization {
         public static string SavingProject {
             get {
                 return ResourceManager.GetString("SavingProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        public static string Setting {
+            get {
+                return ResourceManager.GetString("Setting", resourceCulture);
             }
         }
         

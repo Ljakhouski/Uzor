@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="0" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="BeforeStep" xml:space="preserve">
     <value>Предыдущий</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="SavingProject" xml:space="preserve">
     <value>Сохранение проекта:</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Настройки</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>

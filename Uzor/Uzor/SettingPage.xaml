@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Uzor.SettingPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:resources="clr-namespace:Uzor.Localization">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Frame BackgroundColor="#CAD1D7" VerticalOptions="Fill" Grid.Row="0" Padding="0" Margin="0">
+                <Label x:Name="settingLabel" Text="{x:Static resources:AppResource.Setting}" 
+                       FontSize="23" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0"
+                       Margin="15, 0, 0, 0" 
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"></Label>
+            </Frame>
+            
+            <StackLayout Grid.Row="1">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{x:Static resources:AppResource.LanguageLabel}"></Label>
+                    <Picker x:Name="languagePicker" SelectedIndexChanged="languageChanged" HorizontalOptions="End">
+                        <Picker.Items>
+                            <x:String>English</x:String>
+                            <x:String>Русский</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
