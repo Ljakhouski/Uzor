@@ -15,18 +15,18 @@ namespace Uzor
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UzorCreatingPage : ContentPage
     {
-        public UzorCreatingPage()
+        public UzorCreatingPage(MainPage p)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-
+            this.pageForAlert = p;
             SaveSetting_ ss = SaveSetting;
             this.newUzorSettingView = new NewUzorSetting(ss);
             newUzorSettingView.Opacity = 0;
             creatingPageGrid.Children.Add(newUzorSettingView, 0, 1);
             newUzorSettingView.FadeTo(1);
         }
-
+        private MainPage pageForAlert;
         public UzorCreatingPage(UzorData data) // for editing a previously created Uzor
         {
             var v = new UzorEditElementView(data);
@@ -55,6 +55,7 @@ namespace Uzor
             creatingPageGrid.Children.Remove(newUzorSettingView);
 
             var v = new UzorEditElementView(data);
+            v.PageForAlert = this.pageForAlert;
             //uzorDataList.Add(v.UzorView.ThisData);
             uzorEditElementViewList.Add(v);
 

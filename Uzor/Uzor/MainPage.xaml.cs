@@ -46,7 +46,7 @@ namespace Uzor
         private async void NewUzor(object sender, EventArgs e)
         {
             //mediaElement.Stop();
-            await Navigation.PushModalAsync(new NavigationPage(new UzorCreatingPage()), true);
+            await Navigation.PushModalAsync(new NavigationPage(new UzorCreatingPage(this)), true);
             //stack.Children.Add(new UzorItem());
 //      edited:      MakeUzorItemList();
             //mediaElement.Play();
@@ -54,7 +54,7 @@ namespace Uzor
 
         }
 
-        private void MakeUzorItemList()
+        public void MakeUzorItemList()
         {
             this.itemStack.Children.Clear();
 

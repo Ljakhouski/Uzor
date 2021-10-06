@@ -28,7 +28,7 @@ namespace Uzor.Views
         public DarkField mirrorIndicator { get; set; } = new DarkField();
         public CenterMarker centerIndicator { get; set; } = new CenterMarker();
         public CropIndicator cropIndicator { get; set; }
-
+        public MainPage PageForAlert { get; set; }
         public bool ReSave = false; // for rewriting before results
         private string SavedFilePath;
         public UzorEditElementView(UzorData data)
@@ -222,10 +222,13 @@ namespace Uzor.Views
             FileStream fs = new FileStream(folderPath+"/"+fileName, FileMode.OpenOrCreate);
             formatter.Serialize(fs, this.ThisData);
             fs.Dispose();
-        }
-            // rewriting file
-           // File.WriteAllText(Path.Combine(folderPath, this.UzorView.ThisData.Name), textEditor.Text);
 
+
+            if (PageForAlert != null)
+                PageForAlert.MakeUzorItemList();
+               // pageForAlert.itemStack.Children.Add(new UzorItem(this.ThisData, pageForAlert));
+        }
+           
         
     }
 }
