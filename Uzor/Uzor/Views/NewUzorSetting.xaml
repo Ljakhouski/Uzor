@@ -15,7 +15,8 @@
                     <StackLayout Margin="10">
                         <StackLayout Orientation="Horizontal" Margin="30,90,0,0">
                             <Label Text="Name: "  FontSize="20" MinimumWidthRequest="60" Padding="0,13,0,0"></Label>
-                            <Entry x:Name="entryName" Text="new Uzor" HorizontalOptions="StartAndExpand" FontSize="20" Margin="20,0,20,0" />
+                            <Entry x:Name="entryName" Text="new Uzor" HorizontalOptions="Start" FontSize="20" Margin="20,0,20,0" />
+                            <ImageButton Source="deleteFileButton.png" BackgroundColor="#ffffff" WidthRequest="37" HeightRequest="37" VerticalOptions="Center" Clicked="editEntry_Clicked" CornerRadius="10"></ImageButton>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center" Margin="0,20,0,0">

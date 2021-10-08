@@ -172,10 +172,16 @@ namespace Uzor
             }
 }
         //crutches
-        private bool isSquareMode;
+        private bool? isSquareMode = null;
         protected override bool OnBackButtonPressed()
         {
-            if (isSquareMode)
+            if (isSquareMode == null)
+            {
+                ForPopModalAsync();
+                return true;
+            }
+
+            if (isSquareMode == true)
                 BackButton_Clicked(null, null);
             else
                 BackButton_Clicked(null, null);
@@ -210,6 +216,9 @@ namespace Uzor
             await Navigation.PopModalAsync();
         }
 
-
+        private async void ForPopModalAsync()
+        {
+            await Navigation.PopModalAsync();
+        }
     }
 }

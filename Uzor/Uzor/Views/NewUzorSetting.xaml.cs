@@ -52,5 +52,11 @@ namespace Uzor.Views
             SquareUzorModeFrame.ScaleTo(1, 100); //draw a single element of the pattern
             LongUzorModeFrame.ScaleTo(1.1, 100); // a full-fledged pattern of simpler elements
         }
+
+        private void editEntry_Clicked(object sender, EventArgs e)
+        {
+            this.entryName.Text = "";
+            this.entryName.Focus();
+        }
     }
 }

@@ -174,13 +174,13 @@ namespace Uzor.Views
             
             if (!sliderPanel.IsVisible)
             {
-                cropButton.Source = "cropOnMenuButton.png";
+                cropButton.Source = "cropOffMenuButton.png";
                 sliderPanel.IsVisible = true;
                 sliderPanelShadow.IsVisible = true;
                 return;
             }    
                 
-            cropButton.Source = "cropOffMenuButton.png";
+            cropButton.Source = "cropOnMenuButton.png";
             sliderPanel.HeightRequest = 20;
 
             sliderPanel.IsVisible = false;
