@@ -27,9 +27,11 @@ namespace Uzor
             newUzorSettingView.FadeTo(1);
         }
         private MainPage pageForAlert;
-        public UzorCreatingPage(UzorData data) // for editing a previously created Uzor
+        public UzorCreatingPage(UzorData data, MainPage p) // for editing a previously created Uzor
         {
+            InitializeComponent();
             var v = new UzorEditElementView(data);
+            this.pageForAlert = p;
             uzorEditElementViewList.Add(v);
             creatingPageGrid.Children.Add(v, 0, 1);
 
@@ -167,7 +169,7 @@ namespace Uzor
             else
             {
                 longUzorData.SidePattern = SideUzorGenerator.GetNewSideUzor(longUzorData.UzorElements[0].FieldSize);
-                LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData);
+                LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData, pageForAlert);
                 await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
             }
 }
@@ -194,31 +196,28 @@ namespace Uzor
         // for square-mode
         private async void BackButton_Clicked(object sender, EventArgs e)
         {
-    /*if (this.stepNumber == 1)
-
-    else
-    {
-        this.stepNumber--;
-        stepsPanel.StepLabel.Text = stepNumber.ToString()+'/'+"2";
-    }*/
-
             if (uzorEditElementViewList[0].ReSave || await DisplayAlert("", AppResource.ExitQuestion, AppResource.Yes, AppResource.No))
-            {
                 await Navigation.PopModalAsync();
-            }
-                
-        
+            
         }
 
 
         private async void SaveChanges_Clicked(object sender, EventArgs e) // if this editor is open for editing a previously created Uzor
         {
+            this.getUzorEditElementView().ReSave = true;
+            this.getUzorEditElementView().SaveButton_Click(null, null); // oh, shitcode again...
+            this.pageForAlert.MakeUzorItemList();
             await Navigation.PopModalAsync();
         }
 
         private async void ForPopModalAsync()
         {
             await Navigation.PopModalAsync();
+        }
+
+        private UzorEditElementView getUzorEditElementView()
+        {
+            return uzorEditElementViewList[stepNumber - 1];
         }
     }
 }

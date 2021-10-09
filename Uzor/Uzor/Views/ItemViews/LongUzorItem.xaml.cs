@@ -38,7 +38,7 @@ namespace Uzor.Views
 
         private async void TapOnItem(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new LongUzorItemPage(Data)));
+            await Navigation.PushModalAsync(new NavigationPage(new LongUzorItemPage(Data, pageForAlert)));
         }
 
         private async void deleteItem(object sender, EventArgs e)

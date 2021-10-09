@@ -20,12 +20,13 @@ namespace Uzor
         private LayersParapetersView layoutParametersView;
         private SaveView saveView;
         private string SavedFilePath;
+        private MainPage pageForAlert;
         public bool ReSave { get; set; }
-        public LongUzorEditorPage(LongUzorData data)
+        public LongUzorEditorPage(LongUzorData data, MainPage p)
         {
-            
             InitializeComponent();
             this.longUzorView.Data = data;
+            this.pageForAlert = p;
             initializeDropMenus();
         }
 
@@ -192,6 +193,7 @@ namespace Uzor
         {
             if (await DisplayAlert("", AppResource.ExitQuestion, AppResource.Yes, AppResource.No))
             {
+                this.pageForAlert.MakeUzorItemList();
                 Navigation.PopModalAsync();
                 Navigation.PopModalAsync();
             }

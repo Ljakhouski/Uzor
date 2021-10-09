@@ -12,16 +12,18 @@ namespace Uzor.ItemPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LongUzorItemPage : ContentPage
     {
-        public LongUzorItemPage(LongUzorData data)
+        private MainPage pageForAlert;
+        public LongUzorItemPage(LongUzorData data, MainPage p)
         {
             InitializeComponent();
+            this.pageForAlert = p;
             this.itemNameLabel.Text = data.Name;
             this.longUzorView.Data = data;
         }
 
         private async void editButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new LongUzorEditorPage(longUzorView.Data));
+            await Navigation.PushModalAsync(new LongUzorEditorPage(longUzorView.Data, pageForAlert));
         }
     }
 }

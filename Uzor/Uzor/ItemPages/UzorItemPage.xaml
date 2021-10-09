@@ -8,9 +8,12 @@
                 <RowDefinition Height="65"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <Frame BackgroundColor="#CAD1D7" VerticalOptions="Fill" Grid.Row="0" Padding="0" Margin="0">
-                <Label x:Name="itemNameLabel" Text="ItemName: " FontSize="23" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0" Margin="15, 0, 0, 0" VerticalOptions="Center"></Label>
+                <StackLayout Orientation="Horizontal">
+                    <Label x:Name="itemNameLabel" Text="ItemName: " FontSize="23" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0" Margin="15, 0, 0, 0" VerticalOptions="Center"></Label>
+                    <ImageButton Source="editButton.png" BackgroundColor="#CAD1D7" HorizontalOptions="EndAndExpand" Clicked="editButton_Clicked" Margin="0,0,20,0"></ImageButton>
+                </StackLayout>
             </Frame>
 
             <sh:Shadows x:Name="MyViewShadows"

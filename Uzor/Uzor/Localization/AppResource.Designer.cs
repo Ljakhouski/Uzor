@@ -187,7 +187,7 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Setting.
+        ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Setting {
             get {
