@@ -21,7 +21,12 @@ namespace Uzor.Views.LongUzorEditorPageViews
 
         private void Save_Clicked(object sender, EventArgs e)
         {
-            editorPage.SaveProject();
+            this.editorPage.SaveProject();
+        }
+
+        private void ImageSave_Clicked(object sender, EventArgs e)
+        {
+            this.editorPage.ShowImageBufferSaveView();
         }
     }
 }
