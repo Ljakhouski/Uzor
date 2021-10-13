@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Uzor.Data;
 using Uzor.Localization;
+using Uzor.Views;
 using Uzor.Views.LongUzorEditorPageViews;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -35,7 +36,7 @@ namespace Uzor
             return this.longUzorView.Data;
         }
 
-        internal void SaveProject()
+        public void SaveProject()
         {
             BinaryFormatter formatter = new BinaryFormatter();
 
@@ -71,6 +72,18 @@ namespace Uzor
             FileStream fs = new FileStream(folderPath + "/" + fileName, FileMode.OpenOrCreate);
             formatter.Serialize(fs, this.GetData());
             fs.Dispose();
+        }
+
+        public void ShowImageBufferSaveView()
+        {
+            var v = new ImageBufferSaveView(this.GetData());
+            v.BackgroundTapped += ImageSaveView_BackgroundTapped;
+            this.backgroundGrid.Children.Add(v);
+        }
+
+        private void ImageSaveView_BackgroundTapped(object sender, EventArgs e)
+        {
+            this.backgroundGrid.Children.Remove(sender as ImageBufferSaveView);
         }
 
         private void initializeDropMenus()

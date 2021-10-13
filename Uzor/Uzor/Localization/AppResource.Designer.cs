@@ -70,6 +70,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saving as Image:.
+        /// </summary>
+        public static string BufferSavingLabel {
+            get {
+                return ResourceManager.GetString("BufferSavingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the item?.
         /// </summary>
         public static string DeleteQuestion {

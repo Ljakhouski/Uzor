@@ -5,7 +5,7 @@
              xmlns:tt="clr-namespace:TouchTracking"
              NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
-        <Grid>
+        <Grid x:Name="backgroundGrid">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>

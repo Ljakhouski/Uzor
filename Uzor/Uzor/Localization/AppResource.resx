@@ -120,6 +120,9 @@
   <data name="BeforeStep" xml:space="preserve">
     <value>Before Uzor</value>
   </data>
+  <data name="BufferSavingLabel" xml:space="preserve">
+    <value>Saving as Image:</value>
+  </data>
   <data name="DeleteQuestion" xml:space="preserve">
     <value>Are you sure you want to delete the item?</value>
   </data>

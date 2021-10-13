@@ -15,6 +15,8 @@ namespace Uzor.Views.EditorObjects
 
         }
 
+        public virtual void Draw(SKCanvas canvas, float width, float height) { }
+
         public virtual void TouchEffectAction(TouchActionEventArgs args, SKCanvasView view) { }
     }
 }

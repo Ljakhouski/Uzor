@@ -9,8 +9,8 @@
                 <Label Text="{x:Static resources:AppResource.SavingProject}" HorizontalOptions="Start"/>
                 <Button Text="{x:Static resources:AppResource.Save}" Clicked="Save_Clicked" CornerRadius="20" HorizontalOptions="Center"/>
                 <Label Text="{x:Static resources:AppResource.SavedLabel}" IsVisible="false" HorizontalOptions="Center" FontSize="Small"/>
-                <Label Text="SAVE_TEST_LABEL"/>
-                <Label Text="SAVE_TEST_LABEL"/>
+                <Label Text="{x:Static resources:AppResource.BufferSavingLabel}"/>
+                <Button Text="{x:Static resources:AppResource.Save}" Clicked="ImageSave_Clicked" CornerRadius="20" HorizontalOptions="Center"/>
             </StackLayout>
         </Frame>
     </ContentView.Content>

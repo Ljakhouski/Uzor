@@ -59,14 +59,29 @@ namespace Uzor.Views.EditorObjects
             bool b = false;
             for (int i = -7; i < 7; i++)
             {
-                drawCentralUzor(i, canvas, view);
-                drawSideUzor(i, canvas, view);
+                drawCentralUzor(i, canvas, view.CanvasSize.Width, view.CanvasSize.Height);
+                drawSideUzor(i, canvas, view.CanvasSize.Width, view.CanvasSize.Height);
             }
 
             
         }
+        public override void Draw(SKCanvas canvas, float width, float height)
+        {
+            canvas.Clear();
+            if (Data == null)
+                return;
 
-        private void drawCentralUzor(int i, SKCanvas canvas, SKCanvasView view)
+            this.sceneCenterX = (int)width / 2;
+
+            bool b = false;
+            for (int i = -7; i < 7; i++)
+            {
+                drawCentralUzor(i, canvas, width, height);
+                drawSideUzor(i, canvas, width, height);
+            }
+        }
+
+        private void drawCentralUzor(int i, SKCanvas canvas, float width, float height)
         {
             SKMatrix matrix = SKMatrix.Identity;
             SKMatrix previousMatrix = canvas.TotalMatrix;
@@ -81,13 +96,13 @@ namespace Uzor.Views.EditorObjects
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
             canvas.SetMatrix(matrix);
-            uzorPainter.DrawUzor(this.pixelSize, canvas, view); // uzor constantly drawing in [0;0] point
+            uzorPainter.DrawUzor(this.pixelSize, canvas, width, height); // uzor constantly drawing in [0;0] point
             canvas.SetMatrix(previousMatrix);
 
             uzorPainter.Data = this.Data.UzorElements[i%2==0 ? 0 : 1];
         }
 
-        private void drawSideUzor(int i, SKCanvas canvas, SKCanvasView view)
+        private void drawSideUzor(int i, SKCanvas canvas, float width, float height)
         {
             // left side:
             SKMatrix matrix = SKMatrix.Identity;
@@ -104,7 +119,7 @@ namespace Uzor.Views.EditorObjects
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
             canvas.SetMatrix(matrix);
-            sideUzorPainter.DrawUzor(this.pixelSize, canvas, view, Direction.ToRight);
+            sideUzorPainter.DrawUzor(this.pixelSize, canvas, width, height, Direction.ToRight);
 
             canvas.SetMatrix(previousMatrix);
 
@@ -118,7 +133,7 @@ namespace Uzor.Views.EditorObjects
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
             canvas.SetMatrix(matrix);
-            sideUzorPainter.DrawUzor(this.pixelSize, canvas, view, Direction.ToLeft);
+            sideUzorPainter.DrawUzor(this.pixelSize, canvas, width, height, Direction.ToLeft);
 
             canvas.SetMatrix(previousMatrix2);
         }

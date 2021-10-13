@@ -30,11 +30,11 @@ namespace Uzor.Views.EditorObjects
 
             //canvas.Clear(Color.DarkGray.ToSKColor());
             float pixelSize = (float)view.CanvasSize.Width / Data.FieldSize;
-            this.DrawUzor(pixelSize, canvas, view);
+            this.DrawUzor(pixelSize, canvas, view.CanvasSize.Width, view.CanvasSize.Height);
 
         }
 
-        public void DrawUzor(float pixelSize, SKCanvas canvas, SKCanvasView view, Direction direction = Direction.None)
+        public void DrawUzor(float pixelSize, SKCanvas canvas, float width, float height, Direction direction = Direction.None)
         {
             
             var f = this.Data.Layers[LayerNumber].GetLastState();
@@ -50,28 +50,30 @@ namespace Uzor.Views.EditorObjects
             if (GradientMode)
             {
                 frontPaint.Shader = SKShader.CreateLinearGradient(
-                        new SKPoint(view.CanvasSize.Width / 4, view.CanvasSize.Height / 2),
-                        new SKPoint(view.CanvasSize.Width, view.CanvasSize.Height / 2),
+                        new SKPoint(width / 4, height / 2),
+                        new SKPoint(width, height / 2),
                         new SKColor[] { frontColor, new SKColor(frontColor.Red, frontColor.Green, frontColor.Blue, 0) },
                         new float[] { 0, 1 },
                         SKShaderTileMode.Clamp);
 
 
                 backPaint.Shader = SKShader.CreateLinearGradient(
-                        new SKPoint(view.CanvasSize.Width / 4, view.CanvasSize.Height / 2),
-                        new SKPoint(view.CanvasSize.Width, view.CanvasSize.Height / 2),
+                        new SKPoint(width / 4, height / 2),
+                        new SKPoint(width, height / 2),
                         new SKColor[] { backColor, new SKColor(backColor.Red, backColor.Green, backColor.Blue, 0) },
                         new float[] { 0, 1 },
                         SKShaderTileMode.Clamp);
             }
 
-                             /********* visible-optimization *********/
+            /********* visible-optimization *********/
+            const float leftTopPointX = 0, leftTopPointY = 0;
+            float rightDownPointX = width, rightDownPointY = height;
 
-            int xLeftTopLocationAfterScaling = (int)((int)(GetLeftTopPoint(view).X - matrix.TransX) / matrix.ScaleX);
-            int yLeftTopLocationAfterScaling = (int)((int)(GetLeftTopPoint(view).Y - matrix.TransY) / matrix.ScaleY);
+            int xLeftTopLocationAfterScaling = (int)((int)(leftTopPointX - matrix.TransX) / matrix.ScaleX);
+            int yLeftTopLocationAfterScaling = (int)((int)(leftTopPointY - matrix.TransY) / matrix.ScaleY);
 
-            int xRightDownLocationAfterScaling = (int)((int)(GetRightDownPoint(view).X - matrix.TransX) / matrix.ScaleX);
-            int yRightDownLocationAfterScaling = (int)((int)(GetRightDownPoint(view).Y - matrix.TransY) / matrix.ScaleY);
+            int xRightDownLocationAfterScaling = (int)((int)(rightDownPointX - matrix.TransX) / matrix.ScaleX);
+            int yRightDownLocationAfterScaling = (int)((int)(rightDownPointY - matrix.TransY) / matrix.ScaleY);
 
             //oldCenter.X = xLocationAfterScaling; oldCenter.Y = yLocationAfterScaling;
 
@@ -110,7 +112,6 @@ namespace Uzor.Views.EditorObjects
                 }
         }
 
-      
 
         public override void TouchEffectAction(TouchActionEventArgs args, SKCanvasView view)
         {
@@ -210,15 +211,6 @@ namespace Uzor.Views.EditorObjects
             return new SKPoint((float)(view.CanvasSize.Width * pt.X / view.Width),
                                (float)(view.CanvasSize.Height * pt.Y / view.Height));
         }
-        private SKPoint GetLeftTopPoint(SKCanvasView view)
-        {
-            return new SKPoint((float)(view.CanvasSize.Width * 0 / view.Width),
-                               (float)(view.CanvasSize.Height * 0 / view.Height));
-        }
-        private SKPoint GetRightDownPoint(SKCanvasView view)
-        {
-            return new SKPoint((float)(view.CanvasSize.Width * view.Width / view.Width),
-                               (float)(view.CanvasSize.Height * view.Height / view.Height));
-        }
+       
     }
 }

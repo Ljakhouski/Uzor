@@ -14,7 +14,7 @@
             <Frame BackgroundColor="#CAD1D7" VerticalOptions="Fill" Grid.Row="0" Padding="0" Margin="0">
                 <Label x:Name="settingLabel" Text="{x:Static resources:AppResource.Setting}" 
                        FontSize="20" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0"
-                       Margin="15, 0, 0, 0" 
+                       Margin="0, 0, 0, 0" 
                        VerticalOptions="Center"
                        HorizontalOptions="Center"></Label>
             </Frame>
