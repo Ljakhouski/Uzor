@@ -3,28 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sh="http://sharpnado.com"
              x:Class="Uzor.UzorItemPage">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="65"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+        <Grid x:Name="backgroundGrid">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
 
-            <Frame BackgroundColor="#CAD1D7" VerticalOptions="Fill" Grid.Row="0" Padding="0" Margin="0">
-                <StackLayout Orientation="Horizontal">
-                    <Label x:Name="itemNameLabel" Text="ItemName: " FontSize="23" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0" Margin="15, 0, 0, 0" VerticalOptions="Center"></Label>
-                    <ImageButton Source="editButton.png" BackgroundColor="#CAD1D7" HorizontalOptions="EndAndExpand" Clicked="editButton_Clicked" Margin="0,0,20,0"></ImageButton>
-                </StackLayout>
-            </Frame>
+                <Frame BackgroundColor="#CAD1D7" VerticalOptions="Fill" Grid.Row="0" Padding="0" Margin="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="itemNameLabel" Text="ItemName: " FontSize="23" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0" Margin="15, 0, 0, 0" VerticalOptions="Center"></Label>
+                        <Button Text="saveAsImage" Clicked="imageSaving_Clicked"/>
+                        <ImageButton Source="editButton.png" BackgroundColor="#CAD1D7" HorizontalOptions="EndAndExpand" Clicked="editButton_Clicked" Margin="0,0,20,0"></ImageButton>
+                    </StackLayout>
+                </Frame>
 
-            <sh:Shadows x:Name="MyViewShadows"
-            CornerRadius="10"
-            Shades="{sh:SingleShade Offset='3, 3',
-                                    Opacity=0.35,
-                                    Color=black}"
-                        Grid.Row="1">
-                <Frame x:Name="uzorFieldFrame" HasShadow="False" Margin="15,15,15,15" CornerRadius="10" Padding="0" Grid.Row="1" VerticalOptions="Center"></Frame>
-            </sh:Shadows>
+                <sh:Shadows x:Name="MyViewShadows"
+                CornerRadius="10"
+                Shades="{sh:SingleShade Offset='3, 3',
+                                        Opacity=0.35,
+                                        Color=black}"
+                            Grid.Row="1">
+                    <Frame x:Name="uzorFieldFrame" HasShadow="False" Margin="15,15,15,15" CornerRadius="10" Padding="0" Grid.Row="1" VerticalOptions="Center"></Frame>
+                </sh:Shadows>
 
+            </Grid>
         </Grid>
+        
     </ContentPage.Content>
 </ContentPage>

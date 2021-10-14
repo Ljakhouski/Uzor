@@ -4,21 +4,25 @@
              x:Class="Uzor.ItemPages.LongUzorItemPage"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Grid RowSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="65"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+        <Grid x:Name="backgroundGrid">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
 
-            <Frame BackgroundColor="#CAD1D7" VerticalOptions="Fill" Grid.Row="0" Padding="0" Margin="0">
-                <StackLayout Orientation="Horizontal">
-                    <Label x:Name="itemNameLabel" Text="ItemName: " FontSize="23" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0" Margin="15, 0, 0, 0" VerticalOptions="Center"></Label>
-                    <ImageButton Source="editButton.png" BackgroundColor="#CAD1D7" HorizontalOptions="EndAndExpand" Clicked="editButton_Clicked" Margin="0,0,20,0"></ImageButton>
-                </StackLayout>
-            </Frame>
+                <Frame BackgroundColor="#CAD1D7" VerticalOptions="Fill" Grid.Row="0" Padding="0" Margin="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label x:Name="itemNameLabel" Text="ItemName: " FontSize="23" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0" Margin="15, 0, 0, 0" VerticalOptions="Center"></Label>
+                        <Button Text="saveAsImage" Clicked="imageSaving_Clicked"/>
+                        <ImageButton Source="editButton.png" BackgroundColor="#CAD1D7" HorizontalOptions="EndAndExpand" Clicked="editButton_Clicked" Margin="0,0,20,0"></ImageButton>
+                    </StackLayout>
+                </Frame>
 
-            <views:LongUzorView x:Name="longUzorView" Grid.Row="1" Padding="0" Margin="0"></views:LongUzorView>
+                <views:LongUzorView x:Name="longUzorView" Grid.Row="1" Padding="0" Margin="0"></views:LongUzorView>
 
+            </Grid>
         </Grid>
+        
     </ContentPage.Content>
 </ContentPage>

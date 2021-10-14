@@ -42,7 +42,8 @@ namespace Uzor.Views.EditorObjects
 
         private int minimalStepSize;
         //private int minimal_A_parameter;
-        private int sceneCenterX;
+        private int sceneCenterX, sceneCenterY;
+        
    
         private UzorDrawingObject uzorPainter = new UzorDrawingObject();
         private UzorDrawingObject sideUzorPainter = new UzorDrawingObject();
@@ -55,6 +56,7 @@ namespace Uzor.Views.EditorObjects
                 return;
 
             this.sceneCenterX = (int)view.CanvasSize.Width / 2;
+            this.sceneCenterY = (int)view.CanvasSize.Height / 2;
 
             bool b = false;
             for (int i = -7; i < 7; i++)
@@ -72,6 +74,7 @@ namespace Uzor.Views.EditorObjects
                 return;
 
             this.sceneCenterX = (int)width / 2;
+            this.sceneCenterY = (int)height / 2;
 
             bool b = false;
             for (int i = -7; i < 7; i++)
@@ -92,6 +95,7 @@ namespace Uzor.Views.EditorObjects
 
             int uzorCenterY = uzorCenterX; // Uzor is square object
             matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY; // diapasone of Data.A: [0;100]
+            matrix.TransY += this.sceneCenterY;
                                                                                 
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
@@ -114,7 +118,8 @@ namespace Uzor.Views.EditorObjects
             int uzorCenterY = uzorCenterX; // Uzor is square object
 
             int phaseShift = Data.A * minimalStepSize / 2;
-            matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY + phaseShift; 
+            matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY + phaseShift;
+            matrix.TransY += this.sceneCenterY;
 
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
@@ -128,7 +133,8 @@ namespace Uzor.Views.EditorObjects
             matrix = SKMatrix.Identity;
             int uzorRightShift = this.pixelSize * (this.Data.UzorElements[0].FieldSize / 2 - this.sideUzorPainter.Data.FieldSize / 2);
             matrix.TransX = this.sceneCenterX + this.Data.B * this.minimalStepSize + uzorRightShift;
-            matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY + phaseShift; 
+            matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY + phaseShift;
+            matrix.TransY += this.sceneCenterY;
 
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 

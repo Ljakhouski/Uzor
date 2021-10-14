@@ -24,6 +24,11 @@ namespace Uzor.Views.EditorObjects
         protected Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
         protected SKMatrix matrix = SKMatrix.CreateIdentity();
 
+        public UzorDrawingObject(UzorData data)
+        {
+            this.Data = data;
+        }
+        public UzorDrawingObject() { }
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {
             canvas.SetMatrix(matrix); // default this view can transform matrix

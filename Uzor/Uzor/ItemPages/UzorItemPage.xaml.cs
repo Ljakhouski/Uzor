@@ -31,5 +31,17 @@ namespace Uzor
         {
             await Navigation.PushModalAsync(new UzorCreatingPage(this.data, this.pageForAlert));
         }
+
+        private void hideSavingView(object sender, EventArgs e)
+        {
+            this.backgroundGrid.Children.Remove(sender as ImageBufferSaveView);
+        }
+
+        private void imageSaving_Clicked(object sender, EventArgs e)
+        {
+            var v = new ImageBufferSaveView(this.data);
+            v.BackgroundTapped += hideSavingView;
+            this.backgroundGrid.Children.Add(v);
+        }
     }
 }

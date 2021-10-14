@@ -17,8 +17,10 @@ namespace Uzor.Views
     {
         private LongUzorData longUzorData;
         private UzorData uzorData;
-        private SKBitmap bitmap = new SKBitmap(1000, 1000);
-        private int bitmapHeight = 1000;
+        private SKBitmap bitmap = new SKBitmap(1000, 1600);
+
+        private int bitmapWidth = 1000;
+        private int bitmapHeight = 1600;
         public ImageBufferSaveView(LongUzorData data)
         {
             this.longUzorData = data;
@@ -30,8 +32,13 @@ namespace Uzor.Views
         public ImageBufferSaveView(UzorData data)
         {
             this.uzorData = data;
+            this.bitmapWidth = data.FieldSize * 20;
+            this.bitmapHeight = bitmapWidth;
+            this.bitmap = new SKBitmap(bitmapWidth, bitmapHeight);
             InitializeComponent();
             setDefaultPickerValue();
+            this.heightSlider.IsVisible = false;
+            updateSquareUzorBitmap();
         } 
         
         private void setDefaultPickerValue()
@@ -41,6 +48,18 @@ namespace Uzor.Views
         
         public event EventHandler BackgroundTapped;
 
+        enum Mode
+        {
+            Square,
+            Long
+        }
+
+        private Mode getUzorMode()
+        {
+            if (this.longUzorData == null)
+                return Mode.Square;
+            return Mode.Long;
+        }
         private void background_Tapped(object sender, EventArgs e)
         {
             viewFrame.FadeTo(0);
@@ -57,13 +76,21 @@ namespace Uzor.Views
         {
             using (SKCanvas saveBitmapCanvas = new SKCanvas(bitmap))
             {
-                saveBitmapCanvas.Clear(Color.Green.ToSKColor());
+                var o = new LongUzorDrawingObject(longUzorData);
+                o.Draw(saveBitmapCanvas, 1000, this.bitmapHeight);
+              //  for (int i = 500; i > 100; i -= 10)
+               //     saveBitmapCanvas.DrawCircle(500, 500, i, new SKPaint() { Color = new SKColor((byte)new Random().Next(10,222), (byte)new Random().Next(10, 222), (byte)new Random().Next(10, 222), 10) });
+            }
 
-                var drObj = new LongUzorDrawingObject(longUzorData);
-                drObj.Draw(saveBitmapCanvas, 1000, this.bitmapHeight);
+            this.previewCanvas.InvalidateSurface();
+        }
 
-                for (int i = 500; i > 100; i -= 10)
-                    saveBitmapCanvas.DrawCircle(500, 500, i, new SKPaint() { Color = new SKColor((byte)new Random().Next(10,222), (byte)new Random().Next(10, 222), (byte)new Random().Next(10, 222), 10) });
+        private void updateSquareUzorBitmap()
+        {
+            using (SKCanvas saveBitmapCanvas = new SKCanvas(bitmap))
+            {
+                var o = new UzorDrawingObject(uzorData);
+                o.DrawUzor(20, saveBitmapCanvas, bitmapWidth, bitmapHeight);
             }
 
             this.previewCanvas.InvalidateSurface();
@@ -97,13 +124,17 @@ namespace Uzor.Views
         {
             SKCanvas c = e.Surface.Canvas;
             if (this.bitmap != null)
+            {
+                c.Clear();
                 c.DrawBitmap(this.bitmap, new SKPoint(0, 0));
+            }
+                
         }
 
         private void heightValue_Changed(object sender, ValueChangedEventArgs e)
         {
             this.bitmapHeight = (int)e.NewValue;
-            this.bitmap = new SKBitmap(1000, (int)e.NewValue);
+            this.bitmap = new SKBitmap(1000, bitmapHeight);
             updateLongUzorBitmap();
         }
     }

@@ -12,7 +12,7 @@
             </BoxView>
             
             <Frame x:Name="viewFrame"
-                   BackgroundColor="White"
+                   BackgroundColor="#e3e6e8"
                    CornerRadius="20"
                    Margin="40,100,40,100"
                    Padding="0"
@@ -42,9 +42,9 @@
                         
                     </StackLayout>
                     
-                    <Slider  Maximum="5000" Minimum="700" Value="1000" ValueChanged="heightValue_Changed"></Slider>
+                    <Slider x:Name="heightSlider" Maximum="5000" Minimum="1500" Value="1600" ValueChanged="heightValue_Changed"></Slider>
                     
-                    <Frame BackgroundColor="Red" VerticalOptions="Fill" HorizontalOptions="Fill" CornerRadius="10" Padding="0" Margin="15">
+                    <Frame VerticalOptions="Fill" HorizontalOptions="Fill" CornerRadius="10" Padding="0" Margin="15">
                         <ScrollView Orientation="Both">
                             <skia1:SKCanvasView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" WidthRequest="1000" HeightRequest="1000"
                             x:Name="previewCanvas"  InputTransparent="True"
