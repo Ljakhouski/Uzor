@@ -23,18 +23,13 @@ namespace Uzor.Algorithm
             for (int w = 0; w < size; w++)
                 for (int h = 0; h < size; h++)
                 {
-                    int countCellsAround = CountAround(w, h, size, field);
-
+                    int countCellsAround = countAround(w, h, size, field);
 
                     if (countCellsAround == 2 || countCellsAround == 3)
-                    {
                         fieldForEditing[w, h] = true;
                         // return;
-                    }
                     else
-                    {
                         fieldForEditing[w, h] = false;
-                    }
 
                 }
 
@@ -42,18 +37,17 @@ namespace Uzor.Algorithm
             f.AddNextState(field);
         }
 
-        private static int CountAround(int w, int h, int size, bool[,] field)
+        private static int countAround(int w, int h, int size, bool[,] field)
         {
             int count = 0;
             for (int i = -1; i < 2; i++)
                 for (int y = -1; y < 2; y++)
-                {
                     if (w + i >= 0 && w + i < size && h + y >= 0 && h + y < size)  // for replace "OutOfRangeException"  
-                        if (field[w + i, h + y] &&
-                                !(y == 0 && i == 0)  // current pixel
+                        if (
+                            field[w + i, h + y] &&
+                            !(y == 0 && i == 0)  // current pixel
                                 )
                             count++;
-                }
             return count;
         }
     }
