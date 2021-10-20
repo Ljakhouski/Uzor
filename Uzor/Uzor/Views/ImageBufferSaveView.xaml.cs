@@ -101,23 +101,12 @@ namespace Uzor.Views
             // Get this SKImage data. This is basically an array of bytes in PNG format.
             SKData data = SKImage.FromBitmap(bitmap).Encode();
 
-            // Fabricate a filename based on data and time.
             // NOTE: This filename is not used by iOS!
             DateTime dt = DateTime.Now;
-            string filename = String.Format("SpinPaint-{0:D4}{1:D2}{2:D2}-{3:D2}{4:D2}{5:D2}{6:D3}.png",
+            string filename = String.Format("Uzor" + "-{0:D4}{1:D2}{2:D2}-{3:D2}{4:D2}{5:D2}{6:D3}.png",
                                             dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
 
-            // Get the dependency service implemented in the particular platform.
-            //ISpinPaintDependencyService dependencyService = DependencyService.Get<ISpinPaintDependencyService>();
-
-            // Save the bitmap and get a boolean indicating success.
-            //bool result = await dependencyService.SaveBitmap(data.ToArray(), filename);
-
-            // Display an alert if an error occurred.
-           // if (!result)
-           // {
-           //     await DisplayAlert("SpinPaint", "Artwork could not be saved. Sorry!", "OK");
-           // }
+            BitmapStreamWriter.SaveBitmap(bitmap, (SKEncodedImageFormat)formatPicker.SelectedItem, 100, filename, "UzorApp");
         }
 
         private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
