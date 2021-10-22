@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CustomRender.cs" />
+    <Compile Include="FileOpener.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="PhotoLibrary.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

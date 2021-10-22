@@ -135,6 +135,9 @@
   <data name="ExitQuestion" xml:space="preserve">
     <value>Are you sure you want to get out?</value>
   </data>
+  <data name="FormatLabel" xml:space="preserve">
+    <value>Format:</value>
+  </data>
   <data name="LanguageLabel" xml:space="preserve">
     <value>Language:</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="SavedInLabel" xml:space="preserve">
+    <value>File saved in:</value>
   </data>
   <data name="SavedLabel" xml:space="preserve">
     <value>Saved</value>

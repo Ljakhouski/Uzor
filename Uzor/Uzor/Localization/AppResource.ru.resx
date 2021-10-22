@@ -138,6 +138,9 @@
   <data name="ExitQuestion" xml:space="preserve">
     <value>Вы точно хотите выйти?</value>
   </data>
+  <data name="FormatLabel" xml:space="preserve">
+    <value>Формат: </value>
+  </data>
   <data name="LanguageLabel" xml:space="preserve">
     <value>Язык:</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
+  </data>
+  <data name="SavedInlabel" xml:space="preserve">
+    <value>Файл сохранен в: </value>
   </data>
   <data name="SavedLabel" xml:space="preserve">
     <value>Сохранено</value>

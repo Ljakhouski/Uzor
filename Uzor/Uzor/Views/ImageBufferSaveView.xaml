@@ -2,7 +2,8 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:skia="clr-namespace:SkiaSharp;assembly=SkiaSharp" xmlns:skia1="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
-             x:Class="Uzor.Views.ImageBufferSaveView">
+             x:Class="Uzor.Views.ImageBufferSaveView"
+             xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
         <Grid>
             <BoxView x:Name="background" BackgroundColor="Black" Opacity="0.35">
@@ -20,14 +21,13 @@
                    >
                 <StackLayout>
                     <Grid MinimumHeightRequest="60" HeightRequest="60">
-                        <BoxView BackgroundColor="Red" HorizontalOptions="FillAndExpand" Margin="0"></BoxView>
-                        <Label Text="sgdgdfg" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"></Label>
+                        <BoxView BackgroundColor="#D23838" HorizontalOptions="FillAndExpand" Margin="0"></BoxView>
+                        <Label Text="{x:Static resources:AppResource.Save}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"></Label>
                     </Grid>
 
                     <StackLayout Orientation="Horizontal" Padding="20">
-                        <Label Text="type bla bla bla" TextColor="Black"></Label>
+                        <Label Text="{x:Static resources:AppResource.FormatLabel}" TextColor="Black" VerticalOptions="Center"></Label>
                         <Picker x:Name="formatPicker"
-                            Title="image format"
                             SelectedIndexChanged="onFormatPickerChanged">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type skia:SKEncodedImageFormat}">
@@ -54,8 +54,9 @@
                     </Frame>
                     
                     
-                    <Button Text="save" Clicked="imageSaveButton_clicked" Margin="20"></Button>
-                    
+                    <Button Text="{x:Static resources:AppResource.Save}" Clicked="imageSaveButton_clicked" CornerRadius="20" Margin="20"></Button>
+                    <Label Text="" x:Name="savingStatusLabel" LineBreakMode="WordWrap" TextColor="Black"/>
+                    <Button Text="..." IsVisible="false" x:Name="showFileButton" Clicked="showImageFile_Clicked"/>
                 </StackLayout>
             </Frame>
         </Grid>

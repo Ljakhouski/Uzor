@@ -115,6 +115,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Format:.
+        /// </summary>
+        public static string FormatLabel {
+            get {
+                return ResourceManager.GetString("FormatLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language:.
         /// </summary>
         public static string LanguageLabel {
@@ -174,6 +183,15 @@ namespace Uzor.Localization {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File saved in:.
+        /// </summary>
+        public static string SavedInLabel {
+            get {
+                return ResourceManager.GetString("SavedInLabel", resourceCulture);
             }
         }
         

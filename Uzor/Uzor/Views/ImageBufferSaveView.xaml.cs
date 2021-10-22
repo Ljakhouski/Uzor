@@ -1,11 +1,8 @@
 ﻿using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Uzor.Data;
+using Uzor.Localization;
 using Uzor.Views.EditorObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -107,6 +104,11 @@ namespace Uzor.Views
                                             dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
 
             string savedFilePath = BitmapStreamWriter.SaveBitmap(bitmap, (SKEncodedImageFormat)formatPicker.SelectedItem, 100, filename, "UzorApp");
+            savingStatusLabel.Text = AppResource.SavedInLabel + " \"" + savedFilePath + "\"";
+            imageFileShowPath = savedFilePath;
+            this.showFileButton.IsVisible = true;
+
+           
         }
 
         private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
@@ -125,6 +127,11 @@ namespace Uzor.Views
             this.bitmapHeight = (int)e.NewValue;
             this.bitmap = new SKBitmap(1000, bitmapHeight);
             updateLongUzorBitmap();
+        }
+        private string imageFileShowPath;
+        private void showImageFile_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<IFileOpener>().Show(imageFileShowPath);
         }
     }
 }
