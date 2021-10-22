@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Uzor
 {
     class BitmapStreamWriter
     {
-        public async static void SaveBitmap(SKBitmap bitmap, SKEncodedImageFormat format, int quality, string name, string folder)
+        public static string SaveBitmap(SKBitmap bitmap, SKEncodedImageFormat format, int quality, string name, string folder)
         {
             using (MemoryStream memStream = new MemoryStream())
             using (SKManagedWStream wstream = new SKManagedWStream(memStream))
@@ -23,13 +24,17 @@ namespace Uzor
                 }
                 else
                 {
-                    bool success = await DependencyService.Get<IPhotoLibrary>().
-                        SavePhotoAsync(data, folder, name);
+                    string savedFilePath = Task.Run(() => DependencyService.Get<IPhotoLibrary>().
+                        SavePhotoAsync(data, folder, name)).Result;
 
-                    if (!success)
-                    {
-                        throw new BitmapFileWriteException("file save error");
-                    }
+                    //savedFilePath = await DependencyService.Get<IPhotoLibrary>().
+                    //    SavePhotoAsync(data, folder, name);
+
+                    //if (success)
+                    //{
+                    //    throw new BitmapFileWriteException("file save error");
+                    //}
+                    return savedFilePath;
                 }
             }
         }

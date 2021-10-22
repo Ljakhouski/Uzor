@@ -8,6 +8,6 @@ namespace Uzor
 {
     public interface IPhotoLibrary
     {
-        Task<bool> SavePhotoAsync(byte[] data, string folder, string filename);
+        Task<string> SavePhotoAsync(byte[] data, string folder, string filename);
     }
 }

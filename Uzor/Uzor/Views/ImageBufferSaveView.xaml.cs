@@ -106,7 +106,7 @@ namespace Uzor.Views
             string filename = String.Format("Uzor" + "-{0:D4}{1:D2}{2:D2}-{3:D2}{4:D2}{5:D2}{6:D3}.png",
                                             dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
 
-            BitmapStreamWriter.SaveBitmap(bitmap, (SKEncodedImageFormat)formatPicker.SelectedItem, 100, filename, "UzorApp");
+            string savedFilePath = BitmapStreamWriter.SaveBitmap(bitmap, (SKEncodedImageFormat)formatPicker.SelectedItem, 100, filename, "UzorApp");
         }
 
         private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)

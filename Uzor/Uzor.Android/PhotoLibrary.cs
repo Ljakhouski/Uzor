@@ -18,14 +18,27 @@ namespace Uzor.Droid
 {
     public class PhotoLibrary : IPhotoLibrary
     {
-        public async Task<bool> SavePhotoAsync(byte[] data, string folder, string filename)
+        public async Task<string> SavePhotoAsync(byte[] data, string folder, string filename)
         {
 
-            /* WORK ONLY UP TO ANDROID 12 VERSION !!! */
+            string picturesDirectory;
+            
 
-           // string picturesDirectory = System.IO.Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).AbsolutePath, folder);
-            string picturesDirectory = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), folder);
-                        /*  /storage/emulated/0/UzorApp  */
+
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Q)
+            {
+                /*  own path for new file-access politic  */
+                picturesDirectory = Android.App.Application.Context.GetExternalFilesDir(/*Android.OS.Environment.RootDirectory.ToString()*/ null).ToString();
+            }
+            else
+            {
+                /*  in android 10 create '/storage/emulated/0/UzorApp' */
+                picturesDirectory = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), folder); 
+            }
+
+
+
+
 
             if (await Permissions.RequestAsync<Permissions.StorageWrite>() == PermissionStatus.Granted &&
                 await Permissions.RequestAsync<Permissions.StorageRead>()  == PermissionStatus.Granted &&
@@ -33,6 +46,7 @@ namespace Uzor.Droid
                 await Permissions.RequestAsync<Permissions.Media>()        == PermissionStatus.Granted
                 )
             {
+                //System.IO.Directory.CreateDirectory(picturesDirectory); 
                 System.IO.Directory.CreateDirectory(picturesDirectory);
 
                 using (File bitmapFile = new File(picturesDirectory, filename))
@@ -44,7 +58,7 @@ namespace Uzor.Droid
                     catch (Exception e)
                     {
                         var s = e.Message;
-                        return false;
+                        return null;
                     }
 
                     using (FileOutputStream outputStream = new FileOutputStream(bitmapFile))
@@ -54,10 +68,23 @@ namespace Uzor.Droid
                 }
             }
             else
-                return false;
+            {
+                //TODO: throw new Excepton
+                return "file access must be enabled!";
+            }
+                
 
                 
-            return true;
+            return new File(picturesDirectory, filename).ToString();
         }
     }
 }
+
+// string picturesDirectory = System.IO.Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).AbsolutePath, folder);
+
+/*
+File f = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures);
+File filesDirectory = Android.App.Application.Context.GetExternalFilesDir(null);
+string f3 = Xamarin.Essentials.FileSystem.AppDataDirectory.ToString();
+File f4 = 
+*/
