@@ -41,7 +41,7 @@ namespace Uzor.Data
     public class Field
     {
         public PixelColor FrontColor { get; set; } = new PixelColor(255, 0, 0);
-        public PixelColor BackColor { get; set; }  = new PixelColor(255, 255, 255);
+        public PixelColor BackColor { get; set; }  = new PixelColor(255, 255, 255, 0);
         private List<bool[,]> Content { get; set; } = new List<bool[,]>(); // List<> of all states of Content
         public bool ColorInverted { get; set; } = false;
         public int Step { get; set; } = -1;

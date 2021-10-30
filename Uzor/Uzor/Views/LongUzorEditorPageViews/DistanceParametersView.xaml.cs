@@ -34,6 +34,8 @@ namespace Uzor.Views.LongUzorEditorPageViews
                 parentView.Data.B = (int)e.NewValue;
             else if (slider == FindByName("C"))
                 parentView.Data.C = (int)e.NewValue;
+            else if (slider == FindByName("D"))
+                parentView.Data.D = (int)e.NewValue;
 
             parentView.Draw();
         }

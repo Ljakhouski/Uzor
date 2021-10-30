@@ -27,6 +27,8 @@ namespace Uzor
                     string savedFilePath = Task.Run(() => DependencyService.Get<IPhotoLibrary>().
                         SavePhotoAsync(data, folder, name)).Result;
 
+                    var task = DependencyService.Get<IPhotoLibrary>().SavePhotoAsync(data, folder, name);
+                    //Task<string> result = task.Result();
                     //savedFilePath = await DependencyService.Get<IPhotoLibrary>().
                     //    SavePhotoAsync(data, folder, name);
 

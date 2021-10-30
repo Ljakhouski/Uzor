@@ -58,12 +58,13 @@ namespace Uzor.Views.EditorObjects
             this.sceneCenterX = (int)view.CanvasSize.Width / 2;
             this.sceneCenterY = (int)view.CanvasSize.Height / 2;
 
-            bool b = false;
+            /*
             for (int i = -7; i < 7; i++)
             {
                 drawCentralUzor(i, canvas, view.CanvasSize.Width, view.CanvasSize.Height);
                 drawSideUzor(i, canvas, view.CanvasSize.Width, view.CanvasSize.Height);
-            }
+            }*/
+            drawSingleLongUzor(canvas, view.CanvasSize.Width, view.CanvasSize.Height);
 
             
         }
@@ -76,12 +77,39 @@ namespace Uzor.Views.EditorObjects
             this.sceneCenterX = (int)width / 2;
             this.sceneCenterY = (int)height / 2;
 
-            bool b = false;
+            /*
             for (int i = -7; i < 7; i++)
             {
                 drawCentralUzor(i, canvas, width, height);
                 drawSideUzor(i, canvas, width, height);
+            }*/
+            drawSingleLongUzor(canvas, width, height);
+        }
+
+        private void drawSingleLongUzor(SKCanvas canvas, float width, float height)
+        {
+            for (int i = -2; i<3; i++)
+            {
+                SKMatrix matrix = SKMatrix.Identity;
+                SKMatrix previousMatrix = canvas.TotalMatrix;
+
+                int distance = this.Data.D;
+                int x = distance * minimalStepSize * i;
+
+                matrix.TransX = x;
+                SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
+                canvas.SetMatrix(matrix);
+                int debugDistance = (int)canvas.TotalMatrix.TransX;
+                int debugYdistance = (int)canvas.TotalMatrix.TransY;
+                for (int j = -7; j < 7; j++)
+                {
+                    drawCentralUzor(j, canvas, width, height);
+                    drawSideUzor(j, canvas, width, height);
+                }
+
+                canvas.SetMatrix(previousMatrix);
             }
+                
         }
 
         private void drawCentralUzor(int i, SKCanvas canvas, float width, float height)
