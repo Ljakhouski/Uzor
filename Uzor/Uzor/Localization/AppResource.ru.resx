@@ -126,6 +126,9 @@
   <data name="BufferSavingLabel" xml:space="preserve">
     <value>Сохранение изображения:</value>
   </data>
+  <data name="Color" xml:space="preserve">
+    <value>Цвет</value>
+  </data>
   <data name="DeleteQuestion" xml:space="preserve">
     <value>Вы точно хотите удалить элемент?</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>
+  </data>
+  <data name="PermissionDenied" xml:space="preserve">
+    <value>Не предоставлено разрешение для доступа к файлам устройства! </value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>

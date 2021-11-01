@@ -4,13 +4,19 @@
              x:Class="Uzor.Views.LongUzorEditorPageViews.LayersParapetersView">
   <ContentView.Content>
         <Frame CornerRadius="15" Margin="0,0,0,0" BackgroundColor="White" HasShadow="False">
-            <StackLayout Spacing="23">
-                <Label Text="TEST_LABEL"/>
-                <Label Text="TEST_LABEL"/>
-                <Label Text="TEST_LABEL"/>
-                <Label Text="TEST_LABEL"/>
-                <Label Text="TEST_LABEL"/>
-            </StackLayout>
+            <ScrollView>
+                <StackLayout Spacing="23">
+                    <Label Text="TEST_LABEL"/>
+                    <Button Text="1 edit"/>
+                    <Label Text="TEST_LABEL"/>
+                    <Button Text="2 edit"/>
+                    <Label Text="TEST_LABEL"/>
+                    <Button Text="side edit"/>
+                    <Label Text="colors:"/>
+                    <Button Text="front" Clicked="colorChange_Clicked"/>
+                </StackLayout>
+            </ScrollView>
+            
         </Frame>
     </ContentView.Content>
 </ContentView>

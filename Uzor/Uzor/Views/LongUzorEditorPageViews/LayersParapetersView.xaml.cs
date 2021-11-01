@@ -16,5 +16,12 @@ namespace Uzor.Views.LongUzorEditorPageViews
         {
             InitializeComponent();
         }
+
+       
+
+        private void colorChange_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

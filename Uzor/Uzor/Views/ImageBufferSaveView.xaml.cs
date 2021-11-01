@@ -93,7 +93,7 @@ namespace Uzor.Views
             this.previewCanvas.InvalidateSurface();
         }
 
-        private void imageSaveButton_clicked(object sender, EventArgs e)
+        private async void imageSaveButton_clicked(object sender, EventArgs e)
         {
             // Get this SKImage data. This is basically an array of bytes in PNG format.
             SKData data = SKImage.FromBitmap(bitmap).Encode();
@@ -103,12 +103,15 @@ namespace Uzor.Views
             string filename = String.Format("Uzor" + "-{0:D4}{1:D2}{2:D2}-{3:D2}{4:D2}{5:D2}{6:D3}.png",
                                             dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
 
-            string savedFilePath = BitmapStreamWriter.SaveBitmap(bitmap, (SKEncodedImageFormat)formatPicker.SelectedItem, 100, filename, "UzorApp");
-            savingStatusLabel.Text = AppResource.SavedInLabel + " \"" + savedFilePath + "\"";
+            string savedFilePath = await BitmapStreamWriter.SaveBitmap(bitmap, (SKEncodedImageFormat)formatPicker.SelectedItem, 100, filename, "UzorApp");
+
+            if (savedFilePath == null)
+                savingStatusLabel.Text = AppResource.PermissionDenied;
+            else
+                savingStatusLabel.Text = AppResource.SavedInLabel + " \"" + savedFilePath + "\"";
+
             imageFileShowPath = savedFilePath;
             this.showFileButton.IsVisible = true;
-
-           
         }
 
         private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)

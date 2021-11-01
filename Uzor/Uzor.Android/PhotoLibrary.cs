@@ -22,7 +22,7 @@ namespace Uzor.Droid
         {
 
             string picturesDirectory;
-            
+
 
 
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Q)
@@ -33,17 +33,15 @@ namespace Uzor.Droid
             else
             {
                 /*  in android 10 create '/storage/emulated/0/UzorApp' */
-                picturesDirectory = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), folder); 
+                picturesDirectory = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.ToString(), folder);
             }
 
 
 
-
-
             if (await Permissions.RequestAsync<Permissions.StorageWrite>() == PermissionStatus.Granted &&
-                await Permissions.RequestAsync<Permissions.StorageRead>()  == PermissionStatus.Granted &&
-                await Permissions.RequestAsync<Permissions.Photos>()       == PermissionStatus.Granted &&
-                await Permissions.RequestAsync<Permissions.Media>()        == PermissionStatus.Granted
+                await Permissions.RequestAsync<Permissions.StorageRead>() == PermissionStatus.Granted &&
+                await Permissions.RequestAsync<Permissions.Photos>() == PermissionStatus.Granted &&
+                await Permissions.RequestAsync<Permissions.Media>() == PermissionStatus.Granted
                 )
             {
                 //System.IO.Directory.CreateDirectory(picturesDirectory); 
@@ -70,11 +68,11 @@ namespace Uzor.Droid
             else
             {
                 //TODO: throw new Excepton
-                return "file access must be enabled!";
+                return null;
             }
-                
 
-                
+
+            //if ()
             return new File(picturesDirectory, filename).ToString();
         }
     }

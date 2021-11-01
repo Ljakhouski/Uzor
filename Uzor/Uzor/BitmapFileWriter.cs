@@ -10,7 +10,7 @@ namespace Uzor
 {
     class BitmapStreamWriter
     {
-        public static string SaveBitmap(SKBitmap bitmap, SKEncodedImageFormat format, int quality, string name, string folder)
+        public static async Task<string> SaveBitmap(SKBitmap bitmap, SKEncodedImageFormat format, int quality, string name, string folder)
         {
             using (MemoryStream memStream = new MemoryStream())
             using (SKManagedWStream wstream = new SKManagedWStream(memStream))
@@ -24,10 +24,11 @@ namespace Uzor
                 }
                 else
                 {
-                    string savedFilePath = Task.Run(() => DependencyService.Get<IPhotoLibrary>().
-                        SavePhotoAsync(data, folder, name)).Result;
+                    /*string savedFilePath = Task.Run(() => DependencyService.Get<IPhotoLibrary>().
+                        SavePhotoAsync(data, folder, name)).Result;*/
 
-                    var task = DependencyService.Get<IPhotoLibrary>().SavePhotoAsync(data, folder, name);
+                    var savedFilePath = await DependencyService.Get<IPhotoLibrary>().SavePhotoAsync(data, folder, name);
+
                     //Task<string> result = task.Result();
                     //savedFilePath = await DependencyService.Get<IPhotoLibrary>().
                     //    SavePhotoAsync(data, folder, name);
