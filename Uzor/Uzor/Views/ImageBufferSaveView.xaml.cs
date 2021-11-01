@@ -4,6 +4,7 @@ using System;
 using Uzor.Data;
 using Uzor.Localization;
 using Uzor.Views.EditorObjects;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -108,10 +109,11 @@ namespace Uzor.Views
             if (savedFilePath == null)
                 savingStatusLabel.Text = AppResource.PermissionDenied;
             else
+            {
                 savingStatusLabel.Text = AppResource.SavedInLabel + " \"" + savedFilePath + "\"";
-
-            imageFileShowPath = savedFilePath;
-            this.showFileButton.IsVisible = true;
+                imageFileShowPath = savedFilePath;
+                this.showFileButton.IsVisible = true;
+            }
         }
 
         private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
@@ -132,9 +134,13 @@ namespace Uzor.Views
             updateLongUzorBitmap();
         }
         private string imageFileShowPath;
-        private void showImageFile_Clicked(object sender, EventArgs e)
+        private async void showImageFile_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IFileOpener>().Show(imageFileShowPath);
+            await Share.RequestAsync(new ShareFileRequest
+            {
+                Title = "Share",
+                File = new ShareFile(imageFileShowPath)
+            });
         }
     }
 }
