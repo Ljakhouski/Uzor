@@ -43,7 +43,7 @@ namespace Uzor
 
         private async void openURL_Clicked(object sender, EventArgs e)
         {
-            await Browser.OpenAsync("https://www.instagram.com/ljachovsky/", BrowserLaunchMode.SystemPreferred);
+            await Browser.OpenAsync("https://www.instagram.com/ljakhousky/", BrowserLaunchMode.SystemPreferred);
         }
     }
 }
