@@ -1,9 +1,10 @@
 ﻿using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
+using System.Threading.Tasks;
 using Uzor.Data;
+using Uzor.EditorObjects;
 using Uzor.Localization;
-using Uzor.Views.EditorObjects;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,28 +16,32 @@ namespace Uzor.Views
     {
         private LongUzorData longUzorData;
         private UzorData uzorData;
-        private SKBitmap bitmap = new SKBitmap(1000, 1600);
+        private SKBitmap bitmap;
 
-        private int bitmapWidth = 1000;
-        private int bitmapHeight = 1600;
+        private int bitmapWidth;
+        private int bitmapHeight = 1500;
+
+        const int currentPixelSize = 20; // using for size-calculation & bitmap drawing
         public ImageBufferSaveView(LongUzorData data)
         {
             this.longUzorData = data;
             InitializeComponent();
             setDefaultPickerValue();
             updateLongUzorBitmap();
+            this.bitmapPreviewViewFrame.Content = new BitmapPreviewView(bitmap);
         }
 
         public ImageBufferSaveView(UzorData data)
         {
             this.uzorData = data;
-            this.bitmapWidth = data.FieldSize * 20;
+            this.bitmapWidth = data.FieldSize * currentPixelSize;
             this.bitmapHeight = bitmapWidth;
-            this.bitmap = new SKBitmap(bitmapWidth, bitmapHeight);
             InitializeComponent();
             setDefaultPickerValue();
             this.heightSlider.IsVisible = false;
+            this.bitmapPreviewViewFrame.Content = new BitmapPreviewView(bitmap);
             updateSquareUzorBitmap();
+            
         } 
         
         private void setDefaultPickerValue()
@@ -70,33 +75,76 @@ namespace Uzor.Views
 
         }
 
+        private void updateBitmapInPreviewer()
+        {
+            if (this.bitmapPreviewViewFrame.Content != null)
+            {
+                var v = (BitmapPreviewView)this.bitmapPreviewViewFrame.Content;
+                v.Bitmap = bitmap;
+            }
+        }
         private void updateLongUzorBitmap()
         {
+            var o = new LongUzorDrawingObject(longUzorData) { PixelSize = currentPixelSize };
+            this.bitmapWidth = o.GetResultSceneWidth() >3500? 3500 : o.GetResultSceneWidth();
+            this.bitmap = new SKBitmap(this.bitmapWidth, this.bitmapHeight);
+
             using (SKCanvas saveBitmapCanvas = new SKCanvas(bitmap))
             {
-                var o = new LongUzorDrawingObject(longUzorData);
-                o.Draw(saveBitmapCanvas, 1000, this.bitmapHeight);
-              //  for (int i = 500; i > 100; i -= 10)
-               //     saveBitmapCanvas.DrawCircle(500, 500, i, new SKPaint() { Color = new SKColor((byte)new Random().Next(10,222), (byte)new Random().Next(10, 222), (byte)new Random().Next(10, 222), 10) });
+                o.Draw(saveBitmapCanvas, this.bitmapWidth, this.bitmapHeight);
             }
 
-            this.previewCanvas.InvalidateSurface();
+            updateBitmapInPreviewer();
         }
 
         private void updateSquareUzorBitmap()
         {
+            this.bitmapWidth = uzorData.FieldSize * currentPixelSize;
+            this.bitmapHeight = bitmapWidth;
+
+            this.bitmap = new SKBitmap(this.bitmapWidth, this.bitmapHeight);
+            
             using (SKCanvas saveBitmapCanvas = new SKCanvas(bitmap))
             {
                 var o = new UzorDrawingObject(uzorData);
-                o.DrawUzor(20, saveBitmapCanvas, bitmapWidth, bitmapHeight);
+                o.DrawUzor(currentPixelSize, saveBitmapCanvas, bitmapWidth, bitmapHeight);
             }
 
-            this.previewCanvas.InvalidateSurface();
+            updateBitmapInPreviewer();
+        }
+
+        private void updateBitmapPreviewView()
+        {
+            var v = (BitmapPreviewView)this.bitmapPreviewViewFrame.Content;
+            v.Draw();
         }
 
         private async void imageSaveButton_clicked(object sender, EventArgs e)
         {
+            await saveImageAsync();
             // Get this SKImage data. This is basically an array of bytes in PNG format.
+
+
+            /*SKData data = SKImage.FromBitmap(bitmap).Encode();
+
+            // NOTE: This filename is not used by iOS!
+            DateTime dt = DateTime.Now;
+            string filename = String.Format("Uzor" + "-{0:D4}{1:D2}{2:D2}-{3:D2}{4:D2}{5:D2}{6:D3}.png",
+                                            dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
+
+            string savedFilePath = await BitmapStreamWriter.SaveBitmap(bitmap, (SKEncodedImageFormat)formatPicker.SelectedItem, 100, filename, "UzorApp");
+
+            if (savedFilePath == null)
+                savingStatusLabel.Text = AppResource.PermissionDenied;
+            else
+            {
+                savingStatusLabel.Text = AppResource.SavedInLabel + " \"" + savedFilePath + "\"";
+                imageFileShowPath = savedFilePath;
+            }*/
+        }
+
+        private async Task saveImageAsync()
+        {
             SKData data = SKImage.FromBitmap(bitmap).Encode();
 
             // NOTE: This filename is not used by iOS!
@@ -112,10 +160,8 @@ namespace Uzor.Views
             {
                 savingStatusLabel.Text = AppResource.SavedInLabel + " \"" + savedFilePath + "\"";
                 imageFileShowPath = savedFilePath;
-                this.showFileButton.IsVisible = true;
             }
         }
-
         private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
         {
             SKCanvas c = e.Surface.Canvas;
@@ -132,15 +178,26 @@ namespace Uzor.Views
             this.bitmapHeight = (int)e.NewValue;
             this.bitmap = new SKBitmap(1000, bitmapHeight);
             updateLongUzorBitmap();
+            updateBitmapPreviewView();
         }
-        private string imageFileShowPath;
+        private string imageFileShowPath = "";
         private async void showImageFile_Clicked(object sender, EventArgs e)
         {
+            if (imageFileShowPath.Length == 0)
+                await saveImageAsync().ConfigureAwait(false);
+
             await Share.RequestAsync(new ShareFileRequest
             {
-                Title = "Share",
+                Title = AppResource.Share,
                 File = new ShareFile(imageFileShowPath)
             });
+
+            imageFileShowPath = "";
+        }
+
+        private void frameSizeChandged(object sender, EventArgs e)
+        {
+            this.bitmapPreviewViewFrame.HeightRequest = this.bitmapPreviewViewFrame.Width;
         }
     }
 }

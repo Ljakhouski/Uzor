@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Uzor.Algorithm;
 using Uzor.Data;
-using Uzor.Views.EditorObjects;
+using Uzor.EditorObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -47,6 +47,7 @@ namespace Uzor.Views
             else
                 this.cropSlider.Maximum = data.FieldSize/2;
 
+            this.UzorView.EditorObjectssList.Add(new Background(data));
             this.UzorView.EditorObjectssList.Add(uzor);
             this.UzorView.EditorObjectssList.Add(centerIndicator);
             this.UzorView.EditorObjectssList.Add(mirrorIndicator);

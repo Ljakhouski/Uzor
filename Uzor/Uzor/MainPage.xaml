@@ -45,30 +45,31 @@
                     <Grid>
                         <Image x:Name="backGroundImage" Source="uzorBackGroundGradient.PNG" Scale="2" AnchorX="0.23" AnchorY="0.98" Rotation="10"></Image>
                         <StackLayout TranslationY="15" Margin="0,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Orientation="Horizontal" >
-                        <sh:Shadows CornerRadius="20" Rotation="45" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.43, Color=Red}">
-                            <ImageButton Source="whiteSettingButton.png"
-                                         HeightRequest="70" VerticalOptions="Center" 
-                                         Clicked="settingClick"
-                                         BackgroundColor="#FA2626" 
-                                         Margin="0,0,10,0" 
-                                         CornerRadius="23" >
+                            <sh:Shadows CornerRadius="20" Rotation="45" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.43, Color=Red}">
+                                <ImageButton Source="whiteSettingButton.png"
+                                             HeightRequest="70" VerticalOptions="Center" 
+                                             Clicked="settingClick"
+                                             BackgroundColor="#FA2626" 
+                                             Margin="0,0,20,0" 
+                                             CornerRadius="23" 
+                                             >
+                                    </ImageButton>
+                                </sh:Shadows>
+                            <sh:Shadows CornerRadius="100" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.55, Color=Red,BlurRadius=100}">
+                                <ImageButton
+                                
+                                        BackgroundColor="#FA2626" VerticalOptions="Fill" 
+                                        Source="brushIcon.png"
+                                        WidthRequest="130" 
+                                        HeightRequest="130"
+                                        Clicked="NewUzor" 
+                                        CornerRadius="100">
+                                
                                 </ImageButton>
-                            </sh:Shadows>
-                        <sh:Shadows CornerRadius="100" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.55, Color=Red,BlurRadius=100}">
-                            <ImageButton
-                                
-                                    BackgroundColor="#FA2626" VerticalOptions="Fill" 
-                                    Source="brushIcon.png"
-                                    WidthRequest="130" 
-                                    HeightRequest="130"
-                                    Clicked="NewUzor" 
-                                    CornerRadius="100">
-                                
-                            </ImageButton>
-                            </sh:Shadows>
+                                </sh:Shadows>
 
-                            <BoxView WidthRequest="80"></BoxView>
-                        </StackLayout> 
+                                <BoxView WidthRequest="80"></BoxView>
+                            </StackLayout> 
                     </Grid>
                  
                 </Frame>

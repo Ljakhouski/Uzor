@@ -8,10 +8,10 @@
         <Frame CornerRadius="15" Margin="15,0,15,15" BackgroundColor="#D9FFFFFF" HasShadow="False" >
             <StackLayout Spacing="23">
                 <Label Text="{x:Static resources:AppResource.DistancesValue}" HorizontalOptions="Center" FontSize="Default" TextColor="#262626"/>
-                <Slider x:Name="A"  Maximum="200" Minimum="0" ValueChanged="slider_Changed" ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939"/>
-                <Slider x:Name="B" Maximum="100" Minimum="-50" Value="0" ValueChanged="slider_Changed" ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939"/>
-                <Slider x:Name="C" ValueChanged="slider_Changed" ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939"/>
-                <Slider x:Name="D" Maximum="500" Minimum="50" Value="100" ValueChanged="slider_Changed" ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939"/>
+                <Slider x:Name="A"  Maximum="200" Minimum="0" ValueChanged="slider_Changed" ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939" x:FieldModifier="public"/>
+                <Slider x:Name="B" Maximum="100" Minimum="-50" Value="0" ValueChanged="slider_Changed" ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939" x:FieldModifier="public"/>
+                <Slider x:Name="C" ValueChanged="slider_Changed" ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939" x:FieldModifier="public"/>
+                <Slider x:Name="D" Maximum="200" Minimum="50" Value="100" ValueChanged="slider_Changed" ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939" x:FieldModifier="public"/>
             </StackLayout>
         </Frame>
   </ContentView.Content>

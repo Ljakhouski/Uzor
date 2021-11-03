@@ -29,8 +29,21 @@ namespace Uzor
             this.longUzorView.Data = data;
             this.pageForAlert = p;
             initializeDropMenus();
+            calculateLongUzorParameters();
         }
 
+        private void calculateLongUzorParameters()
+        {
+            var data = this.GetData();
+            data.A = /*this.longUzorView.LongUzorGraphic.PixelSize*/ 2 * data.UzorElements[0].FieldSize;
+            data.B = 0;
+            data.D = data.UzorElements[0].FieldSize * 2 + 30;
+
+            distanceParametersView.A.Value = data.A;
+            distanceParametersView.B.Value = data.B;
+            //distanceParametersView.C.Value = data.C;
+            distanceParametersView.D.Value = data.D;
+        }
         public LongUzorData GetData()
         {
             return this.longUzorView.Data;

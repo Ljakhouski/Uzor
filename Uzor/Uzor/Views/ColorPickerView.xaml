@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Uzor.Views.ColorPickerView"
+             xmlns:resources="clr-namespace:Uzor.Localization">
+  <ContentView.Content>
+        <Grid>
+            <Frame x:Name="viewFrame"
+                   BackgroundColor="#e3e6e8"
+                   CornerRadius="20"
+                   Margin="40,100,40,100"
+                   Padding="0"
+                   VerticalOptions="Center">
+
+                <StackLayout>
+                    <Grid MinimumHeightRequest="60" HeightRequest="60">
+                        <BoxView BackgroundColor="#D23838" HorizontalOptions="FillAndExpand" Margin="0"></BoxView>
+                        <Label Text="{x:Static resources:AppResource.Color}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"></Label>
+                    </Grid>
+
+                    <StackLayout Orientation="Horizontal" Padding="20">
+                        <Picker x:Name="picker"
+                            SelectedIndexChanged="onPickerChanged">
+                            <Picker.Items>
+                                <x:String>Front</x:String>
+                                <x:String>Background</x:String>
+                            </Picker.Items>
+                        </Picker>
+                        <Grid>
+                            <Ellipse x:Name="backEllipse" WidthRequest="30" HeightRequest="30" Stroke="Black" StrokeThickness="4"></Ellipse>
+                            <Ellipse x:Name="frontEllipse"  WidthRequest="30" HeightRequest="30" TranslationX="20" TranslationY="-15" Stroke="Black" StrokeThickness="4"></Ellipse>
+                        </Grid>
+
+
+                    </StackLayout>
+                    
+                    
+                    <Slider x:Name="R_Slider" Maximum="255" Minimum="0" Value="100" ValueChanged="colorValue_Changed"
+                            ThumbColor="Red" MinimumTrackColor="DarkRed"
+                            ></Slider>
+                    <Slider x:Name="G_Slider" Maximum="255" Minimum="0" Value="100" ValueChanged="colorValue_Changed"
+                            ThumbColor="Green" MinimumTrackColor="DarkGreen"></Slider>
+                    <Slider x:Name="B_Slider" Maximum="255" Minimum="0" Value="100" ValueChanged="colorValue_Changed"
+                            ThumbColor="Blue" MinimumTrackColor="DarkBlue"></Slider>
+                    <Slider x:Name="A_Slider" Maximum="255" Minimum="0" Value="100" ValueChanged="colorValue_Changed"
+                            ThumbColor="Gray" MinimumTrackColor="DarkGray"></Slider>
+
+                    
+                </StackLayout>
+
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

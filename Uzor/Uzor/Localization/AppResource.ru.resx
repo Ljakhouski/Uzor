@@ -180,6 +180,12 @@
   <data name="Setting" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="Share" xml:space="preserve">
+    <value>Поделиться</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Размер:</value>
+  </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
   </data>

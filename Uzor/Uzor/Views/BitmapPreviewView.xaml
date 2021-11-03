@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:skia1="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" xmlns:tt="clr-namespace:TouchTracking"
+             x:Class="Uzor.Views.BitmapPreviewView">
+  <ContentView.Content>
+    <Grid>
+        <skia1:SKCanvasView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                        x:Name="view"  InputTransparent="True"
+                        PaintSurface="onCanvasViewPaintSurface" IgnorePixelScaling="False">
+        </skia1:SKCanvasView>
+        
+        <Grid.Effects>
+            <tt:TouchEffect Capture="True"
+                            TouchAction="OnTouchEffectAction"/>
+        </Grid.Effects>
+        </Grid>
+  </ContentView.Content>
+</ContentView>

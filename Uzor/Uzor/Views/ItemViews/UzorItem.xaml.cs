@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Uzor.Data;
 using Uzor.Localization;
-using Uzor.Views.EditorObjects;
+using Uzor.EditorObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

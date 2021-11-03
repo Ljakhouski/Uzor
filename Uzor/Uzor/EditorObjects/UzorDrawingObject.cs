@@ -7,7 +7,7 @@ using TouchTracking;
 using Uzor.Data;
 using Xamarin.Forms;
 
-namespace Uzor.Views.EditorObjects
+namespace Uzor.EditorObjects
 {
     public enum Direction
     {
@@ -33,7 +33,9 @@ namespace Uzor.Views.EditorObjects
         {
             canvas.SetMatrix(matrix); // default this view can transform matrix
 
-            //canvas.Clear(Color.DarkGray.ToSKColor());
+            //SKColor backColor = this.Data.Layers[0].BackColor.ToSKColor();
+            //canvas.Clear(backColor);
+
             float pixelSize = (float)view.CanvasSize.Width / Data.FieldSize;
             this.DrawUzor(pixelSize, canvas, view.CanvasSize.Width, view.CanvasSize.Height);
 
@@ -41,15 +43,14 @@ namespace Uzor.Views.EditorObjects
 
         public void DrawUzor(float pixelSize, SKCanvas canvas, float width, float height, Direction direction = Direction.None)
         {
-            
             var f = this.Data.Layers[LayerNumber].GetLastState();
             var mask = this.Data.CropMask;
             bool isEmptyMask = this.Data.CropMaskIsEmpty();
 
-            SKColor backColor = this.Data.Layers[0].BackColor.ToSKColor();
+            //SKColor backColor = this.Data.Layers[0].BackColor.ToSKColor();
             SKColor frontColor = this.Data.Layers[0].FrontColor.ToSKColor();
 
-            SKPaint backPaint = new SKPaint { Color = backColor };
+            //SKPaint backPaint = new SKPaint { Color = backColor };
             SKPaint frontPaint = new SKPaint { Color = frontColor };
 
             if (GradientMode)
@@ -61,13 +62,12 @@ namespace Uzor.Views.EditorObjects
                         new float[] { 0, 1 },
                         SKShaderTileMode.Clamp);
 
-
-                backPaint.Shader = SKShader.CreateLinearGradient(
+                /*backPaint.Shader = SKShader.CreateLinearGradient(
                         new SKPoint(width / 4, height / 2),
                         new SKPoint(width, height / 2),
                         new SKColor[] { backColor, new SKColor(backColor.Red, backColor.Green, backColor.Blue, 0) },
                         new float[] { 0, 1 },
-                        SKShaderTileMode.Clamp);
+                        SKShaderTileMode.Clamp);*/
             }
 
             /********* visible-optimization *********/
@@ -106,14 +106,19 @@ namespace Uzor.Views.EditorObjects
                         (direction == Direction.ToRight && w >= Data.FieldSize/2)
                         ))
 
-                        if (f[w, h] == false)
+                        if (f[w, h])
+                            canvas.DrawRect((float)w * pixelSize,
+                                            (float)h * pixelSize, pixelSize, pixelSize,
+                                                frontPaint);
+
+                        /*if (f[w, h] == false)
                             canvas.DrawRect((float)w * pixelSize, 
                                             (float)h * pixelSize, pixelSize, pixelSize, 
                                              backPaint);
                         else
                             canvas.DrawRect((float)w * pixelSize, 
                                             (float)h * pixelSize, pixelSize, pixelSize,
-                                             frontPaint);
+                                             frontPaint);*/
                 }
         }
 

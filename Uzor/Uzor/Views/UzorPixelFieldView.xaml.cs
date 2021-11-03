@@ -13,7 +13,7 @@ using TouchTracking;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Uzor.Algorithm;
-using Uzor.Views.EditorObjects;
+using Uzor.EditorObjects;
 using Uzor.Data;
 
 namespace Uzor.Views

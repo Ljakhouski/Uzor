@@ -8,7 +8,7 @@ using TouchTracking;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Uzor.Views.EditorObjects
+namespace Uzor.EditorObjects
 {
     class UzorEditorObject : UzorDrawingObject
     {

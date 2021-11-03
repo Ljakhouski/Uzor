@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using TouchTracking;
 
-namespace Uzor.Views.EditorObjects
+namespace Uzor.EditorObjects
 {
     public class EditorObject
     {

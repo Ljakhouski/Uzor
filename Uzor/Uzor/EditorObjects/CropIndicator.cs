@@ -7,7 +7,7 @@ using Uzor.Algorithms;
 using Uzor.Data;
 using Xamarin.Forms;
 
-namespace Uzor.Views.EditorObjects
+namespace Uzor.EditorObjects
 {
     public class CropIndicator : EditorObject
     {

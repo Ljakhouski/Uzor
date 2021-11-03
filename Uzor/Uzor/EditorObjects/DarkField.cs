@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Uzor.Views.EditorObjects
+namespace Uzor.EditorObjects
 {
     public class DarkField : EditorObject
     {

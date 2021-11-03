@@ -135,9 +135,20 @@ namespace Uzor
 
                 if (this.longUzorData.UzorElements[stepNumber] == null ) // expand array of UzorElements and creating new View
                 {
-                    var current = this.longUzorData.UzorElements[stepNumber - 1];
+                    var current = this.longUzorData.UzorElements[0];
 
                     var nextUzorData = new UzorData(current.Name, current.DataOfCreation, current.GetMaskSize());
+
+                    nextUzorData.Layers[0].FrontColor = new PixelColor(current.Layers[0].FrontColor.R, 
+                                                                       current.Layers[0].FrontColor.G, 
+                                                                       current.Layers[0].FrontColor.B,
+                                                                       current.Layers[0].FrontColor.A);
+
+                    nextUzorData.Layers[0].BackColor =  new PixelColor(current.Layers[0].BackColor.R,
+                                                                       current.Layers[0].BackColor.G, 
+                                                                       current.Layers[0].BackColor.B,
+                                                                       current.Layers[0].BackColor.A);
+
                     this.longUzorData.UzorElements[stepNumber-1 + 1] = nextUzorData;
 
                     uzorEditElementViewList.Add(new UzorEditElementView(nextUzorData));
@@ -169,6 +180,13 @@ namespace Uzor
             else
             {
                 longUzorData.SidePattern = SideUzorGenerator.GetNewSideUzor(longUzorData.UzorElements[0].FieldSize);
+                longUzorData.SidePattern.Layers[0].FrontColor = longUzorData.UzorElements[0].Layers[0].FrontColor;
+
+                longUzorData.SidePattern.Layers[0].FrontColor = new PixelColor(longUzorData.UzorElements[0].Layers[0].FrontColor.R,
+                                                                               longUzorData.UzorElements[0].Layers[0].FrontColor.G,
+                                                                               longUzorData.UzorElements[0].Layers[0].FrontColor.B,
+                                                                               longUzorData.UzorElements[0].Layers[0].FrontColor.A);
+
                 LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData, pageForAlert);
                 await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
             }

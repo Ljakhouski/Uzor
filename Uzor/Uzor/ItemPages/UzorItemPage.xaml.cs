@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Uzor.Data;
 using Uzor.Views;
-using Uzor.Views.EditorObjects;
+using Uzor.EditorObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,7 +21,9 @@ namespace Uzor
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             this.data = data;
+            this.pageForAlert = p;
             var upfView = new UzorPixelFieldView();
+            upfView.EditorObjectssList.Add(new Background(data));
             upfView.EditorObjectssList.Add(new DemonstrateUzorEditorObject() { Data = data, GradientMode = false });
             this.uzorFieldFrame.Content = upfView;
             itemNameLabel.Text = data.Name;

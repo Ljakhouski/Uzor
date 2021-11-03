@@ -1,62 +1,70 @@
-﻿using System;
+﻿using SkiaSharp;
+using SkiaSharp.Views.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TouchTracking;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Uzor.EditorObjects;
-using SkiaSharp;
-using Uzor.Data;
-using TouchTracking;
 
 namespace Uzor.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LongUzorView : ContentView
+    public partial class BitmapPreviewView : ContentView
     {
-        public LongUzorDrawingObject LongUzorGraphic { get; set; } = new LongUzorDrawingObject();
+        public SKBitmap Bitmap { get; set; }
 
-        private SKMatrix matrix = SKMatrix.MakeIdentity();
         private Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
+        private SKMatrix matrix = SKMatrix.CreateIdentity();
+        public BitmapPreviewView(SKBitmap bitmap)
+        {
+            this.Bitmap = bitmap;
+            InitializeComponent();
+        }
 
-        private bool demonstrateMode_ = false;
-        //TODO: need to add ...mode for interactive elements (to turn off all events except zoom-moving)
-        public bool DemonstrateMode { get { return demonstrateMode_; } set
+        public void Draw()
+        {
+            this.view.InvalidateSurface();
+        }
+        private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
+        {
+            SKCanvas c = e.Surface.Canvas;
+            c.Clear();
+            drawBackgroundGrid(c);
+            c.SetMatrix(matrix);
+            if (this.Bitmap != null)
             {
-                demonstrateMode_ = value;
-                this.InputTransparent = !value;
+                c.DrawBitmap(this.Bitmap, new SKPoint(0, 0));
             }
-        } 
-
-        private void GridTouchEffect_TouchAction(object sender, TouchActionEventArgs args)
-        {
-            throw new NotImplementedException();
         }
 
-        public LongUzorData Data 
-        { 
-            get { return LongUzorGraphic.Data; }
-            set { this.LongUzorGraphic.Data = value; }
-        }
-
-        public LongUzorView(LongUzorData data)
+        private void drawBackgroundGrid(SKCanvas canvas)
         {
-            InitializeComponent();
-            this.LongUzorGraphic.Data = data;
-        }
+            var currentMatrix = canvas.TotalMatrix;
+            var matrix = SKMatrix.Identity;
+            canvas.SetMatrix(matrix);
 
-        public LongUzorView()
-        {
-            InitializeComponent();
+            var p1 = new SKPaint() { Color = Color.White.ToSKColor() };
+            var p2 = new SKPaint() { Color = Color.Gray.ToSKColor() };
+            bool b = false;
+            for (int i = 0; i<201; i++)
+                for (int j = 0; j<201; j++)
+                {
+                    canvas.DrawRect(new SKRect(i * 15, j * 15, i * 15 + 15, j * 15 + 15), b? p1:p2);
+                    b = !b;
+                }
+
+            canvas.SetMatrix(currentMatrix);
+
         }
         private void OnTouchEffectAction(object sender, TouchTracking.TouchActionEventArgs args)
         {
             Point pt = args.Location;
             SKPoint point =
-                new SKPoint((float)(canvasView.CanvasSize.Width * pt.X / canvasView.Width),
-                            (float)(canvasView.CanvasSize.Height * pt.Y / canvasView.Height));
+                new SKPoint((float)(view.CanvasSize.Width * pt.X / view.Width),
+                            (float)(view.CanvasSize.Height * pt.Y / view.Height));
 
 
             switch (args.Type)
@@ -139,25 +147,12 @@ namespace Uzor.Views
                     if (touchDictionary.ContainsKey(args.Id))
                         touchDictionary.Remove(args.Id);
 
-                    if (matrix.ScaleX < 0.2)
-                        matrix = SKMatrix.Identity;
                     break;
+
+                
             }
-
-            this.canvasView.InvalidateSurface();
-        }
-
-        private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
-        {
-            e.Surface.Canvas.SetMatrix(matrix);
-            LongUzorGraphic.Draw(e.Surface.Canvas, canvasView);
-
-            // TODO: draw zoom-indicator in top angle with specifical parent-view 
-        }
-
-        public void Draw()
-        {
-            this.canvasView.InvalidateSurface();
+            
+            this.view.InvalidateSurface();
         }
     }
 }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:skia="clr-namespace:SkiaSharp;assembly=SkiaSharp" xmlns:skia1="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="Uzor.Views.ImageBufferSaveView"
-             xmlns:resources="clr-namespace:Uzor.Localization">
+             xmlns:resources="clr-namespace:Uzor.Localization" xmlns:views="clr-namespace:Uzor.Views">
   <ContentView.Content>
         <Grid>
             <BoxView x:Name="background" BackgroundColor="Black" Opacity="0.35">
@@ -31,32 +31,29 @@
                             SelectedIndexChanged="onFormatPickerChanged">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type skia:SKEncodedImageFormat}">
-                                    <x:Static Member="skia:SKEncodedImageFormat.Gif" />
-                                    <x:Static Member="skia:SKEncodedImageFormat.Ico" />
                                     <x:Static Member="skia:SKEncodedImageFormat.Jpeg" />
                                     <x:Static Member="skia:SKEncodedImageFormat.Png" />
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
-                        
-                        
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Text="{x:Static resources:AppResource.Size}" Margin="15,0,10,0"></Label>
+                        <Slider x:Name="heightSlider" ThumbColor="#D23838" MinimumTrackColor="#D23838" MaximumTrackColor="Gray" Maximum="5000" Minimum="1500" Value="3600" HorizontalOptions="FillAndExpand" ValueChanged="heightValue_Changed"></Slider>
                     </StackLayout>
                     
-                    <Slider x:Name="heightSlider" Maximum="5000" Minimum="1500" Value="1600" ValueChanged="heightValue_Changed"></Slider>
-                    
-                    <Frame VerticalOptions="Fill" HorizontalOptions="Fill" CornerRadius="10" Padding="0" Margin="15">
-                        <ScrollView Orientation="Both">
-                            <skia1:SKCanvasView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" WidthRequest="1000" HeightRequest="1000"
-                            x:Name="previewCanvas"  InputTransparent="True"
-                            PaintSurface="onCanvasViewPaintSurface" IgnorePixelScaling="False">
-                            </skia1:SKCanvasView>
-                        </ScrollView>
+                    <Frame x:Name="bitmapPreviewViewFrame" MinimumHeightRequest="200"  HorizontalOptions="Fill" CornerRadius="10" Padding="0" Margin="15" SizeChanged="frameSizeChandged">
+                        
                     </Frame>
+
+                    <StackLayout Orientation="Horizontal" Margin="20" HorizontalOptions="Fill">
+                        <Button Text="{x:Static resources:AppResource.Save}" BackgroundColor="#CBCBCB" Clicked="imageSaveButton_clicked" CornerRadius="20" Margin="0,0,10,0" HorizontalOptions="FillAndExpand"></Button>
+                        <ImageButton Source="ShareIcon.png" BackgroundColor="#e3e6e8" Clicked="showImageFile_Clicked" WidthRequest="50" CornerRadius="20"/>
+                    </StackLayout>
                     
+                    <Label Text="" Margin="10" x:Name="savingStatusLabel" LineBreakMode="WordWrap" TextColor="Black"/>
                     
-                    <Button Text="{x:Static resources:AppResource.Save}" Clicked="imageSaveButton_clicked" CornerRadius="20" Margin="20"></Button>
-                    <Label Text="" x:Name="savingStatusLabel" LineBreakMode="WordWrap" TextColor="Black"/>
-                    <Button Text="..." IsVisible="false" x:Name="showFileButton" Clicked="showImageFile_Clicked"/>
                 </StackLayout>
             </Frame>
         </Grid>

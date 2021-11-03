@@ -7,7 +7,7 @@ using TouchTracking;
 using Uzor.Data;
 using Xamarin.Forms;
 
-namespace Uzor.Views.EditorObjects
+namespace Uzor.EditorObjects
 {
     public class LongUzorDrawingObject : EditorObject
     {
@@ -19,7 +19,13 @@ namespace Uzor.Views.EditorObjects
                 sideUzorPainter.Data = data_.SidePattern;
                 calculateSizes();
             } }
-        private int pixelSize = 10;
+
+        private int _pixelSize = 10;
+        public int PixelSize
+        { 
+            get { return _pixelSize; }
+            set { this._pixelSize = value; calculateSizes(); } 
+        }
         public LongUzorDrawingObject(LongUzorData data)
         {
             this.Data = data;
@@ -31,16 +37,22 @@ namespace Uzor.Views.EditorObjects
         public LongUzorDrawingObject()
         {
             //uzorPainter.Data = this.Data.UzorElements[0];
-            //calculateSizes();
+            calculateSizes();
         }
 
         private void calculateSizes()
         {
-            minimalStepSize = pixelSize / 2;
+            minimalStepSize = PixelSize / 2;
             //minimal_A_parameter = minimalStepSize * 20;
         }
 
         private int minimalStepSize;
+        public int GetResultSceneWidth()
+        {
+            const int longUzorNumber = 5;
+            const int freeZone = 300;
+            return this.Data.D * longUzorNumber * minimalStepSize + freeZone;
+        }
         //private int minimal_A_parameter;
         private int sceneCenterX, sceneCenterY;
         
@@ -51,7 +63,6 @@ namespace Uzor.Views.EditorObjects
 
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {
-            canvas.Clear();
             if (Data == null)
                 return;
 
@@ -64,13 +75,15 @@ namespace Uzor.Views.EditorObjects
                 drawCentralUzor(i, canvas, view.CanvasSize.Width, view.CanvasSize.Height);
                 drawSideUzor(i, canvas, view.CanvasSize.Width, view.CanvasSize.Height);
             }*/
-            drawSingleLongUzor(canvas, view.CanvasSize.Width, view.CanvasSize.Height);
+
+            canvas.Clear(Data.BackColor.ToSKColor());
+
+            drawSingleLongUzors(canvas, view.CanvasSize.Width, view.CanvasSize.Height);
 
             
         }
         public override void Draw(SKCanvas canvas, float width, float height)
         {
-            canvas.Clear();
             if (Data == null)
                 return;
 
@@ -83,10 +96,13 @@ namespace Uzor.Views.EditorObjects
                 drawCentralUzor(i, canvas, width, height);
                 drawSideUzor(i, canvas, width, height);
             }*/
-            drawSingleLongUzor(canvas, width, height);
+
+            canvas.Clear(Data.BackColor.ToSKColor());
+
+            drawSingleLongUzors(canvas, width, height);
         }
 
-        private void drawSingleLongUzor(SKCanvas canvas, float width, float height)
+        private void drawSingleLongUzors(SKCanvas canvas, float width, float height)
         {
             for (int i = -2; i<3; i++)
             {
@@ -118,7 +134,7 @@ namespace Uzor.Views.EditorObjects
             SKMatrix previousMatrix = canvas.TotalMatrix;
 
             /* move Uzor to the x-center of screen */
-            int uzorCenterX = this.pixelSize * uzorPainter.Data.FieldSize / 2;
+            int uzorCenterX = this.PixelSize * uzorPainter.Data.FieldSize / 2;
             matrix.TransX = this.sceneCenterX - uzorCenterX;
 
             int uzorCenterY = uzorCenterX; // Uzor is square object
@@ -128,7 +144,7 @@ namespace Uzor.Views.EditorObjects
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
             canvas.SetMatrix(matrix);
-            uzorPainter.DrawUzor(this.pixelSize, canvas, width, height); // uzor constantly drawing in [0;0] point
+            uzorPainter.DrawUzor(this.PixelSize, canvas, width, height); // uzor constantly drawing in [0;0] point
             canvas.SetMatrix(previousMatrix);
 
             uzorPainter.Data = this.Data.UzorElements[i%2==0 ? 0 : 1];
@@ -139,8 +155,8 @@ namespace Uzor.Views.EditorObjects
             // left side:
             SKMatrix matrix = SKMatrix.Identity;
             SKMatrix previousMatrix = canvas.TotalMatrix;
-            int uzorCenterX = this.pixelSize * this.sideUzorPainter.Data.FieldSize / 2;
-            int uzorLeftShift = this.pixelSize * this.Data.UzorElements[0].FieldSize / 2; // must be equal to one of the central Uzor-size;
+            int uzorCenterX = this.PixelSize * this.sideUzorPainter.Data.FieldSize / 2;
+            int uzorLeftShift = this.PixelSize * this.Data.UzorElements[0].FieldSize / 2; // must be equal to one of the central Uzor-size;
             matrix.TransX = this.sceneCenterX - this.Data.B * this.minimalStepSize - uzorCenterX - uzorLeftShift;
 
             int uzorCenterY = uzorCenterX; // Uzor is square object
@@ -152,14 +168,14 @@ namespace Uzor.Views.EditorObjects
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
             canvas.SetMatrix(matrix);
-            sideUzorPainter.DrawUzor(this.pixelSize, canvas, width, height, Direction.ToRight);
+            sideUzorPainter.DrawUzor(this.PixelSize, canvas, width, height, Direction.ToRight);
 
             canvas.SetMatrix(previousMatrix);
 
             // right side:
             SKMatrix previousMatrix2 = canvas.TotalMatrix;
             matrix = SKMatrix.Identity;
-            int uzorRightShift = this.pixelSize * (this.Data.UzorElements[0].FieldSize / 2 - this.sideUzorPainter.Data.FieldSize / 2);
+            int uzorRightShift = this.PixelSize * (this.Data.UzorElements[0].FieldSize / 2 - this.sideUzorPainter.Data.FieldSize / 2);
             matrix.TransX = this.sceneCenterX + this.Data.B * this.minimalStepSize + uzorRightShift;
             matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY + phaseShift;
             matrix.TransY += this.sceneCenterY;
@@ -167,7 +183,7 @@ namespace Uzor.Views.EditorObjects
             SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
 
             canvas.SetMatrix(matrix);
-            sideUzorPainter.DrawUzor(this.pixelSize, canvas, width, height, Direction.ToLeft);
+            sideUzorPainter.DrawUzor(this.PixelSize, canvas, width, height, Direction.ToLeft);
 
             canvas.SetMatrix(previousMatrix2);
         }

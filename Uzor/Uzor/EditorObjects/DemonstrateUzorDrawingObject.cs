@@ -8,7 +8,7 @@ using Uzor.Data;
 using Xamarin.Forms;
 
 
-namespace Uzor.Views.EditorObjects
+namespace Uzor.EditorObjects
 {
     class DemonstrateUzorEditorObject : EditorObject
     {
@@ -23,13 +23,15 @@ namespace Uzor.Views.EditorObjects
         {
             canvas.SetMatrix(matrix);
 
-            //canvas.Clear(Color.DarkGray.ToSKColor());
+            
 
             float pixelSize = (float)view.CanvasSize.Width / Data.FieldSize;
             var f = this.Data.Layers[LayerNumber].GetLastState();
 
             SKColor backColor = this.Data.Layers[0].BackColor.ToSKColor();
             SKColor frontColor = this.Data.Layers[0].FrontColor.ToSKColor();
+            
+            canvas.Clear(backColor);
 
             SKPaint backPaint = new SKPaint { Color = backColor };
             SKPaint frontPaint = new SKPaint { Color = frontColor };
@@ -56,12 +58,15 @@ namespace Uzor.Views.EditorObjects
             for (int w = 0; w < Data.FieldSize; w++)
                 for (int h = 0; h < Data.FieldSize; h++)
                 {
-                    if (f[w, h] == false)
+                    /*if (f[w, h] == false)
                     {
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  /*new SKPaint() { Color = backColor}*/ backPaint);
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize,  /*new SKPaint() { Color = backColor}/ backPaint);
                     }
                     else
-                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, /*new SKPaint() { Color = frontColor }*/ frontPaint);
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, /*new SKPaint() { Color = frontColor }/ frontPaint);*/
+
+                    if (f[w,h])
+                        canvas.DrawRect((float)w * pixelSize, (float)h * pixelSize, pixelSize, pixelSize, frontPaint);
                 }
 
         }

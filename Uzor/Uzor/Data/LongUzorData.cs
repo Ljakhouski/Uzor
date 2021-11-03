@@ -36,5 +36,28 @@ namespace Uzor.Data
         public LongUzorData()
         { }
 
+        public PixelColor FrontColor 
+        { 
+            get 
+            {
+                return UzorElements[0].Layers[0].FrontColor; 
+            } 
+            set
+            {
+                UzorElements[0].Layers[0].FrontColor = value;
+            }
+        }
+
+        public PixelColor BackColor
+        {
+            get
+            {
+                return UzorElements[0].Layers[0].BackColor;
+            }
+            set
+            {
+                UzorElements[0].Layers[0].BackColor = value;
+            }
+        }
     }
 }

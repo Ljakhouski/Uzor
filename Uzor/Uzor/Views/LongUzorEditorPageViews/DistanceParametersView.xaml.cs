@@ -39,5 +39,10 @@ namespace Uzor.Views.LongUzorEditorPageViews
 
             parentView.Draw();
         }
+
+        private void slider_Chaged(object sender, ValueChangedEventArgs e)
+        {
+
+        }
     }
 }
