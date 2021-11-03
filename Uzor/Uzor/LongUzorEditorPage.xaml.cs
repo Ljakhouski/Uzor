@@ -41,7 +41,8 @@ namespace Uzor
 
             distanceParametersView.A.Value = data.A;
             distanceParametersView.B.Value = data.B;
-            //distanceParametersView.C.Value = data.C;
+            distanceParametersView.C.Maximum = data.SidePattern.FieldSize / 2 + 1;
+            distanceParametersView.C.Value = distanceParametersView.C.Maximum;
             distanceParametersView.D.Value = data.D;
         }
         public LongUzorData GetData()

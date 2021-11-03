@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TouchTracking;
+using Uzor.Algorithms;
 using Uzor.Data;
 using Xamarin.Forms;
 
@@ -152,6 +153,8 @@ namespace Uzor.EditorObjects
 
         private void drawSideUzor(int i, SKCanvas canvas, float width, float height)
         {
+            update_C_Parameter();
+
             // left side:
             SKMatrix matrix = SKMatrix.Identity;
             SKMatrix previousMatrix = canvas.TotalMatrix;
@@ -186,6 +189,11 @@ namespace Uzor.EditorObjects
             sideUzorPainter.DrawUzor(this.PixelSize, canvas, width, height, Direction.ToLeft);
 
             canvas.SetMatrix(previousMatrix2);
+        }
+        private void update_C_Parameter()
+        {
+            //if (this.sideUzorPainter.Data.CropMask != null && !this.sideUzorPainter.Data.CropMaskIsEmpty())
+            this.sideUzorPainter.Data.CropMask = RhombAlgorithm.GetRhombMask(this.Data.C, this.sideUzorPainter.Data.FieldSize);
         }
         public override void TouchEffectAction(TouchActionEventArgs args, SKCanvasView view)
         {

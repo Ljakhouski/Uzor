@@ -8,6 +8,9 @@ namespace Uzor.Algorithms
     {
         public static bool[,] GetRhombMask(int size, int fieldSize)
         {
+            if (size == 0)
+                return null;
+
             var cropFieldMask = new bool[fieldSize, fieldSize];
 
             int lineSize = 0;

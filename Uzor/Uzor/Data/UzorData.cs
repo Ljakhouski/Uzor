@@ -103,6 +103,9 @@ namespace Uzor.Data
         
         public bool CropMaskIsEmpty()
         {
+            if (this.CropMask == null)
+                return true;
+
             for (int i = 0; i <= this.CropMask.GetUpperBound(0); i++)
                 for (int j = 0; j <= this.CropMask.GetUpperBound(1); j++)
                     if (this.CropMask[i, j])
