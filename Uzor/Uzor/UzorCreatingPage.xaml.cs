@@ -187,7 +187,7 @@ namespace Uzor
                                                                                longUzorData.UzorElements[0].Layers[0].FrontColor.B,
                                                                                longUzorData.UzorElements[0].Layers[0].FrontColor.A);
 
-                LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData, pageForAlert);
+                LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData, pageForAlert, true);
                 await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
             }
 }

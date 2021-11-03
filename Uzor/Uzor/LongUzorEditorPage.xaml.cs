@@ -23,13 +23,14 @@ namespace Uzor
         private string SavedFilePath;
         private MainPage pageForAlert;
         public bool ReSave { get; set; }
-        public LongUzorEditorPage(LongUzorData data, MainPage p)
+        public LongUzorEditorPage(LongUzorData data, MainPage p, bool isNewLongUzor = false)
         {
             InitializeComponent();
             this.longUzorView.Data = data;
             this.pageForAlert = p;
             initializeDropMenus();
-            calculateLongUzorParameters();
+            if (isNewLongUzor)
+                calculateLongUzorParameters();
         }
 
         private void calculateLongUzorParameters()
