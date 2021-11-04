@@ -106,6 +106,7 @@ namespace Uzor.Views
             
             using (SKCanvas saveBitmapCanvas = new SKCanvas(bitmap))
             {
+                saveBitmapCanvas.Clear(uzorData.Layers[0].BackColor.ToSKColor()); // UzorDrawingObject does not support background rendering
                 var o = new UzorDrawingObject(uzorData);
                 o.DrawUzor(currentPixelSize, saveBitmapCanvas, bitmapWidth, bitmapHeight);
             }

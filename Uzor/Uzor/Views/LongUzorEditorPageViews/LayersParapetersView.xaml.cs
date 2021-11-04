@@ -23,5 +23,11 @@ namespace Uzor.Views.LongUzorEditorPageViews
         {
 
         }
+
+        private void scrollToDown(object sender, EventArgs e)
+        {
+            scroll.ScrollToAsync(forScrollingToEnd, ScrollToPosition.End, true);
+            downButton.FadeTo(0);
+        }
     }
 }

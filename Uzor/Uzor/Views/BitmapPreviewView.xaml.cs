@@ -22,6 +22,10 @@ namespace Uzor.Views
         {
             this.Bitmap = bitmap;
             InitializeComponent();
+            this.matrix.ScaleX = 0.5f;
+            this.matrix.ScaleY = 0.5f;
+            this.matrix.TransX = 20;
+            this.matrix.TransY = 20;
         }
 
         public void Draw()

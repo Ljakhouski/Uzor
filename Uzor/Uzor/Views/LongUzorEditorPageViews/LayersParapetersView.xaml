@@ -1,21 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Uzor.Views.LongUzorEditorPageViews.LayersParapetersView">
+             x:Class="Uzor.Views.LongUzorEditorPageViews.LayersParapetersView"
+             HeightRequest="350">
   <ContentView.Content>
-        <Frame CornerRadius="15" Margin="0,0,0,0" BackgroundColor="White" HasShadow="False">
-            <ScrollView>
-                <StackLayout Spacing="23">
-                    <Label Text="TEST_LABEL"/>
-                    <Button Text="1 edit"/>
-                    <Label Text="TEST_LABEL"/>
-                    <Button Text="2 edit"/>
-                    <Label Text="TEST_LABEL"/>
-                    <Button Text="side edit"/>
-                    <Label Text="colors:"/>
-                    <Button Text="front" Clicked="colorChange_Clicked"/>
-                </StackLayout>
-            </ScrollView>
+        <Frame CornerRadius="15" Margin="0,0,0,0" BackgroundColor="White" HasShadow="False" Padding="0">
+            <Grid>
+                <ScrollView x:Name="scroll" VerticalScrollBarVisibility="Always">
+                    <StackLayout Spacing="23" Padding="10">
+                        <Label Text="TEST_LABEL"/>
+                        <Button Text="1 edit"/>
+                        <Label Text="TEST_LABEL"/>
+                        <Button Text="2 edit"/>
+                        <Label Text="TEST_LABEL"/>
+                        <Button Text="side edit"/>
+                        <Label Text="colors:"/>
+                        <Button Text="front" Clicked="colorChange_Clicked"/>
+                        <Label x:Name="forScrollingToEnd" HeightRequest="0" WidthRequest="0"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <ImageButton x:Name="downButton" Clicked="scrollToDown" Source="downButton.png" HeightRequest="50" WidthRequest="50" BackgroundColor="#C0C0C0" CornerRadius="30" HorizontalOptions="Center" VerticalOptions="End" Margin="30" Opacity="0.8" Padding="15" />
+            </Grid>
+            
             
         </Frame>
     </ContentView.Content>

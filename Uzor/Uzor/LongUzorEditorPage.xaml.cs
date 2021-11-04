@@ -170,6 +170,7 @@ namespace Uzor
                 //blackBackground.Opacity = 0; // !!!
 
                 dropDownMenuLayout.Children.Add(distanceParametersView);
+                dropDownMenuLayout.HeightRequest = distanceParametersView.HeightRequest;
                 await distanceParametersView.TranslateTo(0, 0, 250, Easing.SinInOut);
             }
             else
@@ -190,6 +191,7 @@ namespace Uzor
                 blackBackground.FadeTo(0.3, 250);
 
                 dropDownMenuLayout.Children.Add(layoutParametersView);
+                dropDownMenuLayout.HeightRequest = layoutParametersView.HeightRequest;
                 await layoutParametersView.TranslateTo(0, 0, 250, Easing.SinInOut);
             }
             else
@@ -210,6 +212,7 @@ namespace Uzor
                 blackBackground.FadeTo(0.3, 250);
 
                 dropDownMenuLayout.Children.Add(saveView);
+                dropDownMenuLayout.HeightRequest = saveView.HeightRequest;
                 await saveView.TranslateTo(0, 0, 250, Easing.SinInOut);
             }
             else
