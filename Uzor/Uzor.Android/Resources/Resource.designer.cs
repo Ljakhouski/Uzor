@@ -19339,6 +19339,9 @@ namespace Uzor.Droid
 			// aapt resource value: 0x7F0C0006
 			public const int stopButton = 2131492870;
 			
+			// aapt resource value: 0x7F0C0007
+			public const int uzorIcon = 2131492871;
+			
 			static Mipmap()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
