@@ -132,22 +132,20 @@ namespace Uzor
             blackBackground.InputTransparent = true;
             blackBackground.IsEnabled = false;
 
-            if (dropDownMenuLayout.Children.Contains(distanceParametersView))
+            if (distanceDropMenuLayout.Children.Contains(distanceParametersView))
             {
-                await distanceParametersView.TranslateTo(0, 1000, 250, Easing.SinInOut);
-                dropDownMenuLayout.Children.Remove(distanceParametersView);
+                await distanceParametersView.TranslateTo(0, 1000, 350, Easing.SinInOut);
+                distanceDropMenuLayout.Children.Remove(distanceParametersView);
             }
-            else if (dropDownMenuLayout.Children.Contains(layoutParametersView))
+            else if (layerDropMenuLayout.Children.Contains(layoutParametersView))
             {
-               
-                await layoutParametersView.TranslateTo(0, 1000, 250, Easing.SinInOut);
-                dropDownMenuLayout.Children.Remove(layoutParametersView);
-
+                await layoutParametersView.TranslateTo(0, 1000, 350, Easing.SinInOut);
+                layerDropMenuLayout.Children.Remove(layoutParametersView);
             }
-            else if (dropDownMenuLayout.Children.Contains(saveView))
+            else if (saveDropMenuLayout.Children.Contains(saveView))
             {
-                await saveView.TranslateTo(0, 1000, 250, Easing.SinInOut);
-                dropDownMenuLayout.Children.Remove(saveView);
+                await saveView.TranslateTo(0, 1000, 350, Easing.SinInOut);
+                saveDropMenuLayout.Children.Remove(saveView);
             }
                 
 
@@ -159,7 +157,7 @@ namespace Uzor
         {
 
 
-            if (!dropDownMenuLayout.Children.Contains(distanceParametersView))
+            if (!distanceDropMenuLayout.Children.Contains(distanceParametersView))
             {
                 hideDownAllDropMenu();
 
@@ -169,9 +167,9 @@ namespace Uzor
                 //blackBackground.FadeTo(0.3, 250);  
                 //blackBackground.Opacity = 0; // !!!
 
-                dropDownMenuLayout.Children.Add(distanceParametersView);
-                dropDownMenuLayout.HeightRequest = distanceParametersView.HeightRequest;
-                await distanceParametersView.TranslateTo(0, 0, 250, Easing.SinInOut);
+                distanceDropMenuLayout.Children.Add(distanceParametersView);
+                //distanceDropMenuLayout.HeightRequest = distanceParametersView.HeightRequest;
+                await distanceParametersView.TranslateTo(0, 0, 300, Easing.SinInOut);
             }
             else
                 hideDownAllDropMenu();
@@ -179,7 +177,7 @@ namespace Uzor
 
         private async void layersMenu_Clicked(object sender, EventArgs e)
         {
-            if (!dropDownMenuLayout.Children.Contains(layoutParametersView))
+            if (!layerDropMenuLayout.Children.Contains(layoutParametersView))
             {
                 hideDownAllDropMenu();
 
@@ -190,9 +188,9 @@ namespace Uzor
                 blackBackground.IsEnabled = true;
                 blackBackground.FadeTo(0.3, 250);
 
-                dropDownMenuLayout.Children.Add(layoutParametersView);
-                dropDownMenuLayout.HeightRequest = layoutParametersView.HeightRequest;
-                await layoutParametersView.TranslateTo(0, 0, 250, Easing.SinInOut);
+                layerDropMenuLayout.Children.Add(layoutParametersView);
+                //layerDropMenuLayout.HeightRequest = layoutParametersView.HeightRequest;
+                await layoutParametersView.TranslateTo(0, 0, 300, Easing.SinInOut);
             }
             else
                 hideDownAllDropMenu();
@@ -200,7 +198,7 @@ namespace Uzor
 
         private async void saveMenu_Clicked(object sender, EventArgs e)
         {
-            if (!dropDownMenuLayout.Children.Contains(saveView))
+            if (!saveDropMenuLayout.Children.Contains(saveView))
             {
                 hideDownAllDropMenu();
 
@@ -211,9 +209,9 @@ namespace Uzor
                 blackBackground.IsEnabled = true;
                 blackBackground.FadeTo(0.3, 250);
 
-                dropDownMenuLayout.Children.Add(saveView);
-                dropDownMenuLayout.HeightRequest = saveView.HeightRequest;
-                await saveView.TranslateTo(0, 0, 250, Easing.SinInOut);
+                saveDropMenuLayout.Children.Add(saveView);
+                //saveDropMenuLayout.HeightRequest = saveView.HeightRequest;
+                await saveView.TranslateTo(0, 0, 300, Easing.SinInOut);
             }
             else
                 hideDownAllDropMenu();

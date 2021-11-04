@@ -15,19 +15,15 @@
 
                 <views:LongUzorView x:Name="longUzorView" Grid.Row="0"></views:LongUzorView>
 
-
-                <!--<AbsoluteLayout x:Name="dropDownMenuLayout"  Margin="0,0,0,0" Grid.Row="0" >
-                         <Rectangle  x:Name="blackBackground" IsVisible="false" BackgroundColor="Black" Opacity="0" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0, 1.0, 1.0"> </Rectangle>
-                
-                    </AbsoluteLayout>-->
-
                 <BoxView Grid.Row="0" x:Name="blackBackground" IsVisible="false" BackgroundColor="Black" Opacity="0" AbsoluteLayout.LayoutFlags="SizeProportional" >
                     <BoxView.Effects>
                         <tt:TouchEffect Capture="True" TouchAction="blackBackgroundTapped"/>
                     </BoxView.Effects>
                 </BoxView>
 
-                <Grid x:Name="dropDownMenuLayout" VerticalOptions="End"></Grid>
+                <Grid x:Name="distanceDropMenuLayout" VerticalOptions="End"></Grid>
+                <Grid x:Name="layerDropMenuLayout" VerticalOptions="End"></Grid>
+                <Grid x:Name="saveDropMenuLayout" VerticalOptions="End"></Grid>
 
                 <Grid x:Name="toolsPanelGrid" Grid.Row="1" BackgroundColor="#EBEBEB">
                     <Grid.ColumnDefinitions>
