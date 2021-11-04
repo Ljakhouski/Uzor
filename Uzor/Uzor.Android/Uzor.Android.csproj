@@ -118,12 +118,6 @@
     <AndroidResource Include="Resources\drawable\button1.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\raw\background.mp4" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\raw\bg_h264.mp4" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\rightButton.png" />
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\downButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\raw\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
