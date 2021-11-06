@@ -17,16 +17,16 @@ namespace Uzor.Views
     {
         public LongUzorData Data { get; set; }
         private MainPage pageForAlert;
-       
-        public LongUzorItem(LongUzorData data, MainPage p)
+        private string path;
+        public LongUzorItem(LongUzorData data, string path, MainPage p)
         {
             InitializeComponent();
             this.Data = data;
+            this.path = path;
             LongUzorView v = this.preview;
 
             v.Data = data;
 
-            
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
             this.itemDate.Text = data.DataOfCreation.ToString();
             /*this.mineFrame.BackgroundColor = new Color(data.Layers[0].BackColor.R,
@@ -38,7 +38,7 @@ namespace Uzor.Views
 
         private async void TapOnItem(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new LongUzorItemPage(Data, pageForAlert)));
+            await Navigation.PushModalAsync(new NavigationPage(new LongUzorItemPage(Data, path, pageForAlert)));
         }
 
         private async void deleteItem(object sender, EventArgs e)

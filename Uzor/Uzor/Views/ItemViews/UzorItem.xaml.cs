@@ -17,8 +17,9 @@ namespace Uzor.Views
     {
         public UzorData Data { get; set; }
         private MainPage pageForAlert;
+        private string path;
      
-        public UzorItem(UzorData data, MainPage p)
+        public UzorItem(UzorData data, string path, MainPage p)
         {
             InitializeComponent();
             this.Data = data;
@@ -45,7 +46,7 @@ namespace Uzor.Views
         }
         private async void TapOnItem(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new UzorItemPage(Data, pageForAlert)));
+            await Navigation.PushModalAsync(new NavigationPage(new UzorItemPage(Data, path, pageForAlert)));
         }
 
         async private void deleteItem(object sender, EventArgs e)

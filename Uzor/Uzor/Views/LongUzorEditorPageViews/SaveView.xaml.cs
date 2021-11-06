@@ -23,10 +23,20 @@ namespace Uzor.Views.LongUzorEditorPageViews
         {
             this.editorPage.SaveProject();
         }
-
+        
+        private void Ok_Clicked(object sender, EventArgs e)
+        {
+            this.editorPage.Ok();
+        }
+        private void Cancel_Clicked(object sender, EventArgs e)
+        {
+            this.editorPage.Cancel();
+        }
         private void ImageSave_Clicked(object sender, EventArgs e)
         {
             this.editorPage.ShowImageBufferSaveView();
         }
+
+        
     }
 }

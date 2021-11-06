@@ -126,6 +126,9 @@
   <data name="BufferSavingLabel" xml:space="preserve">
     <value>Сохранение изображения:</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
   <data name="Color" xml:space="preserve">
     <value>Цвет</value>
   </data>
@@ -141,6 +144,9 @@
   <data name="ExitQuestion" xml:space="preserve">
     <value>Вы точно хотите выйти?</value>
   </data>
+  <data name="FirstUzorEdit" xml:space="preserve">
+    <value>Изменить первый Uzor </value>
+  </data>
   <data name="FormatLabel" xml:space="preserve">
     <value>Формат: </value>
   </data>
@@ -148,19 +154,22 @@
     <value>Язык:</value>
   </data>
   <data name="MakeLongUzor" xml:space="preserve">
-    <value>Сделать Узор</value>
+    <value>Сделать Uzor</value>
   </data>
   <data name="MakeUzor" xml:space="preserve">
-    <value>Новый Узор</value>
+    <value>Новый Uzor</value>
   </data>
   <data name="NewUzor" xml:space="preserve">
-    <value>Новый Узор</value>
+    <value>Новый Uzor</value>
   </data>
   <data name="NextStep" xml:space="preserve">
-    <value>Следующий Узор</value>
+    <value>Следующий Uzor</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Сохранить</value>
   </data>
   <data name="PermissionDenied" xml:space="preserve">
     <value>Не предоставлено разрешение для доступа к файлам устройства! </value>
@@ -177,11 +186,17 @@
   <data name="SavingProject" xml:space="preserve">
     <value>Сохранение проекта:</value>
   </data>
+  <data name="SecondUzorEdit" xml:space="preserve">
+    <value>Изменить второй Uzor </value>
+  </data>
   <data name="Setting" xml:space="preserve">
     <value>Настройки</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Поделиться</value>
+  </data>
+  <data name="SideUzorEdit" xml:space="preserve">
+    <value>Изменить боковой Uzor</value>
   </data>
   <data name="Size" xml:space="preserve">
     <value>Размер:</value>

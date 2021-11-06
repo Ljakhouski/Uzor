@@ -79,6 +79,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Color.
         /// </summary>
         public static string Color {
@@ -120,6 +129,15 @@ namespace Uzor.Localization {
         public static string ExitQuestion {
             get {
                 return ResourceManager.GetString("ExitQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Edit first Uzor.
+        /// </summary>
+        public static string FirstUzorEdit {
+            get {
+                return ResourceManager.GetString("FirstUzorEdit", resourceCulture);
             }
         }
         
@@ -187,6 +205,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на file access must be enabled!.
         /// </summary>
         public static string PermissionDenied {
@@ -232,6 +259,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Edit second Uzor.
+        /// </summary>
+        public static string SecondUzorEdit {
+            get {
+                return ResourceManager.GetString("SecondUzorEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Settings.
         /// </summary>
         public static string Setting {
@@ -246,6 +282,15 @@ namespace Uzor.Localization {
         public static string Share {
             get {
                 return ResourceManager.GetString("Share", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Edit Side Uzor.
+        /// </summary>
+        public static string SideUzorEdit {
+            get {
+                return ResourceManager.GetString("SideUzorEdit", resourceCulture);
             }
         }
         

@@ -58,24 +58,13 @@ namespace Uzor
         {
             this.itemStack.Children.Clear();
 
-            BinaryFormatter formatter = new BinaryFormatter();
             var fileList = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+
             foreach(string fileName in fileList)
-            {
-                FileStream fs = new FileStream(fileName, FileMode.Open);
-                //i.Data = 
-                //i.SetUzorNameLabelText( fileName.Split("/".ToCharArray()).Last());
                 if (fileName.Substring(fileName.Length - 4) == ".ubf")
-                    this.itemStack.Children.Add(new UzorItem((UzorData)formatter.Deserialize(fs), this));
+                    this.itemStack.Children.Add(new UzorItem(UzorProjectFileManager.LoadUzorDataFromInternalStorage(fileName), fileName, this));
                 else if (fileName.Substring(fileName.Length - 5) == ".lubf") //{   File.Delete(fileName); }
-                    this.itemStack.Children.Add(new LongUzorItem((LongUzorData)formatter.Deserialize(fs), this));
-                    
-                fs.Dispose();
-            }
-        }
-        private async void TestNow(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new TestPage()));
+                    this.itemStack.Children.Add(new LongUzorItem(UzorProjectFileManager.LoadLongUzorDataFromInternalStorage(fileName), fileName, this));
         }
 
         private async void settingClick(object sender, EventArgs e)

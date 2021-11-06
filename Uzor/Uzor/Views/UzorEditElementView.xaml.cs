@@ -190,6 +190,16 @@ namespace Uzor.Views
        
         public void SaveButton_Click(object sender, EventArgs e)
         {
+            if (ReSave)
+                UzorProjectFileManager.ReSave(this.ThisData, SavedFilePath);
+            else
+            {
+                SavedFilePath = UzorProjectFileManager.SaveInInternalStorage(this.ThisData);
+                ReSave = true;
+            }
+            
+            /*
+
             BinaryFormatter formatter = new BinaryFormatter();
 
             if (ReSave) // rewrite file
@@ -223,7 +233,7 @@ namespace Uzor.Views
             FileStream fs = new FileStream(folderPath+"/"+fileName, FileMode.OpenOrCreate);
             formatter.Serialize(fs, this.ThisData);
             fs.Dispose();
-
+            */
 
             if (PageForAlert != null)
                 PageForAlert.MakeUzorItemList();

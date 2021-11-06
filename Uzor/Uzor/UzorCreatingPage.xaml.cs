@@ -15,6 +15,13 @@ namespace Uzor
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UzorCreatingPage : ContentPage
     {
+        public enum ActionStatus
+        {
+            Saved,
+            Canceled
+        }
+        private ActionStatus _action;
+        public ActionStatus Action { get { return _action; }  }
         public UzorCreatingPage(MainPage p)
         {
             InitializeComponent();
@@ -27,20 +34,25 @@ namespace Uzor
             newUzorSettingView.FadeTo(1);
         }
         private MainPage pageForAlert;
-        public UzorCreatingPage(UzorData data, MainPage p) // for editing a previously created Uzor
+        public UzorCreatingPage(UzorData data, MainPage p) // for editing a previously created Uzor 
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             var v = new UzorEditElementView(data);
             this.pageForAlert = p;
             uzorEditElementViewList.Add(v);
             creatingPageGrid.Children.Add(v, 0, 1);
 
             this.saveTopPanel = new UzorEditorSaveTopPanel();
-            saveTopPanel.SaveButton.Clicked += SaveChanges_Clicked;
-            saveTopPanel.BackButton.IsVisible = false;
+            saveTopPanel.SaveButton.Clicked += saveChanges_Clicked;
+            saveTopPanel.BackButton.Clicked += cancelChanges_Clicked;
+            saveTopPanel.BackButton.Text = AppResource.Cancel;
+            saveTopPanel.SaveButton.Text = AppResource.Ok;
             creatingPageGrid.Children.Add(saveTopPanel, 0, 0);
+            creatingPageGrid.RowDefinitions[0].Height = 60;
             v.cropButton.IsVisible = true;
         }
+
         public delegate void SaveSetting_(UzorData data);
         private NewUzorSetting newUzorSettingView;
         private UzorEditorSaveTopPanel saveTopPanel;
@@ -220,11 +232,15 @@ namespace Uzor
         }
 
 
-        private async void SaveChanges_Clicked(object sender, EventArgs e) // if this editor is open for editing a previously created Uzor
+        private async void saveChanges_Clicked(object sender, EventArgs e) // if this editor is open for editing a previously created Uzor
         {
-            this.getUzorEditElementView().ReSave = true;
-            this.getUzorEditElementView().SaveButton_Click(null, null); // oh, shitcode again...
+            this._action = ActionStatus.Saved;
             this.pageForAlert.MakeUzorItemList();
+            await Navigation.PopModalAsync();
+        }
+        private async void cancelChanges_Clicked(object sender, EventArgs e)
+        {
+            this._action = ActionStatus.Canceled;
             await Navigation.PopModalAsync();
         }
 

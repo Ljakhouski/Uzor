@@ -14,9 +14,11 @@ namespace Uzor.ItemPages
     public partial class LongUzorItemPage : ContentPage
     {
         private MainPage pageForAlert;
-        public LongUzorItemPage(LongUzorData data, MainPage p)
+        private string path;
+        public LongUzorItemPage(LongUzorData data, string path, MainPage p)
         {
             InitializeComponent();
+            this.path = path;
             this.pageForAlert = p;
             this.itemNameLabel.Text = data.Name;
             this.longUzorView.Data = data;
@@ -24,7 +26,15 @@ namespace Uzor.ItemPages
 
         private async void editButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new LongUzorEditorPage(longUzorView.Data, pageForAlert));
+            var p = new LongUzorEditorPage(longUzorView.Data, pageForAlert);
+            await Navigation.PushModalAsync(p);
+
+            if (p.Action == LongUzorEditorPage.ActionStatus.Saved)
+                UzorProjectFileManager.ReSave(this.longUzorView.Data, path);
+            else if (p.Action == LongUzorEditorPage.ActionStatus.Canceled)
+                this.longUzorView.Data = UzorProjectFileManager.LoadLongUzorDataFromInternalStorage(path);
+
+            this.longUzorView.Draw();
         }
 
         private void imageSaving_Clicked(object sender, EventArgs e)

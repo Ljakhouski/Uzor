@@ -23,6 +23,17 @@ namespace Uzor
         private string SavedFilePath;
         private MainPage pageForAlert;
         public bool ReSave { get; set; }
+
+        public enum ActionStatus
+        {
+            Saved,
+            Canceled
+        };
+
+
+        private ActionStatus _action = ActionStatus.Canceled; // only for edit a previously opened project
+        public ActionStatus Action { get { return _action; } }
+
         public LongUzorEditorPage(LongUzorData data, MainPage p, bool isNewLongUzor = false)
         {
             InitializeComponent();
@@ -32,8 +43,20 @@ namespace Uzor
 
             if (isNewLongUzor)
                 calculateLongUzorParameters();
+            else
+            {
+                this.saveView.stackOfOkCancelButtons.IsVisible = true;
+                this.saveView.stackOfSavingProjectButton.IsVisible = false;
+            }
+                
+                
 
             setSlidersValue();
+        }
+
+        public void UpdateView()
+        {
+            this.longUzorView.Draw();
         }
 
         private void calculateLongUzorParameters()
@@ -99,6 +122,17 @@ namespace Uzor
             fs.Dispose();
         }
 
+        public void Cancel()
+        {
+            _action = ActionStatus.Canceled;
+            this.Exit();
+        }
+
+        public void Ok()
+        {
+            _action = ActionStatus.Saved;
+            Navigation.PopModalAsync();
+        }
         public void ShowImageBufferSaveView()
         {
             var v = new ImageBufferSaveView(this.GetData());
@@ -117,7 +151,7 @@ namespace Uzor
             AbsoluteLayout.SetLayoutFlags(distanceParametersView, AbsoluteLayoutFlags.All);
             AbsoluteLayout.SetLayoutBounds(distanceParametersView, new Rectangle(1,1, 1, 0.3));
 
-            this.layoutParametersView = new LayersParapetersView();
+            this.layoutParametersView = new LayersParapetersView(this, pageForAlert);
             AbsoluteLayout.SetLayoutFlags(layoutParametersView, AbsoluteLayoutFlags.All);
             AbsoluteLayout.SetLayoutBounds(layoutParametersView, new Rectangle(1, 1, 1, 0.5));
 
@@ -233,7 +267,7 @@ namespace Uzor
             if (await DisplayAlert("", AppResource.ExitQuestion, AppResource.Yes, AppResource.No))
             {
                 this.pageForAlert.MakeUzorItemList();
-                Navigation.PopModalAsync();
+                //Navigation.PopModalAsync();
                 Navigation.PopModalAsync();
             }
         }

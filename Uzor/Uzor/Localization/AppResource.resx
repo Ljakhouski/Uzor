@@ -123,6 +123,9 @@
   <data name="BufferSavingLabel" xml:space="preserve">
     <value>Saving as Image:</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="Color" xml:space="preserve">
     <value>Color</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="ExitQuestion" xml:space="preserve">
     <value>Are you sure you want to get out?</value>
+  </data>
+  <data name="FirstUzorEdit" xml:space="preserve">
+    <value>Edit first Uzor</value>
   </data>
   <data name="FormatLabel" xml:space="preserve">
     <value>Format:</value>
@@ -159,6 +165,9 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
   <data name="PermissionDenied" xml:space="preserve">
     <value>file access must be enabled!</value>
   </data>
@@ -174,11 +183,17 @@
   <data name="SavingProject" xml:space="preserve">
     <value>Saving project:</value>
   </data>
+  <data name="SecondUzorEdit" xml:space="preserve">
+    <value>Edit second Uzor</value>
+  </data>
   <data name="Setting" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Share</value>
+  </data>
+  <data name="SideUzorEdit" xml:space="preserve">
+    <value>Edit Side Uzor</value>
   </data>
   <data name="Size" xml:space="preserve">
     <value>Size:</value>

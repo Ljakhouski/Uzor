@@ -7,9 +7,17 @@
   <ContentView.Content>
         <Frame CornerRadius="15" Margin="0,0,0,0" BackgroundColor="White" HasShadow="False">
             <StackLayout Spacing="23">
-                <Label Text="{x:Static resources:AppResource.SavingProject}" HorizontalOptions="Start"/>
-                <Button Text="{x:Static resources:AppResource.Save}" Clicked="Save_Clicked" CornerRadius="20" HorizontalOptions="Center"/>
-                <Label Text="{x:Static resources:AppResource.SavedLabel}" IsVisible="false" HorizontalOptions="Center" FontSize="Small"/>
+                <StackLayout Orientation="Horizontal" x:Name="stackOfOkCancelButtons" IsVisible="false" x:FieldModifier="public">
+                    <Button Text="{x:Static resources:AppResource.Ok}" Clicked="Ok_Clicked" CornerRadius="20" HorizontalOptions="Center" x:FieldModifier="public"/>
+                    <Button Text="{x:Static resources:AppResource.Ok}" Clicked="Cancel_Clicked" CornerRadius="20" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <StackLayout x:Name="stackOfSavingProjectButton" x:FieldModifier="public">
+                    <Label Text="{x:Static resources:AppResource.SavingProject}" HorizontalOptions="Start"/>
+                    <Button Text="{x:Static resources:AppResource.Save}" Clicked="Save_Clicked" CornerRadius="20" HorizontalOptions="Center" />
+                    <Label Text="{x:Static resources:AppResource.SavedLabel}" IsVisible="false" HorizontalOptions="Center" FontSize="Small"/>
+                </StackLayout>
+                
                 <Label Text="{x:Static resources:AppResource.BufferSavingLabel}"/>
                 <Button Text="{x:Static resources:AppResource.Save}" Clicked="ImageSave_Clicked" CornerRadius="20" HorizontalOptions="Center"/>
             </StackLayout>
