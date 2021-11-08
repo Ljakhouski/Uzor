@@ -34,6 +34,7 @@ namespace Uzor
         private ActionStatus _action = ActionStatus.Canceled; // only for edit a previously opened project
         public ActionStatus Action { get { return _action; } }
 
+        public EventHandler Closed;
         public LongUzorEditorPage(LongUzorData data, MainPage p, bool isNewLongUzor = false)
         {
             InitializeComponent();
@@ -131,6 +132,7 @@ namespace Uzor
         public void Ok()
         {
             _action = ActionStatus.Saved;
+            this.Closed?.Invoke(this, null);
             Navigation.PopModalAsync();
         }
         public void ShowImageBufferSaveView()
@@ -267,6 +269,7 @@ namespace Uzor
             if (await DisplayAlert("", AppResource.ExitQuestion, AppResource.Yes, AppResource.No))
             {
                 this.pageForAlert.MakeUzorItemList();
+                this.Closed?.Invoke(this, null);
                 //Navigation.PopModalAsync();
                 Navigation.PopModalAsync();
             }

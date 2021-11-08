@@ -23,6 +23,7 @@ namespace Uzor.Views
         {
             InitializeComponent();
             this.Data = data;
+            this.path = path;
             UzorPixelFieldView upv = this.preview;
 
             DemonstrateUzorEditorObject udb = new DemonstrateUzorEditorObject();
@@ -55,7 +56,8 @@ namespace Uzor.Views
             {
                 //var fileList = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
-                File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+"/"+this.Data.Name+".ubf");
+                //File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+"/"+this.Data.Name+".ubf");
+                UzorProjectFileManager.Delete(this.path);
                 pageForAlert.itemStack.Children.Remove(this);
             }
         

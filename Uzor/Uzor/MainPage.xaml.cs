@@ -62,9 +62,9 @@ namespace Uzor
 
             foreach(string fileName in fileList)
                 if (fileName.Substring(fileName.Length - 4) == ".ubf")
-                    this.itemStack.Children.Add(new UzorItem(UzorProjectFileManager.LoadUzorDataFromInternalStorage(fileName), fileName, this));
+                    this.itemStack.Children.Add(new UzorItem(UzorProjectFileManager.LoadUzorData(fileName), fileName, this));
                 else if (fileName.Substring(fileName.Length - 5) == ".lubf") //{   File.Delete(fileName); }
-                    this.itemStack.Children.Add(new LongUzorItem(UzorProjectFileManager.LoadLongUzorDataFromInternalStorage(fileName), fileName, this));
+                    this.itemStack.Children.Add(new LongUzorItem(UzorProjectFileManager.LoadLongUzorData(fileName), fileName, this));
         }
 
         private async void settingClick(object sender, EventArgs e)

@@ -11,7 +11,7 @@ namespace Uzor
     {
         public static string SaveInInternalStorage(UzorData data) // returns the save path
         {
-            return SaveObjectInInternalStorage(data, data.Name, ".ubf");
+            return saveObjectInInternalStorage(data, data.Name, ".ubf");
            /* string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
             string fileName = data.Name + ".ubf";
@@ -39,10 +39,10 @@ namespace Uzor
 
         public static string SaveInInternalStorage(LongUzorData data) // returns the save path
         {
-            return SaveObjectInInternalStorage(data, data.Name, ".lubf");
+            return saveObjectInInternalStorage(data, data.Name, ".lubf");
         }
 
-        private static string SaveObjectInInternalStorage(object data, string name, string extension)
+        private static string saveObjectInInternalStorage(object data, string name, string extension)
         {
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
@@ -82,22 +82,42 @@ namespace Uzor
             fsr.Dispose();
         }
 
-        public static UzorData LoadUzorDataFromInternalStorage(string path)
+        public static UzorData LoadUzorData(string path)
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream fs = new FileStream(path, FileMode.Open);
-            var d = (UzorData)formatter.Deserialize(fs);
+
+            UzorData d = null;
+            try
+            {
+                d = (UzorData)formatter.Deserialize(fs);
+            }
+            catch(System.Runtime.Serialization.SerializationException e)
+            {
+                return new UzorData("SERIALIZATION ERROR", System.DateTime.Now, 20);
+            }
+            
             fs.Dispose();
             return d;
         }
 
-        public static LongUzorData LoadLongUzorDataFromInternalStorage(string path)
+        public static LongUzorData LoadLongUzorData(string path)
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream fs = new FileStream(path, FileMode.Open);
             var d = (LongUzorData)formatter.Deserialize(fs);
             fs.Dispose();
             return d;
+        }
+
+        public static void DeleteByNameFromInternalStorage(string fileName)
+        {
+            File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/" + fileName);
+        }
+
+        public static void Delete(string path)
+        {
+            File.Delete(path);
         }
     }
 }

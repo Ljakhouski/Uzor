@@ -27,14 +27,26 @@ namespace Uzor.ItemPages
         private async void editButton_Clicked(object sender, EventArgs e)
         {
             var p = new LongUzorEditorPage(longUzorView.Data, pageForAlert);
+            p.Closed += longUzorEditorPage_Closed;
             await Navigation.PushModalAsync(p);
 
+            
+        }
+
+        private void longUzorEditorPage_Closed(object sender, EventArgs e)
+        {
+            var p = (LongUzorEditorPage)sender;
             if (p.Action == LongUzorEditorPage.ActionStatus.Saved)
+            {
                 UzorProjectFileManager.ReSave(this.longUzorView.Data, path);
+                pageForAlert.MakeUzorItemList();
+            }
+                
             else if (p.Action == LongUzorEditorPage.ActionStatus.Canceled)
-                this.longUzorView.Data = UzorProjectFileManager.LoadLongUzorDataFromInternalStorage(path);
+                this.longUzorView.Data = UzorProjectFileManager.LoadLongUzorData(path);
 
             this.longUzorView.Draw();
+            
         }
 
         private void imageSaving_Clicked(object sender, EventArgs e)

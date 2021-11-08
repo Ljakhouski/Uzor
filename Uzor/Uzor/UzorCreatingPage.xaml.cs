@@ -20,8 +20,9 @@ namespace Uzor
             Saved,
             Canceled
         }
-        private ActionStatus _action;
+        private ActionStatus _action = ActionStatus.Canceled;
         public ActionStatus Action { get { return _action; }  }
+        public EventHandler Closed;
         public UzorCreatingPage(MainPage p)
         {
             InitializeComponent();
@@ -200,9 +201,13 @@ namespace Uzor
                                                                                longUzorData.UzorElements[0].Layers[0].FrontColor.A);
 
                 LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData, pageForAlert, true);
+                longUzorPage.Closed += longUzorEditorPage_Closed;
+
                 await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
             }
-}
+        }
+
+
         //crutches
         private bool? isSquareMode = null;
         protected override bool OnBackButtonPressed()
@@ -228,7 +233,8 @@ namespace Uzor
         {
             if (uzorEditElementViewList[0].ReSave || await DisplayAlert("", AppResource.ExitQuestion, AppResource.Yes, AppResource.No))
                 await Navigation.PopModalAsync();
-            
+            this.Closed?.Invoke(this, null);
+
         }
 
 
@@ -236,19 +242,26 @@ namespace Uzor
         {
             this._action = ActionStatus.Saved;
             this.pageForAlert.MakeUzorItemList();
+            this.Closed?.Invoke(this, null);
             await Navigation.PopModalAsync();
         }
         private async void cancelChanges_Clicked(object sender, EventArgs e)
         {
             this._action = ActionStatus.Canceled;
+            this.Closed?.Invoke(this, null);
             await Navigation.PopModalAsync();
         }
 
         private async void ForPopModalAsync()
         {
+            this.Closed?.Invoke(this, null);
             await Navigation.PopModalAsync();
         }
 
+        private void longUzorEditorPage_Closed(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
         private UzorEditElementView getUzorEditElementView()
         {
             return uzorEditElementViewList[stepNumber - 1];
