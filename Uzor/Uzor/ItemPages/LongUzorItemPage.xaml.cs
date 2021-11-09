@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Uzor.ItemPages
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+  //  [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LongUzorItemPage : ContentPage
     {
         private MainPage pageForAlert;

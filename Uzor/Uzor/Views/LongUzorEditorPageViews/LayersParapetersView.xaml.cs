@@ -45,13 +45,14 @@ namespace Uzor.Views.LongUzorEditorPageViews
         
         private async void colorChange_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new UzorCreatingPage(this.editorPage.GetData().SidePattern, this.pageForAlert));
+            
             this.editorPage.UpdateView();
         }
 
-        private void sideUzorEdit_Clicked(object sender, EventArgs e)
+        private async void sideUzorEdit_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushModalAsync(new UzorCreatingPage(this.editorPage.GetData().SidePattern, this.pageForAlert));
+            this.editorPage.UpdateView();
         }
     }
 }

@@ -10,30 +10,66 @@
     <ContentView.Content>
         <sh:Shadows CornerRadius="15" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
             <Frame x:Name="mineFrame" HeightRequest="150" Padding="0"  CornerRadius="15"  Opacity="1" Margin="20,5">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="#FFFFFF"
+                          Offset="0.1" />
+                        <GradientStop Color="#E3EAEE"
+                          Offset="1.0" />
+                    </LinearGradientBrush>
+                    
+                </Frame.Background>
+                
+                <Grid Opacity="1">
+                    
+                    <View:LongUzorView 
+                            x:Name="preview"
+                            Rotation="0"
+                            Margin="0,0,150,0"
+                    ></View:LongUzorView>
+                    
+                    <sh:Shadows CornerRadius="15" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}">
+                        <Frame x:Name="backGround" BackgroundColor="White" HorizontalOptions="End" CornerRadius="15" WidthRequest="200" Margin="0" Padding="0">
+                            <BoxView Opacity="1" >
+                            <BoxView.Background>
+                                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                                    <GradientStop x:Name="backgroungStartGradientColor" Color="#1AFFFFFF"
+                                         Offset="0.0" />
+                                    <GradientStop x:Name="backgroungStopGradientColor" Color="#4C9BA3A7"
+                                 Offset="1.0" />
+                                </LinearGradientBrush>
+                            </BoxView.Background>
+                        </BoxView>
+                        </Frame>
+                        
+                    </sh:Shadows>
+                    
 
-                <RelativeLayout >
-                    <!--<View:LongUzorView 
+                    <Grid  Padding="0" Margin="0" RowSpacing ="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                       
+                        <Label x:Name="itemName" Text="ItemName: " FontSize="25" TextColor="Black" Opacity="0.7" Grid.Row="0" VerticalOptions="Center"  HorizontalOptions="End" Margin="10,10,20,0" Padding="0"></Label>
+                        <Label x:Name="itemDate"  FontSize="15" TextColor="Black" Opacity="0.3" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="End" Margin="10,0,20,0" Padding="0" TranslationY="-8"></Label>
+                        <sh:Shadows x:Name="shadow" CornerRadius="10" Grid.Row="2" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}">
+                            <ImageButton x:Name="deleteButton" Opacity="0.95" Source="deleteFileButton.png"   HorizontalOptions="End" VerticalOptions="End" CornerRadius="10" Margin="0,0,20,20" BackgroundColor="#F8F8F8" Clicked="deleteItem" MinimumHeightRequest="40" WidthRequest="40" HeightRequest="40" Grid.Row="2"
+                                     ></ImageButton>
+                        </sh:Shadows>
+                    </Grid>
+                    <!--<RelativeLayout >
+                        --><!--<View:LongUzorView 
                         Opacity="1"
                         x:Name="preview"
                         Rotation="90"
                         
-                        ></View:LongUzorView>-->
+                        ></View:LongUzorView>--><!--
 
-                    <Frame BackgroundColor="Green"
-                           RelativeLayout.XConstraint= "{ConstraintExpression Type=RelativeToParent, 
-                Property=Width, Factor=0.5, Constant=-50}" 
-           RelativeLayout.YConstraint= "{ConstraintExpression Type=RelativeToParent,
-                Property=Height, Factor=0.5, Constant=-50}">
 
-                        <View:LongUzorView 
-                            Opacity="0.3"
-                            x:Name="preview"
-                            Rotation="90"
-                        
-                        ></View:LongUzorView>
-                    </Frame>
 
-                    <Frame HorizontalOptions="Fill" VerticalOptions="Fill" 
+                        <Frame HorizontalOptions="Fill" VerticalOptions="Fill" Opacity="0" 
                            
                            RelativeLayout.WidthConstraint=
                                 "{ConstraintExpression Type=RelativeToParent,
@@ -45,37 +81,32 @@
                                 Factor=1}">
 
 
-                        <Frame.Background>
-                            <LinearGradientBrush EndPoint="1,0">
-                                <GradientStop Color="#007D7D02"
-                          Offset="0.1" />
-                                <GradientStop Color="#22294150"
-                          Offset="1.0" />
-                            </LinearGradientBrush>
-                        </Frame.Background>
-                    </Frame>
-                    <Label  x:Name="itemName" Text="ItemName: " FontSize="25" TextColor="Black" Opacity="0.7"
+                            
+                        </Frame>
+                        <Label  x:Name="itemName" Text="ItemName: " FontSize="25" TextColor="Black" Opacity="0.7"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=0}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}"
                            ></Label>
 
-                    <Label  x:Name="itemDate"  FontSize="15" TextColor="Black" Opacity="0.3"
+                        <Label  x:Name="itemDate"  FontSize="15" TextColor="Black" Opacity="0.3"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=0}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.2, Constant=20}"
                            ></Label>
 
 
 
-                    <sh:Shadows x:Name="shadow" CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}"
+                        <sh:Shadows x:Name="shadow" CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9, Constant=-20}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9, Constant=-40}">
-                        <ImageButton x:Name="deleteButton" Opacity="0.95" Source="deleteFileButton.png"   CornerRadius="10" BackgroundColor="#F8F8F8" Clicked="deleteItem" WidthRequest="40" HeightRequest="40"
+                            <ImageButton x:Name="deleteButton" Opacity="0.95" Source="deleteFileButton.png"   CornerRadius="10" BackgroundColor="#F8F8F8" Clicked="deleteItem" WidthRequest="40" HeightRequest="40"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9, Constant=-20}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9, Constant=-40}"
                                      ></ImageButton>
-                    </sh:Shadows>
+                        </sh:Shadows>
 
-                </RelativeLayout>
+                    </RelativeLayout>-->
+                </Grid>
+                
             </Frame>
         </sh:Shadows>
     </ContentView.Content>
