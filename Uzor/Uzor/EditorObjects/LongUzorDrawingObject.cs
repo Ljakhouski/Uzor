@@ -48,7 +48,7 @@ namespace Uzor.EditorObjects
         }
 
         private int minimalStepSize;
-        public int GetResultSceneWidth()
+        public int GetResultContentWidth()
         {
             const int longUzorNumber = 5;
             const int freeZone = 300;

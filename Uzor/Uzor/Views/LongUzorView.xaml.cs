@@ -10,6 +10,7 @@ using Uzor.EditorObjects;
 using SkiaSharp;
 using Uzor.Data;
 using TouchTracking;
+using Xamarin.Essentials;
 
 namespace Uzor.Views
 {
@@ -18,11 +19,17 @@ namespace Uzor.Views
     {
         public LongUzorDrawingObject LongUzorGraphic { get; set; } = new LongUzorDrawingObject();
 
-        private SKMatrix matrix = SKMatrix.MakeIdentity();
+        private SKMatrix matrix = SKMatrix.MakeIdentity(); // scene-matrix, only for drawing Uzor-scene on screen or on bitmap
+        private SKMatrix bitmapMatrix = SKMatrix.MakeIdentity(); // for double-buffering, reseted when the buffer is redrawing
+
         private Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
 
         private bool demonstrateMode_ = false;
+        private bool doubleBuffering = true;
         //TODO: need to add ...mode for interactive elements (to turn off all events except zoom-moving)
+
+        private SKBitmap bitmap;
+        private SKCanvas bitmapCanvas;
         public bool DemonstrateMode { get { return demonstrateMode_; } set
             {
                 demonstrateMode_ = value;
@@ -38,7 +45,7 @@ namespace Uzor.Views
         public LongUzorData Data 
         { 
             get { return LongUzorGraphic.Data; }
-            set { this.LongUzorGraphic.Data = value; }
+            set { this.LongUzorGraphic.Data = value; if (bitmap != null) bitmapInit(); }
         }
 
         public LongUzorView(LongUzorData data)
@@ -51,6 +58,15 @@ namespace Uzor.Views
         {
             InitializeComponent();
         }
+
+        private void bitmapInit()
+        {
+            this.bitmap = new SKBitmap((int)this.canvasView.CanvasSize.Width, (int)this.canvasView.CanvasSize.Height);
+            this.bitmapCanvas = new SKCanvas(bitmap);
+            this.doubleBuffering = Preferences.Get("doubleBuffering", true);
+            this.updateBitmap();
+        }
+
         private void OnTouchEffectAction(object sender, TouchTracking.TouchActionEventArgs args)
         {
             Point pt = args.Location;
@@ -86,6 +102,7 @@ namespace Uzor.Views
                             SKPoint delta = newPoint - prevPoint;  // new_p = newPoint; old_p = prevPoint;
 
                             SKMatrix.PostConcat(ref matrix, SKMatrix.MakeTranslation(delta.X, delta.Y));
+                            SKMatrix.PostConcat(ref bitmapMatrix, SKMatrix.MakeTranslation(delta.X, delta.Y));
                             touchDictionary[args.Id] = point;
                         }
                         else if (touchDictionary.Count >= 2)
@@ -128,6 +145,9 @@ namespace Uzor.Views
                             SKMatrix.PostConcat(ref matrix, scaleMatrix);   // NEW "PostContact() DOES NOT WORKING CORRECTLY!!!" 
                             SKMatrix.PostConcat(ref matrix, translationMatrix);
 
+                            SKMatrix.PostConcat(ref bitmapMatrix, scaleMatrix);   // NEW "PostContact() DOES NOT WORKING CORRECTLY!!!" 
+                            SKMatrix.PostConcat(ref bitmapMatrix, translationMatrix);
+
 
                             touchDictionary[args.Id] = point;
                         }
@@ -141,6 +161,9 @@ namespace Uzor.Views
 
                     if (matrix.ScaleX < 0.2)
                         matrix = SKMatrix.Identity;
+
+                    updateBitmap();
+
                     break;
             }
 
@@ -149,14 +172,39 @@ namespace Uzor.Views
 
         private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
         {
-            e.Surface.Canvas.SetMatrix(matrix);
-            LongUzorGraphic.Draw(e.Surface.Canvas, canvasView);
+            if (bitmap == null)
+                this.bitmapInit();
+
+            if (doubleBuffering)
+            {
+                // TODO: background rendering
+
+                e.Surface.Canvas.SetMatrix(bitmapMatrix);
+                e.Surface.Canvas.Clear();
+                e.Surface.Canvas.DrawBitmap(bitmap, 0, 0);
+            }
+            else
+            {
+                e.Surface.Canvas.SetMatrix(matrix);
+                LongUzorGraphic.Draw(e.Surface.Canvas, canvasView);
+            }
 
             // TODO: draw zoom-indicator in top angle with specifical parent-view 
+        }
+        private void updateBitmap()
+        {
+            bitmapCanvas.SetMatrix(matrix);
+            LongUzorGraphic.Draw(bitmapCanvas, canvasView);
+            bitmapMatrix = SKMatrix.MakeIdentity();
         }
 
         public void Draw()
         {
+            if (bitmap == null)
+                //bitmapInit();
+                return;
+
+            this.updateBitmap();
             this.canvasView.InvalidateSurface();
         }
     }

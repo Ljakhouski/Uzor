@@ -19,6 +19,7 @@ namespace Uzor
         public SettingPage()
         {
             InitializeComponent();
+            this.renderCheckbox.IsChecked = Preferences.Get("RenderMode", true);
             //this.languagePicker.SelectedIndex = 0;
         }
 
@@ -44,6 +45,16 @@ namespace Uzor
         private async void openURL_Clicked(object sender, EventArgs e)
         {
             await Browser.OpenAsync("https://www.instagram.com/ljakhousky/", BrowserLaunchMode.SystemPreferred);
+        }
+
+        private void testButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new TestPage());
+        }
+
+        private void renderCheckbox_Changed(object sender, CheckedChangedEventArgs e)
+        {
+            Preferences.Set("RenderMode", e.Value);
         }
     }
 }

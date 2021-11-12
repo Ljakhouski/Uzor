@@ -171,6 +171,9 @@
   <data name="Ok" xml:space="preserve">
     <value>Сохранить</value>
   </data>
+  <data name="OptimizationLabel" xml:space="preserve">
+    <value>Оптимизация рендера:</value>
+  </data>
   <data name="PermissionDenied" xml:space="preserve">
     <value>Не предоставлено разрешение для доступа к файлам устройства! </value>
   </data>

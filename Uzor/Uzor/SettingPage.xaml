@@ -31,8 +31,12 @@
                     
                 </StackLayout>
 
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{x:Static resources:AppResource.OptimizationLabel}"></Label>
+                    <CheckBox x:Name="renderCheckbox" IsChecked="True" CheckedChanged="renderCheckbox_Changed" Color="Red"></CheckBox>
+                </StackLayout>
                 <BoxView VerticalOptions="FillAndExpand"/>
-                
+                <Button Clicked="testButton_Clicked"></Button>
                 <Label HorizontalOptions="Center" Margin="0,0,0,10">
                     <Label.FormattedText>
                         <FormattedString>
@@ -48,6 +52,8 @@
                     </Label.FormattedText>
                 </Label>
                 <Label Text="Belarus 2021" HorizontalOptions="Center"/>
+                
+                
             </StackLayout>
         </Grid>
     </ContentPage.Content>

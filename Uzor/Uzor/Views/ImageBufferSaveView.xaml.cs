@@ -86,7 +86,7 @@ namespace Uzor.Views
         private void updateLongUzorBitmap()
         {
             var o = new LongUzorDrawingObject(longUzorData) { PixelSize = currentPixelSize };
-            this.bitmapWidth = o.GetResultSceneWidth() >3500? 3500 : o.GetResultSceneWidth();
+            this.bitmapWidth = o.GetResultContentWidth() >3500? 3500 : o.GetResultContentWidth();
             this.bitmap = new SKBitmap(this.bitmapWidth, this.bitmapHeight);
 
             using (SKCanvas saveBitmapCanvas = new SKCanvas(bitmap))

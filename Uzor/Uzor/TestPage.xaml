@@ -5,8 +5,14 @@
              xmlns:tt="clr-namespace:TouchTracking" xmlns:views="clr-namespace:Uzor.Views"
              x:Class="Uzor.TestPage"
              Title=".......">
-    <StackLayout>
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start">
         <CheckBox x:Name="chckbx" CheckedChanged="chckbx_CheckedChanged"></CheckBox>
+        <Slider Maximum="2000" Minimum="10" ValueChanged="sliderValue_Changed"></Slider>
+        <views:LongUzorView 
+                            x:Name="preview"
+                            Rotation="0"
+                            Margin="0,0,0,0"
+                    ></views:LongUzorView>
         <!--<views:UzorPixelFieldView x:Name="uzorView"></views:UzorPixelFieldView>-->
     </StackLayout>
 </ContentPage>

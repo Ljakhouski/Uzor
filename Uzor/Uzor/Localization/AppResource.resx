@@ -168,6 +168,9 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="OptimizationLabel" xml:space="preserve">
+    <value>Rendering optimization:</value>
+  </data>
   <data name="PermissionDenied" xml:space="preserve">
     <value>file access must be enabled!</value>
   </data>

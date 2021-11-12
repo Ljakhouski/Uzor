@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using TouchTracking;
 using Uzor.Data;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Uzor.EditorObjects
@@ -23,10 +24,11 @@ namespace Uzor.EditorObjects
         public bool ConsuderMask { get; set; } = false;
         protected Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
         protected SKMatrix matrix = SKMatrix.CreateIdentity();
-
+        private bool renderMode;
         public UzorDrawingObject(UzorData data)
         {
             this.Data = data;
+            this.renderMode = Preferences.Get("RenderMode", true);
         }
         public UzorDrawingObject() { }
         public override void Draw(SKCanvas canvas, SKCanvasView view)
@@ -88,28 +90,25 @@ namespace Uzor.EditorObjects
             int xRightDown = (int)(xRightDownLocationAfterScaling / pixelSize);
             int yRightDown = (int)(yRightDownLocationAfterScaling / pixelSize);
 
-            
-            for (int w = (xLeftTop - 1) < 0 ? 0 : xLeftTop - 1; 
-                w </*Data.FieldSize*/(xRightDown + 1 > Data.FieldSize ? Data.FieldSize : xRightDown + 1);
-                w++)
+            if (!this.renderMode)
+            {
+                for (int w = 0; w < Data.FieldSize; w++)
 
-                for (int h = (yLeftTop - 1) < 0 ? 0 : yLeftTop - 1; 
-                    h </*Data.FieldSize*/(yRightDown + 1 > Data.FieldSize ? Data.FieldSize : yRightDown + 1); 
-                    h++)
-                {
-                            /***** check for masks *****/
+                    for (int h = 0; h < Data.FieldSize; h++)
+                    {
+                        /***** check for masks *****/
 
-                    if ((isEmptyMask || (mask[w,h] && !isEmptyMask))
-                        && 
-                        (direction == Direction.None || 
-                        (direction == Direction.ToLeft && w<=Data.FieldSize/2) ||
-                        (direction == Direction.ToRight && w >= Data.FieldSize/2)
-                        ))
+                        if ((isEmptyMask || (mask[w, h] && !isEmptyMask))
+                            &&
+                            (direction == Direction.None ||
+                            (direction == Direction.ToLeft && w <= Data.FieldSize / 2) ||
+                            (direction == Direction.ToRight && w >= Data.FieldSize / 2)
+                            ))
 
-                        if (f[w, h])
-                            canvas.DrawRect((float)w * pixelSize,
-                                            (float)h * pixelSize, pixelSize, pixelSize,
-                                                frontPaint);
+                            if (f[w, h])
+                                canvas.DrawRect((float)w * pixelSize,
+                                                (float)h * pixelSize, pixelSize, pixelSize,
+                                                    frontPaint);
 
                         /*if (f[w, h] == false)
                             canvas.DrawRect((float)w * pixelSize, 
@@ -119,7 +118,42 @@ namespace Uzor.EditorObjects
                             canvas.DrawRect((float)w * pixelSize, 
                                             (float)h * pixelSize, pixelSize, pixelSize,
                                              frontPaint);*/
-                }
+                    }
+                return;
+            }
+            else
+            
+                for (int w = (xLeftTop - 1) < 0 ? 0 : xLeftTop - 1; 
+                    w </*Data.FieldSize*/(xRightDown + 1 > Data.FieldSize ? Data.FieldSize : xRightDown + 1);
+                    w++)
+
+                    for (int h = (yLeftTop - 1) < 0 ? 0 : yLeftTop - 1; 
+                        h </*Data.FieldSize*/(yRightDown + 1 > Data.FieldSize ? Data.FieldSize : yRightDown + 1); 
+                        h++)
+                    {
+                                /***** check for masks *****/
+
+                        if ((isEmptyMask || (mask[w,h] && !isEmptyMask))
+                            && 
+                            (direction == Direction.None || 
+                            (direction == Direction.ToLeft && w<=Data.FieldSize/2) ||
+                            (direction == Direction.ToRight && w >= Data.FieldSize/2)
+                            ))
+
+                            if (f[w, h])
+                                canvas.DrawRect((float)w * pixelSize,
+                                                (float)h * pixelSize, pixelSize, pixelSize,
+                                                    frontPaint);
+
+                            /*if (f[w, h] == false)
+                                ca nvas.DrawRect((float)w * pixelSize, 
+                                                (float)h * pixelSize, pixelSize, pixelSize, 
+                                                 backPaint);
+                            else
+                                canvas.DrawRect((float)w * pixelSize, 
+                                                (float)h * pixelSize, pixelSize, pixelSize,
+                                                 frontPaint);*/
+                    }
         }
 
 

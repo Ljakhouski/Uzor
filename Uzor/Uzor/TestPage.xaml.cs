@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TouchTracking;
+using Uzor.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,6 +27,14 @@ namespace Uzor
             //    this.uzorView.StartCalculation();
             //else
             //    this.uzorView.StopCaltulation();
+        }
+
+        private void sliderValue_Changed(object sender, ValueChangedEventArgs e)
+        {
+            this.preview.HeightRequest = e.NewValue;
+            LongUzorView v = this.preview;
+            v.Data = UzorProjectFileManager.LoadLongUzorData("/data/user/0/com.companyname.uzor/files/.local/share/new Uzor5.lubf");
+            v.Draw();
         }
     }
 }

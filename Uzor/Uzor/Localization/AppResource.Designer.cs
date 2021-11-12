@@ -214,6 +214,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Rendering optimization:.
+        /// </summary>
+        public static string OptimizationLabel {
+            get {
+                return ResourceManager.GetString("OptimizationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на file access must be enabled!.
         /// </summary>
         public static string PermissionDenied {
