@@ -2,13 +2,20 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Uzor.Views.ColorPickerView"
-             xmlns:resources="clr-namespace:Uzor.Localization">
+             xmlns:resources="clr-namespace:Uzor.Localization"
+             xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">
   <ContentView.Content>
         <Grid>
+            <BoxView x:Name="background" BackgroundColor="Black" Opacity="0.35">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="background_Tapped"></TapGestureRecognizer>
+                </BoxView.GestureRecognizers>
+            </BoxView>
+            
             <Frame x:Name="viewFrame"
                    BackgroundColor="#e3e6e8"
                    CornerRadius="20"
-                   Margin="40,100,40,100"
+                   Margin="40,70,40,70"
                    Padding="0"
                    VerticalOptions="Center">
 
@@ -18,6 +25,28 @@
                         <Label Text="{x:Static resources:AppResource.Color}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"></Label>
                     </Grid>
 
+
+                    <colorpicker:ColorWheel x:Name="ColorWheel1"
+                                ShowAlphaSlider="{ Binding Source={x:Reference ShowAlphaSwitch}, Path=IsToggled }"
+                                ShowLuminositySlider="{ Binding Source={x:Reference ShowLuminositySlider}, Path=IsToggled }"
+                                ShowLuminosityWheel="{ Binding Source={x:Reference ShowLuminosityWheel}, Path=IsToggled }"
+                                IsVisible="{ Binding Source={x:Reference ShowTriangleSwitch}, Path=IsToggled, Converter={StaticResource InverseBoolConverter} }"
+                                Vertical="{ Binding Source={x:Reference VerticalSlider}, Path=IsToggled }"
+                                Padding="5"
+                                Grid.Row="1"/>
+                    <colorpicker:ColorTriangle x:Name="ColorTriangle1"
+                                   ConnectedColorPicker="{x:Reference Name=ColorWheel1}"
+                                   IsVisible="{ Binding Source={x:Reference ShowTriangleSwitch}, Path=IsToggled }"
+                                   RotateTriangleByHue="{ Binding Source={x:Reference RotateTriangleByHue}, Path=IsToggled }"
+                                   Padding="5"
+                                   Grid.Row="1"/>
+                    <colorpicker:HSLSliders x:Name="HSLSliders1"
+                                ConnectedColorPicker="{x:Reference Name=ColorWheel1}"
+                                ShowAlphaSlider="{ Binding Source={x:Reference ShowAlphaSwitch}, Path=IsToggled }"
+                                Padding="5"
+                                Grid.Row="2"/>
+                    
+                    
                     <StackLayout Orientation="Horizontal" Padding="20">
                         <Picker x:Name="picker"
                             SelectedIndexChanged="onPickerChanged">
@@ -45,6 +74,7 @@
                     <Slider x:Name="A_Slider" Maximum="255" Minimum="0" Value="100" ValueChanged="colorValue_Changed"
                             ThumbColor="Gray" MinimumTrackColor="DarkGray"></Slider>
 
+                    
                     
                 </StackLayout>
 

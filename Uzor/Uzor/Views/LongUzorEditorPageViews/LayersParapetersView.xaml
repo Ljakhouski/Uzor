@@ -6,7 +6,7 @@
              HeightRequest="350">
   <ContentView.Content>
         <Frame CornerRadius="15" Margin="0,0,0,0" BackgroundColor="White" HasShadow="False" Padding="0">
-            <Grid>
+            <Grid x:Name="mainGrid">
                 <ScrollView x:Name="scroll" VerticalScrollBarVisibility="Always">
                     <StackLayout Spacing="23" Padding="10">
                         <Button HeightRequest="45" CornerRadius="20" Text="{x:Static resources:AppResource.FirstUzorEdit}" Clicked="firstUzorEdit_Clicked"/>

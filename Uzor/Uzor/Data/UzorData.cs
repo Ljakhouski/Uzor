@@ -20,6 +20,11 @@ namespace Uzor.Data
             return new SKColor((byte)R, (byte)G, (byte)B, (byte)A);
         }
 
+        public Color ToNativeColor()
+        {
+            return Color.FromArgb((byte)A, (byte)R, (byte)G, (byte)B);
+        }
+
         public PixelColor (int r, int g, int b, int a)
         {
             this.R = r;

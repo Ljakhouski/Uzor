@@ -135,18 +135,7 @@ namespace Uzor
             this.Closed?.Invoke(this, null);
             Navigation.PopModalAsync();
         }
-        public void ShowImageBufferSaveView()
-        {
-            var v = new ImageBufferSaveView(this.GetData());
-            v.BackgroundTapped += ImageSaveView_BackgroundTapped;
-            this.backgroundGrid.Children.Add(v);
-        }
-
-        private void ImageSaveView_BackgroundTapped(object sender, EventArgs e)
-        {
-            this.backgroundGrid.Children.Remove(sender as ImageBufferSaveView);
-        }
-
+       
         private void initializeDropMenus()
         {
             this.distanceParametersView = new DistanceParametersView(longUzorView);

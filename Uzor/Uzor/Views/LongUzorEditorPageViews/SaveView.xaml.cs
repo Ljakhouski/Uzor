@@ -34,9 +34,14 @@ namespace Uzor.Views.LongUzorEditorPageViews
         }
         private void ImageSave_Clicked(object sender, EventArgs e)
         {
-            this.editorPage.ShowImageBufferSaveView();
+            var i = new ImageBufferSaveView(editorPage.GetData());
+            i.BackgroundTapped += imageBufferSaver_background_Tapped;
+            this.editorPage.backgroundGrid.Children.Add(i);
         }
 
-        
+        private void imageBufferSaver_background_Tapped(object sender, EventArgs e)
+        {
+            this.editorPage.backgroundGrid.Children.Remove(sender as ImageBufferSaveView);
+        }
     }
 }

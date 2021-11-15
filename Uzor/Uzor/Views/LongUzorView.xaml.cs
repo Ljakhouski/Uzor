@@ -21,6 +21,7 @@ namespace Uzor.Views
 
         private SKMatrix matrix = SKMatrix.MakeIdentity(); // scene-matrix, only for drawing Uzor-scene on screen or on bitmap
         private SKMatrix bitmapMatrix = SKMatrix.MakeIdentity(); // for double-buffering, reseted when the buffer is redrawing
+        private SKMatrix backgroundMatrix = SKMatrix.MakeIdentity();
 
         private Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
 
@@ -29,6 +30,7 @@ namespace Uzor.Views
         //TODO: need to add ...mode for interactive elements (to turn off all events except zoom-moving)
 
         private SKBitmap bitmap;
+        private SKBitmap backgroundBitmap;
         private SKCanvas bitmapCanvas;
         public bool DemonstrateMode { get { return demonstrateMode_; } set
             {

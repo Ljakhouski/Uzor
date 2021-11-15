@@ -45,8 +45,15 @@ namespace Uzor.Views.LongUzorEditorPageViews
         
         private async void colorChange_Clicked(object sender, EventArgs e)
         {
-            
+            var c = new ColorPickerView(this.editorPage.GetData().UzorElements[0]);
+            c.BackgroundTapped += colorPicker_Background_Tapped;
+            this.editorPage.backgroundGrid.Children.Add(c);
             this.editorPage.UpdateView();
+        }
+
+        private void colorPicker_Background_Tapped(object sender, EventArgs e)
+        {
+            this.editorPage.backgroundGrid.Children.Remove(sender as ColorPickerView);
         }
 
         private async void sideUzorEdit_Clicked(object sender, EventArgs e)
