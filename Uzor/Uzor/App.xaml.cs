@@ -26,9 +26,9 @@ namespace Uzor
             }
 
 
-            if (!Preferences.ContainsKey("RenderMode"))
+            if (!Preferences.ContainsKey("RenderingMode"))
             {
-                Preferences.Set("RenderMode", true);
+                Preferences.Set("RenderingMode", 2);
             }
                 //Xamarin.Forms.DependencyService.Get<ILocalize>().SetLocale(ci);
 

@@ -54,6 +54,13 @@ namespace Uzor.EditorObjects
             const int freeZone = 300;
             return this.Data.D * longUzorNumber * minimalStepSize + freeZone;
         }
+
+        public int GetResultContentHeight()
+        {
+            const int freeZone = 350;
+            const int verticalElementNumber = 14;
+            return Data.A * minimalStepSize * verticalElementNumber + freeZone;
+        }
         //private int minimal_A_parameter;
         private int sceneCenterX, sceneCenterY;
         

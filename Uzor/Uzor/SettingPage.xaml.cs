@@ -12,14 +12,24 @@ using Xamarin.Forms.Xaml;
 
 namespace Uzor
 {
+    enum RenderingMode
+    {
+        Low,
+        DoubleBuffering,
+        FullDoubleBuffering,
+    }
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingPage : ContentPage
     {
         public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
+
+        private RenderingMode renderingMode;
         public SettingPage()
         {
             InitializeComponent();
-            this.renderCheckbox.IsChecked = Preferences.Get("RenderMode", true);
+            this.renderingMode = (RenderingMode)Preferences.Get("RenderingMode", 2);
+            this.renderingModePicker.SelectedIndex = (int)renderingMode;
             //this.languagePicker.SelectedIndex = 0;
         }
 
@@ -52,9 +62,11 @@ namespace Uzor
             Navigation.PushModalAsync(new TestPage());
         }
 
-        private void renderCheckbox_Changed(object sender, CheckedChangedEventArgs e)
+
+        private void renderingMode_Changed(object sender, EventArgs e)
         {
-            Preferences.Set("RenderMode", e.Value);
+            this.renderingMode = (RenderingMode)((Picker)sender).SelectedIndex;
+            Preferences.Set("RenderingMode", (int)this.renderingMode);
         }
     }
 }

@@ -33,6 +33,11 @@ namespace Uzor.Data
             this.A = a;
         }
 
+        public static PixelColor FromNativeColor(Color color)
+        {
+            return new PixelColor(color.R, color.G, color.B, color.A);
+        }
+
         public PixelColor(int r, int g, int b)
         {
             this.R = r;

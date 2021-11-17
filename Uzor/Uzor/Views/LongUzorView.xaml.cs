@@ -26,12 +26,14 @@ namespace Uzor.Views
         private Dictionary<long, SKPoint> touchDictionary = new Dictionary<long, SKPoint>();
 
         private bool demonstrateMode_ = false;
-        private bool doubleBuffering = true;
+        private RenderingMode renderingMode = RenderingMode.Low;
         //TODO: need to add ...mode for interactive elements (to turn off all events except zoom-moving)
 
-        private SKBitmap bitmap;
-        private SKBitmap backgroundBitmap;
+        private SKBitmap doubleBufferingBitmap;
+        private SKBitmap bitmap; // for full-double-buffering
         private SKCanvas bitmapCanvas;
+
+        private bool quickViewUpdateMode = false; // if the finger are moving on canvas
         public bool DemonstrateMode { get { return demonstrateMode_; } set
             {
                 demonstrateMode_ = value;
@@ -39,6 +41,7 @@ namespace Uzor.Views
             }
         } 
 
+        
         private void GridTouchEffect_TouchAction(object sender, TouchActionEventArgs args)
         {
             throw new NotImplementedException();
@@ -47,13 +50,14 @@ namespace Uzor.Views
         public LongUzorData Data 
         { 
             get { return LongUzorGraphic.Data; }
-            set { this.LongUzorGraphic.Data = value; if (bitmap != null) bitmapInit(); }
+            set { this.LongUzorGraphic.Data = value; if (doubleBufferingBitmap != null && bitmap !=null) bitmapInit(); }
         }
 
         public LongUzorView(LongUzorData data)
         {
             InitializeComponent();
             this.LongUzorGraphic.Data = data;
+            bitmapInit();
         }
 
         public LongUzorView()
@@ -63,9 +67,22 @@ namespace Uzor.Views
 
         private void bitmapInit()
         {
-            this.bitmap = new SKBitmap((int)this.canvasView.CanvasSize.Width, (int)this.canvasView.CanvasSize.Height);
-            this.bitmapCanvas = new SKCanvas(bitmap);
-            this.doubleBuffering = Preferences.Get("doubleBuffering", true);
+            this.renderingMode = (RenderingMode)Preferences.Get("RenderingMode", 2);
+
+            if (renderingMode == RenderingMode.DoubleBuffering)
+            {
+                this.doubleBufferingBitmap = new SKBitmap((int)this.canvasView.CanvasSize.Width, (int)this.canvasView.CanvasSize.Height);
+                this.bitmapCanvas = new SKCanvas(doubleBufferingBitmap);
+            }
+            else if (renderingMode == RenderingMode.FullDoubleBuffering)
+            {
+                this.bitmap = new SKBitmap(LongUzorGraphic.GetResultContentWidth() >7000? 7000 : LongUzorGraphic.GetResultContentWidth(),
+                                           LongUzorGraphic.GetResultContentHeight()>13000? 13000: LongUzorGraphic.GetResultContentHeight());
+                this.bitmapCanvas = new SKCanvas(bitmap);
+            }
+            else
+                return;
+            
             this.updateBitmap();
         }
 
@@ -88,6 +105,17 @@ namespace Uzor.Views
                 case TouchActionType.Moved:
                     if (touchDictionary.ContainsKey(args.Id))
                     {
+                        this.quickViewUpdateMode = true;
+                        if (renderingMode == RenderingMode.DoubleBuffering)
+                            Device.StartTimer(TimeSpan.FromMilliseconds(300), () => {
+                               // MainThread.BeginInvokeOnMainThread(() =>
+                               // {
+                                    Draw();
+                               // });
+
+                                return this.quickViewUpdateMode;
+                            });
+
                         if (touchDictionary.Count == 1)
                         {
                             long[] keys = new long[touchDictionary.Count];
@@ -157,13 +185,13 @@ namespace Uzor.Views
                     break;
                 case TouchActionType.Released:
                 case TouchActionType.Cancelled:
-
                     if (touchDictionary.ContainsKey(args.Id))
                         touchDictionary.Remove(args.Id);
 
                     if (matrix.ScaleX < 0.2)
                         matrix = SKMatrix.Identity;
 
+                    this.quickViewUpdateMode = false;
                     updateBitmap();
 
                     break;
@@ -174,39 +202,64 @@ namespace Uzor.Views
 
         private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
         {
-            if (bitmap == null)
+            if (doubleBufferingBitmap == null && bitmap == null)
                 this.bitmapInit();
 
-            if (doubleBuffering)
+            switch(renderingMode)
             {
-                // TODO: background rendering
-
-                e.Surface.Canvas.SetMatrix(bitmapMatrix);
-                e.Surface.Canvas.Clear();
-                e.Surface.Canvas.DrawBitmap(bitmap, 0, 0);
-            }
-            else
-            {
-                e.Surface.Canvas.SetMatrix(matrix);
-                LongUzorGraphic.Draw(e.Surface.Canvas, canvasView);
+                case RenderingMode.Low:
+                    e.Surface.Canvas.SetMatrix(matrix);
+                    LongUzorGraphic.Draw(e.Surface.Canvas, canvasView);
+                    break;
+                case RenderingMode.DoubleBuffering:
+                    e.Surface.Canvas.SetMatrix(bitmapMatrix);
+                    e.Surface.Canvas.Clear();
+                    e.Surface.Canvas.DrawBitmap(doubleBufferingBitmap, 0, 0);
+                    break;
+                case RenderingMode.FullDoubleBuffering:
+                    e.Surface.Canvas.SetMatrix(matrix);
+                    e.Surface.Canvas.Clear(this.Data.BackColor.ToSKColor());
+                    e.Surface.Canvas.DrawBitmap(bitmap, canvasView.CanvasSize.Width/2 -bitmap.Width / 2, canvasView.CanvasSize.Height / 2 - bitmap.Height / 2);
+                    break;
+                default:
+                    break;
             }
 
             // TODO: draw zoom-indicator in top angle with specifical parent-view 
         }
         private void updateBitmap()
         {
-            bitmapCanvas.SetMatrix(matrix);
-            LongUzorGraphic.Draw(bitmapCanvas, canvasView);
-            bitmapMatrix = SKMatrix.MakeIdentity();
+            if (renderingMode == RenderingMode.DoubleBuffering)
+            {
+                bitmapCanvas.SetMatrix(matrix);
+                LongUzorGraphic.Draw(bitmapCanvas, canvasView);
+                bitmapMatrix = SKMatrix.MakeIdentity();
+            }
+            else if (renderingMode == RenderingMode.FullDoubleBuffering)
+            {
+                bitmapCanvas.ResetMatrix();
+                LongUzorGraphic.Draw(bitmapCanvas, bitmap.Width, bitmap.Height);
+            }
+
+
         }
 
         public void Draw()
         {
-            if (bitmap == null)
-                //bitmapInit();
-                return;
+            if (renderingMode == RenderingMode.DoubleBuffering)
+            {
+                if (doubleBufferingBitmap == null)
+                    return;
+                this.updateBitmap();
+            }
+            else if (renderingMode == RenderingMode.FullDoubleBuffering)
+            {
+                if (bitmap == null)
+                    return;
+                this.bitmapInit();
 
-            this.updateBitmap();
+            }
+
             this.canvasView.InvalidateSurface();
         }
     }

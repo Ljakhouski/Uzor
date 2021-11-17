@@ -33,10 +33,16 @@
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="{x:Static resources:AppResource.OptimizationLabel}"></Label>
-                    <CheckBox x:Name="renderCheckbox" IsChecked="True" CheckedChanged="renderCheckbox_Changed" Color="Red"></CheckBox>
+                    <Picker x:Name="renderingModePicker" SelectedIndexChanged="renderingMode_Changed" WidthRequest="100">
+                        <Picker.Items>
+                            <x:String>Low</x:String>
+                            <x:String>DoubleBuffering</x:String>
+                            <x:String>FullDoubleBuffering</x:String>
+                        </Picker.Items>
+                    </Picker>
                 </StackLayout>
                 <BoxView VerticalOptions="FillAndExpand"/>
-                <Button Clicked="testButton_Clicked"></Button>
+                <Button Clicked="testButton_Clicked" ></Button>
                 <Label HorizontalOptions="Center" Margin="0,0,0,10">
                     <Label.FormattedText>
                         <FormattedString>
