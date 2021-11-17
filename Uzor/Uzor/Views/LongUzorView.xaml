@@ -4,7 +4,7 @@
              x:Class="Uzor.Views.LongUzorView"
              x:ClassModifier="public">
   <ContentView.Content>
-        <Grid>
+        <Grid x:Name="mainGrid">
             <skia:SKCanvasView
                     x:Name="canvasView" 
                     PaintSurface="onCanvasViewPaintSurface" IgnorePixelScaling="False"

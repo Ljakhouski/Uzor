@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:Uzor.Views" x:DataType="views:MessageBox"
+             x:Class="Uzor.Views.MessageBox"
+             xmlns:resources="clr-namespace:Uzor.Localization">
+  <ContentView.Content WidthRequest="200" HeightRequest="200">
+        <Frame BackgroundColor="#dadce0" CornerRadius="20" Padding="0" Margin="50" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="250" HeightRequest="300">
+            <StackLayout>
+                <Grid BackgroundColor="#a62112" HeightRequest="60">
+                    <Label Text="{x:Static resources:AppResource.Warning}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White"></Label>
+                </Grid> 
+                <Label x:Name="mainLabel" Text="{Binding Text}" VerticalOptions="FillAndExpand" Margin="20"></Label>
+                <Button Text="{x:Static resources:AppResource.Ok}" BackgroundColor="White" HorizontalOptions="Center" WidthRequest="100" CornerRadius="20" Clicked="OK_Clicked" VerticalOptions="End" Margin="20"></Button>
+
+
+            </StackLayout>
+
+
+        </Frame>
+    </ContentView.Content>
+</ContentView>

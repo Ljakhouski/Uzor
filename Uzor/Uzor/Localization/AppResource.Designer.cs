@@ -313,6 +313,24 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Rendering-mode is set to &quot;Low&quot;.
+        /// </summary>
+        public static string SwitchRenderingAlert {
+            get {
+                return ResourceManager.GetString("SwitchRenderingAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Warning.
+        /// </summary>
+        public static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Yes.
         /// </summary>
         public static string Yes {

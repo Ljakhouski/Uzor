@@ -201,6 +201,12 @@
   <data name="Size" xml:space="preserve">
     <value>Size:</value>
   </data>
+  <data name="SwitchRenderingAlert" xml:space="preserve">
+    <value>Rendering-mode is set to "Low"</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>

@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using Uzor.EditorObjects;
 using SkiaSharp;
 using Uzor.Data;
+using Uzor.Localization;
 using TouchTracking;
 using Xamarin.Essentials;
 
@@ -76,14 +77,32 @@ namespace Uzor.Views
             }
             else if (renderingMode == RenderingMode.FullDoubleBuffering)
             {
-                this.bitmap = new SKBitmap(LongUzorGraphic.GetResultContentWidth() >7000? 7000 : LongUzorGraphic.GetResultContentWidth(),
-                                           LongUzorGraphic.GetResultContentHeight()>13000? 13000: LongUzorGraphic.GetResultContentHeight());
+                try
+                {
+                    this.bitmap = new SKBitmap(LongUzorGraphic.GetResultContentWidth() >7000? 7000 : LongUzorGraphic.GetResultContentWidth(),
+                                               LongUzorGraphic.GetResultContentHeight()>13000? 13000: LongUzorGraphic.GetResultContentHeight());
+
+                }
+                catch(System.Exception e)
+                {
+                    this.bitmap = new SKBitmap(3000, 4000);
+                    var mb = new MessageBox(e.Message + "    " + AppResource.SwitchRenderingAlert);
+                    mb.OkButton_Clicked += hideAlert;
+                    this.mainGrid.Children.Add(mb);
+                    this.renderingMode = RenderingMode.Low;
+                }
+                
                 this.bitmapCanvas = new SKCanvas(bitmap);
             }
             else
                 return;
             
             this.updateBitmap();
+        }
+
+        private void hideAlert(object sender, EventArgs e)
+        {
+            this.mainGrid.Children.Remove(sender as MessageBox);
         }
 
         private void OnTouchEffectAction(object sender, TouchTracking.TouchActionEventArgs args)

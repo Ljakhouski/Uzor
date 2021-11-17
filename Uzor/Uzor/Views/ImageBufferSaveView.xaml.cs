@@ -19,7 +19,7 @@ namespace Uzor.Views
         private SKBitmap bitmap;
 
         private int bitmapWidth;
-        private int bitmapHeight = 1500;
+        private int bitmapHeight = 3600;
 
         const int currentPixelSize = 20; // using for size-calculation & bitmap drawing
         public ImageBufferSaveView(LongUzorData data)
