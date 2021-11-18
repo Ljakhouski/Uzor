@@ -168,6 +168,9 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
   <data name="OptimizationLabel" xml:space="preserve">
     <value>Rendering optimization:</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="SecondUzorEdit" xml:space="preserve">
     <value>Edit second Uzor</value>
+  </data>
+  <data name="SetFrontColorToAll" xml:space="preserve">
+    <value>Set front color to all elements: </value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>Settings</value>

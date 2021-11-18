@@ -214,6 +214,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Opacity.
+        /// </summary>
+        public static string Opacity {
+            get {
+                return ResourceManager.GetString("Opacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Rendering optimization:.
         /// </summary>
         public static string OptimizationLabel {
@@ -273,6 +282,15 @@ namespace Uzor.Localization {
         public static string SecondUzorEdit {
             get {
                 return ResourceManager.GetString("SecondUzorEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Set front color to all elements: .
+        /// </summary>
+        public static string SetFrontColorToAll {
+            get {
+                return ResourceManager.GetString("SetFrontColorToAll", resourceCulture);
             }
         }
         

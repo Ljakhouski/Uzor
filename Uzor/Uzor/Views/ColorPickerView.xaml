@@ -4,14 +4,14 @@
              x:Class="Uzor.Views.ColorPickerView"
              xmlns:resources="clr-namespace:Uzor.Localization"
              xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">
-  <ContentView.Content>
+    <ContentView.Content>
         <Grid>
             <BoxView x:Name="background" BackgroundColor="Black" Opacity="0.35">
                 <BoxView.GestureRecognizers>
                     <TapGestureRecognizer Tapped="background_Tapped"></TapGestureRecognizer>
                 </BoxView.GestureRecognizers>
             </BoxView>
-            
+
             <Frame x:Name="viewFrame"
                    BackgroundColor="#e3e6e8"
                    CornerRadius="20"
@@ -45,8 +45,8 @@
                                 ShowAlphaSlider="{ Binding Source={x:Reference ShowAlphaSwitch}, Path=IsToggled }"
                                 Padding="5"
                                 Grid.Row="2"/>-->
-                    
-                    
+
+
                     <StackLayout Orientation="Horizontal" Padding="20" Margin="20,0,30,0">
                         <Picker x:Name="picker" HorizontalOptions="FillAndExpand"
                             SelectedIndexChanged="onPickerChanged" SelectedIndex="0">
@@ -62,20 +62,47 @@
 
 
                     </StackLayout>
-                    
-                    
-                    <Slider x:Name="H_Slider" Maximum="1" Minimum="0" Value="0.5" ValueChanged="colorValue_Changed"
-                            ThumbColor="Red" MinimumTrackColor="DarkRed"
-                            ></Slider>
-                    <Slider x:Name="S_Slider" Maximum="1" Minimum="0" Value="0.5" ValueChanged="colorValue_Changed"
-                            ThumbColor="Green" MinimumTrackColor="DarkGreen"></Slider>
-                    <Slider x:Name="L_Slider" Maximum="1" Minimum="0" Value="0.5" ValueChanged="colorValue_Changed"
-                            ThumbColor="Blue" MinimumTrackColor="DarkBlue"></Slider>
-                    <Slider x:Name="A_Slider" Maximum="1" Minimum="0" Value="0.5" ValueChanged="colorValue_Changed"
-                            ThumbColor="Gray" MinimumTrackColor="DarkGray"></Slider>
 
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
+                        <Label x:Name="H_Label" WidthRequest="50"></Label>
+                        <Slider x:Name="H_Slider" Maximum="1" Minimum="0" Value="0.5" ValueChanged="colorValue_Changed" HorizontalOptions="FillAndExpand"
+                            ThumbColor="Black" MinimumTrackColor="DarkRed" ></Slider>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
+                        <Label x:Name="S_Label" WidthRequest="50"></Label>
+                        <Slider x:Name="S_Slider" Maximum="1" Minimum="0" Value="0.5" ValueChanged="colorValue_Changed" HorizontalOptions="FillAndExpand"
+                            ThumbColor="Black" MinimumTrackColor="DarkRed"></Slider>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
+                        <Label x:Name="L_Label" WidthRequest="50"></Label>
+                        <Slider x:Name="L_Slider" Maximum="1" Minimum="0" Value="0.5" ValueChanged="colorValue_Changed" HorizontalOptions="FillAndExpand"
+                            ThumbColor="Black" MinimumTrackColor="DarkRed"></Slider>
+                    </StackLayout>
+
+                    <Label Text="{x:Static resources:AppResource.Opacity}" HorizontalOptions="Center"/>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
+                        <Label x:Name="A_Label" WidthRequest="50"></Label>
+                        <Slider x:Name="A_Slider" Maximum="1" Minimum="0" Value="0.5" ValueChanged="colorValue_Changed" HorizontalOptions="FillAndExpand"
+                            ThumbColor="Black" MinimumTrackColor="DarkGray"></Slider>
+                    </StackLayout>
+
+
+                    <StackLayout Orientation="Horizontal" Margin="20">
+                        <Label Text="{x:Static resources:AppResource.SetFrontColorToAll}" Margin="10"></Label>
+                        <CheckBox x:Name="saveAllColorCheckbox" IsChecked="True" Color="Red" Margin="10"></CheckBox>
+                    </StackLayout>
                     
-                    
+
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Button Margin="20" Text="{x:Static resources:AppResource.Ok}" CornerRadius="20" HorizontalOptions="FillAndExpand" Clicked="OK_Clicked"></Button>
+                        <Button Margin="20" Text="{x:Static resources:AppResource.Cancel}" CornerRadius="20" HorizontalOptions="FillAndExpand" Clicked="Cancel_Clicked"></Button>
+                    </StackLayout>
+
+
                 </StackLayout>
 
             </Frame>

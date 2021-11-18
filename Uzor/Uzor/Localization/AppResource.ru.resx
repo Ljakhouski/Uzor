@@ -168,6 +168,9 @@
   <data name="Ok" xml:space="preserve">
     <value>Сохранить</value>
   </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>Прозрачность</value>
+  </data>
   <data name="OptimizationLabel" xml:space="preserve">
     <value>Оптимизация рендера:</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="SecondUzorEdit" xml:space="preserve">
     <value>Изменить второй Uzor </value>
+  </data>
+  <data name="SetFrontColorToAll" xml:space="preserve">
+    <value>Применить основной цвет ко всем элементам: </value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>Настройки</value>
