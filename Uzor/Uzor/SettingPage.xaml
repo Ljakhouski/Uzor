@@ -40,9 +40,15 @@
                             <x:String>FullDoubleBuffering</x:String>
                         </Picker.Items>
                     </Picker>
+                    
+                </StackLayout>
+                <Label x:Name="unsafeLabel" Text="WARNING! UNSAFE METHOD!" IsVisible="false" TextColor="Red"/>
+                <StackLayout Orientation="Horizontal">
+                    <!--<Button Text="export project in folder..."/>
+                    <Button Text="im[prt project in folder..."/>-->
                 </StackLayout>
                 <BoxView VerticalOptions="FillAndExpand"/>
-                <Button Clicked="testButton_Clicked" ></Button>
+                <!--<Button Clicked="testButton_Clicked" ></Button>-->
                 <Label HorizontalOptions="Center" Margin="0,0,0,10">
                     <Label.FormattedText>
                         <FormattedString>

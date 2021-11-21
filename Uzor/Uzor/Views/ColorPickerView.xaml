@@ -56,8 +56,8 @@
                             </Picker.Items>
                         </Picker>
                         <Grid HorizontalOptions="Fill" HeightRequest="50" WidthRequest="50">
-                            <Ellipse x:Name="backEllipse" WidthRequest="30" HeightRequest="30" Stroke="Gray"  StrokeThickness="4"></Ellipse>
-                            <Ellipse x:Name="frontEllipse"  WidthRequest="30" HeightRequest="30" TranslationX="20" TranslationY="-15" Stroke="Gray" StrokeThickness="4"></Ellipse>
+                            <Rectangle x:Name="backEllipse" RadiusX="10" RadiusY="10" WidthRequest="30" HeightRequest="30" Stroke="Gray"  StrokeThickness="4"></Rectangle>
+                            <Rectangle x:Name="frontEllipse" Rotation="0" RadiusX="10" RadiusY="10" WidthRequest="30" HeightRequest="30" TranslationX="20" TranslationY="-15" Stroke="Gray" StrokeThickness="4"></Rectangle>
                         </Grid>
 
 

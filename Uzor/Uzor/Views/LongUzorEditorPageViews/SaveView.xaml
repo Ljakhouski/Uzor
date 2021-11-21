@@ -7,9 +7,9 @@
   <ContentView.Content>
         <Frame CornerRadius="15" Margin="0,0,0,0" BackgroundColor="White" HasShadow="False">
             <StackLayout Spacing="23">
-                <StackLayout Orientation="Horizontal" x:Name="stackOfOkCancelButtons" IsVisible="false" x:FieldModifier="public">
-                    <Button Text="{x:Static resources:AppResource.Ok}" Clicked="Ok_Clicked" CornerRadius="20" HorizontalOptions="Center" x:FieldModifier="public"/>
-                    <Button Text="{x:Static resources:AppResource.Ok}" Clicked="Cancel_Clicked" CornerRadius="20" HorizontalOptions="Center"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" x:Name="stackOfOkCancelButtons" IsVisible="false" x:FieldModifier="public">
+                    <Button Text="{x:Static resources:AppResource.Ok}" Clicked="Ok_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="20"  x:FieldModifier="public"/>
+                    <Button Text="{x:Static resources:AppResource.Cancel}" Clicked="Cancel_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="20"/>
                 </StackLayout>
 
                 <StackLayout x:Name="stackOfSavingProjectButton" x:FieldModifier="public">

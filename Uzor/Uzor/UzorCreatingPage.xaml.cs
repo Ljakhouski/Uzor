@@ -237,9 +237,13 @@ namespace Uzor
 
         }
 
-
+        private bool popModalAsyncWorked = false;
         private async void saveChanges_Clicked(object sender, EventArgs e) // if this editor is open for editing a previously created Uzor
         {
+            if (popModalAsyncWorked)
+                return;
+            popModalAsyncWorked = true;
+
             this._action = ActionStatus.Saved;
             this.pageForAlert.MakeUzorItemList();
             this.Closed?.Invoke(this, null);
@@ -247,6 +251,10 @@ namespace Uzor
         }
         private async void cancelChanges_Clicked(object sender, EventArgs e)
         {
+            if (popModalAsyncWorked)
+                return;
+            popModalAsyncWorked = true;
+
             this._action = ActionStatus.Canceled;
             this.Closed?.Invoke(this, null);
             await Navigation.PopModalAsync();
@@ -254,12 +262,20 @@ namespace Uzor
 
         private async void ForPopModalAsync()
         {
+            if (popModalAsyncWorked)
+                return;
+
+            popModalAsyncWorked = true;
+
             this.Closed?.Invoke(this, null);
             await Navigation.PopModalAsync();
         }
 
         private void longUzorEditorPage_Closed(object sender, EventArgs e)
         {
+            if (popModalAsyncWorked)
+                return;
+            popModalAsyncWorked = true;
             Navigation.PopModalAsync();
         }
         private UzorEditElementView getUzorEditElementView()

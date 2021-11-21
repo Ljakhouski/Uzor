@@ -6,7 +6,7 @@
              NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
         <Grid x:Name="backgroundGrid" x:FieldModifier="public">
-            <Grid>
+            <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="60">

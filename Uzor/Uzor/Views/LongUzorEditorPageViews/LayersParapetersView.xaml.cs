@@ -22,9 +22,6 @@ namespace Uzor.Views.LongUzorEditorPageViews
         }
 
        
-
-        
-
         private void scrollToDown(object sender, EventArgs e)
         {
             scroll.ScrollToAsync(forScrollingToEnd, ScrollToPosition.End, true);
@@ -33,14 +30,17 @@ namespace Uzor.Views.LongUzorEditorPageViews
 
         private async void firstUzorEdit_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new UzorCreatingPage(this.editorPage.GetData().UzorElements[0], this.pageForAlert));
-            this.editorPage.UpdateView();
+            var p = new UzorCreatingPage(this.editorPage.GetData().UzorElements[0], this.pageForAlert);
+            p.Closed += anyPage_Closed;
+            await Navigation.PushModalAsync(p);
         }
 
+        
         private async void secondUzorEdit_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new UzorCreatingPage(this.editorPage.GetData().UzorElements[1], this.pageForAlert));
-            this.editorPage.UpdateView();
+            var p = new UzorCreatingPage(this.editorPage.GetData().UzorElements[1], this.pageForAlert);
+            p.Closed += anyPage_Closed;
+            await Navigation.PushModalAsync(p);
         }
         
         private async void colorChange_Clicked(object sender, EventArgs e)
@@ -50,10 +50,15 @@ namespace Uzor.Views.LongUzorEditorPageViews
             this.editorPage.backgroundGrid.Children.Add(c);
             this.editorPage.UpdateView();
         }
+        private void anyPage_Closed(object sender, EventArgs e)
+        {
+            this.editorPage.UpdateView();
+        }
 
         private void colorPicker_Background_Tapped(object sender, EventArgs e)
         {
             this.editorPage.backgroundGrid.Children.Remove(sender as ColorPickerView);
+            this.editorPage.UpdateView();
         }
 
         private async void sideUzorEdit_Clicked(object sender, EventArgs e)

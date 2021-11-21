@@ -40,7 +40,7 @@
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                         <Label Text="{x:Static resources:AppResource.Size}" Margin="15,0,10,0"></Label>
-                        <Slider x:Name="heightSlider" ThumbColor="#D23838" MinimumTrackColor="#D23838" MaximumTrackColor="Gray" Maximum="5000" Minimum="50" Value="3600" HorizontalOptions="FillAndExpand" ValueChanged="heightValue_Changed"></Slider>
+                        <Slider x:Name="heightSlider" ThumbColor="#D23838" MinimumTrackColor="#D23838" MaximumTrackColor="Gray" Maximum="7000" Minimum="1000" Value="3600" HorizontalOptions="FillAndExpand" ValueChanged="heightValue_Changed"></Slider>
                     </StackLayout>
                     
                     <Frame x:Name="bitmapPreviewViewFrame" MinimumHeightRequest="200"  HorizontalOptions="Fill" CornerRadius="10" Padding="0" Margin="15" SizeChanged="frameSizeChandged">

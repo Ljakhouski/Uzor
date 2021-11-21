@@ -67,6 +67,8 @@ namespace Uzor
         {
             this.renderingMode = (RenderingMode)((Picker)sender).SelectedIndex;
             Preferences.Set("RenderingMode", (int)this.renderingMode);
+
+            this.unsafeLabel.IsVisible = this.renderingMode == RenderingMode.FullDoubleBuffering ? true : false;
         }
     }
 }

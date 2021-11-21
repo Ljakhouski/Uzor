@@ -42,8 +42,12 @@ namespace Uzor.Views
             updateView();
         }
 
+        bool skipColorValueChanged = false;
         private void colorValue_Changed(object sender, ValueChangedEventArgs e)
         {
+            if (skipColorValueChanged)
+                return;
+
             Color c = Color.FromHsla(((Slider)FindByName("H_Slider")).Value,
                                      ((Slider)FindByName("S_Slider")).Value,
                                      ((Slider)FindByName("L_Slider")).Value,
@@ -74,6 +78,7 @@ namespace Uzor.Views
 
         private void setColorSliderValues()
         {
+            skipColorValueChanged = true;
             if (picker.SelectedIndex == 0)
             {
                 H_Slider.Value = frontColor.Hue;
@@ -88,6 +93,7 @@ namespace Uzor.Views
                 L_Slider.Value = backColor.Luminosity;
                 A_Slider.Value = backColor.A;
             }
+            skipColorValueChanged = false;
         }
         private void updateColorSLiderLabel()
         {
@@ -113,7 +119,9 @@ namespace Uzor.Views
         }
         private void onPickerChanged(object sender, EventArgs e)
         {
+            skipColorValueChanged = true;
             setColorSliderValues();
+            skipColorValueChanged = false;
         }
 
         private void background_Tapped(object sender, EventArgs e)

@@ -36,6 +36,11 @@ namespace Uzor.Views
             //this.backgroungStartGradientColor.Color = new Color( data.BackColor.R, data.BackColor.G, data.BackColor.B, /*data.BackColor.A*/ 20);
             //this.backgroungStopGradientColor.Color = new Color(data.BackColor.R, data.BackColor.G, data.BackColor.B, 20);
             this.backGround.BackgroundColor = new Color(data.BackColor.R, data.BackColor.G, data.BackColor.B, 255);
+            if (data.BackColor.ToNativeColor().GetBrightness()>180)
+            {
+                this.itemDate.TextColor = Color.White;
+                this.itemName.TextColor = Color.White;
+            }
             this.pageForAlert = p;
         }
 
