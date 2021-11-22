@@ -23,7 +23,29 @@ namespace Uzor.Views
     {
         public UzorPixelFieldView UzorView { get; set; }
 
-        public UzorData ThisData { get; set; }
+        private UzorData _data;
+        public UzorData Data { get { return _data; } set
+            {
+                _data = value;
+
+                this.UzorView = new UzorPixelFieldView();
+                this.editingFieldFrame.Content = UzorView;
+
+                this.uzor = new UzorEditorObject() { MirrorMode = true, Data = value };
+                this.cropIndicator = new CropIndicator(value);
+
+                if (value.FieldSize / 2 <= this.cropSlider.Minimum)
+                    this.cropSlider.Maximum = this.cropSlider.Minimum + 1;
+                else
+                    this.cropSlider.Maximum = value.FieldSize / 2;
+
+                this.UzorView.EditorObjectssList.Add(new Background(value));
+                this.UzorView.EditorObjectssList.Add(uzor);
+                this.UzorView.EditorObjectssList.Add(centerIndicator);
+                this.UzorView.EditorObjectssList.Add(mirrorIndicator);
+                this.UzorView.EditorObjectssList.Add(cropIndicator);
+            }
+        }
         private UzorEditorObject uzor {get;set;}
         public DarkField mirrorIndicator { get; set; } = new DarkField();
         public CenterMarker centerIndicator { get; set; } = new CenterMarker();
@@ -34,25 +56,7 @@ namespace Uzor.Views
         public UzorEditElementView(UzorData data)
         {
             InitializeComponent();
-            this.ThisData = data;
-
-            this.UzorView = new UzorPixelFieldView();
-            this.editingFieldFrame.Content = UzorView;
-
-            this.uzor = new UzorEditorObject() { MirrorMode = true, Data = data};
-            this.cropIndicator = new CropIndicator(data);
-
-            if (data.FieldSize / 2 <= this.cropSlider.Minimum)
-                this.cropSlider.Maximum = this.cropSlider.Minimum + 1;
-            else
-                this.cropSlider.Maximum = data.FieldSize/2;
-
-            this.UzorView.EditorObjectssList.Add(new Background(data));
-            this.UzorView.EditorObjectssList.Add(uzor);
-            this.UzorView.EditorObjectssList.Add(centerIndicator);
-            this.UzorView.EditorObjectssList.Add(mirrorIndicator);
-            this.UzorView.EditorObjectssList.Add(cropIndicator);
-
+            this.Data = data;
             Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
         }
       
@@ -63,7 +67,7 @@ namespace Uzor.Views
 
             // CALCULTION:
 
-            BasicDrawingAlgorithm.Calculate(this.ThisData.Layers[this.uzor.LayerNumber]);
+            BasicDrawingAlgorithm.Calculate(this.Data.Layers[this.uzor.LayerNumber]);
             
             //counter.Text = (Int32.Parse(counter.Text) + 1).ToString();
 
@@ -97,8 +101,8 @@ namespace Uzor.Views
         private void beforeButtonClick(object sender, EventArgs e)
         {
             this.StopCaltulation();
-            if (this.ThisData.Layers[uzor.LayerNumber].Step >= 0)
-                this.ThisData.Layers[uzor.LayerNumber].GetAndSetPreviousState(); // only set
+            if (this.Data.Layers[uzor.LayerNumber].Step >= 0)
+                this.Data.Layers[uzor.LayerNumber].GetAndSetPreviousState(); // only set
             this.UzorView.DrawView();
 
             this.uzor.SetDefaultScale();
@@ -115,7 +119,7 @@ namespace Uzor.Views
             this.StopCaltulation();
             // CALCULTION:
             
-            BasicDrawingAlgorithm.Calculate(this.ThisData.Layers[uzor.LayerNumber]);
+            BasicDrawingAlgorithm.Calculate(this.Data.Layers[uzor.LayerNumber]);
 
             this.UzorView.DrawView();
             this.uzor.SetDefaultScale();
@@ -133,10 +137,10 @@ namespace Uzor.Views
 
         private void invertButtonClick(object sender, EventArgs e)
         {
-            PixelColor c = ThisData.Layers[0].FrontColor;
+            PixelColor c = Data.Layers[0].FrontColor;
 
-            ThisData.Layers[0].FrontColor = ThisData.Layers[0].BackColor;
-            ThisData.Layers[0].BackColor = c;
+            Data.Layers[0].FrontColor = Data.Layers[0].BackColor;
+            Data.Layers[0].BackColor = c;
             UzorView.DrawView();
         }
 
@@ -191,10 +195,10 @@ namespace Uzor.Views
         public void SaveButton_Click(object sender, EventArgs e)
         {
             if (ReSave)
-                UzorProjectFileManager.ReSave(this.ThisData, SavedFilePath);
+                UzorProjectFileManager.ReSave(this.Data, SavedFilePath);
             else
             {
-                SavedFilePath = UzorProjectFileManager.SaveInInternalStorage(this.ThisData);
+                SavedFilePath = UzorProjectFileManager.SaveInInternalStorage(this.Data);
                 ReSave = true;
             }
             
@@ -239,7 +243,24 @@ namespace Uzor.Views
                 PageForAlert.MakeUzorItemList();
                // pageForAlert.itemStack.Children.Add(new UzorItem(this.ThisData, pageForAlert));
         }
-           
-        
+
+        private void replaceUzorClick(object sender, EventArgs e)
+        {
+            var p = new SelectionItemPage();
+            p.UzorSelected += uzorItem_Selected;
+            Navigation.PushModalAsync(p);
+        }
+
+        private void uzorItem_Selected(object sender, EventArgs e)
+        {
+            this.Data = (sender as SelectionItemPage).SelectedUzor;
+            this.UzorView.DrawView();
+        }
+
+        private void deleteAllClick(object sender, EventArgs e)
+        {
+            this.Data = new UzorData(Data.Name, Data.DataOfCreation, Data.FieldSize);
+            this.UzorView.DrawView();
+        }
     }
 }

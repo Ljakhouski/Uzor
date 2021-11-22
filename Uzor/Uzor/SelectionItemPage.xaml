@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Uzor.SelectionItemPage"
+             xmlns:resources="clr-namespace:Uzor.Localization">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid HeightRequest="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Text="{x:Static resources:AppResource.SelectItem}" Grid.Row="0" FontSize="50" HeightRequest="100" Margin="40,20,40,20"></Label>
+            </Grid>
+
+            <ScrollView>
+                <StackLayout x:Name="itemStack"/>
+            </ScrollView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

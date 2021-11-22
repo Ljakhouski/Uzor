@@ -192,6 +192,9 @@
   <data name="SecondUzorEdit" xml:space="preserve">
     <value>Edit second Uzor</value>
   </data>
+  <data name="SelectItem" xml:space="preserve">
+    <value>Select Uzor:</value>
+  </data>
   <data name="SetFrontColorToAll" xml:space="preserve">
     <value>Set front color to all elements: </value>
   </data>

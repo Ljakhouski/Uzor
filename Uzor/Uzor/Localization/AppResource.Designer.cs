@@ -286,6 +286,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Select Uzor:.
+        /// </summary>
+        public static string SelectItem {
+            get {
+                return ResourceManager.GetString("SelectItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Set front color to all elements: .
         /// </summary>
         public static string SetFrontColorToAll {

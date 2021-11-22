@@ -192,6 +192,9 @@
   <data name="SecondUzorEdit" xml:space="preserve">
     <value>Изменить второй Uzor </value>
   </data>
+  <data name="SelectItem" xml:space="preserve">
+    <value>Выберите Uzor:</value>
+  </data>
   <data name="SetFrontColorToAll" xml:space="preserve">
     <value>Применить основной цвет ко всем элементам: </value>
   </data>

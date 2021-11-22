@@ -18,7 +18,7 @@ namespace Uzor.Views
         public UzorData Data { get; set; }
         private MainPage pageForAlert;
         private string path;
-     
+        public EventHandler Tapped;
         public UzorItem(UzorData data, string path, MainPage p)
         {
             InitializeComponent();
@@ -41,17 +41,47 @@ namespace Uzor.Views
 
             this.pageForAlert = p;
         }
+
+        bool selectItemMode = false;
+        public UzorItem(UzorData data)
+        {
+            InitializeComponent();
+
+            selectItemMode = true;
+            this.Data = data;
+
+            UzorPixelFieldView upv = this.preview;
+
+            DemonstrateUzorEditorObject udb = new DemonstrateUzorEditorObject();
+            udb.Data = data;
+            udb.GradientMode = false;
+
+            //upv.ThisData = data;
+            upv.EditorObjectssList.Add(udb);
+            upv.DrawView();
+            this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
+            this.itemDate.Text = data.DataOfCreation.ToString();
+            this.mineFrame.BackgroundColor = new Color(data.Layers[0].BackColor.R,
+                                                        data.Layers[0].BackColor.G,
+                                                        data.Layers[0].BackColor.B);
+        }
         public void SetUzorNameLabelText(string name)
         {
             this.itemName.Text = name;
         }
         private async void TapOnItem(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new UzorItemPage(Data, path, pageForAlert)));
+            if (selectItemMode)
+                this.Tapped?.Invoke(this, null);
+            else
+                await Navigation.PushModalAsync(new NavigationPage(new UzorItemPage(Data, path, pageForAlert)));
         }
 
         async private void deleteItem(object sender, EventArgs e)
         {
+            if (selectItemMode)
+                return;
+
             if (await pageForAlert.DisplayAlert("", AppResource.DeleteQuestion, AppResource.Yes, AppResource.No))
             {
                 //var fileList = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
