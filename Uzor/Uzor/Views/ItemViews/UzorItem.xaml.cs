@@ -43,7 +43,7 @@ namespace Uzor.Views
         }
 
         bool selectItemMode = false;
-        public UzorItem(UzorData data)
+        public UzorItem(UzorData data) // for SelectionItemPage
         {
             InitializeComponent();
 
@@ -64,6 +64,8 @@ namespace Uzor.Views
             this.mineFrame.BackgroundColor = new Color(data.Layers[0].BackColor.R,
                                                         data.Layers[0].BackColor.G,
                                                         data.Layers[0].BackColor.B);
+
+            this.deleteButton.IsVisible = false;
         }
         public void SetUzorNameLabelText(string name)
         {
