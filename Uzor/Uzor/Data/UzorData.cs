@@ -134,5 +134,17 @@ namespace Uzor.Data
 
             return maskSize;
         }
+
+        public void Replace(UzorData data)
+        {
+            this.FieldSize = data.FieldSize;
+            this.Layers = data.Layers; // TODO: make copy
+            this.CropMask = (bool[,])data.CropMask.Clone();
+        }
+
+        public void Clear()
+        {
+            this.Replace(new UzorData(this.Name, this.DataOfCreation, this.FieldSize));
+        }
     } 
 }

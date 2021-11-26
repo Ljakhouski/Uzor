@@ -253,13 +253,13 @@ namespace Uzor.Views
 
         private void uzorItem_Selected(object sender, EventArgs e)
         {
-            this.Data = (sender as SelectionItemPage).SelectedUzor;
+            this.Data.Replace((sender as SelectionItemPage).SelectedUzor);
             this.UzorView.DrawView();
         }
 
         private void deleteAllClick(object sender, EventArgs e)
         {
-            this.Data = new UzorData(Data.Name, Data.DataOfCreation, Data.FieldSize);
+            this.Data.Clear();
             this.UzorView.DrawView();
         }
     }

@@ -63,8 +63,9 @@ namespace Uzor.Views.LongUzorEditorPageViews
 
         private async void sideUzorEdit_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new UzorCreatingPage(this.editorPage.GetData().SidePattern, this.pageForAlert));
-            this.editorPage.UpdateView();
+            var p = new UzorCreatingPage(this.editorPage.GetData().SidePattern, this.pageForAlert);
+            p.Closed += anyPage_Closed;
+            await Navigation.PushModalAsync(p);
         }
     }
 }
