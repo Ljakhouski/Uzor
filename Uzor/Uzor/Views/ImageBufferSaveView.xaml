@@ -51,7 +51,8 @@
                         <Button Text="{x:Static resources:AppResource.Save}" BackgroundColor="#CBCBCB" Clicked="imageSaveButton_clicked" CornerRadius="20" Margin="0,0,10,0" HorizontalOptions="FillAndExpand"></Button>
                         <ImageButton Source="ShareIcon.png" BackgroundColor="#e3e6e8" Clicked="showImageFile_Clicked" WidthRequest="50" CornerRadius="20"/>
                     </StackLayout>
-                    
+
+                    <ActivityIndicator x:Name="loadingIndicator" IsVisible="false" HorizontalOptions="Center" Color="#D23838" Margin="0,0,0,20"></ActivityIndicator>
                     <Label Text="" Margin="10" x:Name="savingStatusLabel" LineBreakMode="WordWrap" TextColor="Black"/>
                     
                 </StackLayout>

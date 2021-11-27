@@ -268,6 +268,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Save current project color.
+        /// </summary>
+        public static string SaveProjectColor {
+            get {
+                return ResourceManager.GetString("SaveProjectColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Saving project:.
         /// </summary>
         public static string SavingProject {

@@ -253,7 +253,7 @@ namespace Uzor.Views
 
         private void uzorItem_Selected(object sender, EventArgs e)
         {
-            this.Data.Replace((sender as SelectionItemPage).SelectedUzor);
+            this.Data.Replace((sender as SelectionItemPage).SelectedUzor, (sender as SelectionItemPage).SaveProjectColor);
             this.UzorView.DrawView();
         }
 

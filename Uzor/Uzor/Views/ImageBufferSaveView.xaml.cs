@@ -122,7 +122,22 @@ namespace Uzor.Views
 
         private async void imageSaveButton_clicked(object sender, EventArgs e)
         {
-            await saveImageAsync();
+            this.savingStatusLabel.IsVisible = false;
+            this.loadingIndicator.IsVisible = true;
+            this.loadingIndicator.IsRunning = true;
+
+            //await Task.Delay(250);
+            //await saveImageAsync();
+
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await saveImageAsync();
+
+                this.savingStatusLabel.IsVisible = true;
+                this.loadingIndicator.IsVisible = false;
+                this.loadingIndicator.IsRunning = false;
+            });
             // Get this SKImage data. This is basically an array of bytes in PNG format.
 
 
@@ -162,6 +177,10 @@ namespace Uzor.Views
                 savingStatusLabel.Text = AppResource.SavedInLabel + " \"" + savedFilePath + "\"";
                 imageFileShowPath = savedFilePath;
             }
+
+            //this.savingStatusLabel.IsVisible = true;
+            //this.loadingIndicator.IsVisible = false;
+            //this.loadingIndicator.IsRunning = false;
         }
         private void onCanvasViewPaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
         {

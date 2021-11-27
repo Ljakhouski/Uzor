@@ -135,16 +135,25 @@ namespace Uzor.Data
             return maskSize;
         }
 
-        public void Replace(UzorData data)
+        public void Replace(UzorData data, bool saveColor = false)
         {
+            var b = this.Layers[0].BackColor;
+            var f = this.Layers[0].FrontColor;
+
             this.FieldSize = data.FieldSize;
             this.Layers = data.Layers; // TODO: make copy
             this.CropMask = (bool[,])data.CropMask.Clone();
+            
+            if (saveColor)
+            {
+                this.Layers[0].BackColor = b;
+                this.Layers[0].FrontColor = f;
+            }
         }
 
         public void Clear()
         {
-            this.Replace(new UzorData(this.Name, this.DataOfCreation, this.FieldSize));
+            this.Replace(new UzorData(this.Name, this.DataOfCreation, this.FieldSize), true);
         }
     } 
 }

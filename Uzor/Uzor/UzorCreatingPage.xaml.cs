@@ -49,6 +49,7 @@ namespace Uzor
             saveTopPanel.BackButton.Clicked += cancelChanges_Clicked;
             saveTopPanel.BackButton.Text = AppResource.Cancel;
             saveTopPanel.SaveButton.Text = AppResource.Ok;
+            saveTopPanel.BackButton.IsEnabled = false; // canceling does not working
             creatingPageGrid.Children.Add(saveTopPanel, 0, 0);
             creatingPageGrid.RowDefinitions[0].Height = 60;
             v.cropButton.IsVisible = true;

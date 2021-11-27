@@ -97,9 +97,9 @@ namespace Uzor.Views
         }
         private void updateColorSLiderLabel()
         {
-            H_Label.Text = "Hue: " + (H_Slider.Value.ToString().Length > 4 ? H_Slider.Value.ToString().Substring(0,4): H_Slider.Value.ToString());
-            S_Label.Text = "Sat: " + (S_Slider.Value.ToString().Length > 4 ? S_Slider.Value.ToString().Substring(0,4) : S_Slider.Value.ToString());
-            L_Label.Text = "Lum: " + (L_Slider.Value.ToString().Length > 4 ? L_Slider.Value.ToString().Substring(0, 4) : L_Slider.Value.ToString());
+            H_Label.Text = "Hue: \n" + (H_Slider.Value.ToString().Length > 4 ? H_Slider.Value.ToString().Substring(0,4): H_Slider.Value.ToString());
+            S_Label.Text = "Sat: \n" + (S_Slider.Value.ToString().Length > 4 ? S_Slider.Value.ToString().Substring(0,4) : S_Slider.Value.ToString());
+            L_Label.Text = "Lum: \n" + (L_Slider.Value.ToString().Length > 4 ? L_Slider.Value.ToString().Substring(0, 4) : L_Slider.Value.ToString());
             A_Label.Text = A_Slider.Value.ToString().Length > 4? A_Slider.Value.ToString().Substring(0, 4) : A_Slider.Value.ToString();
         }
 

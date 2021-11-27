@@ -16,6 +16,7 @@ namespace Uzor
     {
         public EventHandler UzorSelected;
         public UzorData SelectedUzor { get; set; }
+        public bool SaveProjectColor { get; set; }
         public SelectionItemPage()
         {
             InitializeComponent();
@@ -43,6 +44,7 @@ namespace Uzor
         {
             this.SelectedUzor = (sender as UzorItem).Data;
             this.UzorSelected?.Invoke(this, null);
+            this.SaveProjectColor = saveProjectColor_Checkbox.IsChecked;
             Navigation.PopModalAsync();
         }
     }

@@ -66,6 +66,7 @@ namespace Uzor.Views
                                                         data.Layers[0].BackColor.B);
 
             this.deleteButton.IsVisible = false;
+            this.shadow.IsVisible = false;
         }
         public void SetUzorNameLabelText(string name)
         {

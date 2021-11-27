@@ -186,6 +186,9 @@
   <data name="SavedLabel" xml:space="preserve">
     <value>Сохранено</value>
   </data>
+  <data name="SaveProjectColor" xml:space="preserve">
+    <value>Оставить текущий цвет</value>
+  </data>
   <data name="SavingProject" xml:space="preserve">
     <value>Сохранение проекта:</value>
   </data>

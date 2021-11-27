@@ -14,7 +14,7 @@
                 <ImageButton Source="deleteButton.png" x:Name="deleteButton"   HeightRequest="50"  WidthRequest="50"    Clicked="deleteButtonClick"      BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
 
                 <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <ImageButton x:Name="deleteAllButton" HeightRequest="50" WidthRequest="50"  Clicked="deleteAllClick"    BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
+                    <ImageButton x:Name="deleteAllButton" Source="deleteFileButton.png" HeightRequest="50" WidthRequest="50"  Clicked="deleteAllClick"    BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
                 </sh:Shadows>
                 
                 <sh:Shadows CornerRadius="10" x:Name="cropButtonShadow" x:FieldModifier="public" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
@@ -30,7 +30,7 @@
                 </sh:Shadows>
 
                 <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <ImageButton x:Name="replaceUzorButton" HeightRequest="50" WidthRequest="50"  Clicked="replaceUzorClick"     BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
+                    <ImageButton x:Name="replaceUzorButton" HeightRequest="50" WidthRequest="50"  Clicked="replaceUzorClick"  Source="replaceButton.png"   BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
                 </sh:Shadows>
                 
             </StackLayout>

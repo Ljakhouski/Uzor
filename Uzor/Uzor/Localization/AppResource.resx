@@ -186,6 +186,9 @@
   <data name="SavedLabel" xml:space="preserve">
     <value>Saved</value>
   </data>
+  <data name="SaveProjectColor" xml:space="preserve">
+    <value>Save current project color</value>
+  </data>
   <data name="SavingProject" xml:space="preserve">
     <value>Saving project:</value>
   </data>
