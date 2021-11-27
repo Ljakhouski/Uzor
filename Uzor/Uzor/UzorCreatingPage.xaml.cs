@@ -40,6 +40,7 @@ namespace Uzor
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             var v = new UzorEditElementView(data);
+            v.BackgroundGrid = this.mainGrid;
             this.pageForAlert = p;
             uzorEditElementViewList.Add(v);
             creatingPageGrid.Children.Add(v, 0, 1);
@@ -71,6 +72,7 @@ namespace Uzor
             creatingPageGrid.Children.Remove(newUzorSettingView);
 
             var v = new UzorEditElementView(data);
+            v.BackgroundGrid = this.mainGrid;
             v.PageForAlert = this.pageForAlert;
             //uzorDataList.Add(v.UzorView.ThisData);
             uzorEditElementViewList.Add(v);
@@ -165,7 +167,9 @@ namespace Uzor
 
                     this.longUzorData.UzorElements[stepNumber-1 + 1] = nextUzorData;
 
-                    uzorEditElementViewList.Add(new UzorEditElementView(nextUzorData));
+                    var v = new UzorEditElementView(nextUzorData);
+                    v.BackgroundGrid = this.mainGrid;
+                    uzorEditElementViewList.Add(v);
 
                     uzorEditElementViewList[uzorEditElementViewList.Count - 1].UzorView.BecomeSquare();
                 }

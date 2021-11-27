@@ -22,6 +22,7 @@ namespace Uzor.Views
     public partial class UzorEditElementView : ContentView
     {
         public UzorPixelFieldView UzorView { get; set; }
+        public Grid BackgroundGrid { get; set; } // to place ColorPicker and other views width dark tapped-background
 
         private UzorData _data;
         public UzorData Data { get { return _data; } set
@@ -57,6 +58,7 @@ namespace Uzor.Views
         {
             InitializeComponent();
             this.Data = data;
+            this.BackgroundGrid = this.mainGrid;
             Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
         }
       
@@ -259,7 +261,21 @@ namespace Uzor.Views
 
         private void deleteAllClick(object sender, EventArgs e)
         {
-            this.Data.Clear();
+            //this.Data.Clear();
+            this.Data.Layers[0].AddNextState(new bool[this.Data.FieldSize, this.Data.FieldSize]);
+            this.UzorView.DrawView();
+        }
+
+        private void colorChangeButtonClick(object sender, EventArgs e)
+        {
+            var p = new ColorPickerView(Data);
+            p.BackgroundTapped += hidePanel;
+            this.BackgroundGrid.Children.Add(p);
+        }
+
+        private void hidePanel(object sender, EventArgs e)
+        {
+            this.BackgroundGrid.Children.Remove(sender as ColorPickerView);
             this.UzorView.DrawView();
         }
     }

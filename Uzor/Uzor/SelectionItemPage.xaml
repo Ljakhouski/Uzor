@@ -5,13 +5,13 @@
              xmlns:resources="clr-namespace:Uzor.Localization">
     <ContentPage.Content>
         <StackLayout>
-            <Grid HeightRequest="200" Margin="20">
+            <Grid HeightRequest="170" Margin="20">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="130"/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <Label Text="{x:Static resources:AppResource.SelectItem}" Grid.Row="0" FontSize="50" HeightRequest="100" Margin="10,20,40,20"></Label>
+                <Label Text="{x:Static resources:AppResource.SelectItem}" Grid.Row="0" FontSize="50" HeightRequest="100" Padding="0" Margin="10,20,40,20"></Label>
                 <StackLayout Orientation="Horizontal" Grid.Row="1">
                     <Label Text="{x:Static resources:AppResource.SaveProjectColor}" FontSize="20" VerticalOptions="Center" Margin="10,0,0,10"></Label>
                     <CheckBox x:Name="saveProjectColor_Checkbox" Color="#bf2121" IsChecked="True" Margin="20,0,0,10"></CheckBox>

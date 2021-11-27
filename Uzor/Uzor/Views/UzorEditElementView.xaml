@@ -2,57 +2,57 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:Uzor.Views" xmlns:sh="http://sharpnado.com"
              x:Class="Uzor.Views.UzorEditElementView" VerticalOptions="Center">
-  <ContentView.Content>
-        <StackLayout>
-            
-                   
-              
+    <ContentView.Content>
+        <Grid x:Name="mainGrid">
+            <StackLayout>
 
-            
-            
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <ImageButton Source="deleteButton.png" x:Name="deleteButton"   HeightRequest="50"  WidthRequest="50"    Clicked="deleteButtonClick"      BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <ImageButton Source="deleteButton.png" x:Name="deleteButton"   HeightRequest="50"  WidthRequest="50"    Clicked="deleteButtonClick"      BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
 
-                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <ImageButton x:Name="deleteAllButton" Source="deleteFileButton.png" HeightRequest="50" WidthRequest="50"  Clicked="deleteAllClick"    BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
-                </sh:Shadows>
-                
-                <sh:Shadows CornerRadius="10" x:Name="cropButtonShadow" x:FieldModifier="public" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <ImageButton HeightRequest="50" WidthRequest="50" x:Name="cropButton" x:FieldModifier="public" Clicked="cropButtonClick"  Source="cropOnMenuButton.png"  Opacity="0.8"  BackgroundColor="#E92626"  CornerRadius="10"></ImageButton>
-                </sh:Shadows>
-                
-                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                    <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                        <ImageButton x:Name="deleteAllButton" Source="deleteFileButton.png" HeightRequest="50" WidthRequest="50"  Clicked="deleteAllClick"    BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
+                    </sh:Shadows>
+
+                    <sh:Shadows CornerRadius="10" x:Name="cropButtonShadow" x:FieldModifier="public" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                        <ImageButton HeightRequest="50" WidthRequest="50" x:Name="cropButton" x:FieldModifier="public" Clicked="cropButtonClick"  Source="cropOnMenuButton.png"  Opacity="0.8"  BackgroundColor="#E92626"  CornerRadius="10"></ImageButton>
+                    </sh:Shadows>
+
+                    <!--<sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
                     <ImageButton HeightRequest="50" WidthRequest="50" x:Name="invertButton"  Clicked="invertButtonClick"  Source="invertButton.png"  Opacity="0.8"  BackgroundColor="#E92626"  CornerRadius="10"></ImageButton>
-                </sh:Shadows>
+                </sh:Shadows>-->
 
-                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <ImageButton x:Name="mirrorButton" HeightRequest="50" WidthRequest="50"   Clicked="mirrorButtonClick"    Source="mirrorOffButton.png" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
-                </sh:Shadows>
+                    <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                        <ImageButton x:Name="colorChangeButton" HeightRequest="50" WidthRequest="50"   Clicked="colorChangeButtonClick"    Source="colorChangeButton.png" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
+                    </sh:Shadows>
 
-                <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <ImageButton x:Name="replaceUzorButton" HeightRequest="50" WidthRequest="50"  Clicked="replaceUzorClick"  Source="replaceButton.png"   BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
-                </sh:Shadows>
-                
-            </StackLayout>
+                    <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                        <ImageButton x:Name="mirrorButton" HeightRequest="50" WidthRequest="50"   Clicked="mirrorButtonClick"    Source="mirrorOffButton.png" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
+                    </sh:Shadows>
+
+                    <sh:Shadows CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                        <ImageButton x:Name="replaceUzorButton" HeightRequest="50" WidthRequest="50"  Clicked="replaceUzorClick"  Source="replaceButton.png"   BackgroundColor="#E92626" Opacity="0.8" CornerRadius="10"></ImageButton>
+                    </sh:Shadows>
+
+                </StackLayout>
 
                 <sh:Shadows IsVisible="false" x:Name="sliderPanelShadow" x:FieldModifier="public" CornerRadius="10" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
                     <Frame IsVisible="false" x:Name="sliderPanel" x:FieldModifier="public" CornerRadius="10" BackgroundColor="white" HeightRequest="20"  Margin="20,10,20,0">
                         <Slider x:Name="cropSlider" x:FieldModifier="public" Maximum="60" Minimum="3"  ValueChanged="cropChanged" ThumbColor="#E92626" MinimumTrackColor="#E92626" MaximumTrackColor="Gray" Value="7"></Slider>
                     </Frame>
                 </sh:Shadows>
-            
-            <sh:Shadows x:Name="MyViewShadows"
-            CornerRadius="10"
-            Shades="{sh:SingleShade Offset='3, 3',
+
+                <sh:Shadows x:Name="MyViewShadows"
+                            CornerRadius="10"
+                            Shades="{sh:SingleShade Offset='3, 3',
                                     Opacity=0.35,
                                     Color=black}">
-                <Frame x:Name="editingFieldFrame" HasShadow="False" Margin="15,15,15,15" CornerRadius="10" Padding="0" ></Frame>
-            </sh:Shadows>
-            
-            
-            <!--<Label x:Name="counter" Text="0"></Label>-->
+                    <Frame x:Name="editingFieldFrame" HasShadow="False" Margin="15,15,15,15" CornerRadius="10" Padding="0" ></Frame>
+                </sh:Shadows>
 
-            <!-- <Grid BackgroundColor="DarkCyan" x:Name="gridField">
+
+                <!--<Label x:Name="counter" Text="0"></Label>-->
+
+                <!-- <Grid BackgroundColor="DarkCyan" x:Name="gridField">
                 <skia:SKCanvasView
                     x:Name="uzorFieldCanvasView" 
                     PaintSurface="onCanvasViewPaintSurface"
@@ -65,26 +65,27 @@
                                 TouchAction="OnTouchEffectAction"/>
                 </Grid.Effects>
             </Grid>-->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,10,0,15">
-                
-                <sh:Shadows CornerRadius="50" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}" Margin="0,0,25,0">
-                    <ImageButton  x:Name="beforeButton" HeightRequest="60" VerticalOptions="Center"  Source="leftOrRightWhiteButton.png"    Clicked="beforeButtonClick" WidthRequest="60"  BackgroundColor="#E92626" Opacity="0.8" CornerRadius="50"></ImageButton>
-                </sh:Shadows>
-                
-                <sh:Shadows CornerRadius="100" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.40, Color=black}">
-                    <ImageButton  Source="startButton.png" x:Name="calculationButton"  HeightRequest="80"    Clicked="CalculationButtonClick" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="100"></ImageButton>
-                </sh:Shadows>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,10,0,15">
 
-                <sh:Shadows CornerRadius="50" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                    <ImageButton x:Name="nextButton" Clicked="nextButtonClick" VerticalOptions="Center" Source="leftOrRightWhiteButton.png" Rotation="180" HeightRequest="60"  WidthRequest="60" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="50" Margin="25,0,0,0">
-                    </ImageButton>
-                </sh:Shadows>
+                    <sh:Shadows CornerRadius="50" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}" Margin="0,0,25,0">
+                        <ImageButton  x:Name="beforeButton" HeightRequest="60" VerticalOptions="Center"  Source="leftOrRightWhiteButton.png"    Clicked="beforeButtonClick" WidthRequest="60"  BackgroundColor="#E92626" Opacity="0.8" CornerRadius="50"></ImageButton>
+                    </sh:Shadows>
+
+                    <sh:Shadows CornerRadius="100" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.40, Color=black}">
+                        <ImageButton  Source="startButton.png" x:Name="calculationButton"  HeightRequest="80"    Clicked="CalculationButtonClick" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="100"></ImageButton>
+                    </sh:Shadows>
+
+                    <sh:Shadows CornerRadius="50" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
+                        <ImageButton x:Name="nextButton" Clicked="nextButtonClick" VerticalOptions="Center" Source="leftOrRightWhiteButton.png" Rotation="180" HeightRequest="60"  WidthRequest="60" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="50" Margin="25,0,0,0">
+                        </ImageButton>
+                    </sh:Shadows>
 
 
-            </StackLayout>
+                </StackLayout>
 
-            <!--<Label Text="" x:Name="labelinfowah" ></Label>
+                <!--<Label Text="" x:Name="labelinfowah" ></Label>
             <Label Text="" x:Name="labelPostition" TextColor="DarkGreen"></Label>-->
-        </StackLayout>
+            </StackLayout>
+        </Grid>
     </ContentView.Content>
 </ContentView>

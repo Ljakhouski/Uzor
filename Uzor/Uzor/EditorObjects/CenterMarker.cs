@@ -14,16 +14,16 @@ namespace Uzor.EditorObjects
             canvas.Restore();
 
             canvas.DrawLine((float)((view.CanvasSize.Width / 2.0) - 50),
-                            (float)(view.CanvasSize.Height / 2.0),
+                            (float)(view.CanvasSize.Width / 2.0),
                             (float)(view.CanvasSize.Width / 2.0) + 50,
-                            (float)(view.CanvasSize.Height / 2.0),
+                            (float)(view.CanvasSize.Width / 2.0),
                             new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth = 10 }
                             );
 
             canvas.DrawLine((float)((view.CanvasSize.Width / 2.0)),
-                            (float)(view.CanvasSize.Height / 2.0 - 50),
+                            (float)(view.CanvasSize.Width / 2.0 - 50),
                             (float)(view.CanvasSize.Width / 2.0),
-                            (float)(view.CanvasSize.Height / 2.0) + 50,
+                            (float)(view.CanvasSize.Width / 2.0) + 50,
                             new SKPaint() { Color = Color.FromRgba(10, 10, 10, 100).ToSKColor(), StrokeWidth = 10 }
                             );
         }

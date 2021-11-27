@@ -15,18 +15,18 @@
             <Frame x:Name="viewFrame"
                    BackgroundColor="#e3e6e8"
                    CornerRadius="20"
-                   Margin="40,100,40,100"
+                   Margin="40,50,40,50"
                    Padding="0"
                    VerticalOptions="Center"
                    >
-                <StackLayout>
+                <StackLayout Spacing="0">
                     <Grid MinimumHeightRequest="60" HeightRequest="60">
                         <BoxView BackgroundColor="#D23838" HorizontalOptions="FillAndExpand" Margin="0"></BoxView>
                         <Label Text="{x:Static resources:AppResource.Save}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"></Label>
                     </Grid>
 
-                    <StackLayout Orientation="Horizontal" Padding="20">
-                        <Label Text="{x:Static resources:AppResource.FormatLabel}" TextColor="Black" VerticalOptions="Center"></Label>
+                    <StackLayout Orientation="Horizontal" Padding="10" Margin="0"  VerticalOptions="Center">
+                        <Label Text="{x:Static resources:AppResource.FormatLabel}" TextColor="Black" VerticalOptions="Center" Margin="5,0,0,0"></Label>
                         <Picker x:Name="formatPicker"
                             SelectedIndexChanged="onFormatPickerChanged">
                             <Picker.ItemsSource>
@@ -38,8 +38,8 @@
                         </Picker>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Label Text="{x:Static resources:AppResource.Size}" Margin="15,0,10,0"></Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,5,0,5">
+                        <Label Text="{x:Static resources:AppResource.Size}" Margin="15,0,10,0" VerticalOptions="Start"></Label>
                         <Slider x:Name="heightSlider" ThumbColor="#D23838" MinimumTrackColor="#D23838" MaximumTrackColor="Gray" Maximum="7000" Minimum="1000" Value="3600" HorizontalOptions="FillAndExpand" ValueChanged="heightValue_Changed"></Slider>
                     </StackLayout>
                     
@@ -47,7 +47,7 @@
                         
                     </Frame>
 
-                    <StackLayout Orientation="Horizontal" Margin="20" HorizontalOptions="Fill">
+                    <StackLayout Orientation="Horizontal" Margin="20,0,20,0" HorizontalOptions="Fill">
                         <Button Text="{x:Static resources:AppResource.Save}" BackgroundColor="#CBCBCB" Clicked="imageSaveButton_clicked" CornerRadius="20" Margin="0,0,10,0" HorizontalOptions="FillAndExpand"></Button>
                         <ImageButton Source="ShareIcon.png" BackgroundColor="#e3e6e8" Clicked="showImageFile_Clicked" WidthRequest="50" CornerRadius="20"/>
                     </StackLayout>

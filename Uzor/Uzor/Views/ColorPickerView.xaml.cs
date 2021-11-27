@@ -165,5 +165,10 @@ namespace Uzor.Views
         {
             BackgroundTapped?.Invoke(this, null);
         }
+
+        private void shapeSizeChanged(object sender, EventArgs e)
+        {
+            (sender as Xamarin.Forms.Shapes.Rectangle).HeightRequest = (sender as Xamarin.Forms.Shapes.Rectangle).Width;
+        }
     }
 }
