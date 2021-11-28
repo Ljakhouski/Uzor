@@ -69,7 +69,7 @@ namespace Uzor
 
         private async void settingClick(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new SettingPage());
+            await Navigation.PushModalAsync(new SettingPage(this));
         }
     }
 }

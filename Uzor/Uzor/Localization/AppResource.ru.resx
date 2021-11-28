@@ -141,11 +141,17 @@
   <data name="ExitQuestion" xml:space="preserve">
     <value>Вы точно хотите выйти?</value>
   </data>
+  <data name="ExportProjects" xml:space="preserve">
+    <value>Экспортировать проекты в папку</value>
+  </data>
   <data name="FirstUzorEdit" xml:space="preserve">
     <value>Изменить первый Uzor </value>
   </data>
   <data name="FormatLabel" xml:space="preserve">
     <value>Формат: </value>
+  </data>
+  <data name="ImportProjects" xml:space="preserve">
+    <value>Импортировать проекты в папку</value>
   </data>
   <data name="LanguageLabel" xml:space="preserve">
     <value>Язык:</value>

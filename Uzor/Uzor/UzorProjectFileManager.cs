@@ -108,7 +108,7 @@ namespace Uzor
             var d = (LongUzorData)formatter.Deserialize(fs);
             fs.Dispose();
             return d;
-        }
+        } 
 
         public static void DeleteByNameFromInternalStorage(string fileName)
         {

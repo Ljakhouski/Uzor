@@ -43,10 +43,11 @@
                     
                 </StackLayout>
                 <Label x:Name="unsafeLabel" Text="WARNING! UNSAFE METHOD!" IsVisible="false" TextColor="Red"/>
-                <StackLayout Orientation="Horizontal">
-                    <!--<Button Text="export project in folder..."/>
-                    <Button Text="im[prt project in folder..."/>-->
+                <StackLayout Orientation="Vertical" Margin="20,0,20,0">
+                    <Button Text="{x:Static resources:AppResource.ExportProjects}" CornerRadius="20" Clicked="exportProjects_Clicked" />
+                    <Button Text="{x:Static resources:AppResource.ImportProjects}" CornerRadius="20" Clicked="importProject_Clicked"/>
                 </StackLayout>
+                <Label x:Name="metaDataLabel" IsVisible="false"/>
                 <BoxView VerticalOptions="FillAndExpand"/>
                 <!--<Button Clicked="testButton_Clicked" ></Button>-->
                 <Label HorizontalOptions="Center" Margin="0,0,0,10">

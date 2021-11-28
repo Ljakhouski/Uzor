@@ -133,6 +133,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Export projects in folder....
+        /// </summary>
+        public static string ExportProjects {
+            get {
+                return ResourceManager.GetString("ExportProjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Edit first Uzor.
         /// </summary>
         public static string FirstUzorEdit {
@@ -147,6 +156,15 @@ namespace Uzor.Localization {
         public static string FormatLabel {
             get {
                 return ResourceManager.GetString("FormatLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Import projects from app-folder.
+        /// </summary>
+        public static string ImportProjects {
+            get {
+                return ResourceManager.GetString("ImportProjects", resourceCulture);
             }
         }
         

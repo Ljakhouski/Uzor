@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -25,9 +26,11 @@ namespace Uzor
         public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
         private RenderingMode renderingMode;
-        public SettingPage()
+        private MainPage mainPage;
+        public SettingPage(MainPage p)
         {
             InitializeComponent();
+            this.mainPage = p;
             this.renderingMode = (RenderingMode)Preferences.Get("RenderingMode", 2);
             this.renderingModePicker.SelectedIndex = (int)renderingMode;
             //this.languagePicker.SelectedIndex = 0;
@@ -69,6 +72,42 @@ namespace Uzor
             Preferences.Set("RenderingMode", (int)this.renderingMode);
 
             this.unsafeLabel.IsVisible = this.renderingMode == RenderingMode.FullDoubleBuffering ? true : false;
+        }
+
+        private void exportProjects_Clicked(object sender, EventArgs e)
+        {
+            var fileList = DependencyService.Get<IProjectManager>().ExportProjects().Result;
+            this.metaDataLabel.IsVisible = true;
+            string content="";
+            foreach (string s in fileList)
+                content += s + '\n';
+
+            string path = DependencyService.Get<IProjectManager>().GetExternalFolderPath();
+
+            if (fileList.Length != 0)
+                this.metaDataLabel.Text = "Exported files:\n" + content + "\nfiles placed in \""+path+"\"";
+            else
+                this.metaDataLabel.Text = "Exported files not found. Create new projects to main-menu";
+        }
+
+        private void importProject_Clicked(object sender, EventArgs e)
+        {
+            var fileList = DependencyService.Get<IProjectManager>().ImportProjects().Result;
+            string path = DependencyService.Get<IProjectManager>().GetExternalFolderPath();
+
+            this.metaDataLabel.IsVisible = true;
+            string content = "";
+            foreach (string s in fileList)
+                content += s + '\n';
+
+            if (fileList.Length != 0)
+            {
+                this.metaDataLabel.Text = "Imported files:\n" + content;
+                mainPage.MakeUzorItemList();
+            }
+                
+            else
+                this.metaDataLabel.Text = "Imported files not found. Add .ubf or .lubf projects to \"" + path + '"';
         }
     }
 }
