@@ -132,6 +132,9 @@
   <data name="DeleteQuestion" xml:space="preserve">
     <value>Вы точно хотите удалить элемент?</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание:</value>
+  </data>
   <data name="DistancesValue" xml:space="preserve">
     <value>Расстояния:</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="LanguageLabel" xml:space="preserve">
     <value>Язык:</value>
+  </data>
+  <data name="LongUzorDescription" xml:space="preserve">
+    <value>Длинный узор - полноценный вариант формы классического белорусского узора, состоящий из трёх одиночных</value>
   </data>
   <data name="MakeLongUzor" xml:space="preserve">
     <value>Сделать Uzor</value>
@@ -218,6 +224,9 @@
   </data>
   <data name="Size" xml:space="preserve">
     <value>Размер:</value>
+  </data>
+  <data name="SquareUzorDescription" xml:space="preserve">
+    <value>Cоздание одиночного узора квадратного формата. Можно иcпользовать в дальнейшем для длинных паттернов</value>
   </data>
   <data name="SwitchRenderingAlert" xml:space="preserve">
     <value>Режим отрисовки изменен на "Low"</value>

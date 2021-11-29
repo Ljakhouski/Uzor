@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Uzor;
 using Uzor.Data;
+using Uzor.Localization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static Uzor.UzorCreatingPage;
@@ -21,6 +22,7 @@ namespace Uzor.Views
             saveSettingDelegateFunc = ss;
             InitializeComponent();
             SquareUzorModeFrame.ScaleTo(1.1, 100);
+            this.SquareUzorModeTapped(null, null);
         }
       
         private void sizeSliderChanged(object sender, ValueChangedEventArgs e)
@@ -41,6 +43,8 @@ namespace Uzor.Views
 
             SquareUzorModeFrame.ScaleTo(1.1, 100);
             LongUzorModeFrame.ScaleTo(1, 100);
+
+            this.descriptionLabel.Text = AppResource.Description + " " + AppResource.SquareUzorDescription;
         }
 
         private async void LongUzorModeTapped(object sender, EventArgs e)
@@ -51,6 +55,8 @@ namespace Uzor.Views
             
             SquareUzorModeFrame.ScaleTo(1, 100); //draw a single element of the pattern
             LongUzorModeFrame.ScaleTo(1.1, 100); // a full-fledged pattern of simpler elements
+
+            this.descriptionLabel.Text = AppResource.Description + " " + AppResource.LongUzorDescription;
         }
 
         private void editEntry_Clicked(object sender, EventArgs e)
