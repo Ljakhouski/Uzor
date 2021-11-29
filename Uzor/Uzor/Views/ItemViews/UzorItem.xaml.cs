@@ -28,17 +28,24 @@ namespace Uzor.Views
 
             DemonstrateUzorEditorObject udb = new DemonstrateUzorEditorObject();
             udb.Data = data;
-            udb.GradientMode = true;
+            udb.GradientMode = false;
 
             //upv.ThisData = data;
             upv.EditorObjectssList.Add(udb);
             upv.DrawView();
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
             this.itemDate.Text = data.DataOfCreation.ToString();
-            this.mineFrame.BackgroundColor = new Color( data.Layers[0].BackColor.R,
-                                                        data.Layers[0].BackColor.G,
-                                                        data.Layers[0].BackColor.B);
 
+                                /** WTF??? **/
+            /*this.mineFrame.BackgroundColor = new Xamarin.Forms.Color( data.Layers[0].BackColor.R,
+                                                        data.Layers[0].BackColor.G,
+                                                        data.Layers[0].BackColor.B,
+                                                        data.Layers[0].BackColor.A);*/
+
+            this.mineFrame.BackgroundColor = Color.FromRgba(data.Layers[0].BackColor.R,
+                                                        data.Layers[0].BackColor.G,
+                                                        data.Layers[0].BackColor.B,
+                                                        data.Layers[0].BackColor.A);
             this.pageForAlert = p;
         }
 
@@ -61,9 +68,10 @@ namespace Uzor.Views
             upv.DrawView();
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
             this.itemDate.Text = data.DataOfCreation.ToString();
-            this.mineFrame.BackgroundColor = new Color(data.Layers[0].BackColor.R,
+            this.mineFrame.BackgroundColor = Color.FromRgba(data.Layers[0].BackColor.R,
                                                         data.Layers[0].BackColor.G,
-                                                        data.Layers[0].BackColor.B);
+                                                        data.Layers[0].BackColor.B,
+                                                        data.Layers[0].BackColor.A);
 
             this.deleteButton.IsVisible = false;
             this.shadow.IsVisible = false;

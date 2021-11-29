@@ -29,8 +29,10 @@
                     ></View:LongUzorView>
                     
                     <sh:Shadows CornerRadius="15" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.33, Color=black}">
-                        <Frame x:Name="backGround" BackgroundColor="White" HorizontalOptions="End" CornerRadius="15" WidthRequest="200" Margin="0" Padding="0">
-                            <BoxView Opacity="1" >
+                        <Frame x:Name="backGroundFrame" BackgroundColor="White" HorizontalOptions="End" CornerRadius="15" WidthRequest="200" Margin="0" Padding="0">
+                            <Grid>
+                                <BoxView x:Name="backGround"></BoxView>
+                                <BoxView Opacity="1">
                             <BoxView.Background>
                                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
                                     <GradientStop x:Name="backgroungStartGradientColor" Color="#1AFFFFFF"
@@ -40,6 +42,8 @@
                                 </LinearGradientBrush>
                             </BoxView.Background>
                         </BoxView>
+                            </Grid>
+                            
                         </Frame>
                         
                     </sh:Shadows>

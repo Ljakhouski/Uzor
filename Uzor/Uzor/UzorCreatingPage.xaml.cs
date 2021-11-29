@@ -208,7 +208,12 @@ namespace Uzor
                 LongUzorEditorPage longUzorPage = new LongUzorEditorPage(longUzorData, pageForAlert, true);
                 longUzorPage.Closed += longUzorEditorPage_Closed;
 
-                await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
+                if (!pushModalAsyncWorked)
+                {
+                    pushModalAsyncWorked = true;
+                    await Navigation.PushModalAsync(new NavigationPage(longUzorPage), true);
+                }
+                    
             }
         }
 
@@ -243,6 +248,7 @@ namespace Uzor
         }
 
         private bool popModalAsyncWorked = false;
+        private bool pushModalAsyncWorked = false;
         private async void saveChanges_Clicked(object sender, EventArgs e) // if this editor is open for editing a previously created Uzor
         {
             if (popModalAsyncWorked)

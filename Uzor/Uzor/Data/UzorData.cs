@@ -25,6 +25,11 @@ namespace Uzor.Data
             return Color.FromArgb((byte)A, (byte)R, (byte)G, (byte)B);
         }
 
+        public Color ToXamarinFormsColor()
+        {
+            return Xamarin.Forms.Color.FromRgba(R, G, B, A);
+        }
+
         public PixelColor (int r, int g, int b, int a)
         {
             this.R = r;

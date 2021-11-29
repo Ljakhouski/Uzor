@@ -35,8 +35,9 @@ namespace Uzor.Views
 
             //this.backgroungStartGradientColor.Color = new Color( data.BackColor.R, data.BackColor.G, data.BackColor.B, /*data.BackColor.A*/ 20);
             //this.backgroungStopGradientColor.Color = new Color(data.BackColor.R, data.BackColor.G, data.BackColor.B, 20);
-            this.backGround.BackgroundColor = new Color(data.BackColor.R, data.BackColor.G, data.BackColor.B, 255);
-            if (data.BackColor.ToNativeColor().GetBrightness()>180)
+            this.backGround.BackgroundColor = data.BackColor.ToNativeColor(); //new Color(data.BackColor.R, data.BackColor.G, data.BackColor.B, data.BackColor.A); 
+
+            if (data.BackColor.A >180 && data.BackColor.ToXamarinFormsColor().GetBrightness() < 0.5f)
             {
                 this.itemDate.TextColor = Color.White;
                 this.itemName.TextColor = Color.White;
