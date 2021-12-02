@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Uzor.Views.tips.Tip1">
   <ContentView.Content>
-      <StackLayout>
+      <StackLayout VerticalOptions="FillAndExpand">
             <Label Text="Put some dots in center at the beginning and switch forward" />
           
       </StackLayout>

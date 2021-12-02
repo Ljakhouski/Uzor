@@ -12,6 +12,10 @@ namespace Uzor.Views.tips
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Tip1 : ContentView
     {
+        public /*override*/ string GetTitle()
+        {
+            return "tip 1";
+        }
         public Tip1()
         {
             InitializeComponent();

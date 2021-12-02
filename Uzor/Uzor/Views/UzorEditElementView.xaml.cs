@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Uzor.Algorithm;
 using Uzor.Data;
 using Uzor.EditorObjects;
+using Uzor.Views.tips;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -54,12 +55,17 @@ namespace Uzor.Views
         public MainPage PageForAlert { get; set; }
         public bool ReSave = false; // for rewriting before results
         private string SavedFilePath;
-        public UzorEditElementView(UzorData data)
+        public UzorEditElementView(UzorData data, Grid backGroundGrid = null)
         {
             InitializeComponent();
             this.Data = data;
-            this.BackgroundGrid = this.mainGrid;
+            this.BackgroundGrid = backGroundGrid == null ? this.mainGrid : backGroundGrid; 
             Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
+            Device.StartTimer(TimeSpan.FromSeconds(2), () => { 
+                var v = new TipsViewer(BackgroundGrid); 
+                this.BackgroundGrid.Children.Add(v);
+                return false;
+            });
         }
       
         private bool OnTimerTick()

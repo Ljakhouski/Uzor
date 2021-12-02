@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Uzor.Views.tips.TipsViewer">
+  <ContentView.Content>
+        <Grid>
+            <BoxView BackgroundColor="Black" Opacity="0.5">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="background_Tapped"></TapGestureRecognizer>
+                </BoxView.GestureRecognizers>
+            </BoxView>
+            <Frame CornerRadius="20" Margin="30,40,30,40" Padding="0">
+                <Grid BackgroundColor="Green">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="70"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame BackgroundColor="{StaticResource RedColor}" Grid.Row="0" CornerRadius="0" Padding="0">
+                        <Label x:Name="titleLabel" Text="x static resource " VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                    </Frame>
+
+                    <Grid x:Name="tipContainer" VerticalOptions="FillAndExpand" Grid.Row="1" BackgroundColor="Blue"/>
+                    
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="2" Margin="30,0,30,0" BackgroundColor="Cornsilk">
+                        <ImageButton  HeightRequest="60" Source="downButton.png" Rotation="90" Clicked="nextTip_Clicked" CornerRadius="60" HorizontalOptions="Start" Padding="20" />
+                        <Label x:Name="stepLabel" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <ImageButton  HeightRequest="60" Source="downButton.png" Rotation="270" Clicked="beforeTip_Clicked" CornerRadius="60" VerticalOptions="End" Padding="20" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
