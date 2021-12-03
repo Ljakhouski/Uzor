@@ -61,6 +61,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basics.
+        /// </summary>
+        public static string Basics {
+            get {
+                return ResourceManager.GetString("Basics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Before Uzor.
         /// </summary>
         public static string BeforeStep {

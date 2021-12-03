@@ -13,14 +13,18 @@ namespace Uzor.Views.tips
 	{
         private Grid parentGrid;
         List<View> tipList;
-        int step = 0;
-		public TipsViewer(Grid g)
+        List<string> titleTipsList = new List<string>();
+        int step;
+		public TipsViewer(Grid g, int step = 0)
 		{
 			InitializeComponent();
             this.parentGrid = g;
+            this.step = step;
             tipList = new List<View>();
             tipList.Add(new Tip1());
             // ...
+
+            titleTipsList.Add(Tip1.GetTitle());
             updateTipOnView();
             updateStepLabel();
 		}
@@ -65,6 +69,7 @@ namespace Uzor.Views.tips
         private void updateStepLabel()
         {
             this.stepLabel.Text = (this.step + 1).ToString() + " / " + tipList.Count;
+            this.titleLabel.Text = titleTipsList[step];
             //this.titleLabel.Text = (this.tipList[this.step]).GetTitle();
         }
     }
