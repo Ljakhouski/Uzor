@@ -147,8 +147,12 @@ namespace Uzor.Data
 
             this.FieldSize = data.FieldSize;
             this.Layers = data.Layers; // TODO: make copy
-            this.CropMask = (bool[,])data.CropMask.Clone();
-            
+
+            if (data.CropMask != null)
+                this.CropMask = (bool[,])data.CropMask.Clone();
+            else
+                this.CropMask = null;
+
             if (saveColor)
             {
                 this.Layers[0].BackColor = b;

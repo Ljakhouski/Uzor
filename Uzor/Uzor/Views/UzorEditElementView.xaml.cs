@@ -41,6 +41,13 @@ namespace Uzor.Views
                 else
                     this.cropSlider.Maximum = value.FieldSize / 2;
 
+                this.cropSlider.Value = this.cropSlider.Maximum - 2; // TODO: debug this
+                this.cropIndicator.IsVisible = false; // cropSlider.Value called "Value_Changed()..."
+                //this.mirrorIndicator.IsVisible = true;
+                this.MirrorButtonClick(null, null);
+
+                this.Data.CropMask = null;
+
                 this.UzorView.EditorObjectssList.Add(new Background(value));
                 this.UzorView.EditorObjectssList.Add(uzor);
                 this.UzorView.EditorObjectssList.Add(centerIndicator);
@@ -59,13 +66,15 @@ namespace Uzor.Views
         {
             InitializeComponent();
             this.Data = data;
-            this.BackgroundGrid = backGroundGrid == null ? this.mainGrid : backGroundGrid; 
             Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
-            Device.StartTimer(TimeSpan.FromSeconds(2), () => { 
-                var v = new TipsViewer(BackgroundGrid); 
-                this.BackgroundGrid.Children.Add(v);
-                return false;
-            });
+
+            //this.BackgroundGrid = backGroundGrid == null ? this.mainGrid : backGroundGrid; 
+            //Device.StartTimer(TimeSpan.FromSeconds(1), () => { 
+            //    var v = new TipsViewer(BackgroundGrid); 
+            //    this.BackgroundGrid.Children.Add(v);
+            //    return false;
+            //});
+
         }
       
         private bool OnTimerTick()
@@ -152,7 +161,7 @@ namespace Uzor.Views
             UzorView.DrawView();
         }
 
-        private void mirrorButtonClick(object sender, EventArgs e)
+        public void MirrorButtonClick(object sender, EventArgs e)
         {
             if (!uzor.MirrorMode)
                 mirrorButton.Source = "mirrorOffButton.png";
@@ -175,21 +184,29 @@ namespace Uzor.Views
                 return;
 
             if (this.mirrorIndicator.IsVisible) // to not to recalculate View
-                this.mirrorButtonClick(null, null);
+                this.MirrorButtonClick(null, null);
 
             this.cropIndicator.Crop = (int)e.NewValue;
             //this.UzorView.Scale = e.NewValue;
             this.UzorView.DrawView();
         }
 
+        private bool mirrorModeIsPreviousState = false;
         private void cropButtonClick(object sender, EventArgs e)
         {
-            
+            this.cropIndicator.IsVisible = true;
+
             if (!sliderPanel.IsVisible)
             {
                 cropButton.Source = "cropOffMenuButton.png";
                 sliderPanel.IsVisible = true;
                 sliderPanelShadow.IsVisible = true;
+
+                mirrorModeIsPreviousState = this.uzor.MirrorMode;
+
+                this.mirrorIndicator.IsVisible = false;
+                this.uzor.MirrorMode = false;
+                
                 return;
             }    
                 
@@ -198,6 +215,12 @@ namespace Uzor.Views
 
             sliderPanel.IsVisible = false;
             sliderPanelShadow.IsVisible = false;
+
+            if (mirrorModeIsPreviousState)
+            {
+                this.mirrorIndicator.IsVisible = true;
+                this.uzor.MirrorMode = true;
+            }
         }
        
         public void SaveButton_Click(object sender, EventArgs e)
@@ -262,6 +285,7 @@ namespace Uzor.Views
         private void uzorItem_Selected(object sender, EventArgs e)
         {
             this.Data.Replace((sender as SelectionItemPage).SelectedUzor, (sender as SelectionItemPage).SaveProjectColor);
+            this.Data = Data;
             this.UzorView.DrawView();
         }
 

@@ -1,19 +1,32 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:View="clr-namespace:Uzor.Views"
-             x:Class="Uzor.Views.tips.Tip1">
+             x:Class="Uzor.Views.tips.Tip1"
+             xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
-      <StackLayout VerticalOptions="FillAndExpand">
-            <Label Text="Put some dots in center at the beginning and switch forward" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label Text="Put some dots in center at the beginning and switch forward" />
+                <Grid VerticalOptions="Start" HeightRequest="180">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                <Image Source="forTip1.png" Grid.Column="0" Margin="15,0,0,0"/>
-                <Frame x:Name="demonstrateUzorFrame" HasShadow="True" Margin="15,15,15,15" VerticalOptions="CenterAndExpand" CornerRadius="10" Padding="0" Grid.Column="1" SizeChanged="frameSizeChanged"/>
-            </Grid>
-      </StackLayout>
-  </ContentView.Content>
+                    <Image Source="forTip1.png" Grid.Column="0" Margin="15,0,0,0"/>
+                    <Frame x:Name="demonstrateUzorFrame" HasShadow="True" Margin="15,15,15,15" VerticalOptions="CenterAndExpand" CornerRadius="10" Padding="0" Grid.Column="1" SizeChanged="frameSizeChanged"/>
+                </Grid>
+
+                <Grid VerticalOptions="Start" HeightRequest="180">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="forTip1_2.png" Grid.Column="0" Margin="15,0,0,0"/>
+                    <Frame x:Name="demonstrateUzorFrame2" HasShadow="True" Margin="15,15,15,15" VerticalOptions="CenterAndExpand" CornerRadius="10" Padding="0" Grid.Column="1" SizeChanged="frameSizeChanged2"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
 </ContentView>

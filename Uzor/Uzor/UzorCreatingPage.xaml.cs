@@ -7,6 +7,8 @@ using Uzor.Algorithms;
 using Uzor.Data;
 using Uzor.Localization;
 using Uzor.Views;
+using Uzor.Views.tips;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -33,7 +35,7 @@ namespace Uzor
             newUzorSettingView.Opacity = 0;
             creatingPageGrid.Children.Add(newUzorSettingView, 0, 1);
             newUzorSettingView.FadeTo(1);
-        }
+        }     
         private MainPage pageForAlert;
         public UzorCreatingPage(UzorData data, MainPage p) // for editing a previously created Uzor 
         {
@@ -104,6 +106,13 @@ namespace Uzor
             // gridCreatingPage.Children.Add(new NewUzorSetting(SaveSetting));
 
             creatingPageGrid.RowDefinitions[0].Height = 60;
+
+            if (Preferences.Get("TipViewShow", true))
+                Device.StartTimer(TimeSpan.FromSeconds(1), () => {
+                    var t = new TipsViewer(this.mainGrid);
+                    this.mainGrid.Children.Add(t);
+                    return false;
+                });
         }
 
 
@@ -131,21 +140,32 @@ namespace Uzor
             
         }
 
+        private bool nextButtonPressed = false;
         private async void NextButton_Clicked(object sender, EventArgs e)
         {
             if (stepNumber<maxStepValue)
             {
-                if (this.longUzorData.UzorElements[stepNumber-1].CropMaskIsEmpty())
+                if (this.longUzorData.UzorElements[stepNumber - 1].CropMaskIsEmpty())
                 {
-                    uzorEditElementViewList[stepNumber - 1].mirrorIndicator.IsVisible = false;
 
-                    uzorEditElementViewList[stepNumber-1].sliderPanel.IsVisible = true;
-                    uzorEditElementViewList[stepNumber-1].sliderPanelShadow.IsVisible = true;
+
+                    uzorEditElementViewList[stepNumber - 1].sliderPanel.IsVisible = true;
+                    uzorEditElementViewList[stepNumber - 1].sliderPanelShadow.IsVisible = true;
                     uzorEditElementViewList[stepNumber - 1].cropIndicator.Crop = (int)uzorEditElementViewList[stepNumber - 1].cropSlider.Value;
+
+                    if (uzorEditElementViewList[stepNumber - 1].mirrorIndicator.IsVisible)
+                        uzorEditElementViewList[stepNumber - 1].MirrorButtonClick(null, null);
+
                     uzorEditElementViewList[stepNumber - 1].UzorView.DrawView();
 
+                    if (nextButtonPressed)
+                        uzorEditElementViewList[stepNumber - 1].sliderPanel.ScaleTo(1.1);
+
+                    nextButtonPressed = true;
                     return;
                 }
+                
+                nextButtonPressed = false;
 
                 if (this.longUzorData.UzorElements[stepNumber] == null ) // expand array of UzorElements and creating new View
                 {
@@ -219,6 +239,13 @@ namespace Uzor
         private bool? isSquareMode = null;
         protected override bool OnBackButtonPressed()
         {
+            if (mainGrid.Children.Count > 1)
+            {
+                mainGrid.Children.RemoveAt(mainGrid.Children.Count-1);
+                return true;
+            }
+                
+
             if (isSquareMode == null)
             {
                 ForPopModalAsync();

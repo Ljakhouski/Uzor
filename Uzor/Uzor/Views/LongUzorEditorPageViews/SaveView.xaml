@@ -14,7 +14,11 @@
 
                 <StackLayout x:Name="stackOfSavingProjectButton" x:FieldModifier="public">
                     <Label Text="{x:Static resources:AppResource.SavingProject}" HorizontalOptions="Start"/>
-                    <Button Text="{x:Static resources:AppResource.Save}" Clicked="Save_Clicked" CornerRadius="20" HorizontalOptions="Center" />
+                    <Grid>
+                        <Button Text="{x:Static resources:AppResource.Save}" Clicked="Save_Clicked" CornerRadius="20" HorizontalOptions="Center" />
+                        <Image x:Name="IsCheckedIcon" IsVisible="false" Source="checked.png" x:FieldModifier="Public" TranslationX="100" VerticalOptions="Center" HeightRequest="30"/>
+                    </Grid>
+                    
                     <Label Text="{x:Static resources:AppResource.SavedLabel}" IsVisible="false" HorizontalOptions="Center" FontSize="Small"/>
                 </StackLayout>
                 

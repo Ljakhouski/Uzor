@@ -171,6 +171,7 @@ namespace Uzor
             {
                 await saveView.TranslateTo(0, 1000, 350, Easing.SinInOut);
                 saveDropMenuLayout.Children.Remove(saveView);
+                saveView.IsCheckedIcon.IsVisible = false;
             }
                 
 
@@ -247,12 +248,21 @@ namespace Uzor
             hideDownAllDropMenu();
         }
 
+        //protected override bool OnBackButtonPressed()
+        //{
+        //    this.Exit();
+        //    return true;
+        //}
         protected override bool OnBackButtonPressed()
         {
+            if (backgroundGrid.Children.Count > 1)
+            {
+                backgroundGrid.Children.RemoveAt(backgroundGrid.Children.Count - 1);
+                return true;
+            }
             this.Exit();
             return true;
         }
-
         public async void Exit()
         {
             if (await DisplayAlert("", AppResource.ExitQuestion, AppResource.Yes, AppResource.No))

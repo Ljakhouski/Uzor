@@ -33,6 +33,8 @@ namespace Uzor.Data
         public int B { get; set; } = 100; // distance between SidePattern-elements (horisontal)
         public int C { get; set; } // crop-factor of SidePattern
         public int D { get; set; } = 100; // distance between single-long-uzor
+
+        public int[] OtherValues; // for further data...
         public LongUzorData()
         { }
 

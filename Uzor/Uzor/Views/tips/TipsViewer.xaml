@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sh="http://sharpnado.com"
-             x:Class="Uzor.Views.tips.TipsViewer">
+             x:Class="Uzor.Views.tips.TipsViewer"
+             xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
         <Grid>
             <BoxView BackgroundColor="Black" Opacity="0.5">

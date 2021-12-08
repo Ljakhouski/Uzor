@@ -82,5 +82,17 @@ namespace Uzor
             v.BackgroundTapped += hideSavingView;
             this.backgroundGrid.Children.Add(v);
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (backgroundGrid.Children.Count > 1)
+            {
+                backgroundGrid.Children.RemoveAt(backgroundGrid.Children.Count - 1);
+                return true;
+            }
+            else
+                Navigation.PopModalAsync();
+            return true;
+        }
     }
 }

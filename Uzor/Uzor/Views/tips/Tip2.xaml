@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Uzor.Views.tips.Tip2"
+             xmlns:resources="clr-namespace:Uzor.Localization">
+  <ContentView.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Label Text="для этого есть ластик, ручка, цвета..." />
+            <Image Source="forTip2.png" Grid.Column="0" Margin="20"/>
+            <!--<Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="forTip2.png" Grid.Column="0" Margin="20"/>
+            </Grid>-->
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

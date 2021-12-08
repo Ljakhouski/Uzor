@@ -22,6 +22,7 @@ namespace Uzor.Views.LongUzorEditorPageViews
         private void Save_Clicked(object sender, EventArgs e)
         {
             this.editorPage.SaveProject();
+            IsCheckedIcon.IsVisible = true;
         }
         
         private void Ok_Clicked(object sender, EventArgs e)

@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Uzor.ItemPages
 {
-  //  [XamlCompilation(XamlCompilationOptions.Compile)]
+    //  [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LongUzorItemPage : ContentPage
     {
         private MainPage pageForAlert;
@@ -30,7 +30,7 @@ namespace Uzor.ItemPages
             p.Closed += longUzorEditorPage_Closed;
             await Navigation.PushModalAsync(p);
 
-            
+
         }
 
         private void longUzorEditorPage_Closed(object sender, EventArgs e)
@@ -41,12 +41,12 @@ namespace Uzor.ItemPages
                 UzorProjectFileManager.ReSave(this.longUzorView.Data, path);
                 pageForAlert.MakeUzorItemList();
             }
-                
+
             else if (p.Action == LongUzorEditorPage.ActionStatus.Canceled)
                 this.longUzorView.Data = UzorProjectFileManager.LoadLongUzorData(path);
 
             this.longUzorView.Draw();
-            
+
         }
 
         private void imageSaving_Clicked(object sender, EventArgs e)
@@ -59,6 +59,18 @@ namespace Uzor.ItemPages
         private void hideSavingView(object sender, EventArgs e)
         {
             this.backgroundGrid.Children.Remove(sender as ImageBufferSaveView);
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (backgroundGrid.Children.Count > 1)
+            {
+                backgroundGrid.Children.RemoveAt(backgroundGrid.Children.Count - 1);
+                return true;
+            }
+            else
+                Navigation.PopModalAsync();
+            return true;
         }
     }
 }

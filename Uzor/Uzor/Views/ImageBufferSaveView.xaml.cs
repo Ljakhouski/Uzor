@@ -165,8 +165,8 @@ namespace Uzor.Views
 
             // NOTE: This filename is not used by iOS!
             DateTime dt = DateTime.Now;
-            string filename = String.Format("Uzor" + "-{0:D4}{1:D2}{2:D2}-{3:D2}{4:D2}{5:D2}{6:D3}.png",
-                                            dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
+            string filename = String.Format("Uzor" + "-{0:D4}{1:D2}{2:D2}-{3:D2}{4:D2}{5:D2}{6:D3}",
+                                            dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond) + '.' + ((SKEncodedImageFormat)formatPicker.SelectedItem).ToString().ToLower();
 
             string savedFilePath = await BitmapStreamWriter.SaveBitmap(bitmap, (SKEncodedImageFormat)formatPicker.SelectedItem, 100, filename, "UzorApp");
 

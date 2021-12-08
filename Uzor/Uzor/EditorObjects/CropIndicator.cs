@@ -34,13 +34,13 @@ namespace Uzor.EditorObjects
         public CropIndicator(UzorData data)
         {
             this.Data = data;
-            this.crop = data.FieldSize/2 - 3;
+            this.crop = data.FieldSize/2 - 1;
             this.IsVisible = false;
         }
         
         public override void Draw(SKCanvas canvas, SKCanvasView view)
         {
-            if (!IsVisible)
+            if (!IsVisible || cropFieldMask == null)
                 return;
            // return; // TODO: fix this
             float pixelSize = (float)view.CanvasSize.Width / Data.FieldSize;

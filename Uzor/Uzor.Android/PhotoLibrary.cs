@@ -18,7 +18,7 @@ namespace Uzor.Droid
 {
     public class PhotoLibrary : IPhotoLibrary
     {
-        public async Task<string> SavePhotoAsync(byte[] data, string folder, string filename)
+        public async Task<string> SavePhotoAsync(byte[] data, string folder, string filename )
         {
 
             string picturesDirectory;
@@ -62,6 +62,7 @@ namespace Uzor.Droid
                     using (FileOutputStream outputStream = new FileOutputStream(bitmapFile))
                     {
                         await outputStream.WriteAsync(data);
+                        outputStream.Close();
                     }
                 }
             }
