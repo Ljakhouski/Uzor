@@ -68,15 +68,15 @@
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,10,0,15">
 
                     <sh:Shadows CornerRadius="50" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}" Margin="0,0,25,0">
-                        <ImageButton  x:Name="beforeButton" HeightRequest="60" VerticalOptions="Center"  Source="leftOrRightWhiteButton.png"    Clicked="beforeButtonClick" WidthRequest="60"  BackgroundColor="#E92626" Opacity="0.8" CornerRadius="50"></ImageButton>
+                        <ImageButton  x:Name="beforeButton" HeightRequest="60" VerticalOptions="Center"  Source="leftOrRightWhiteButton.png"    Clicked="beforeButtonClick" WidthRequest="60"  BackgroundColor="#ED1717" Opacity="0.8" CornerRadius="50"></ImageButton>
                     </sh:Shadows>
 
                     <sh:Shadows CornerRadius="100" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.40, Color=black}">
-                        <ImageButton  Source="startButton.png" x:Name="calculationButton"  HeightRequest="80"    Clicked="CalculationButtonClick" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="100"></ImageButton>
+                        <ImageButton  Source="startButton.png" x:Name="calculationButton"  HeightRequest="80"    Clicked="CalculationButtonClick" BackgroundColor="#ED1717" Opacity="0.8" CornerRadius="100"></ImageButton>
                     </sh:Shadows>
 
                     <sh:Shadows CornerRadius="50" Shades="{sh:SingleShade Offset='3, 3', Opacity=0.35, Color=black}">
-                        <ImageButton x:Name="nextButton" Clicked="nextButtonClick" VerticalOptions="Center" Source="leftOrRightWhiteButton.png" Rotation="180" HeightRequest="60"  WidthRequest="60" BackgroundColor="#E92626" Opacity="0.8" CornerRadius="50" Margin="25,0,0,0">
+                        <ImageButton x:Name="nextButton" Clicked="nextButtonClick" VerticalOptions="Center" Source="leftOrRightWhiteButton.png" Rotation="180" HeightRequest="60"  WidthRequest="60" BackgroundColor="#ED1717" Opacity="0.8" CornerRadius="50" Margin="25,0,0,0">
                         </ImageButton>
                     </sh:Shadows>
 

@@ -171,6 +171,9 @@
   <data name="MakeUzor" xml:space="preserve">
     <value>Новый Uzor</value>
   </data>
+  <data name="Mirror" xml:space="preserve">
+    <value>Зеркало</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Имя:</value>
   </data>
@@ -236,6 +239,24 @@
   </data>
   <data name="SwitchRenderingAlert" xml:space="preserve">
     <value>Режим отрисовки изменен на "Low"</value>
+  </data>
+  <data name="Tip1" xml:space="preserve">
+    <value>Поставьте симметрично несколько точек в центре и запустите генерацию</value>
+  </data>
+  <data name="Tip2" xml:space="preserve">
+    <value>Восползуйтесь зеркалом для симметричного рисования и правок</value>
+  </data>
+  <data name="Tip3" xml:space="preserve">
+    <value>Обрежьте готовый рисунок</value>
+  </data>
+  <data name="Tip3_2" xml:space="preserve">
+    <value>Убрать обрезку можно сдвинув ползунок в начальное положение</value>
+  </data>
+  <data name="Tip4" xml:space="preserve">
+    <value>Всегда можно сохранить как проект, сохранить изображение и поделиться им</value>
+  </data>
+  <data name="Tip4_2" xml:space="preserve">
+    <value>Файлы проектов .ubf и .lubf  импортируются и экспортируются в настройках</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>

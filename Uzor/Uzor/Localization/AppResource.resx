@@ -171,6 +171,9 @@
   <data name="MakeUzor" xml:space="preserve">
     <value>Make Uzor</value>
   </data>
+  <data name="Mirror" xml:space="preserve">
+    <value>Mirror</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name: </value>
   </data>
@@ -236,6 +239,24 @@
   </data>
   <data name="SwitchRenderingAlert" xml:space="preserve">
     <value>Rendering-mode is set to "Low"</value>
+  </data>
+  <data name="Tip1" xml:space="preserve">
+    <value>Draw some symmetrical dots in the center and start generation</value>
+  </data>
+  <data name="Tip2" xml:space="preserve">
+    <value>Use the mirror-tool for symmetrical drawing</value>
+  </data>
+  <data name="Tip3" xml:space="preserve">
+    <value>Crop the finished field</value>
+  </data>
+  <data name="Tip3_2" xml:space="preserve">
+    <value>You can remove the crop by sliding the slider to the start position</value>
+  </data>
+  <data name="Tip4" xml:space="preserve">
+    <value>You can always save as a project, save an image and share it</value>
+  </data>
+  <data name="Tip4_2" xml:space="preserve">
+    <value>.ubf and .lubf project-files are imported and exported in the settings</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

@@ -20,6 +20,7 @@ namespace Uzor.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
             StartActivity(typeof(MainActivity));
             //StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }

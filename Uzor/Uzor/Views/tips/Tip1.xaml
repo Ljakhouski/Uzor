@@ -6,7 +6,7 @@
   <ContentView.Content>
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand">
-                <Label Text="Put some dots in center at the beginning and switch forward" />
+                <Label Text="{x:Static resources:AppResource.Tip1}" Margin="15" FontSize="16"/>
                 <Grid VerticalOptions="Start" HeightRequest="180">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

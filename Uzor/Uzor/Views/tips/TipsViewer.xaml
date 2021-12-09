@@ -34,14 +34,14 @@
 
                 <StackLayout>
                     <Frame BackgroundColor="{StaticResource RedColor}" Grid.Row="0" CornerRadius="0" Padding="0" HeightRequest="60" HorizontalOptions="FillAndExpand">
-                        <Label x:Name="titleLabel" Text="x static resource " VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                        <Label x:Name="titleLabel" Text="" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="16"></Label>
                     </Frame>
                     <Grid x:Name="tipContainer" VerticalOptions="FillAndExpand"/>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" HeightRequest="60" Margin="0,0,0,10">
-                        <ImageButton Padding="5" Source="leftOrRightButton.png" x:Name="calculationButton" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="50" WidthRequest="80"   BackgroundColor="White" Opacity="0.5" CornerRadius="50"></ImageButton>
+                        <ImageButton Padding="5" Source="leftOrRightButton.png" x:Name="calculationButton" Clicked="beforeTip_Clicked" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="50" WidthRequest="80"   BackgroundColor="White" Opacity="0.5" CornerRadius="50"></ImageButton>
                         <Label x:Name="stepLabel" HorizontalOptions="Center" VerticalOptions="Center" Margin="30,0,30,0"/>
-                        <ImageButton Padding="5" x:Name="nextButton" VerticalOptions="Center" HorizontalOptions="Center" Source="leftOrRightButton.png" Rotation="180" HeightRequest="50"  WidthRequest="80" BackgroundColor="White" Opacity="0.5" CornerRadius="50" />
+                        <ImageButton Padding="5" x:Name="nextButton" VerticalOptions="Center" HorizontalOptions="Center" Source="leftOrRightButton.png" Clicked="nextTip_Clicked" Rotation="180" HeightRequest="50"  WidthRequest="80" BackgroundColor="White" Opacity="0.5" CornerRadius="50" />
 
                     </StackLayout>
 

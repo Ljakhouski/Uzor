@@ -4,9 +4,9 @@
              x:Class="Uzor.Views.tips.Tip2"
              xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
-        <StackLayout VerticalOptions="FillAndExpand">
-            <Label Text="для этого есть ластик, ручка, цвета..." />
-            <Image Source="forTip2.png" Grid.Column="0" Margin="20"/>
+        <StackLayout VerticalOptions="FillAndExpand" Margin="20">
+            <Label Text="{x:Static resources:AppResource.Tip2}" FontSize="20" />
+            <Image Source="forTip2.png" VerticalOptions="FillAndExpand"/>
             <!--<Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

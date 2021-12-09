@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using AndroidX.AppCompat.App;
+using Xamarin.Forms;
 
 namespace Uzor.Droid
 {
@@ -15,6 +16,8 @@ namespace Uzor.Droid
         {
             base.OnCreate(savedInstanceState);
             AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
+
+            Application.ApplicationContext.SetTheme(Resource.Style.MainTheme_Base);//= OSAppTheme.Light;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());

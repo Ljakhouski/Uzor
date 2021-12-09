@@ -22,9 +22,15 @@ namespace Uzor.Views.tips
             this.step = step;
             tipList = new List<View>();
             tipList.Add(new Tip1());
+            tipList.Add(new Tip2());
+            tipList.Add(new Tip3());
+            tipList.Add(new Tip4());
             // ...
 
             titleTipsList.Add(Tip1.GetTitle());
+            titleTipsList.Add(Tip2.GetTitle());
+            titleTipsList.Add(Tip3.GetTitle());
+            titleTipsList.Add(Tip4.GetTitle());
             updateTipOnView();
             updateStepLabel();
 		}

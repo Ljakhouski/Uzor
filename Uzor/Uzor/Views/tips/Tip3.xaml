@@ -5,9 +5,9 @@
              xmlns:resources="clr-namespace:Uzor.Localization">
     <ContentView.Content>
         <StackLayout VerticalOptions="FillAndExpand">
-            <Label Text="зеркало - поставьте свои первые точки симметричено относительно центра." />
-            <Label Text="Исправления и рисование по точкам можно так же делать этим инстурмнтом...." />
-            <Image Source="forTip2.png" Grid.Column="0" Margin="20"/>
+            <Label Text="{x:Static resources:AppResource.Tip3}" Margin="20" FontSize="21"/>
+            <Label Text="{x:Static resources:AppResource.Tip3_2}" Margin="20,0,20,0" FontSize="17"/>
+            <Image Source="forTip3.png" Grid.Column="0" Margin="20,5,20,0"/>
             <!--<Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

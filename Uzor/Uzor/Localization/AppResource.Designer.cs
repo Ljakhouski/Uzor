@@ -223,6 +223,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mirror.
+        /// </summary>
+        public static string Mirror {
+            get {
+                return ResourceManager.GetString("Mirror", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name: .
         /// </summary>
         public static string Name {
@@ -417,6 +426,60 @@ namespace Uzor.Localization {
         public static string SwitchRenderingAlert {
             get {
                 return ResourceManager.GetString("SwitchRenderingAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Draw some symmetrical dots in the center and start generation.
+        /// </summary>
+        public static string Tip1 {
+            get {
+                return ResourceManager.GetString("Tip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the mirror-tool for symmetrical drawing.
+        /// </summary>
+        public static string Tip2 {
+            get {
+                return ResourceManager.GetString("Tip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crop the finished field.
+        /// </summary>
+        public static string Tip3 {
+            get {
+                return ResourceManager.GetString("Tip3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can remove the crop by sliding the slider to the start position.
+        /// </summary>
+        public static string Tip3_2 {
+            get {
+                return ResourceManager.GetString("Tip3_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can always save as a project, save an image and share it.
+        /// </summary>
+        public static string Tip4 {
+            get {
+                return ResourceManager.GetString("Tip4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .ubf and .lubf project-files are imported and exported in the settings.
+        /// </summary>
+        public static string Tip4_2 {
+            get {
+                return ResourceManager.GetString("Tip4_2", resourceCulture);
             }
         }
         

@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Uzor.Views.tips.Tip4">
+             x:Class="Uzor.Views.tips.Tip4"
+             xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
       <StackLayout>
-          <Label Text="Всегда можно как сохранить проект, так и поделиться png-изображением" />
-            <Label Text="проекты (.ubf/.lubf) с главного меню экспортируются и импортируются в меню настроек"/>
+          <Label Text="{x:Static resources:AppResource.Tip4}" FontSize="18" Margin="20"/>
+          <Label Text="{x:Static resources:AppResource.Tip4_2}" FontSize="15" Margin="20,0,20,0"/>
+            <Image Source="forTip4" Margin="15,5,15,0"/>
         </StackLayout>
   </ContentView.Content>
 </ContentView>

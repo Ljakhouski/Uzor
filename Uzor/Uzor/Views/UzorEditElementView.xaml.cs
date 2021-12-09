@@ -67,8 +67,8 @@ namespace Uzor.Views
             InitializeComponent();
             this.Data = data;
             Device.StartTimer(TimeSpan.FromMilliseconds(350), OnTimerTick);
-
-            //this.BackgroundGrid = backGroundGrid == null ? this.mainGrid : backGroundGrid; 
+            this.BackgroundGrid = backGroundGrid == null ? this.mainGrid : backGroundGrid; 
+            //
             //Device.StartTimer(TimeSpan.FromSeconds(1), () => { 
             //    var v = new TipsViewer(BackgroundGrid); 
             //    this.BackgroundGrid.Children.Add(v);
