@@ -94,5 +94,18 @@ namespace Uzor
                 Navigation.PopModalAsync();
             return true;
         }
+
+        private void nameEditorShow(object sender, EventArgs e)
+        {
+            var v = new NameEditorView(this.data, this.backgroundGrid);
+            v.NameEdited += nameEdited;
+        }
+
+        private void nameEdited(object sender, EventArgs e)
+        {
+            this.itemNameLabel.Text = data.Name;
+            UzorProjectFileManager.ReSave(this.data, path);
+            pageForAlert.MakeUzorItemList();
+        }
     }
 }

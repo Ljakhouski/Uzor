@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:Uzor.Views" xmlns:sh="http://sharpnado.com"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:Uzor.Views" xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
              x:Class="Uzor.Views.UzorEditElementView" VerticalOptions="Center">
     <ContentView.Content>
         <Grid x:Name="mainGrid">

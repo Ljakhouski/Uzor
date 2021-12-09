@@ -171,6 +171,9 @@
   <data name="MakeUzor" xml:space="preserve">
     <value>Новый Uzor</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя:</value>
+  </data>
   <data name="NewUzor" xml:space="preserve">
     <value>Новый Uzor</value>
   </data>

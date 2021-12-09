@@ -171,6 +171,9 @@
   <data name="MakeUzor" xml:space="preserve">
     <value>Make Uzor</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name: </value>
+  </data>
   <data name="NewUzor" xml:space="preserve">
     <value>New Uzor</value>
   </data>

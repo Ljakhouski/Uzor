@@ -13,7 +13,11 @@
 
                 <Frame BackgroundColor="#CAD1D7" VerticalOptions="Fill" Grid.Row="0" Padding="0" Margin="0">
                     <StackLayout Orientation="Horizontal">
-                        <Label x:Name="itemNameLabel"  Text="ItemName: " FontSize="23" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0" Margin="15, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="FillAndExpand"></Label>
+                        <Label x:Name="itemNameLabel"  Text="ItemName: " FontSize="23" TextColor="#2F2F2F" MinimumHeightRequest="55" Padding="0" Margin="15, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="nameEditorShow"/>
+                            </Label.GestureRecognizers>
+                        </Label>
                         <ImageButton Source="saveIcon.png" VerticalOptions="EndAndExpand" CornerRadius="20" BackgroundColor="#CAD1D7" Padding="5" Clicked="imageSaving_Clicked"/>
                         <ImageButton Source="editButton.png" BackgroundColor="#CAD1D7" CornerRadius="20" HorizontalOptions="End" Clicked="editButton_Clicked" Margin="0,0,20,0"></ImageButton>
                     </StackLayout>

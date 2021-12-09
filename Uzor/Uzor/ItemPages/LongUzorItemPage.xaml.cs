@@ -72,5 +72,18 @@ namespace Uzor.ItemPages
                 Navigation.PopModalAsync();
             return true;
         }
+
+        private void nameEditorShow(object sender, EventArgs e)
+        {
+            var v = new NameEditorView(this.longUzorView.Data, this.backgroundGrid);
+            v.NameEdited += nameEdited;
+        }
+
+        private void nameEdited(object sender, EventArgs e)
+        {
+            this.itemNameLabel.Text = this.longUzorView.Data.Name;
+            UzorProjectFileManager.ReSave(this.longUzorView.Data, path);
+            pageForAlert.MakeUzorItemList();
+        }
     }
 }

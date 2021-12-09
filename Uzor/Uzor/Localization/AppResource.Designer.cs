@@ -223,6 +223,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name: .
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Uzor.
         /// </summary>
         public static string NewUzor {

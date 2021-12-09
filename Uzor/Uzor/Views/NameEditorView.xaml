@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        x:Class="Uzor.Views.NameEditorView"
+        xmlns:resources="clr-namespace:Uzor.Localization">
+    <ContentView.Content>
+        <Grid>
+            <BoxView BackgroundColor="Black" Opacity="0.5">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Cancel_Clicked"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
+            <Frame BackgroundColor="{StaticResource ColdGrayColor}" CornerRadius="20" Padding="0" Margin="50" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="300" HeightRequest="250">
+                <StackLayout>
+                    <Grid BackgroundColor="{StaticResource RedColor}" HeightRequest="60">
+                        <Label Text="{x:Static resources:AppResource.Name}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White"></Label>
+                    </Grid>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
+                        <Entry x:Name="nameEntry" HorizontalOptions="FillAndExpand" FontSize="20" Margin="20,0,0,0" PlaceholderColor="{StaticResource RedColor}" />
+                        <ImageButton Source="deleteFileButton.png" BackgroundColor="#ffffff" WidthRequest="37" HeightRequest="37" VerticalOptions="Center" Clicked="editEntry_Clicked" CornerRadius="10" Margin="20"></ImageButton>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HeightRequest="80">
+                        <Button Text="{x:Static resources:AppResource.Cancel}" BackgroundColor="White" HorizontalOptions="FillAndExpand" WidthRequest="100" CornerRadius="20" Clicked="Cancel_Clicked" VerticalOptions="End" Margin="20"></Button>
+                        <Button Text="{x:Static resources:AppResource.Ok}" BackgroundColor="White" HorizontalOptions="FillAndExpand" WidthRequest="100" CornerRadius="20" Clicked="OK_Clicked" VerticalOptions="End" Margin="20"></Button>
+                    </StackLayout>
+
+
+
+                </StackLayout>
+
+
+            </Frame>
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>
