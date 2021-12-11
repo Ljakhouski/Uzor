@@ -56,7 +56,8 @@ namespace Uzor.Views
             {
                 //var fileList = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
-                File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/" + this.Data.Name + ".lubf");
+                //File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/" + this.Data.Name + ".lubf");
+                File.Delete(this.path);
                 pageForAlert.itemStack.Children.Remove(this);
             }
         }
