@@ -10,15 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace Uzor.Views.tips
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Tip3 : ContentView
+    public partial class LongUzorMakeTip : ContentView
     {
-        public static string GetTitle()
-        {
-            return AppResource.Crop;
-        }
-        public Tip3()
+        public LongUzorMakeTip()
         {
             InitializeComponent();
+        }
+
+        internal static string GetTitle()
+        {
+            return AppResource.Finishing;
         }
     }
 }

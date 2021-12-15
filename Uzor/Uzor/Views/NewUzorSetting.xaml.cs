@@ -16,13 +16,13 @@ namespace Uzor.Views
     public partial class NewUzorSetting : ContentView
     {
         SaveSetting_ saveSettingDelegateFunc;
-        public bool IsSquareUzorMode = true;
+        public bool IsSquareUzorMode = false;
         public NewUzorSetting(SaveSetting_ ss)
         {
             saveSettingDelegateFunc = ss;
             InitializeComponent();
-            SquareUzorModeFrame.ScaleTo(1.1, 100);
-            this.SquareUzorModeTapped(null, null);
+            LongUzorModeFrame.ScaleTo(1.1, 100);
+            this.LongUzorModeTapped(null, null);
         }
 
         private void sizeSliderChanged(object sender, ValueChangedEventArgs e)

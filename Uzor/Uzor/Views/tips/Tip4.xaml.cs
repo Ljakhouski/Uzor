@@ -14,7 +14,7 @@ namespace Uzor.Views.tips
     {
         public static string GetTitle()
         {
-            return AppResource.Mirror;
+            return AppResource.SavingLabelTip;
         }
         public Tip4()
         {

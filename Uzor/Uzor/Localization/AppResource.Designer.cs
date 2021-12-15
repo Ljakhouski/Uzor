@@ -106,6 +106,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crop.
+        /// </summary>
+        public static string Crop {
+            get {
+                return ResourceManager.GetString("Crop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the item?.
         /// </summary>
         public static string DeleteQuestion {
@@ -160,6 +169,15 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finishing.
+        /// </summary>
+        public static string Finishing {
+            get {
+                return ResourceManager.GetString("Finishing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit first Uzor.
         /// </summary>
         public static string FirstUzorEdit {
@@ -178,7 +196,7 @@ namespace Uzor.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import projects from app-folder.
+        ///   Looks up a localized string similar to Import projects.
         /// </summary>
         public static string ImportProjects {
             get {
@@ -201,6 +219,24 @@ namespace Uzor.Localization {
         public static string LongUzorDescription {
             get {
                 return ResourceManager.GetString("LongUzorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Draw two elements and go to manage your pattern-project.
+        /// </summary>
+        public static string LongUzorTip1 {
+            get {
+                return ResourceManager.GetString("LongUzorTip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All basic parameters are changed in the first tab.
+        /// </summary>
+        public static string LongUzorTip2 {
+            get {
+                return ResourceManager.GetString("LongUzorTip2", resourceCulture);
             }
         }
         
@@ -264,6 +300,15 @@ namespace Uzor.Localization {
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not show again.
+        /// </summary>
+        public static string OffTips {
+            get {
+                return ResourceManager.GetString("OffTips", resourceCulture);
             }
         }
         
@@ -336,6 +381,15 @@ namespace Uzor.Localization {
         public static string SaveProjectColor {
             get {
                 return ResourceManager.GetString("SaveProjectColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving.
+        /// </summary>
+        public static string SavingLabelTip {
+            get {
+                return ResourceManager.GetString("SavingLabelTip", resourceCulture);
             }
         }
         
@@ -480,6 +534,24 @@ namespace Uzor.Localization {
         public static string Tip4_2 {
             get {
                 return ResourceManager.GetString("Tip4_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (you can enable tips in the settings).
+        /// </summary>
+        public static string TipsEnableTip {
+            get {
+                return ResourceManager.GetString("TipsEnableTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show tips.
+        /// </summary>
+        public static string ViewTips {
+            get {
+                return ResourceManager.GetString("ViewTips", resourceCulture);
             }
         }
         

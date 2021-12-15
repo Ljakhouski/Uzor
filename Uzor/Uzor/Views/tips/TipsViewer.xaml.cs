@@ -15,7 +15,7 @@ namespace Uzor.Views.tips
         List<View> tipList;
         List<string> titleTipsList = new List<string>();
         int step;
-		public TipsViewer(Grid g, int step = 0)
+		public TipsViewer(Grid g, bool isLongUzorTips = true, int step = 0)
 		{
 			InitializeComponent();
             this.parentGrid = g;
@@ -24,17 +24,33 @@ namespace Uzor.Views.tips
             tipList.Add(new Tip1());
             tipList.Add(new Tip2());
             tipList.Add(new Tip3());
+            if (isLongUzorTips)
+                tipList.Add(new LongUzorMakeTip());
             tipList.Add(new Tip4());
+            tipList.Add(new OffTipViewerView());
             // ...
+            setStartParameters();
 
             titleTipsList.Add(Tip1.GetTitle());
             titleTipsList.Add(Tip2.GetTitle());
             titleTipsList.Add(Tip3.GetTitle());
+            if (isLongUzorTips)
+                titleTipsList.Add(LongUzorMakeTip.GetTitle());
             titleTipsList.Add(Tip4.GetTitle());
+            titleTipsList.Add(OffTipViewerView.GetTitle());
             updateTipOnView();
             updateStepLabel();
 		}
 
+        private void setStartParameters()
+        {
+            foreach (View v in tipList)
+            {
+                v.Opacity = 0;
+                v.TranslationY = 50;
+            }
+                
+        }
         private void background_Tapped(object sender, EventArgs e)
         {
             parentGrid.Children.Remove(this);
@@ -71,6 +87,8 @@ namespace Uzor.Views.tips
         {
             this.tipContainer.Children.Clear();
             this.tipContainer.Children.Add(tipList[step]);
+            tipList[step].FadeTo(1, 200);
+            tipList[step].TranslateTo(0, 0, 250, Easing.SinInOut);
         }
         private void updateStepLabel()
         {

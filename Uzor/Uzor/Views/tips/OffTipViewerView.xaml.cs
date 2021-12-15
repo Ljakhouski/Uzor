@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Uzor.Localization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,6 +22,12 @@ namespace Uzor.Views.tips
         {
             Preferences.Set("TipViewShow", false);
             IsCheckedIcon.FadeTo(1, 100);
+            tipLabel.FadeTo(1, 300);
+        }
+
+        public static string GetTitle()
+        {
+            return "...";
         }
     }
 }

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Uzor.Views.tips.LongUzorMakeTip"
+             xmlns:resources="clr-namespace:Uzor.Localization">
+    <ContentView.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label Text="{x:Static resources:AppResource.LongUzorTip1}" Margin="15,15,15,10" FontSize="16" />
+                <Image Source="ForLongUzorMakeTip.png" Margin="13"/>
+                <Label Text="{x:Static resources:AppResource.LongUzorTip2}" Margin="15,8,15,8" FontSize="15"/>
+                <Image Source="ForLongUzorMakeTip2.png" Margin="13"/>
+            </StackLayout>
+        </ScrollView>
+
+    </ContentView.Content>
+</ContentView>

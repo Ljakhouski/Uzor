@@ -43,6 +43,7 @@ namespace Uzor.Views.tips
             v1.EditorObjectssList.Add(new Background(d));
             v1.EditorObjectssList.Add(uzor2);
 
+
             Device.StartTimer(TimeSpan.FromMilliseconds(350), () => {
 
                 if (uzorStep > 15)

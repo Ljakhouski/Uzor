@@ -109,7 +109,7 @@ namespace Uzor
 
             if (Preferences.Get("TipViewShow", true))
                 Device.StartTimer(TimeSpan.FromSeconds(1), () => {
-                    var t = new TipsViewer(this.mainGrid);
+                    var t = new TipsViewer(this.mainGrid, !newUzorSettingView.IsSquareUzorMode);
                     this.mainGrid.Children.Add(t);
                     return false;
                 });

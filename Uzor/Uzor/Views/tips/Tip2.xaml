@@ -4,7 +4,7 @@
              x:Class="Uzor.Views.tips.Tip2"
              xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
-        <StackLayout VerticalOptions="FillAndExpand" Margin="20">
+        <StackLayout x:Name="mainStack" VerticalOptions="FillAndExpand" Margin="20">
             <Label Text="{x:Static resources:AppResource.Tip2}" FontSize="20" />
             <Image Source="forTip2.png" VerticalOptions="FillAndExpand"/>
             <!--<Grid>

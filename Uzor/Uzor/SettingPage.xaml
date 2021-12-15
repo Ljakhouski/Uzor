@@ -44,7 +44,7 @@
                 </StackLayout>
                 <Label x:Name="unsafeLabel" Text="WARNING! UNSAFE METHOD!" IsVisible="false" TextColor="Red"/>
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="{x:Static resources:ViewTips}" Margin="10"></Label>
+                    <Label Text="{x:Static resources:AppResource.ViewTips}" Margin="10"></Label>
                     <CheckBox x:Name="tipsViewingCheckbox" CheckedChanged="TipsViewing_Changed"/>
                 </StackLayout>
                 <StackLayout Orientation="Vertical" Margin="20,0,20,0">

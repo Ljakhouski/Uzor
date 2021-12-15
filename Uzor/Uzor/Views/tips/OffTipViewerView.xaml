@@ -4,9 +4,10 @@
              x:Class="Uzor.Views.tips.OffTipViewerView"
              xmlns:resources="clr-namespace:Uzor.Localization">
   <ContentView.Content>
-      <StackLayout VerticalOptions="Center">
-            <Button Text="{x:Static resources:AppResource.OffTips}" CornerRadius="50" HeightRequest="40" Clicked="offTips_Clicked"/>
-            <Image x:Name="IsCheckedIcon" Opacity="0" Source="checked.png" x:FieldModifier="Public" HeightRequest="30" Margin="10"/>
+      <StackLayout VerticalOptions="Center" Margin="0,50,0,50">
+            <Button Text="{x:Static resources:AppResource.OffTips}" CornerRadius="50" HeightRequest="40" Clicked="offTips_Clicked" Margin="35,10,35,10"/>
+            <Image x:Name="IsCheckedIcon" Source="checked.png" x:FieldModifier="Public" HeightRequest="30" Margin="10" Opacity="0"/>
+            <Label x:Name="tipLabel" Text="{x:Static resources:AppResource.TipsEnableTip}" Margin="25,65,25,10" FontSize="12" HorizontalOptions="Center" Opacity="0"/>
         </StackLayout>
   </ContentView.Content>
 </ContentView>

@@ -7,7 +7,7 @@
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand">
                 <Label Text="{x:Static resources:AppResource.Tip1}" Margin="15" FontSize="16"/>
-                <Grid VerticalOptions="Start" HeightRequest="180">
+                <Grid x:Name="tipGrid" VerticalOptions="Start" HeightRequest="180">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
