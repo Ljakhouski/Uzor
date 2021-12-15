@@ -26,7 +26,8 @@ namespace Uzor.Views
             LongUzorView v = this.preview;
 
             v.Data = data;
-
+            if (data.Name == null)
+                data.Name = "";
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
             this.itemDate.Text = data.DataOfCreation.ToString();
             /*this.mineFrame.BackgroundColor = new Color(data.Layers[0].BackColor.R,

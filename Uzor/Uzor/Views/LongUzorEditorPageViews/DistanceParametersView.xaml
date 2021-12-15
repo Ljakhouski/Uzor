@@ -23,7 +23,7 @@
                         ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939"
                         x:FieldModifier="public"/>
                 
-                <Slider x:Name="D" Maximum="200" Minimum="50" Value="100" 
+                <Slider x:Name="D" Maximum="200" Minimum="-20" Value="100" 
                         ValueChanged="slider_Changed"
                         ThumbColor="#000000" MinimumTrackColor="#202020" MaximumTrackColor="#393939" 
                         x:FieldModifier="public"/>

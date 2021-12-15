@@ -10,7 +10,7 @@
                     <TapGestureRecognizer Tapped="background_Tapped"></TapGestureRecognizer>
                 </BoxView.GestureRecognizers>
             </BoxView>
-            <Frame CornerRadius="20" Margin="30,40,30,40" Padding="0">
+            <Frame CornerRadius="20" Margin="30,40,30,40" Padding="0" MinimumHeightRequest="350" VerticalOptions="Center">
                 <!--<Grid BackgroundColor="Green" ColumnSpacing="0" RowSpacing="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>

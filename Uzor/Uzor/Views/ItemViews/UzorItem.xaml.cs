@@ -66,6 +66,10 @@ namespace Uzor.Views
             //upv.ThisData = data;
             upv.EditorObjectssList.Add(udb);
             upv.DrawView();
+
+            if (data.Name == null)
+                data.Name = "";
+
             this.itemName.Text = data.Name.Split("/".ToCharArray()).Last();
             this.itemDate.Text = data.DataOfCreation.ToString();
             this.mineFrame.BackgroundColor = Color.FromRgba(data.Layers[0].BackColor.R,

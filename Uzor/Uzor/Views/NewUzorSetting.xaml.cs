@@ -43,7 +43,7 @@ namespace Uzor.Views
                 switch (new Random().Next(1, 3))
                 {
                     
-                    case 1:while (new Random().Next(1, 3) != 3) { }
+                    case 1: //while (new Random().Next(1, 3) != 3) { }
                         var b = new bool[d.FieldSize, d.FieldSize];
                         b[d.FieldSize / 2, d.FieldSize / 2] = true;
                         b[d.FieldSize / 2, d.FieldSize / 2 - 1] = true;
