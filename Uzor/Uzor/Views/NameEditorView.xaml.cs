@@ -41,9 +41,9 @@ namespace Uzor.Views
         private void OK_Clicked(object sender, EventArgs e)
         {
             if (data != null)
-                this.data.Name = nameEntry.Text;
+                this.data.Name = nameEntry.Text == null? "" : nameEntry.Text;
             else
-                this.ldata.Name = nameEntry.Text;
+                this.ldata.Name = nameEntry.Text == null ? "" : nameEntry.Text;
             NameEdited?.Invoke(this, null);
             Cancel_Clicked(null, null);
         }

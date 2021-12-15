@@ -33,6 +33,7 @@ namespace Uzor
             this.mainPage = p;
             this.renderingMode = (RenderingMode)Preferences.Get("RenderingMode", 2);
             this.renderingModePicker.SelectedIndex = (int)renderingMode;
+            this.tipsViewingCheckbox.IsChecked = Preferences.Get("TipViewShow", true);
             //this.languagePicker.SelectedIndex = 0;
         }
 
@@ -108,6 +109,11 @@ namespace Uzor
                 
             else
                 this.metaDataLabel.Text = "Imported files not found. Add .ubf or .lubf projects to \"" + path + '"';
+        }
+
+        private void TipsViewing_Changed(object sender, CheckedChangedEventArgs e)
+        {
+            Preferences.Set("TipViewShow", e.Value);
         }
     }
 }
