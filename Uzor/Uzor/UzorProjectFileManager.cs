@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using Uzor.Data;
@@ -110,6 +111,35 @@ namespace Uzor
             return d;
         } 
 
+        public static void CopySamplesToInternalStorage()
+        {
+            string[] samples =
+            {
+                "1.lubf",
+                "2.lubf",
+                "3.lubf",
+                "4.lubf",
+                "5.lubf",
+                "6.lubf",
+                "7.lubf",
+                "8.lubf",
+                "square.ubf",
+                "10.ubf",
+            };
+            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(UzorProjectFileManager)).Assembly;
+            
+            //File.Copy()
+            foreach(string sample in samples)  // if (sample.Substring(sample.Length - 4) == ".ubf")
+            {
+                Stream stream = assembly.GetManifestResourceStream("Uzor.Samples."+sample);
+                using (var file = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+ "/" + sample, FileMode.Create, FileAccess.Write))
+                {
+                    if (!File.Exists(Environment.SpecialFolder.LocalApplicationData + "/" + sample))
+                        stream.CopyTo(file);
+                }
+            }
+                
+        }
         public static void DeleteByNameFromInternalStorage(string fileName)
         {
             File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/" + fileName);

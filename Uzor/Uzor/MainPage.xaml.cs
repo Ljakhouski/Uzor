@@ -21,7 +21,7 @@ namespace Uzor
         public MainPage()
         {
             InitializeComponent();
-
+            UzorProjectFileManager.CopySamplesToInternalStorage();
             //videoView1.Start();
           
                 //Assets.

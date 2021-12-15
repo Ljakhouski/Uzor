@@ -11,6 +11,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Samples\1.lubf" />
+    <None Remove="Samples\10.ubf" />
+    <None Remove="Samples\2.lubf" />
+    <None Remove="Samples\3.lubf" />
+    <None Remove="Samples\4.lubf" />
+    <None Remove="Samples\5.lubf" />
+    <None Remove="Samples\6.lubf" />
+    <None Remove="Samples\7.lubf" />
+    <None Remove="Samples\8.lubf" />
+    <None Remove="Samples\square.ubf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Samples\1.lubf" />
+    <EmbeddedResource Include="Samples\2.lubf" />
+    <EmbeddedResource Include="Samples\3.lubf" />
+    <EmbeddedResource Include="Samples\4.lubf" />
+    <EmbeddedResource Include="Samples\5.lubf" />
+    <EmbeddedResource Include="Samples\6.lubf" />
+    <EmbeddedResource Include="Samples\7.lubf" />
+    <EmbeddedResource Include="Samples\8.lubf" />
+    <EmbeddedResource Include="Samples\square.ubf" />
+    <EmbeddedResource Include="Samples\10.ubf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ColorPicker.Xamarin.Forms" Version="1.3.4.21" />
     <PackageReference Include="Sharpnado.Shadows" Version="1.2.0" />
     <PackageReference Include="SkiaSharp" Version="2.80.2" />
