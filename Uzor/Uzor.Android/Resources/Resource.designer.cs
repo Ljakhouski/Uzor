@@ -21494,47 +21494,50 @@ namespace Uzor.Droid
 			// aapt resource value: 0x7F0700AD
 			public const int splash = 2131165357;
 			
-			// aapt resource value: 0x7F0700AE
-			public const int splashScreen = 2131165358;
-			
 			// aapt resource value: 0x7F0700AF
-			public const int SquareUzorMode = 2131165359;
+			public const int splashScreen = 2131165359;
+			
+			// aapt resource value: 0x7F0700AE
+			public const int splash_red = 2131165358;
 			
 			// aapt resource value: 0x7F0700B0
-			public const int startButton = 2131165360;
+			public const int SquareUzorMode = 2131165360;
 			
 			// aapt resource value: 0x7F0700B1
-			public const int stopButton = 2131165361;
+			public const int startButton = 2131165361;
 			
 			// aapt resource value: 0x7F0700B2
-			public const int test_custom_background = 2131165362;
+			public const int stopButton = 2131165362;
 			
 			// aapt resource value: 0x7F0700B3
-			public const int tooltip_frame_dark = 2131165363;
+			public const int test_custom_background = 2131165363;
 			
 			// aapt resource value: 0x7F0700B4
-			public const int tooltip_frame_light = 2131165364;
+			public const int tooltip_frame_dark = 2131165364;
 			
 			// aapt resource value: 0x7F0700B5
-			public const int uzor2BackGround = 2131165365;
+			public const int tooltip_frame_light = 2131165365;
 			
 			// aapt resource value: 0x7F0700B6
-			public const int uzor3BackGround = 2131165366;
+			public const int uzor2BackGround = 2131165366;
 			
 			// aapt resource value: 0x7F0700B7
-			public const int uzorBackGround = 2131165367;
+			public const int uzor3BackGround = 2131165367;
 			
 			// aapt resource value: 0x7F0700B8
-			public const int uzorBackGroundGradient = 2131165368;
+			public const int uzorBackGround = 2131165368;
 			
 			// aapt resource value: 0x7F0700B9
-			public const int whiteSettingButton = 2131165369;
+			public const int uzorBackGroundGradient = 2131165369;
 			
 			// aapt resource value: 0x7F0700BA
-			public const int zoomOffMenuButton = 2131165370;
+			public const int whiteSettingButton = 2131165370;
 			
 			// aapt resource value: 0x7F0700BB
-			public const int zoomOnMenuButton = 2131165371;
+			public const int zoomOffMenuButton = 2131165371;
+			
+			// aapt resource value: 0x7F0700BC
+			public const int zoomOnMenuButton = 2131165372;
 			
 			static Drawable()
 			{

@@ -55,6 +55,7 @@ namespace Uzor
             creatingPageGrid.Children.Add(saveTopPanel, 0, 0);
             creatingPageGrid.RowDefinitions[0].Height = 60;
             v.cropButton.IsVisible = true;
+
         }
 
         public delegate void SaveSetting_(UzorData data);
