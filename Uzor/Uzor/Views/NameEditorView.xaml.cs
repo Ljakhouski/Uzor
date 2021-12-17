@@ -23,6 +23,7 @@ namespace Uzor.Views
             this.grid = grid;
             grid.Children.Add(this);
             this.data = data;
+            this.nameEntry.Text = data.Name == null ? "" : data.Name;
         }
 
         public NameEditorView(LongUzorData data, Grid grid)
@@ -31,6 +32,7 @@ namespace Uzor.Views
             this.grid = grid;
             grid.Children.Add(this);
             this.ldata = data;
+            this.nameEntry.Text = data.Name == null ? "" : data.Name;
         }
 
         private void Cancel_Clicked(object sender, EventArgs e)

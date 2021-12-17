@@ -20,7 +20,12 @@
     <None Remove="Samples\6.lubf" />
     <None Remove="Samples\7.lubf" />
     <None Remove="Samples\8.lubf" />
+    <None Remove="Samples\field.ubf" />
+    <None Remove="Samples\Krosny.lubf" />
+    <None Remove="Samples\pttrn.lubf" />
+    <None Remove="Samples\small.lubf" />
     <None Remove="Samples\square.ubf" />
+    <None Remove="Samples\uzor.lubf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,10 +35,12 @@
     <EmbeddedResource Include="Samples\4.lubf" />
     <EmbeddedResource Include="Samples\5.lubf" />
     <EmbeddedResource Include="Samples\6.lubf" />
-    <EmbeddedResource Include="Samples\7.lubf" />
-    <EmbeddedResource Include="Samples\8.lubf" />
+    <EmbeddedResource Include="Samples\field.ubf" />
+    <EmbeddedResource Include="Samples\Krosny.lubf" />
+    <EmbeddedResource Include="Samples\pttrn.lubf" />
+    <EmbeddedResource Include="Samples\small.lubf" />
     <EmbeddedResource Include="Samples\square.ubf" />
-    <EmbeddedResource Include="Samples\10.ubf" />
+    <EmbeddedResource Include="Samples\uzor.lubf" />
   </ItemGroup>
 
   <ItemGroup>

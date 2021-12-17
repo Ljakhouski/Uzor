@@ -211,7 +211,7 @@ namespace Uzor.Views
 
                 if (this.IsNewUzor)
                 {
-                    this.cropSlider.Value = Data.GetMaskSize() / 2 - 1;
+                    this.cropSlider.Value = Data.FieldSize / 2 - 1;
                     this.IsNewUzor = false;
                 }
 

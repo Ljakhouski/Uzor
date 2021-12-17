@@ -121,10 +121,12 @@ namespace Uzor
                 "4.lubf",
                 "5.lubf",
                 "6.lubf",
-                "7.lubf",
-                "8.lubf",
+                "field.ubf",
+                "Krosny.lubf",
+                "pttrn.lubf",
+                "small.lubf",
                 "square.ubf",
-                "10.ubf",
+                "uzor.lubf",
             };
             var assembly = IntrospectionExtensions.GetTypeInfo(typeof(UzorProjectFileManager)).Assembly;
             
