@@ -74,6 +74,7 @@ namespace Uzor
             creatingPageGrid.Children.Remove(newUzorSettingView);
 
             var v = new UzorEditElementView(data, this.mainGrid);
+            v.IsNewUzor = true; // only for set cropMask as standart figure
             v.PageForAlert = this.pageForAlert;
             //uzorDataList.Add(v.UzorView.ThisData);
             uzorEditElementViewList.Add(v);
@@ -152,6 +153,8 @@ namespace Uzor
 
                     uzorEditElementViewList[stepNumber - 1].sliderPanel.IsVisible = true;
                     uzorEditElementViewList[stepNumber - 1].sliderPanelShadow.IsVisible = true;
+                    uzorEditElementViewList[stepNumber - 1].cropSlider.Value = uzorEditElementViewList[stepNumber - 1].Data.FieldSize / 2 - 1;
+                    uzorEditElementViewList[stepNumber - 1].IsNewUzor = false;
                     uzorEditElementViewList[stepNumber - 1].cropIndicator.Crop = (int)uzorEditElementViewList[stepNumber - 1].cropSlider.Value;
 
                     if (uzorEditElementViewList[stepNumber - 1].mirrorIndicator.IsVisible)

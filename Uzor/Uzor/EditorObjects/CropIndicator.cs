@@ -34,7 +34,16 @@ namespace Uzor.EditorObjects
         public CropIndicator(UzorData data)
         {
             this.Data = data;
-            this.crop = data.FieldSize/2 - 1;
+
+            if (data.CropMaskIsEmpty())
+                //this.crop = data.FieldSize / 2 - 1;
+                this.cropFieldMask = null;
+            else
+            {
+                //this.cropFieldMask = data.CropMask;
+                this.crop = data.GetMaskSize() / 2;
+            }
+                
             this.IsVisible = false;
         }
         

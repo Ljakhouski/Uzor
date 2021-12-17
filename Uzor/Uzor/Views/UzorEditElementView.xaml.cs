@@ -41,12 +41,17 @@ namespace Uzor.Views
                 else
                     this.cropSlider.Maximum = value.FieldSize / 2;
 
-                this.cropSlider.Value = this.cropSlider.Maximum - 2; // TODO: debug this
+                //if (value.CropMaskIsEmpty())
+                    //this.cropSlider.Value = this.cropSlider.Maximum - 2; // TODO: debug this
+                //else
+                this.cropSlider.Value = this.cropIndicator.Crop;
+
+
                 this.cropIndicator.IsVisible = false; // cropSlider.Value called "Value_Changed()..."
                 //this.mirrorIndicator.IsVisible = true;
                 this.MirrorButtonClick(null, null);
 
-                this.Data.CropMask = null;
+                //this.Data.CropMask = null;
 
                 this.UzorView.EditorObjectssList.Add(new Background(value));
                 this.UzorView.EditorObjectssList.Add(uzor);
@@ -62,6 +67,8 @@ namespace Uzor.Views
         public MainPage PageForAlert { get; set; }
         public bool ReSave = false; // for rewriting before results
         private string SavedFilePath;
+
+        public bool IsNewUzor { get; set; } = false;
         public UzorEditElementView(UzorData data, Grid backGroundGrid = null)
         {
             InitializeComponent();
@@ -196,11 +203,18 @@ namespace Uzor.Views
         {
             this.cropIndicator.IsVisible = true;
 
-            if (!sliderPanel.IsVisible)
+            if (!this.sliderPanel.IsVisible)
             {
-                cropButton.Source = "cropOffMenuButton.png";
-                sliderPanel.IsVisible = true;
-                sliderPanelShadow.IsVisible = true;
+                this.cropButton.Source = "cropOffMenuButton.png";
+                this.sliderPanel.IsVisible = true;
+                this.sliderPanelShadow.IsVisible = true;
+
+                if (this.IsNewUzor)
+                {
+                    this.cropSlider.Value = Data.GetMaskSize() / 2 - 1;
+                    this.IsNewUzor = false;
+                }
+
 
                 mirrorModeIsPreviousState = this.uzor.MirrorMode;
 
