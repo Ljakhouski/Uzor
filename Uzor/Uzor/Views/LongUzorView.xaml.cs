@@ -65,6 +65,12 @@ namespace Uzor.Views
         {
             InitializeComponent();
         }
+        /*private float beginScale = 1;
+        private void resetScale()
+        {
+            matrix = SKMatrix.Identity;
+            SKMatrix.PostConcat(ref matrix, SKMatrix.CreateScale(beginScale, beginScale, canvasView.CanvasSize.Width, canvasView.CanvasSize.Height));
+        }*/
 
         private void bitmapInit()
         {
@@ -208,7 +214,8 @@ namespace Uzor.Views
                         touchDictionary.Remove(args.Id);
 
                     if (matrix.ScaleX < 0.2)
-                        matrix = SKMatrix.Identity;
+                        matrix = SKMatrix.MakeIdentity();
+                    //resetScale();
 
                     this.quickViewUpdateMode = false;
                     updateBitmap();

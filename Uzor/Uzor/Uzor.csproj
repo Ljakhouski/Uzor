@@ -12,16 +12,36 @@
 
   <ItemGroup>
     <None Remove="Samples\1.lubf" />
+    <None Remove="Samples\10.lubf" />
     <None Remove="Samples\10.ubf" />
+    <None Remove="Samples\11.lubf" />
+    <None Remove="Samples\12.lubf" />
     <None Remove="Samples\2.lubf" />
     <None Remove="Samples\3.lubf" />
+    <None Remove="Samples\3.ubf" />
     <None Remove="Samples\4.lubf" />
     <None Remove="Samples\5.lubf" />
     <None Remove="Samples\6.lubf" />
     <None Remove="Samples\7.lubf" />
     <None Remove="Samples\8.lubf" />
+    <None Remove="Samples\9.ubf" />
+    <None Remove="Samples\a1.lubf" />
+    <None Remove="Samples\b2.lubf" />
+    <None Remove="Samples\c3.ubf" />
+    <None Remove="Samples\chirvony.lubf" />
+    <None Remove="Samples\d4.lubf" />
+    <None Remove="Samples\e5.lubf" />
+    <None Remove="Samples\f6.lubf" />
     <None Remove="Samples\field.ubf" />
+    <None Remove="Samples\g7.lubf" />
+    <None Remove="Samples\h8.lubf" />
+    <None Remove="Samples\i9.ubf" />
+    <None Remove="Samples\j10.lubf" />
+    <None Remove="Samples\k11.lubf" />
     <None Remove="Samples\Krosny.lubf" />
+    <None Remove="Samples\l12.lubf" />
+    <None Remove="Samples\new Uzor2.lubf" />
+    <None Remove="Samples\new Uzor4.lubf" />
     <None Remove="Samples\pttrn.lubf" />
     <None Remove="Samples\small.lubf" />
     <None Remove="Samples\square.ubf" />
@@ -29,18 +49,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Samples\1.lubf" />
-    <EmbeddedResource Include="Samples\2.lubf" />
-    <EmbeddedResource Include="Samples\3.lubf" />
-    <EmbeddedResource Include="Samples\4.lubf" />
-    <EmbeddedResource Include="Samples\5.lubf" />
-    <EmbeddedResource Include="Samples\6.lubf" />
-    <EmbeddedResource Include="Samples\field.ubf" />
-    <EmbeddedResource Include="Samples\Krosny.lubf" />
-    <EmbeddedResource Include="Samples\pttrn.lubf" />
-    <EmbeddedResource Include="Samples\small.lubf" />
-    <EmbeddedResource Include="Samples\square.ubf" />
-    <EmbeddedResource Include="Samples\uzor.lubf" />
+    <EmbeddedResource Include="Samples\a1.lubf" />
+    <EmbeddedResource Include="Samples\b2.lubf" />
+    <EmbeddedResource Include="Samples\c3.ubf" />
+    <EmbeddedResource Include="Samples\d4.lubf" />
+    <EmbeddedResource Include="Samples\e5.lubf" />
+    <EmbeddedResource Include="Samples\f6.lubf" />
+    <EmbeddedResource Include="Samples\g7.lubf" />
+    <EmbeddedResource Include="Samples\h8.lubf" />
+    <EmbeddedResource Include="Samples\i9.ubf" />
+    <EmbeddedResource Include="Samples\j10.lubf" />
+    <EmbeddedResource Include="Samples\k11.lubf" />
+    <EmbeddedResource Include="Samples\l12.lubf" />
   </ItemGroup>
 
   <ItemGroup>

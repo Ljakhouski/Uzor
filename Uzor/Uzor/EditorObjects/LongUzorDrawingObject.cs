@@ -27,6 +27,7 @@ namespace Uzor.EditorObjects
             get { return _pixelSize; }
             set { this._pixelSize = value; calculateSizes(); } 
         }
+       
         public LongUzorDrawingObject(LongUzorData data)
         {
             this.Data = data;

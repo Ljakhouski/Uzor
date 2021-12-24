@@ -115,18 +115,18 @@ namespace Uzor
         {
             string[] samples =
             {
-                "1.lubf",
-                "2.lubf",
-                "3.lubf",
-                "4.lubf",
-                "5.lubf",
-                "6.lubf",
-                "field.ubf",
-                "Krosny.lubf",
-                "pttrn.lubf",
-                "small.lubf",
-                "square.ubf",
-                "uzor.lubf",
+                "a1.lubf",
+                "b2.lubf",
+                "c3.ubf",
+                "d4.lubf",
+                "e5.lubf",
+                "f6.lubf",
+                "g7.lubf",
+                "h8.lubf",
+                "i9.ubf",
+                "j10.lubf",
+                "k11.lubf",
+                "l12.lubf",
             };
             var assembly = IntrospectionExtensions.GetTypeInfo(typeof(UzorProjectFileManager)).Assembly;
             
