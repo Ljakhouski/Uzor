@@ -48,19 +48,19 @@ namespace Uzor.EditorObjects
             //minimal_A_parameter = minimalStepSize * 20;
         }
 
-        private int minimalStepSize;
+        private float minimalStepSize;
         public int GetResultContentWidth()
         {
             const int longUzorNumber = 5;
             const int freeZone = 300;
-            return this.Data.D * longUzorNumber * minimalStepSize + freeZone;
+            return (int)(this.Data.D * longUzorNumber * minimalStepSize + freeZone);
         }
 
         public int GetResultContentHeight()
         {
             const int freeZone = 350;
             const int verticalElementNumber = 14;
-            return Data.A * minimalStepSize * verticalElementNumber + freeZone;
+            return (int)(Data.A * minimalStepSize * verticalElementNumber + freeZone);
         }
         //private int minimal_A_parameter;
         private int sceneCenterX, sceneCenterY;
@@ -119,7 +119,7 @@ namespace Uzor.EditorObjects
                 SKMatrix previousMatrix = canvas.TotalMatrix;
 
                 int distance = this.Data.D;
-                int x = distance * minimalStepSize * i;
+                float x = distance * minimalStepSize * i;
 
                 matrix.TransX = x;
                 SKMatrix.PostConcat(ref matrix, canvas.TotalMatrix);
@@ -172,7 +172,7 @@ namespace Uzor.EditorObjects
 
             int uzorCenterY = uzorCenterX; // Uzor is square object
 
-            int phaseShift = Data.A * minimalStepSize / 2;
+            float phaseShift = Data.A * minimalStepSize / 2;
             matrix.TransY = i * Data.A * minimalStepSize - uzorCenterY + phaseShift;
             matrix.TransY += this.sceneCenterY;
 

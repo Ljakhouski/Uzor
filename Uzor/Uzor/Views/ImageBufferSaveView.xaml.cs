@@ -21,7 +21,7 @@ namespace Uzor.Views
         private int bitmapWidth;
         private int bitmapHeight = 3600;
 
-        const int currentPixelSize = 15; // using for size-calculation & bitmap drawing
+        const int currentPixelSize = 10; // using for size-calculation & bitmap drawing
         public ImageBufferSaveView(LongUzorData data)
         {
             this.longUzorData = data;
