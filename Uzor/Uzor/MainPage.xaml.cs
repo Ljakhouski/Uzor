@@ -21,7 +21,9 @@ namespace Uzor
         public MainPage()
         {
             InitializeComponent();
-            UzorProjectFileManager.CopySamplesToInternalStorage();
+
+            if (Preferences.Get("SamplesLoad", true))
+                UzorProjectFileManager.CopySamplesToInternalStorage();
 
             //videoView1.Start();
           

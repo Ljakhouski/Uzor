@@ -40,6 +40,9 @@ namespace Uzor
 
             if (!Preferences.ContainsKey("TipViewShow"))
                 Preferences.Set("TipViewShow", true);
+
+            if (!Preferences.ContainsKey("SamplesLoad"))
+                Preferences.Set("SamplesLoad", true);
         }
         protected override void OnStart()
         {

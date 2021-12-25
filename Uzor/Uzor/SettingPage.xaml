@@ -47,6 +47,10 @@
                     <Label Text="{x:Static resources:AppResource.ViewTips}" Margin="10"></Label>
                     <CheckBox x:Name="tipsViewingCheckbox" CheckedChanged="TipsViewing_Changed"/>
                 </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{x:Static resources:AppResource.LoadSamples}" Margin="10"></Label>
+                    <CheckBox x:Name="samplesLoadCheckbox" CheckedChanged="LoadSamples_Changed"/>
+                </StackLayout>
                 <StackLayout Orientation="Vertical" Margin="20,0,20,0">
                     <Button Text="{x:Static resources:AppResource.ExportProjects}" CornerRadius="20" Clicked="exportProjects_Clicked" />
                     <Button Text="{x:Static resources:AppResource.ImportProjects}" CornerRadius="20" Clicked="importProject_Clicked"/>

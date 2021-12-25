@@ -168,6 +168,9 @@
   <data name="LanguageLabel" xml:space="preserve">
     <value>Язык:</value>
   </data>
+  <data name="LoadSamples" xml:space="preserve">
+    <value>Грузить демо-проекты в папку при загрузке</value>
+  </data>
   <data name="LongUzorDescription" xml:space="preserve">
     <value>Длинный узор - полноценный вариант формы классического белорусского узора, состоящий из трёх одиночных</value>
   </data>

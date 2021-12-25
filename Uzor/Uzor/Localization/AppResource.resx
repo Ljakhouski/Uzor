@@ -168,6 +168,9 @@
   <data name="LanguageLabel" xml:space="preserve">
     <value>Language:</value>
   </data>
+  <data name="LoadSamples" xml:space="preserve">
+    <value>Upload samples to a folder when uploading</value>
+  </data>
   <data name="LongUzorDescription" xml:space="preserve">
     <value>Long pattern - a full version of the form of the classic Belarusian pattern, consisting of three single</value>
   </data>

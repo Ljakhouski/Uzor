@@ -34,6 +34,7 @@ namespace Uzor
             this.renderingMode = (RenderingMode)Preferences.Get("RenderingMode", 2);
             this.renderingModePicker.SelectedIndex = (int)renderingMode;
             this.tipsViewingCheckbox.IsChecked = Preferences.Get("TipViewShow", true);
+            this.samplesLoadCheckbox.IsChecked = Preferences.Get("SamplesLoad", true);
             //this.languagePicker.SelectedIndex = 0;
         }
 
@@ -114,6 +115,11 @@ namespace Uzor
         private void TipsViewing_Changed(object sender, CheckedChangedEventArgs e)
         {
             Preferences.Set("TipViewShow", e.Value);
+        }
+
+        private void LoadSamples_Changed(object sender, CheckedChangedEventArgs e)
+        {
+            Preferences.Set("SamplesLoad", e.Value);
         }
     }
 }
