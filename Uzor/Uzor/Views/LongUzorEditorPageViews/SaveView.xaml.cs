@@ -25,9 +25,18 @@ namespace Uzor.Views.LongUzorEditorPageViews
             IsCheckedIcon.IsVisible = true;
         }
         
-        private void Ok_Clicked(object sender, EventArgs e)
+        private async void Ok_Clicked(object sender, EventArgs e)
         {
-            this.editorPage.Ok();
+            this.loadingIndicator.IsVisible = true;
+            this.loadingIndicator.IsRunning = true;
+            
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                this.editorPage.Ok();
+
+                this.loadingIndicator.IsVisible = false;
+                this.loadingIndicator.IsRunning = false;
+            });
         }
         private void Cancel_Clicked(object sender, EventArgs e)
         {

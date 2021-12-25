@@ -237,8 +237,11 @@ namespace Uzor.Views
             }
         }
        
-        public void SaveButton_Click(object sender, EventArgs e)
+        public async void SaveButton_Click(object sender, EventArgs e)
         {
+            //(sender as ActivityIndicator).IsVisible = true;
+            //(sender as ActivityIndicator).IsRunning = true;
+
             if (ReSave)
                 UzorProjectFileManager.ReSave(this.Data, SavedFilePath);
             else
@@ -246,6 +249,7 @@ namespace Uzor.Views
                 SavedFilePath = UzorProjectFileManager.SaveInInternalStorage(this.Data);
                 ReSave = true;
             }
+
             
             /*
 
@@ -285,8 +289,8 @@ namespace Uzor.Views
             */
 
             if (PageForAlert != null)
-                PageForAlert.MakeUzorItemList();
-               // pageForAlert.itemStack.Children.Add(new UzorItem(this.ThisData, pageForAlert));
+                Task.Factory.StartNew(() => PageForAlert.MakeUzorItemList());
+            // pageForAlert.itemStack.Children.Add(new UzorItem(this.ThisData, pageForAlert));
         }
 
         private void replaceUzorClick(object sender, EventArgs e)

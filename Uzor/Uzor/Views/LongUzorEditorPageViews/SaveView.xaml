@@ -11,7 +11,7 @@
                     <Button Text="{x:Static resources:AppResource.Ok}" Clicked="Ok_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="20"  x:FieldModifier="public"/>
                     <Button Text="{x:Static resources:AppResource.Cancel}" Clicked="Cancel_Clicked" HorizontalOptions="FillAndExpand" CornerRadius="20"/>
                 </StackLayout>
-
+                <ActivityIndicator x:Name="loadingIndicator" IsVisible="false" HorizontalOptions="Center" Color="#D23838" Margin="0,0,0,20"></ActivityIndicator>
                 <StackLayout x:Name="stackOfSavingProjectButton" x:FieldModifier="public">
                     <Label Text="{x:Static resources:AppResource.SavingProject}" HorizontalOptions="Start"/>
                     <Grid>
